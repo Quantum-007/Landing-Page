@@ -1,0 +1,26 @@
+QuantumRoboticsLab/
+├── package.json
+├── tailwind.config.js
+├── postcss.config.js
+├── next.config.js
+├── public/
+│   └── images/
+│       ├── hero-bg.jpg
+│       ├── team-member1.jpg
+│       ├── team-member2.jpg
+│       └── team-member3.jpg
+├── styles/
+│   └── globals.css
+├── components/
+│   ├── NavBar.js
+│   └── Footer.js
+└── pages/
+    ├── _app.js
+    ├── index.js        # Home (Hero, About preview, etc.)
+    ├── about.js        # About Us page
+    ├── team.js         # Team page
+    ├── contact.js      # Contact page with form
+    ├── blog.js         # Blog listing page
+    └── api/
+        ├── contact.js  # API route for contact form submissions
+        └── blog.js     # API route for AI-generated blog data
