@@ -24,3 +24,469 @@ QuantumRoboticsLab/
     └── api/
         ├── contact.js  # API route for contact form submissions
         └── blog.js     # API route for AI-generated blog data
+
+{
+  "name": "quantum-robotics-lab",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "13.x",           // Next.js framework
+    "react": "18.x",          // React
+    "react-dom": "18.x"       // React DOM
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.x",  // Tailwind CSS dependency
+    "postcss": "^8.x",        // PostCSS for Tailwind
+    "tailwindcss": "^3.x"     // Tailwind CSS framework
+  }
+}
+
+// next.config.js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,    // enables additional React checks
+  swcMinify: true           // use SWC for faster builds
+  // Future custom config can go here (e.g., images domains, etc.)
+};
+
+module.exports = nextConfig;
+
+// tailwind.config.js
+module.exports = {
+  content: [
+    "./pages/**/*.{js,jsx,ts,tsx}",
+    "./components/**/*.{js,jsx,ts,tsx}"
+  ],
+  theme: {
+    extend: {
+      // You can extend the default theme here (colors, fonts, etc.)
+      colors: {
+        "qrl-blue": "#1e3a8a",    // Example custom color for Quantum Robotics Lab
+        "qrl-teal": "#0d9488"
+      },
+      fontFamily: {
+        'sans': ['ui-sans-serif', 'system-ui'] // default Tailwind font stack
+        // For a futuristic look, you might later import a Google Font like "Orbitron"
+      }
+    }
+  },
+  plugins: []
+};
+
+// postcss.config.js
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {}
+  }
+};
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom global styles can go below */
+body {
+  font-family: theme('fontFamily.sans');
+  /* Perhaps a subtle background or text color? */
+}
+
+// components/NavBar.js
+import { useState } from 'react';
+import Link from 'next/link';
+
+const NavBar = () => {
+  const [openDropdown, setOpenDropdown] = useState(false);
+
+  return (
+    <nav className="bg-gray-900 text-white p-4">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* Logo / Brand Name */}
+        <div className="text-xl font-bold">
+          <Link href="/"><a>Quantum Robotics Lab</a></Link>
+        </div>
+
+        {/* Menu Items */}
+        <ul className="flex space-x-6">
+          <li className="relative">
+            {/* Subsidiaries dropdown */}
+            <button 
+              onClick={() => setOpenDropdown(!openDropdown)} 
+              className="hover:text-qrl-teal"
+            >
+              Subsidiaries ▼
+            </button>
+            {openDropdown && (
+              <ul className="absolute top-full left-0 mt-2 w-40 bg-gray-800 border border-gray-700">
+                {["Kitchen", "Food (B2B)", "Cafe", "Pharma", "Logistics", "Travel"].map((subsidiary) => (
+                  <li key={subsidiary}>
+                    <a 
+                      href="#" 
+                      className="block px-4 py-2 hover:bg-gray-700"
+                    >
+                      {subsidiary}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+          <li><Link href="/about"><a className="hover:text-qrl-teal">About Us</a></Link></li>
+          <li><Link href="/team"><a className="hover:text-qrl-teal">Team</a></Link></li>
+          <li><Link href="/blog"><a className="hover:text-qrl-teal">Blog</a></Link></li>
+          <li><Link href="/contact"><a className="hover:text-qrl-teal">Contact</a></Link></li>
+        </ul>
+      </div>
+    </nav>
+  );
+};
+
+export default NavBar;
+
+// components/Footer.js
+import Link from 'next/link';
+
+const Footer = () => {
+  return (
+    <footer className="bg-gray-900 text-gray-300 py-6 mt-12">
+      <div className="max-w-7xl mx-auto px-4 text-center">
+        <p className="mb-4">&copy; {new Date().getFullYear()} Quantum Robotics Lab. All rights reserved.</p>
+        <div className="space-x-4">
+          <Link href="/"><a className="hover:text-white">Home</a></Link>
+          <Link href="/about"><a className="hover:text-white">About</a></Link>
+          <Link href="/contact"><a className="hover:text-white">Contact</a></Link>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+
+// pages/_app.js
+import '../styles/globals.css';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
+import Head from 'next/head';
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      {/* Global meta tags can go here */}
+      <Head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {/* Primary SEO tags */}
+        <title>Quantum Robotics Lab – Futuristic Robotics Solutions</title>
+        <meta name="description" content="Quantum Robotics Lab is a futuristic robotics parent company innovating across industries.">
+        {/* OpenGraph tags for social sharing */}
+        <meta property="og:title" content="Quantum Robotics Lab" />
+        <meta property="og:description" content="Innovating robotics in Kitchen, Food, Pharma, Logistics, Travel, and more." />
+        <meta property="og:image" content="/images/hero-bg.jpg" />
+        <meta property="og:url" content="https://your-domain.com" />
+        <meta name="twitter:card" content="summary_large_image" />
+        {/* You can add structured data script here if needed */}
+      </Head>
+      <NavBar />
+      <main className="min-h-screen bg-gray-50">
+        <Component {...pageProps} />
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+export default MyApp;
+
+// pages/index.js
+import Head from 'next/head';
+
+export default function Home() {
+  return (
+    <>
+      <Head>
+        {/* Page-specific meta tags */}
+        <title>Quantum Robotics Lab – Home</title>
+        <meta name="description" content="Welcome to Quantum Robotics Lab. We are pioneering robotics across multiple industries. Join us in exploring the future of robotics." />
+      </Head>
+
+      {/* Hero Section */}
+      <section 
+        className="h-screen flex items-center justify-center text-center bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
+      >
+        <div className="bg-black bg-opacity-60 p-8 rounded">
+          <h1 className="text-4xl md:text-6xl text-white font-extrabold mb-4">
+            Quantum Robotics Lab
+          </h1>
+          <p className="text-xl text-gray-200 mb-8">
+            Innovating the future of robotics across industries.
+          </p>
+          <a href="/about" className="bg-qrl-teal text-white px-6 py-3 rounded hover:bg-teal-700">
+            Learn More About Us
+          </a>
+        </div>
+      </section>
+
+      {/* About preview section */}
+      <section className="py-16 px-6 bg-white text-center">
+        <h2 className="text-3xl font-bold mb-4">About Quantum Robotics Lab</h2>
+        <p className="max-w-2xl mx-auto text-gray-700">
+          Quantum Robotics Lab is the parent company to multiple innovative subsidiaries in fields ranging from kitchen automation to pharmaceutical robotics. Our mission is to revolutionize everyday life with robotics, AI, and quantum technology.
+        </p>
+        <a href="/about" className="text-qrl-teal font-semibold hover:underline mt-4 inline-block">
+          More About Us &rarr;
+        </a>
+      </section>
+
+      {/* (Optional) Latest Blog Posts preview */}
+      <section className="py-16 px-6 bg-gray-50 text-center">
+        <h2 className="text-3xl font-bold mb-8">Latest Articles</h2>
+        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+          {/* Example of blog post cards */}
+          <article className="bg-white p-6 rounded shadow">
+            <h3 className="text-2xl font-semibold mb-2">How Robotics is Changing the Culinary World</h3>
+            <p className="text-gray-600">Robotic kitchens are no longer science fiction. Discover how Quantum Kitchen is revolutionizing food prep...</p>
+            <a href="/blog" className="text-qrl-teal font-medium hover:underline">Read more &rarr;</a>
+          </article>
+          <article className="bg-white p-6 rounded shadow">
+            <h3 className="text-2xl font-semibold mb-2">AI in Logistics: The Next Frontier</h3>
+            <p className="text-gray-600">Our logistics arm is leveraging AI and robotics to streamline supply chains worldwide. Learn about the future of automated logistics...</p>
+            <a href="/blog" className="text-qrl-teal font-medium hover:underline">Read more &rarr;</a>
+          </article>
+        </div>
+      </section>
+    </>
+  );
+}
+
+// pages/about.js
+import Head from 'next/head';
+
+export default function About() {
+  return (
+    <>
+      <Head>
+        <title>About Us – Quantum Robotics Lab</title>
+        <meta name="description" content="Learn about Quantum Robotics Lab's mission, vision, and the industries we are transforming with cutting-edge robotics." />
+      </Head>
+      <section className="py-16 px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl font-bold mb-6">About Quantum Robotics Lab</h1>
+          <p className="text-gray-800 leading-7 mb-4">
+            Quantum Robotics Lab was founded with a single vision: to integrate advanced robotics and AI into everyday life. From automated kitchens to smart pharma solutions, our subsidiaries operate at the bleeding edge of innovation.
+          </p>
+          <p className="text-gray-800 leading-7 mb-4">
+            We believe in a future where robotics enhance every aspect of daily living – making processes more efficient, environments safer, and experiences richer. Our team is composed of world-class engineers, researchers, and dreamers all working together to push the boundaries of what's possible.
+          </p>
+          <p className="text-gray-800 leading-7">
+            Based in a state-of-the-art facility, we collaborate with global partners and continuously invest in research and development. Quantum Robotics Lab is not just a company, it's a vision for the future.
+          </p>
+        </div>
+      </section>
+    </>
+  );
+}
+
+// pages/team.js
+import Head from 'next/head';
+
+export default function Team() {
+  // Placeholder team data
+  const teamMembers = [
+    { name: "Alice Johnson", role: "CEO & Founder", bio: "Alice founded Quantum Robotics Lab in 2025 and leads the vision and strategy.", image: "/images/team-member1.jpg" },
+    { name: "Bob Smith", role: "CTO", bio: "Bob heads the tech division, with 20+ years in AI and robotics.", image: "/images/team-member2.jpg" },
+    { name: "Catherine Z.", role: "Lead Robotics Engineer", bio: "Catherine designs next-gen robots for all subsidiaries.", image: "/images/team-member3.jpg" }
+    // Add more team members as needed
+  ];
+
+  return (
+    <>
+      <Head>
+        <title>Our Team – Quantum Robotics Lab</title>
+        <meta name="description" content="Meet the leadership and innovators behind Quantum Robotics Lab's groundbreaking projects." />
+      </Head>
+      <section className="py-16 px-6 bg-gray-50">
+        <div className="max-w-6xl mx-auto text-center">
+          <h1 className="text-4xl font-bold mb-12">Our Team</h1>
+          <div className="grid md:grid-cols-3 gap-8">
+            {teamMembers.map(member => (
+              <div key={member.name} className="bg-white p-6 rounded-lg shadow">
+                <img src={member.image} alt={member.name} className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+                <h3 className="text-2xl font-semibold">{member.name}</h3>
+                <p className="text-qrl-teal font-medium mb-2">{member.role}</p>
+                <p className="text-gray-600 text-sm">{member.bio}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+// pages/contact.js
+import Head from 'next/head';
+import { useState } from 'react';
+
+export default function Contact() {
+  const [status, setStatus] = useState(null); // to display success/error message
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus(null);
+    const form = e.target;
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      category: form.category.value,
+      message: form.message.value
+    };
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        setStatus('success');
+        form.reset();
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus('error');
+    }
+  };
+
+  return (
+    <>
+      <Head>
+        <title>Contact Us – Quantum Robotics Lab</title>
+        <meta name="description" content="Contact Quantum Robotics Lab for any inquiries about our products, services, or partnerships." />
+      </Head>
+      <section className="py-16 px-6 bg-white">
+        <div className="max-w-xl mx-auto">
+          <h1 className="text-4xl font-bold mb-8 text-center">Contact Us</h1>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-1" htmlFor="name">Name</label>
+              <input required id="name" name="name" type="text" className="w-full border border-gray-300 rounded px-3 py-2" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1" htmlFor="email">Email</label>
+              <input required id="email" name="email" type="email" className="w-full border border-gray-300 rounded px-3 py-2" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1" htmlFor="category">Inquiry Category</label>
+              <select id="category" name="category" className="w-full border border-gray-300 rounded px-3 py-2">
+                <option>General</option>
+                <option>Support</option>
+                <option>Partnership</option>
+                <option>Media</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1" htmlFor="message">Message</label>
+              <textarea required id="message" name="message" rows="5" className="w-full border border-gray-300 rounded px-3 py-2"></textarea>
+            </div>
+            <button type="submit" className="bg-qrl-teal text-white font-medium py-2 px-4 rounded hover:bg-teal-700">
+              Send Message
+            </button>
+          </form>
+          {status === 'success' && <p className="text-green-600 mt-4">Thank you! Your message has been sent.</p>}
+          {status === 'error' && <p className="text-red-600 mt-4">Sorry, something went wrong. Please try again.</p>}
+        </div>
+      </section>
+    </>
+  );
+}
+
+// pages/blog.js
+import Head from 'next/head';
+
+// We will use getServerSideProps to fetch blog posts at request time (could also use getStaticProps for SSG)
+export async function getServerSideProps() {
+  const res = await fetch(`http://localhost:3000/api/blog`);  // in production, this would be your domain
+  const posts = await res.json();
+  return { props: { posts } };
+}
+
+export default function Blog({ posts }) {
+  return (
+    <>
+      <Head>
+        <title>Blog – Quantum Robotics Lab</title>
+        <meta name="description" content="Read the latest articles and updates from Quantum Robotics Lab, covering robotics innovations in various industries." />
+      </Head>
+      <section className="py-16 px-6 bg-gray-50">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl font-bold mb-8 text-center">Blog</h1>
+          <div className="space-y-8">
+            {posts && posts.map(post => (
+              <article key={post.id} className="bg-white p-6 rounded shadow">
+                <h2 className="text-2xl font-semibold mb-2">{post.title}</h2>
+                <p className="text-gray-700 mb-4">{post.excerpt}</p>
+                <p className="text-sm text-gray-500">Published on {post.date}</p>
+              </article>
+            ))}
+            {!posts.length && (
+              <p className="text-center text-gray-600">No articles available at the moment. Please check back later.</p>
+            )}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+// pages/api/contact.js
+export default function handler(req, res) {
+  if (req.method === 'POST') {
+    const { name, email, category, message } = req.body;
+    // In a real app, you might send an email or save this to a database.
+    console.log('New contact message:', { name, email, category, message });
+    // Respond with a success message
+    res.status(200).json({ status: 'OK' });
+  } else {
+    // Handle any non-POST request (e.g., GET)
+    res.setHeader('Allow', ['POST']);
+    res.status(405).json({ message: 'Method Not Allowed' });
+  }
+}
+
+// pages/api/blog.js
+export default function handler(req, res) {
+  // We’ll just return an array of blog post objects.
+  const samplePosts = [
+    {
+      id: 1,
+      title: "The Rise of Robotic Kitchens",
+      excerpt: "How AI and robotics are transforming home and commercial kitchens around the world.",
+      date: "2025-02-26"
+    },
+    {
+      id: 2,
+      title: "AI in Hospitality: Travel and Tourism Revolution",
+      excerpt: "Explore how Quantum Robotics Lab's travel tech is personalizing and automating the hospitality industry.",
+      date: "2025-02-25"
+    },
+    {
+      id: 3,
+      title: "Pharma Automation: Robots in the Lab",
+      excerpt: "A look at how robotics streamline research and manufacturing in pharmaceuticals, increasing safety and efficiency.",
+      date: "2025-02-24"
+    }
+  ];
+
+  res.status(200).json(samplePosts);
+}
+
+
