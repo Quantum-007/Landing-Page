@@ -44,9 +44,8 @@ const Header = () => {
   return (
     <AppBar
       position="fixed"
-      className={`transition-all duration-300 bg-opacity-95 backdrop-blur-md ${
-        isScrolled ? 'shadow-md' : 'border-b border-gray-700'
-      }`}
+      className={`transition-all duration-300 bg-opacity-95 backdrop-blur-md ${isScrolled ? 'shadow-md' : 'border-b border-gray-700'
+        }`}
       sx={{
         zIndex: 1000,
         backdropFilter: 'blur(8px)',
@@ -55,24 +54,50 @@ const Header = () => {
       }}
     >
       <Container maxWidth="xl">
-        <Toolbar className="flex justify-between p-6">
+        <Toolbar className="flex justify-between p-4 md:ml-[120px]">
           <Typography
             href="#"
-            variant="h6"
+            variant="h5"
             component="a"
-            className="flex items-center font-bold text-xl text-white"
+            className="flex items-center"
+            style={{ fontWeight: 'bold', color: 'white' }}
           >
             Quantum
             <span style={{ color: 'var(--accent-primary)' }}>Robotics</span>
           </Typography>
 
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }} className="gap-8">
+          <Box sx={{ display: { xs: "none", md: "flex" } }} className="gap-8">
             {navItems.map((item) => (
-              <Button key={item.label} color="inherit" href={item.href}>
+              <Button
+                key={item.label}
+                color="inherit"
+                href={item.href}
+                sx={{
+                  textTransform: "none",
+                  fontWeight: "500",
+                  fontSize: "18px",
+                  color: "white",
+                  position: "relative",
+                  "&::after": {
+                    content: '""',
+                    position: "absolute",
+                    left: 0,
+                    bottom: 0,
+                    width: "100%",
+                    height: "2px",
+                    backgroundColor: "transparent",
+                    transition: "background-color 0.3s ease-in-out",
+                  },
+                  "&:hover::after": {
+                    backgroundColor: 'var(--accent-hover)',
+                  },
+                }}
+              >
                 {item.label}
               </Button>
             ))}
           </Box>
+
 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Button
