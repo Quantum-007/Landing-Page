@@ -44,8 +44,9 @@ const Header = () => {
   return (
     <AppBar
       position="fixed"
-      className={`transition-all duration-300 bg-opacity-95 backdrop-blur-md ${isScrolled ? 'shadow-md' : 'border-b border-gray-700'
-        }`}
+      className={`transition-all duration-300 bg-opacity-95 backdrop-blur-md ${
+        isScrolled ? 'shadow-md' : 'border-b border-gray-700'
+      }`}
       sx={{
         zIndex: 1000,
         backdropFilter: 'blur(8px)',
@@ -54,7 +55,7 @@ const Header = () => {
       }}
     >
       <Container maxWidth="xl">
-        <Toolbar className="flex justify-between p-4 md:ml-[120px]">
+        <Toolbar className="flex justify-between p-4 md:mx-[90px]">
           <Typography
             href="#"
             variant="h5"
@@ -63,32 +64,32 @@ const Header = () => {
             style={{ fontWeight: 'bold', color: 'white' }}
           >
             Quantum
-            <span style={{ color: 'var(--accent-primary)' }}>Robotics</span>
+            <span style={{ color: '#5a7d2f' }}>Robotics</span>
           </Typography>
 
-          <Box sx={{ display: { xs: "none", md: "flex" } }} className="gap-8">
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }} className="gap-4">
             {navItems.map((item) => (
               <Button
-                key={item.label}
                 color="inherit"
+                key={item.label}
                 href={item.href}
                 sx={{
-                  textTransform: "none",
-                  fontWeight: "500",
-                  fontSize: "18px",
-                  color: "white",
-                  position: "relative",
-                  "&::after": {
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  textTransform: 'none',
+                  color: 'white',
+                  position: 'relative',
+                  '&::after': {
                     content: '""',
-                    position: "absolute",
+                    position: 'absolute',
                     left: 0,
                     bottom: 0,
-                    width: "100%",
-                    height: "2px",
-                    backgroundColor: "transparent",
-                    transition: "background-color 0.3s ease-in-out",
+                    width: '100%',
+                    height: '2px',
+                    backgroundColor: 'transparent',
+                    transition: 'background-color 0.3s ease-in-out',
                   },
-                  "&:hover::after": {
+                  '&:hover::after': {
                     backgroundColor: 'var(--accent-hover)',
                   },
                 }}
@@ -98,17 +99,15 @@ const Header = () => {
             ))}
           </Box>
 
-
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Button
-              variant="contained"
               href="#contact"
+              variant="contained"
               sx={{
-                bgcolor: 'var(--accent-primary)',
-                '&:hover': { bgcolor: 'var(--accent-hover)' },
+                bgcolor: '#3c5a1e',
                 fontWeight: 'bold',
+                '&:hover': { bgcolor: 'var(--accent-hover)' },
               }}
-              className="py-8 px-16"
             >
               Join Pilot Program *
             </Button>
