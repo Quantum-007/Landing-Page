@@ -1,7 +1,16 @@
-'use clinet'
+'use clinet';
+
 import React from 'react';
+
+import { useTheme } from '@mui/material/styles';
 import {
-  Box, Container, Grid, Typography, Button, useMediaQuery, Card,
+  Box,
+  Container,
+  Grid,
+  Typography,
+  Button,
+  useMediaQuery,
+  Card,
   CardContent,
 } from '@mui/material';
 import {
@@ -13,8 +22,6 @@ import {
   Psychology as PsychologyIcon,
   SwapHoriz as SwapHorizIcon,
 } from '@mui/icons-material';
-import { useTheme } from '@mui/material/styles';
-
 
 const QortexOS: React.FC = () => {
   const theme = useTheme();
@@ -35,8 +42,9 @@ const QortexOS: React.FC = () => {
       <Container className="relative z-10">
         <Typography
           variant="h2"
-          className={`text-3xl font-bold mb-4 relative ${isTablet ? 'text-center after:left-1/2 after:-translate-x-1/2' : ''
-            }`}
+          className={`text-3xl font-bold mb-4 relative ${
+            isTablet ? 'text-center after:left-1/2 after:-translate-x-1/2' : ''
+          }`}
           sx={{
             position: 'relative',
             '&::after': {
@@ -54,8 +62,9 @@ const QortexOS: React.FC = () => {
         </Typography>
         <Typography
           variant="subtitle1"
-          className={`text-xl text-gray-400 mb-12 max-w-3xl ${isTablet ? 'text-center mx-auto' : ''
-            }`}
+          className={`text-xl text-gray-400 mb-12 max-w-3xl ${
+            isTablet ? 'text-center mx-auto' : ''
+          }`}
         >
           Our proprietary operating system powers all Quantum robots, enabling
           rapid deployment, seamless integration, and unparalleled performance.
@@ -565,7 +574,6 @@ qortex.teach("Gentle placement", () => {
         </Box>
       </Container>
     </Box>
-
   );
 };
 

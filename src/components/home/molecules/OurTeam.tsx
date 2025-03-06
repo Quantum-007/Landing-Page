@@ -1,12 +1,19 @@
 import React from 'react';
-import { Box, Container, Typography, Grid, Card, CardMedia, CardContent, IconButton } from '@mui/material';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import TwitterIcon from '@mui/icons-material/Twitter';
-
 import GitHubIcon from '@mui/icons-material/GitHub';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+
+import {
+  Box,
+  Container,
+  Typography,
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  IconButton,
+} from '@mui/material';
 import { getPlaceholderImage } from '@/utils/placeHolderImage';
-
-
 
 const teamMembers = [
   {
@@ -82,9 +89,9 @@ const TeamSection = () => {
           variant="subtitle1"
           className="text-xl text-gray-400 mb-12 max-w-3xl text-center mx-auto"
         >
-          Meet the experts behind Quantum Robotics&apos; revolutionary technology.
+          Meet the experts behind Quantum Robotics&apos; revolutionary
+          technology.
         </Typography>
-
 
         <Grid container spacing={4}>
           {teamMembers.map((member, index) => (
@@ -119,7 +126,10 @@ const TeamSection = () => {
                   <Typography variant="h6" className="font-semibold mb-1">
                     {member.name}
                   </Typography>
-                  <Typography variant="subtitle2" className="text-green-500 mb-3">
+                  <Typography
+                    variant="subtitle2"
+                    className="text-green-500 mb-3"
+                  >
                     {member.role}
                   </Typography>
                   <Typography variant="body2" className="text-gray-400">

@@ -42,7 +42,9 @@ const Contact = () => {
 
   const isTablet = false; // You can replace this with actual logic for detecting tablet
 
-  const handleFormChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleFormChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -62,7 +64,11 @@ const Contact = () => {
           <Grid item xs={12} md={5}>
             <Typography
               variant="h2"
-              className={`text-3xl font-bold mb-4 relative ${isTablet ? 'text-center after:left-1/2 after:-translate-x-1/2' : ''}`}
+              className={`text-3xl font-bold mb-4 relative ${
+                isTablet
+                  ? 'text-center after:left-1/2 after:-translate-x-1/2'
+                  : ''
+              }`}
               sx={{
                 position: 'relative',
                 '&::after': {
@@ -78,7 +84,12 @@ const Contact = () => {
             >
               Contact Quantum
             </Typography>
-            <Typography variant="body1" className={`text-gray-400 mt-8 mb-6 ${isTablet ? 'text-center' : ''}`}>
+            <Typography
+              variant="body1"
+              className={`text-gray-400 mt-8 mb-6 ${
+                isTablet ? 'text-center' : ''
+              }`}
+            >
               Join our{' '}
               <span className="inline-block bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded ml-2 animate-pulse">
                 FREE
@@ -88,20 +99,35 @@ const Contact = () => {
               hands-on experience with our technology along with dedicated
               implementation support and custom configuration.
             </Typography>
-            <Typography variant="body1" className={`text-gray-400 mb-6 ${isTablet ? 'text-center' : ''}`}>
+            <Typography
+              variant="body1"
+              className={`text-gray-400 mb-6 ${isTablet ? 'text-center' : ''}`}
+            >
               Fill out the form to schedule a personalized demo tailored to your
               industry needs.
             </Typography>
 
-            <Box className={`bg-gray-700 rounded-md inline-flex overflow-hidden mb-8 ${isTablet ? 'mx-auto' : ''}`}>
+            <Box
+              className={`bg-gray-700 rounded-md inline-flex overflow-hidden mb-8 ${
+                isTablet ? 'mx-auto' : ''
+              }`}
+            >
               <Button
-                className={`px-4 py-2 ${contactFormType === 'comprehensive' ? 'bg-green-700 text-white' : 'text-gray-400'}`}
+                className={`px-4 py-2 ${
+                  contactFormType === 'comprehensive'
+                    ? 'bg-green-700 text-white'
+                    : 'text-gray-400'
+                }`}
                 onClick={() => setContactFormType('comprehensive')}
               >
                 Pilot Program Sign Up
               </Button>
               <Button
-                className={`px-4 py-2 ${contactFormType === 'quick' ? 'bg-green-700 text-white' : 'text-gray-400'}`}
+                className={`px-4 py-2 ${
+                  contactFormType === 'quick'
+                    ? 'bg-green-700 text-white'
+                    : 'text-gray-400'
+                }`}
                 onClick={() => setContactFormType('quick')}
               >
                 General Inquiries
@@ -203,8 +229,13 @@ const Contact = () => {
                             />
                           }
                           label={
-                            <Typography variant="body2" className="text-gray-400">
-                              I consent to Quantum Robotics processing my data and contacting me about their products and services.*
+                            <Typography
+                              variant="body2"
+                              className="text-gray-400"
+                            >
+                              I consent to Quantum Robotics processing my data
+                              and contacting me about their products and
+                              services.*
                             </Typography>
                           }
                         />
@@ -296,7 +327,9 @@ const Contact = () => {
                         </Grid>
                         <Grid item xs={12}>
                           <FormControl fullWidth variant="outlined">
-                            <InputLabel className="text-gray-400">Industry*</InputLabel>
+                            <InputLabel className="text-gray-400">
+                              Industry*
+                            </InputLabel>
                             <Select
                               label="Industry*"
                               name="industry"
@@ -311,24 +344,35 @@ const Contact = () => {
                                 '&:hover .MuiOutlinedInput-notchedOutline': {
                                   borderColor: 'rgba(255, 255, 255, 0.5)',
                                 },
-                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                  borderColor: '#3c5a1e',
-                                },
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline':
+                                  {
+                                    borderColor: '#3c5a1e',
+                                  },
                                 '& .MuiSvgIcon-root': {
                                   color: 'white',
                                 },
                               }}
                             >
                               <MenuItem value="">Select your industry</MenuItem>
-                              <MenuItem value="manufacturing">Manufacturing</MenuItem>
+                              <MenuItem value="manufacturing">
+                                Manufacturing
+                              </MenuItem>
                               <MenuItem value="food">Food & Beverage</MenuItem>
                               <MenuItem value="pharma">Pharmaceutical</MenuItem>
-                              <MenuItem value="logistics">Logistics & Distribution</MenuItem>
+                              <MenuItem value="logistics">
+                                Logistics & Distribution
+                              </MenuItem>
                               <MenuItem value="retail">Retail</MenuItem>
-                              <MenuItem value="agriculture">Agriculture</MenuItem>
+                              <MenuItem value="agriculture">
+                                Agriculture
+                              </MenuItem>
                               <MenuItem value="healthcare">Healthcare</MenuItem>
-                              <MenuItem value="energy">Renewable Energy</MenuItem>
-                              <MenuItem value="construction">Construction</MenuItem>
+                              <MenuItem value="energy">
+                                Renewable Energy
+                              </MenuItem>
+                              <MenuItem value="construction">
+                                Construction
+                              </MenuItem>
                               <MenuItem value="other">Other</MenuItem>
                             </Select>
                           </FormControl>

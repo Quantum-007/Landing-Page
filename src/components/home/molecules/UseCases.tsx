@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
+import { useTheme } from '@mui/material/styles';
+import { getPlaceholderImage } from '@/utils/placeHolderImage';
 import {
   Button,
   Box,
@@ -9,8 +11,7 @@ import {
   CardMedia,
   Container,
   Grid,
-  useMediaQuery
-
+  useMediaQuery,
 } from '@mui/material';
 import {
   AccountTree as AccountTreeIcon,
@@ -18,19 +19,12 @@ import {
   ExpandLess as ExpandLessIcon,
   PlayCircle as PlayCircleIcon,
   FileDocument as FileDocumentIcon,
-
 } from '@mui/icons-material';
-import { useTheme } from '@mui/material/styles';
-import { getPlaceholderImage } from "@/utils/placeHolderImage";
-
-
 
 const UseCases: React.FC = () => {
-
   const [industryFilter, setIndustryFilter] = useState('all');
   const [showMoreIndustries, setShowMoreIndustries] = useState(false);
   const [expandedUseCases, setExpandedUseCases] = useState({});
-
 
   const toggleUseCaseDetails = (caseId) => {
     setExpandedUseCases((prev) => ({
@@ -39,22 +33,18 @@ const UseCases: React.FC = () => {
     }));
   };
 
-
-
-
   const theme = useTheme();
 
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
-
-
 
   return (
     <Box id="use-cases" className="py-20 bg-gray-800">
       <Container>
         <Typography
           variant="h2"
-          className={`text-3xl font-bold mb-4 relative ${isTablet ? 'text-center after:left-1/2 after:-translate-x-1/2' : ''
-            }`}
+          className={`text-3xl font-bold mb-4 relative ${
+            isTablet ? 'text-center after:left-1/2 after:-translate-x-1/2' : ''
+          }`}
           sx={{
             position: 'relative',
             '&::after': {
@@ -72,8 +62,9 @@ const UseCases: React.FC = () => {
         </Typography>
         <Typography
           variant="subtitle1"
-          className={`text-xl text-gray-400 mb-12 max-w-3xl ${isTablet ? 'text-center mx-auto' : ''
-            }`}
+          className={`text-xl text-gray-400 mb-12 max-w-3xl ${
+            isTablet ? 'text-center mx-auto' : ''
+          }`}
         >
           Discover how our robotic solutions are transforming operations across
           various industries.
@@ -1177,10 +1168,7 @@ const UseCases: React.FC = () => {
         </Grid>
       </Container>
     </Box>
-
   );
-
-}
-
+};
 
 export default UseCases;

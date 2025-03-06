@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, Container, Grid, Typography, Button } from '@mui/material';
 
 import { getPlaceholderImage } from '@/utils/placeHolderImage';
+import { Box, Container, Grid, Typography, Button } from '@mui/material';
 
 const IndustrialAutomation = () => {
   return (
@@ -17,7 +17,8 @@ const IndustrialAutomation = () => {
           right: 0,
           bottom: 0,
           width: '50%',
-          background: 'linear-gradient(to right, transparent, rgba(60, 90, 30, 0.1))',
+          background:
+            'linear-gradient(to right, transparent, rgba(60, 90, 30, 0.1))',
           zIndex: 1,
         },
       }}
@@ -41,7 +42,9 @@ const IndustrialAutomation = () => {
                 Precision Robotics Engineered for Performance
               </Typography>
               <Typography variant="h6" className="text-gray-400 mt-6">
-                Our robotic solutions combine cutting-edge technology with industrial-grade reliability to deliver unmatched efficiency, precision, and cost-effectiveness across multiple industries.
+                Our robotic solutions combine cutting-edge technology with
+                industrial-grade reliability to deliver unmatched efficiency,
+                precision, and cost-effectiveness across multiple industries.
               </Typography>
 
               <Box className="flex flex-col sm:flex-row gap-4 mb-8 mt-4">
@@ -62,21 +65,23 @@ const IndustrialAutomation = () => {
                   size="large"
                   href="#products"
                   sx={{
-                    borderColor: "#5a7d2f",
-                    color: "white",
-                    "&:hover": {
+                    borderColor: '#5a7d2f',
+                    color: 'white',
+                    '&:hover': {
                       bgcolor: 'var(--accent-hover)',
-                      borderColor: "#5a7d2f",
+                      borderColor: '#5a7d2f',
                     },
                   }}
                 >
                   Explore Solutions
                 </Button>
-
               </Box>
               <Box className="flex flex-col sm:flex-row gap-8">
                 <Box className="flex flex-col">
-                  <Typography variant="h3" className="text-4xl font-bold text-green-500">
+                  <Typography
+                    variant="h3"
+                    className="text-4xl font-bold text-green-500"
+                  >
                     99.8%
                   </Typography>
                   <Typography variant="body2" className="text-gray-400">
@@ -84,7 +89,10 @@ const IndustrialAutomation = () => {
                   </Typography>
                 </Box>
                 <Box className="flex flex-col">
-                  <Typography variant="h3" className="text-4xl font-bold text-green-500">
+                  <Typography
+                    variant="h3"
+                    className="text-4xl font-bold text-green-500"
+                  >
                     35%
                   </Typography>
                   <Typography variant="body2" className="text-gray-400">
@@ -94,7 +102,12 @@ const IndustrialAutomation = () => {
               </Box>
             </Box>
           </Grid>
-          <Grid item xs={12} md={6} className="flex justify-center md:justify-end">
+          <Grid
+            item
+            xs={12}
+            md={6}
+            className="flex justify-center md:justify-end"
+          >
             <Box
               component="img"
               src={getPlaceholderImage(600, 400)}
@@ -104,7 +117,7 @@ const IndustrialAutomation = () => {
           </Grid>
         </Grid>
       </Container>
-    </Box >
+    </Box>
   );
 };
 

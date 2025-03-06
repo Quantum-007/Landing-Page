@@ -1,6 +1,7 @@
 'use client';
 
 import Home from '@/components/home/Home';
+
 import { Box } from '@mui/material';
 
 const App = () => {
