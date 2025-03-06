@@ -31,13 +31,24 @@ const Footer = () => {
             <Typography
               variant="h6"
               fontWeight="600"
-              className="font-semibold pb-2 text-[#f2f2f2]"
-              sx={{ borderBottomWidth: 3, borderBottomColor: '#3c5a1e' }}
+              className="font-semibold text-[#f2f2f2]"
+              sx={{
+                position: 'relative',
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  left: 0,
+                  height: '3px',
+                  width: '60px',
+                  bottom: '-10px',
+                  backgroundColor: '#3c5a1e',
+                },
+              }}
             >
               Quantum Robotics
             </Typography>
 
-            <Typography variant="body1" className="text-[#b0b0b0] pt-4">
+            <Typography variant="body1" className="text-[#b0b0b0] pt-5">
               Revolutionizing industrial automation with precision robotics and
               intelligent systems.
             </Typography>
@@ -95,13 +106,24 @@ const Footer = () => {
             <Typography
               variant="h6"
               fontWeight="600"
-              className="font-semibold pb-2 text-[#f2f2f2]"
-              sx={{ borderBottomWidth: 3, borderBottomColor: '#3c5a1e' }}
+              className="font-semibold text-[#f2f2f2]"
+              sx={{
+                position: 'relative',
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  left: 0,
+                  height: '3px',
+                  width: '60px',
+                  bottom: '-10px',
+                  backgroundColor: '#3c5a1e',
+                },
+              }}
             >
               Products
             </Typography>
 
-            <Box className="space-y-2 mt-4">
+            <Box className="space-y-2 mt-5">
               {[
                 'QuantumFlex™',
                 'QuantumCo™',
@@ -130,13 +152,24 @@ const Footer = () => {
             <Typography
               variant="h6"
               fontWeight="600"
-              className="font-semibold pb-2 text-[#f2f2f2]"
-              sx={{ borderBottomWidth: 3, borderBottomColor: '#3c5a1e' }}
+              className="font-semibold text-[#f2f2f2]"
+              sx={{
+                position: 'relative',
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  left: 0,
+                  height: '3px',
+                  width: '60px',
+                  bottom: '-10px',
+                  backgroundColor: '#3c5a1e',
+                },
+              }}
             >
               Company
             </Typography>
 
-            <Box className="space-y-2 mt-4">
+            <Box className="space-y-2 mt-5">
               {[
                 { text: 'About Us', href: '#vision-mission' },
                 { text: 'Our Team', href: '#team' },
@@ -164,13 +197,24 @@ const Footer = () => {
             <Typography
               variant="h6"
               fontWeight="600"
-              className="font-semibold pb-2 text-[#f2f2f2]"
-              sx={{ borderBottomWidth: 3, borderBottomColor: '#3c5a1e' }}
+              className="font-semibold text-[#f2f2f2]"
+              sx={{
+                position: 'relative',
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  left: 0,
+                  height: '3px',
+                  width: '60px',
+                  bottom: '-10px',
+                  backgroundColor: '#3c5a1e',
+                },
+              }}
             >
               Contact
             </Typography>
 
-            <Box className="space-y-3 mt-4">
+            <Box className="space-y-3 mt-5">
               <Box className="flex items-center justify-start gap-3 text-[#b0b0b0]">
                 <MapIcon className="mt-1 text-[#3c5a1e] flex-shrink-0" />
                 <Typography variant="body2">
