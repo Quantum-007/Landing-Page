@@ -7,7 +7,7 @@ const IndustrialAutomation = () => {
   return (
     <Box
       id="hero"
-      className="min-h-screen flex items-center relative overflow-hidden pt-20 bg-[#121212]"
+      className="flex items-center relative overflow-hidden py-20 bg-[#121212]"
       sx={{
         position: 'relative',
         '&::before': {
@@ -28,20 +28,26 @@ const IndustrialAutomation = () => {
           <Grid item xs={12} md={6}>
             <Box>
               <Typography
-                variant="h6"
-                sx={{ color: 'var(--accent-primary)' }}
-                className="font-bold mb-10 tracking-wider uppercase"
+                variant="body1"
+                fontWeight="600"
+                className="font-bold pb-4 tracking-wider uppercase text-[#5a7d2f]"
               >
                 INDUSTRIAL AUTOMATION
               </Typography>
 
               <Typography
-                variant="h3"
-                className="font-bold text-start mb-10 mt-20"
+                variant="h2"
+                fontWeight="1000"
+                className="text-start pb-4"
               >
                 Precision Robotics Engineered for Performance
               </Typography>
-              <Typography variant="h6" className="text-gray-400 mt-6">
+
+              <Typography
+                variant="body1"
+                fontSize="17.6"
+                className="text-[#b0b0b0] mt-6"
+              >
                 Our robotic solutions combine cutting-edge technology with
                 industrial-grade reliability to deliver unmatched efficiency,
                 precision, and cost-effectiveness across multiple industries.
@@ -49,12 +55,12 @@ const IndustrialAutomation = () => {
 
               <Box className="flex flex-col sm:flex-row gap-4 mb-8 mt-4">
                 <Button
-                  variant="contained"
                   href="#contact"
+                  variant="contained"
                   sx={{
-                    bgcolor: 'var(--accent-primary)',
-                    '&:hover': { bgcolor: 'var(--accent-hover)' },
+                    bgcolor: '#3c5a1e',
                     fontWeight: 'bold',
+                    '&:hover': { bgcolor: 'var(--accent-hover)' },
                   }}
                 >
                   Join Pilot Program *
@@ -65,11 +71,11 @@ const IndustrialAutomation = () => {
                   size="large"
                   href="#products"
                   sx={{
-                    borderColor: '#5a7d2f',
+                    borderColor: '#3c5a1e',
                     color: 'white',
                     '&:hover': {
                       bgcolor: 'var(--accent-hover)',
-                      borderColor: '#5a7d2f',
+                      borderColor: '#3c5a1e',
                     },
                   }}
                 >
@@ -79,23 +85,23 @@ const IndustrialAutomation = () => {
               <Box className="flex flex-col sm:flex-row gap-8">
                 <Box className="flex flex-col">
                   <Typography
-                    variant="h3"
-                    className="text-4xl font-bold text-green-500"
+                    variant="h4"
+                    className="text-4xl font-bold text-[#3c5a1e]"
                   >
                     99.8%
                   </Typography>
-                  <Typography variant="body2" className="text-gray-400">
+                  <Typography variant="body2" className="text-[#b0b0b0]">
                     Operational Reliability
                   </Typography>
                 </Box>
                 <Box className="flex flex-col">
                   <Typography
-                    variant="h3"
-                    className="text-4xl font-bold text-green-500"
+                    variant="h4"
+                    className="text-4xl font-bold text-[#3c5a1e]"
                   >
                     35%
                   </Typography>
-                  <Typography variant="body2" className="text-gray-400">
+                  <Typography variant="body2" className="text-[#b0b0b0]">
                     Average Cost Reduction
                   </Typography>
                 </Box>
@@ -110,9 +116,9 @@ const IndustrialAutomation = () => {
           >
             <Box
               component="img"
+              className="rounded-md shadow-2xl"
               src={getPlaceholderImage(600, 400)}
               alt="Quantum Robotics Industrial Automation Solutions"
-              className="rounded-md shadow-2xl"
             />
           </Grid>
         </Grid>
