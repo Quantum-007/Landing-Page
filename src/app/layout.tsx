@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from '@/components/molecultes/Header';
+import Footer from '@/components/molecultes/Footer'
+
 import "./globals.css";
 
 const inter = Inter({
@@ -25,6 +27,7 @@ export default function RootLayout({
       >
         <Header />
         <main className="pt-16">{children}</main>
+        <Footer></Footer>
       </body>
     </html>
   );

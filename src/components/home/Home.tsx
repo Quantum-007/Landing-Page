@@ -19,6 +19,26 @@ const CoreAdvantages = dynamic(() => import('../home/molecules/CoreAdvantages'),
   ssr: false,
 });
 
+const QortexOS = dynamic(() => import('../home/molecules/QortexOs'), {
+  loading: () => <div>Loading Core Advantages...</div>,
+  ssr: false,
+});
+
+const UseCases = dynamic(() => import('../home/molecules/UseCases'), {
+  loading: () => <div>Loading Core Advantages...</div>,
+  ssr: false,
+});
+
+const OurTeam = dynamic(() => import('../home/molecules/OurTeam'), {
+  loading: () => <div>Loading Core Advantages...</div>,
+  ssr: false,
+});
+
+const Contact = dynamic(() => import('../home/molecules/Contact'), {
+  loading: () => <div>Loading Core Advantages...</div>,
+  ssr: false,
+});
+
 
 const Home = () => {
 
@@ -28,6 +48,10 @@ const Home = () => {
         <IndustrialAutomation />
         <Vision></Vision>
         <CoreAdvantages></CoreAdvantages>
+        <QortexOS></QortexOS>
+        <UseCases></UseCases>
+        <OurTeam></OurTeam>
+        <Contact></Contact>
       </Suspense>
     </Box>
   );
