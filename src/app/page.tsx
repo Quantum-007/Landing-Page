@@ -1,9 +1,11 @@
-'use client'
+'use client';
+
+import Footer from '@/components/molecultes/Footer';
+
 import React, { useState, useEffect } from 'react';
-import Home from '@/components/home/Home'
+import Home from '@/components/home/Home';
+
 import {
-  AppBar,
-  Toolbar,
   Button,
   IconButton,
   Drawer,
@@ -31,14 +33,10 @@ import {
   StepLabel,
   Snackbar,
   Alert,
-  useMediaQuery
+  useMediaQuery,
 } from '@mui/material';
 import {
-  Menu as MenuIcon,
   Close as CloseIcon,
-  Shield as ShieldIcon,
-  TrendingUp as TrendingUpIcon,
-  Gps as GpsIcon,
   Bolt as BoltIcon,
   Memory as MemoryIcon,
   AccountTree as AccountTreeIcon,
@@ -51,18 +49,15 @@ import {
   FileDocument as FileDocumentIcon,
   SwapHoriz as SwapHorizIcon,
   CheckCircle as CheckCircleIcon,
-  Map as MapIcon,
-  Phone as PhoneIcon,
-  Email as EmailIcon,
   LinkedIn as LinkedInIcon,
   Twitter as TwitterIcon,
-  YouTube as YouTubeIcon,
   GitHub as GitHubIcon,
 } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 
 // Mock image placeholders
-const getPlaceholderImage = (width, height) => `https://placehold.co/${width}x${height}`;
+const getPlaceholderImage = (width, height) =>
+  `https://placehold.co/${width}x${height}`;
 
 const App = () => {
   const theme = useTheme();
@@ -109,7 +104,7 @@ const App = () => {
     company: '',
     industry: '',
     message: '',
-    consent: false
+    consent: false,
   });
 
   // Handle scroll events for header styling
@@ -131,17 +126,17 @@ const App = () => {
 
   // Handle toggle of product specs
   const toggleProductSpecs = (productId) => {
-    setExpandedSpecs(prev => ({
+    setExpandedSpecs((prev) => ({
       ...prev,
-      [productId]: !prev[productId]
+      [productId]: !prev[productId],
     }));
   };
 
   // Handle toggle of use case details
   const toggleUseCaseDetails = (caseId) => {
-    setExpandedUseCases(prev => ({
+    setExpandedUseCases((prev) => ({
       ...prev,
-      [caseId]: !prev[caseId]
+      [caseId]: !prev[caseId],
     }));
   };
 
@@ -154,7 +149,7 @@ const App = () => {
       }
       setSelectedProducts([...selectedProducts, productId]);
     } else {
-      setSelectedProducts(selectedProducts.filter(id => id !== productId));
+      setSelectedProducts(selectedProducts.filter((id) => id !== productId));
     }
 
     return true;
@@ -179,7 +174,7 @@ const App = () => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === 'checkbox' ? checked : value,
     });
   };
 
@@ -197,7 +192,7 @@ const App = () => {
       company: '',
       industry: '',
       message: '',
-      consent: false
+      consent: false,
     });
 
     setTimeout(() => {
@@ -215,7 +210,7 @@ const App = () => {
       precision: '±0.08mm',
       speed: '180°/sec',
       features: 'Flexible Mounting, Heavy Payload, Path Planning',
-      bestFor: 'Heavy manufacturing, welding, assembly'
+      bestFor: 'Heavy manufacturing, welding, assembly',
     },
     quantumco: {
       name: 'QuantumCo™',
@@ -225,7 +220,7 @@ const App = () => {
       precision: '±0.03mm',
       speed: '120°/sec',
       features: 'Force Sensing, Multi-Tool Support, Adaptive Learning',
-      bestFor: 'Human-robot collaboration, medical devices, food production'
+      bestFor: 'Human-robot collaboration, medical devices, food production',
     },
     quantumdelta: {
       name: 'QuantumDelta™',
@@ -235,7 +230,7 @@ const App = () => {
       precision: '±0.02mm',
       speed: '200 picks/min',
       features: 'High-Speed, Washdown Ready, Precision Control',
-      bestFor: 'Picking, packaging, sorting applications'
+      bestFor: 'Picking, packaging, sorting applications',
     },
     quantumswift: {
       name: 'QuantumSwift™',
@@ -245,7 +240,7 @@ const App = () => {
       precision: '±0.01mm',
       speed: '7m/sec',
       features: 'Compact Design, High Throughput, IoT Enabled',
-      bestFor: 'Electronics assembly, testing, small component handling'
+      bestFor: 'Electronics assembly, testing, small component handling',
     },
     quantummover: {
       name: 'QuantumMover™',
@@ -255,7 +250,7 @@ const App = () => {
       precision: '±10mm',
       speed: '2m/sec',
       features: 'Dynamic Navigation, Fleet Management, Obstacle Avoidance',
-      bestFor: 'Material transport, warehouse logistics'
+      bestFor: 'Material transport, warehouse logistics',
     },
     quantumaero: {
       name: 'QuantumAero™',
@@ -265,19 +260,23 @@ const App = () => {
       precision: '±5cm',
       speed: '15m/sec',
       features: 'Indoor Navigation, Computer Vision, Extended Flight Time',
-      bestFor: 'Inventory scanning, inspection, monitoring'
-    }
+      bestFor: 'Inventory scanning, inspection, monitoring',
+    },
   };
 
   const renderProducts = () => {
     // Helper function to filter products
     const filterProducts = (product) => {
-      const productElement = document.querySelector(`[data-category="${product}"]`);
+      const productElement = document.querySelector(
+        `[data-category="${product}"]`,
+      );
       if (!productElement) return true;
 
-      const matchesCategory = productCategory === 'all' || product === productCategory;
+      const matchesCategory =
+        productCategory === 'all' || product === productCategory;
       const solutions = productElement.getAttribute('data-solutions') || '';
-      const matchesSolution = solutionFilter === 'all' || solutions.includes(solutionFilter);
+      const matchesSolution =
+        solutionFilter === 'all' || solutions.includes(solutionFilter);
 
       return matchesCategory && matchesSolution;
     };
@@ -287,7 +286,11 @@ const App = () => {
         <Container>
           <Typography
             variant="h2"
-            className={`text-3xl font-bold mb-4 relative ${isTablet ? "text-center after:left-1/2 after:-translate-x-1/2" : ""}`}
+            className={`text-3xl font-bold mb-4 relative ${
+              isTablet
+                ? 'text-center after:left-1/2 after:-translate-x-1/2'
+                : ''
+            }`}
             sx={{
               position: 'relative',
               '&::after': {
@@ -297,67 +300,106 @@ const App = () => {
                 left: 0,
                 width: '80px',
                 height: '4px',
-                backgroundColor: '#3c5a1e'
-              }
+                backgroundColor: '#3c5a1e',
+              },
             }}
           >
             Our Products
           </Typography>
           <Typography
             variant="subtitle1"
-            className={`text-xl text-gray-400 mb-12 max-w-3xl ${isTablet ? "text-center mx-auto" : ""}`}
+            className={`text-xl text-gray-400 mb-12 max-w-3xl ${
+              isTablet ? 'text-center mx-auto' : ''
+            }`}
           >
-            Discover our range of core robotics platforms designed for specific industrial applications.
+            Discover our range of core robotics platforms designed for specific
+            industrial applications.
           </Typography>
 
           {/* Product Category Tabs */}
-          <Box className={`flex flex-wrap justify-center gap-4 mb-8 ${isMobile ? 'flex-col' : ''}`}>
+          <Box
+            className={`flex flex-wrap justify-center gap-4 mb-8 ${
+              isMobile ? 'flex-col' : ''
+            }`}
+          >
             <Button
               variant={productCategory === 'all' ? 'contained' : 'outlined'}
               onClick={() => setProductCategory('all')}
-              className={productCategory === 'all' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+              className={
+                productCategory === 'all'
+                  ? 'bg-green-700'
+                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+              }
             >
               All Platforms
             </Button>
             <Button
-              variant={productCategory === 'articulated' ? 'contained' : 'outlined'}
+              variant={
+                productCategory === 'articulated' ? 'contained' : 'outlined'
+              }
               onClick={() => setProductCategory('articulated')}
-              className={productCategory === 'articulated' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+              className={
+                productCategory === 'articulated'
+                  ? 'bg-green-700'
+                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+              }
             >
               6-Axis Articulated
             </Button>
             <Button
-              variant={productCategory === 'collaborative' ? 'contained' : 'outlined'}
+              variant={
+                productCategory === 'collaborative' ? 'contained' : 'outlined'
+              }
               onClick={() => setProductCategory('collaborative')}
-              className={productCategory === 'collaborative' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+              className={
+                productCategory === 'collaborative'
+                  ? 'bg-green-700'
+                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+              }
             >
               Collaborative
             </Button>
             <Button
               variant={productCategory === 'delta' ? 'contained' : 'outlined'}
               onClick={() => setProductCategory('delta')}
-              className={productCategory === 'delta' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+              className={
+                productCategory === 'delta'
+                  ? 'bg-green-700'
+                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+              }
             >
               Delta
             </Button>
             <Button
               variant={productCategory === 'scara' ? 'contained' : 'outlined'}
               onClick={() => setProductCategory('scara')}
-              className={productCategory === 'scara' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+              className={
+                productCategory === 'scara'
+                  ? 'bg-green-700'
+                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+              }
             >
               SCARA
             </Button>
             <Button
               variant={productCategory === 'mobile' ? 'contained' : 'outlined'}
               onClick={() => setProductCategory('mobile')}
-              className={productCategory === 'mobile' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+              className={
+                productCategory === 'mobile'
+                  ? 'bg-green-700'
+                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+              }
             >
               Mobile
             </Button>
             <Button
               variant={productCategory === 'drone' ? 'contained' : 'outlined'}
               onClick={() => setProductCategory('drone')}
-              className={productCategory === 'drone' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+              className={
+                productCategory === 'drone'
+                  ? 'bg-green-700'
+                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+              }
             >
               UAV/Drone
             </Button>
@@ -365,15 +407,26 @@ const App = () => {
 
           {/* Industry Filter */}
           <Box className="mb-8">
-            <Typography variant="subtitle2" className="text-gray-400 mb-2 font-semibold">
+            <Typography
+              variant="subtitle2"
+              className="text-gray-400 mb-2 font-semibold"
+            >
               Solutions For:
             </Typography>
-            <Box className={`flex flex-wrap gap-2 mb-2 ${isMobile ? 'flex-col' : ''}`}>
+            <Box
+              className={`flex flex-wrap gap-2 mb-2 ${
+                isMobile ? 'flex-col' : ''
+              }`}
+            >
               <Button
                 variant={solutionFilter === 'all' ? 'contained' : 'outlined'}
                 size="small"
                 onClick={() => setSolutionFilter('all')}
-                className={solutionFilter === 'all' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+                className={
+                  solutionFilter === 'all'
+                    ? 'bg-green-700'
+                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+                }
               >
                 All Industries
               </Button>
@@ -381,31 +434,53 @@ const App = () => {
                 variant={solutionFilter === 'pharma' ? 'contained' : 'outlined'}
                 size="small"
                 onClick={() => setSolutionFilter('pharma')}
-                className={solutionFilter === 'pharma' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+                className={
+                  solutionFilter === 'pharma'
+                    ? 'bg-green-700'
+                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+                }
               >
                 Pharmaceutical
               </Button>
               <Button
-                variant={solutionFilter === 'logistics' ? 'contained' : 'outlined'}
+                variant={
+                  solutionFilter === 'logistics' ? 'contained' : 'outlined'
+                }
                 size="small"
                 onClick={() => setSolutionFilter('logistics')}
-                className={solutionFilter === 'logistics' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+                className={
+                  solutionFilter === 'logistics'
+                    ? 'bg-green-700'
+                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+                }
               >
                 Logistics
               </Button>
               <Button
-                variant={solutionFilter === 'semiconductor' ? 'contained' : 'outlined'}
+                variant={
+                  solutionFilter === 'semiconductor' ? 'contained' : 'outlined'
+                }
                 size="small"
                 onClick={() => setSolutionFilter('semiconductor')}
-                className={solutionFilter === 'semiconductor' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+                className={
+                  solutionFilter === 'semiconductor'
+                    ? 'bg-green-700'
+                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+                }
               >
                 Semiconductor
               </Button>
               <Button
-                variant={solutionFilter === 'automotive' ? 'contained' : 'outlined'}
+                variant={
+                  solutionFilter === 'automotive' ? 'contained' : 'outlined'
+                }
                 size="small"
                 onClick={() => setSolutionFilter('automotive')}
-                className={solutionFilter === 'automotive' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+                className={
+                  solutionFilter === 'automotive'
+                    ? 'bg-green-700'
+                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+                }
               >
                 Automotive
               </Button>
@@ -413,23 +488,39 @@ const App = () => {
                 variant={solutionFilter === 'food' ? 'contained' : 'outlined'}
                 size="small"
                 onClick={() => setSolutionFilter('food')}
-                className={solutionFilter === 'food' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+                className={
+                  solutionFilter === 'food'
+                    ? 'bg-green-700'
+                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+                }
               >
                 Food & Beverage
               </Button>
               <Button
-                variant={solutionFilter === 'medical' ? 'contained' : 'outlined'}
+                variant={
+                  solutionFilter === 'medical' ? 'contained' : 'outlined'
+                }
                 size="small"
                 onClick={() => setSolutionFilter('medical')}
-                className={solutionFilter === 'medical' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+                className={
+                  solutionFilter === 'medical'
+                    ? 'bg-green-700'
+                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+                }
               >
                 Medical Devices
               </Button>
               <Button
-                variant={solutionFilter === 'aerospace' ? 'contained' : 'outlined'}
+                variant={
+                  solutionFilter === 'aerospace' ? 'contained' : 'outlined'
+                }
                 size="small"
                 onClick={() => setSolutionFilter('aerospace')}
-                className={solutionFilter === 'aerospace' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+                className={
+                  solutionFilter === 'aerospace'
+                    ? 'bg-green-700'
+                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+                }
               >
                 Aerospace
               </Button>
@@ -439,7 +530,17 @@ const App = () => {
           {/* Products Grid */}
           <Grid container spacing={4}>
             {/* QuantumFlex: 6-Axis Articulated Robot */}
-            <Grid item xs={12} sm={6} md={4} data-category="articulated" data-solutions="automotive,aerospace,manufacturing" style={{ display: filterProducts('articulated') ? 'block' : 'none' }}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              data-category="articulated"
+              data-solutions="automotive,aerospace,manufacturing"
+              style={{
+                display: filterProducts('articulated') ? 'block' : 'none',
+              }}
+            >
               <Card className="bg-gray-800 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-10px) hover:shadow-xl">
                 <CardMedia
                   component="img"
@@ -448,34 +549,66 @@ const App = () => {
                   alt="QuantumFlex 6-Axis Robot"
                 />
                 <CardContent className="p-6 flex-grow flex flex-col">
-                  <Typography variant="caption" className="text-green-500 uppercase">
+                  <Typography
+                    variant="caption"
+                    className="text-green-500 uppercase"
+                  >
                     6-Axis Articulated Robot
                   </Typography>
                   <Typography variant="h5" className="font-semibold mb-2">
                     QuantumFlex™
                   </Typography>
                   <Typography variant="body2" className="text-gray-400 mb-4">
-                    Versatile 6-axis articulated robot for complex manufacturing, welding, and material handling tasks.
+                    Versatile 6-axis articulated robot for complex
+                    manufacturing, welding, and material handling tasks.
                   </Typography>
 
                   {/* Technical Specs - Hidden by default */}
                   {expandedSpecs.quantumflex && (
                     <Box className="flex flex-wrap gap-2 mb-4 bg-green-900 bg-opacity-10 p-2 rounded">
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">210kg</Typography>
-                        <Typography variant="caption" className="text-gray-400">Payload</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          210kg
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Payload
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">2.8m</Typography>
-                        <Typography variant="caption" className="text-gray-400">Reach</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          2.8m
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Reach
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">±0.08mm</Typography>
-                        <Typography variant="caption" className="text-gray-400">Precision</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          ±0.08mm
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Precision
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">180°/s</Typography>
-                        <Typography variant="caption" className="text-gray-400">Speed</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          180°/s
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Speed
+                        </Typography>
                       </Box>
                     </Box>
                   )}
@@ -494,11 +627,19 @@ const App = () => {
 
                   <Box className="flex justify-between items-center mt-auto">
                     <Button
-                      startIcon={expandedSpecs.quantumflex ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                      startIcon={
+                        expandedSpecs.quantumflex ? (
+                          <ExpandLessIcon />
+                        ) : (
+                          <ExpandMoreIcon />
+                        )
+                      }
                       onClick={() => toggleProductSpecs('quantumflex')}
                       className="text-green-500"
                     >
-                      {expandedSpecs.quantumflex ? 'Hide Specs' : 'Technical Specs'}
+                      {expandedSpecs.quantumflex
+                        ? 'Hide Specs'
+                        : 'Technical Specs'}
                     </Button>
                     <FormControlLabel
                       control={
@@ -506,7 +647,10 @@ const App = () => {
                           size="small"
                           checked={selectedProducts.includes('quantumflex')}
                           onChange={(e) => {
-                            const success = handleCompareProduct('quantumflex', e.target.checked);
+                            const success = handleCompareProduct(
+                              'quantumflex',
+                              e.target.checked,
+                            );
                             if (!success) e.preventDefault();
                           }}
                         />
@@ -519,7 +663,17 @@ const App = () => {
             </Grid>
 
             {/* QuantumCo: Collaborative Robot */}
-            <Grid item xs={12} sm={6} md={4} data-category="collaborative" data-solutions="medical,pharma,food" style={{ display: filterProducts('collaborative') ? 'block' : 'none' }}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              data-category="collaborative"
+              data-solutions="medical,pharma,food"
+              style={{
+                display: filterProducts('collaborative') ? 'block' : 'none',
+              }}
+            >
               <Card className="bg-gray-800 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-10px) hover:shadow-xl">
                 <CardMedia
                   component="img"
@@ -528,34 +682,66 @@ const App = () => {
                   alt="QuantumCo Collaborative Robot"
                 />
                 <CardContent className="p-6 flex-grow flex flex-col">
-                  <Typography variant="caption" className="text-green-500 uppercase">
+                  <Typography
+                    variant="caption"
+                    className="text-green-500 uppercase"
+                  >
                     Collaborative Robot
                   </Typography>
                   <Typography variant="h5" className="font-semibold mb-2">
                     QuantumCo™
                   </Typography>
                   <Typography variant="body2" className="text-gray-400 mb-4">
-                    Advanced collaborative robot designed to work alongside human operators in mixed manufacturing environments.
+                    Advanced collaborative robot designed to work alongside
+                    human operators in mixed manufacturing environments.
                   </Typography>
 
                   {/* Technical Specs - Hidden by default */}
                   {expandedSpecs.quantumco && (
                     <Box className="flex flex-wrap gap-2 mb-4 bg-green-900 bg-opacity-10 p-2 rounded">
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">35kg</Typography>
-                        <Typography variant="caption" className="text-gray-400">Payload</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          35kg
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Payload
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">1.7m</Typography>
-                        <Typography variant="caption" className="text-gray-400">Reach</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          1.7m
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Reach
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">±0.03mm</Typography>
-                        <Typography variant="caption" className="text-gray-400">Precision</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          ±0.03mm
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Precision
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">120°/s</Typography>
-                        <Typography variant="caption" className="text-gray-400">Speed</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          120°/s
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Speed
+                        </Typography>
                       </Box>
                     </Box>
                   )}
@@ -574,11 +760,19 @@ const App = () => {
 
                   <Box className="flex justify-between items-center mt-auto">
                     <Button
-                      startIcon={expandedSpecs.quantumco ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                      startIcon={
+                        expandedSpecs.quantumco ? (
+                          <ExpandLessIcon />
+                        ) : (
+                          <ExpandMoreIcon />
+                        )
+                      }
                       onClick={() => toggleProductSpecs('quantumco')}
                       className="text-green-500"
                     >
-                      {expandedSpecs.quantumco ? 'Hide Specs' : 'Technical Specs'}
+                      {expandedSpecs.quantumco
+                        ? 'Hide Specs'
+                        : 'Technical Specs'}
                     </Button>
                     <FormControlLabel
                       control={
@@ -586,7 +780,10 @@ const App = () => {
                           size="small"
                           checked={selectedProducts.includes('quantumco')}
                           onChange={(e) => {
-                            const success = handleCompareProduct('quantumco', e.target.checked);
+                            const success = handleCompareProduct(
+                              'quantumco',
+                              e.target.checked,
+                            );
                             if (!success) e.preventDefault();
                           }}
                         />
@@ -599,7 +796,15 @@ const App = () => {
             </Grid>
 
             {/* QuantumDelta: Delta Robot */}
-            <Grid item xs={12} sm={6} md={4} data-category="delta" data-solutions="food,pharma,medical" style={{ display: filterProducts('delta') ? 'block' : 'none' }}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              data-category="delta"
+              data-solutions="food,pharma,medical"
+              style={{ display: filterProducts('delta') ? 'block' : 'none' }}
+            >
               <Card className="bg-gray-800 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-10px) hover:shadow-xl">
                 <CardMedia
                   component="img"
@@ -608,34 +813,66 @@ const App = () => {
                   alt="QuantumDelta Robot"
                 />
                 <CardContent className="p-6 flex-grow flex flex-col">
-                  <Typography variant="caption" className="text-green-500 uppercase">
+                  <Typography
+                    variant="caption"
+                    className="text-green-500 uppercase"
+                  >
                     Delta Robot
                   </Typography>
                   <Typography variant="h5" className="font-semibold mb-2">
                     QuantumDelta™
                   </Typography>
                   <Typography variant="body2" className="text-gray-400 mb-4">
-                    High-speed picking and placing robot optimized for food, pharmaceutical, and small component assembly.
+                    High-speed picking and placing robot optimized for food,
+                    pharmaceutical, and small component assembly.
                   </Typography>
 
                   {/* Technical Specs - Hidden by default */}
                   {expandedSpecs.quantumdelta && (
                     <Box className="flex flex-wrap gap-2 mb-4 bg-green-900 bg-opacity-10 p-2 rounded">
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">8kg</Typography>
-                        <Typography variant="caption" className="text-gray-400">Payload</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          8kg
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Payload
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">1.2m</Typography>
-                        <Typography variant="caption" className="text-gray-400">Workspace</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          1.2m
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Workspace
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">±0.02mm</Typography>
-                        <Typography variant="caption" className="text-gray-400">Precision</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          ±0.02mm
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Precision
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">200/min</Typography>
-                        <Typography variant="caption" className="text-gray-400">Cycle Rate</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          200/min
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Cycle Rate
+                        </Typography>
                       </Box>
                     </Box>
                   )}
@@ -654,11 +891,19 @@ const App = () => {
 
                   <Box className="flex justify-between items-center mt-auto">
                     <Button
-                      startIcon={expandedSpecs.quantumdelta ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                      startIcon={
+                        expandedSpecs.quantumdelta ? (
+                          <ExpandLessIcon />
+                        ) : (
+                          <ExpandMoreIcon />
+                        )
+                      }
                       onClick={() => toggleProductSpecs('quantumdelta')}
                       className="text-green-500"
                     >
-                      {expandedSpecs.quantumdelta ? 'Hide Specs' : 'Technical Specs'}
+                      {expandedSpecs.quantumdelta
+                        ? 'Hide Specs'
+                        : 'Technical Specs'}
                     </Button>
                     <FormControlLabel
                       control={
@@ -666,7 +911,10 @@ const App = () => {
                           size="small"
                           checked={selectedProducts.includes('quantumdelta')}
                           onChange={(e) => {
-                            const success = handleCompareProduct('quantumdelta', e.target.checked);
+                            const success = handleCompareProduct(
+                              'quantumdelta',
+                              e.target.checked,
+                            );
                             if (!success) e.preventDefault();
                           }}
                         />
@@ -679,7 +927,15 @@ const App = () => {
             </Grid>
 
             {/* QuantumSwift: SCARA Robot */}
-            <Grid item xs={12} sm={6} md={4} data-category="scara" data-solutions="semiconductor,medical,electronics" style={{ display: filterProducts('scara') ? 'block' : 'none' }}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              data-category="scara"
+              data-solutions="semiconductor,medical,electronics"
+              style={{ display: filterProducts('scara') ? 'block' : 'none' }}
+            >
               <Card className="bg-gray-800 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-10px) hover:shadow-xl">
                 <CardMedia
                   component="img"
@@ -688,34 +944,66 @@ const App = () => {
                   alt="QuantumSwift SCARA Robot"
                 />
                 <CardContent className="p-6 flex-grow flex flex-col">
-                  <Typography variant="caption" className="text-green-500 uppercase">
+                  <Typography
+                    variant="caption"
+                    className="text-green-500 uppercase"
+                  >
                     SCARA Robot
                   </Typography>
                   <Typography variant="h5" className="font-semibold mb-2">
                     QuantumSwift™
                   </Typography>
                   <Typography variant="body2" className="text-gray-400 mb-4">
-                    Selective Compliance Articulated Robot Arm designed for precise assembly and handling operations.
+                    Selective Compliance Articulated Robot Arm designed for
+                    precise assembly and handling operations.
                   </Typography>
 
                   {/* Technical Specs - Hidden by default */}
                   {expandedSpecs.quantumswift && (
                     <Box className="flex flex-wrap gap-2 mb-4 bg-green-900 bg-opacity-10 p-2 rounded">
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">20kg</Typography>
-                        <Typography variant="caption" className="text-gray-400">Payload</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          20kg
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Payload
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">850mm</Typography>
-                        <Typography variant="caption" className="text-gray-400">Reach</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          850mm
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Reach
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">±0.01mm</Typography>
-                        <Typography variant="caption" className="text-gray-400">Precision</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          ±0.01mm
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Precision
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">7m/s</Typography>
-                        <Typography variant="caption" className="text-gray-400">Speed</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          7m/s
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Speed
+                        </Typography>
                       </Box>
                     </Box>
                   )}
@@ -734,11 +1022,19 @@ const App = () => {
 
                   <Box className="flex justify-between items-center mt-auto">
                     <Button
-                      startIcon={expandedSpecs.quantumswift ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                      startIcon={
+                        expandedSpecs.quantumswift ? (
+                          <ExpandLessIcon />
+                        ) : (
+                          <ExpandMoreIcon />
+                        )
+                      }
                       onClick={() => toggleProductSpecs('quantumswift')}
                       className="text-green-500"
                     >
-                      {expandedSpecs.quantumswift ? 'Hide Specs' : 'Technical Specs'}
+                      {expandedSpecs.quantumswift
+                        ? 'Hide Specs'
+                        : 'Technical Specs'}
                     </Button>
                     <FormControlLabel
                       control={
@@ -746,7 +1042,10 @@ const App = () => {
                           size="small"
                           checked={selectedProducts.includes('quantumswift')}
                           onChange={(e) => {
-                            const success = handleCompareProduct('quantumswift', e.target.checked);
+                            const success = handleCompareProduct(
+                              'quantumswift',
+                              e.target.checked,
+                            );
                             if (!success) e.preventDefault();
                           }}
                         />
@@ -759,7 +1058,15 @@ const App = () => {
             </Grid>
 
             {/* QuantumMover: Autonomous Mobile Robot */}
-            <Grid item xs={12} sm={6} md={4} data-category="mobile" data-solutions="logistics,automotive,pharma,aerospace" style={{ display: filterProducts('mobile') ? 'block' : 'none' }}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              data-category="mobile"
+              data-solutions="logistics,automotive,pharma,aerospace"
+              style={{ display: filterProducts('mobile') ? 'block' : 'none' }}
+            >
               <Card className="bg-gray-800 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-10px) hover:shadow-xl">
                 <CardMedia
                   component="img"
@@ -768,34 +1075,66 @@ const App = () => {
                   alt="QuantumMover AMR"
                 />
                 <CardContent className="p-6 flex-grow flex flex-col">
-                  <Typography variant="caption" className="text-green-500 uppercase">
+                  <Typography
+                    variant="caption"
+                    className="text-green-500 uppercase"
+                  >
                     Autonomous Mobile Robot
                   </Typography>
                   <Typography variant="h5" className="font-semibold mb-2">
                     QuantumMover™
                   </Typography>
                   <Typography variant="body2" className="text-gray-400 mb-4">
-                    Self-navigating mobile robot for material transport across factory floors, warehouses, and distribution centers.
+                    Self-navigating mobile robot for material transport across
+                    factory floors, warehouses, and distribution centers.
                   </Typography>
 
                   {/* Technical Specs - Hidden by default */}
                   {expandedSpecs.quantummover && (
                     <Box className="flex flex-wrap gap-2 mb-4 bg-green-900 bg-opacity-10 p-2 rounded">
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">1500kg</Typography>
-                        <Typography variant="caption" className="text-gray-400">Payload</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          1500kg
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Payload
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">2.0m/s</Typography>
-                        <Typography variant="caption" className="text-gray-400">Speed</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          2.0m/s
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Speed
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">±10mm</Typography>
-                        <Typography variant="caption" className="text-gray-400">Navigation</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          ±10mm
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Navigation
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">10hrs</Typography>
-                        <Typography variant="caption" className="text-gray-400">Runtime</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          10hrs
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Runtime
+                        </Typography>
                       </Box>
                     </Box>
                   )}
@@ -814,11 +1153,19 @@ const App = () => {
 
                   <Box className="flex justify-between items-center mt-auto">
                     <Button
-                      startIcon={expandedSpecs.quantummover ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                      startIcon={
+                        expandedSpecs.quantummover ? (
+                          <ExpandLessIcon />
+                        ) : (
+                          <ExpandMoreIcon />
+                        )
+                      }
                       onClick={() => toggleProductSpecs('quantummover')}
                       className="text-green-500"
                     >
-                      {expandedSpecs.quantummover ? 'Hide Specs' : 'Technical Specs'}
+                      {expandedSpecs.quantummover
+                        ? 'Hide Specs'
+                        : 'Technical Specs'}
                     </Button>
                     <FormControlLabel
                       control={
@@ -826,7 +1173,10 @@ const App = () => {
                           size="small"
                           checked={selectedProducts.includes('quantummover')}
                           onChange={(e) => {
-                            const success = handleCompareProduct('quantummover', e.target.checked);
+                            const success = handleCompareProduct(
+                              'quantummover',
+                              e.target.checked,
+                            );
                             if (!success) e.preventDefault();
                           }}
                         />
@@ -839,7 +1189,15 @@ const App = () => {
             </Grid>
 
             {/* QuantumAero: Drone/UAV */}
-            <Grid item xs={12} sm={6} md={4} data-category="drone" data-solutions="logistics,aerospace" style={{ display: filterProducts('drone') ? 'block' : 'none' }}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              data-category="drone"
+              data-solutions="logistics,aerospace"
+              style={{ display: filterProducts('drone') ? 'block' : 'none' }}
+            >
               <Card className="bg-gray-800 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-10px) hover:shadow-xl">
                 <CardMedia
                   component="img"
@@ -848,34 +1206,66 @@ const App = () => {
                   alt="QuantumAero Drone"
                 />
                 <CardContent className="p-6 flex-grow flex flex-col">
-                  <Typography variant="caption" className="text-green-500 uppercase">
+                  <Typography
+                    variant="caption"
+                    className="text-green-500 uppercase"
+                  >
                     Drone/UAV
                   </Typography>
                   <Typography variant="h5" className="font-semibold mb-2">
                     QuantumAero™
                   </Typography>
                   <Typography variant="body2" className="text-gray-400 mb-4">
-                    Autonomous aerial system for inventory management, inspection, and light cargo transport.
+                    Autonomous aerial system for inventory management,
+                    inspection, and light cargo transport.
                   </Typography>
 
                   {/* Technical Specs - Hidden by default */}
                   {expandedSpecs.quantumaero && (
                     <Box className="flex flex-wrap gap-2 mb-4 bg-green-900 bg-opacity-10 p-2 rounded">
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">5kg</Typography>
-                        <Typography variant="caption" className="text-gray-400">Payload</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          5kg
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Payload
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">45min</Typography>
-                        <Typography variant="caption" className="text-gray-400">Flight Time</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          45min
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Flight Time
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">10km</Typography>
-                        <Typography variant="caption" className="text-gray-400">Range</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          10km
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Range
+                        </Typography>
                       </Box>
                       <Box className="flex flex-col items-center p-1 min-w-16 flex-1">
-                        <Typography variant="subtitle2" className="font-semibold text-green-500">±5cm</Typography>
-                        <Typography variant="caption" className="text-gray-400">Positioning</Typography>
+                        <Typography
+                          variant="subtitle2"
+                          className="font-semibold text-green-500"
+                        >
+                          ±5cm
+                        </Typography>
+                        <Typography variant="caption" className="text-gray-400">
+                          Positioning
+                        </Typography>
                       </Box>
                     </Box>
                   )}
@@ -894,11 +1284,19 @@ const App = () => {
 
                   <Box className="flex justify-between items-center mt-auto">
                     <Button
-                      startIcon={expandedSpecs.quantumaero ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                      startIcon={
+                        expandedSpecs.quantumaero ? (
+                          <ExpandLessIcon />
+                        ) : (
+                          <ExpandMoreIcon />
+                        )
+                      }
                       onClick={() => toggleProductSpecs('quantumaero')}
                       className="text-green-500"
                     >
-                      {expandedSpecs.quantumaero ? 'Hide Specs' : 'Technical Specs'}
+                      {expandedSpecs.quantumaero
+                        ? 'Hide Specs'
+                        : 'Technical Specs'}
                     </Button>
                     <FormControlLabel
                       control={
@@ -906,7 +1304,10 @@ const App = () => {
                           size="small"
                           checked={selectedProducts.includes('quantumaero')}
                           onChange={(e) => {
-                            const success = handleCompareProduct('quantumaero', e.target.checked);
+                            const success = handleCompareProduct(
+                              'quantumaero',
+                              e.target.checked,
+                            );
                             if (!success) e.preventDefault();
                           }}
                         />
@@ -922,26 +1323,39 @@ const App = () => {
           {/* Product Comparison View */}
           {showComparison && (
             <Box className="mt-12 bg-gray-700 rounded-lg p-6 overflow-x-auto">
-              <Typography variant="h5" className="font-semibold mb-6 text-center">
+              <Typography
+                variant="h5"
+                className="font-semibold mb-6 text-center"
+              >
                 Product Comparison
               </Typography>
               <Box className="min-w-max">
                 <Grid container className="border-b border-gray-600 pb-4 mb-2">
                   <Grid item xs={3}>
-                    <Typography variant="subtitle2" className="font-semibold text-green-500">
+                    <Typography
+                      variant="subtitle2"
+                      className="font-semibold text-green-500"
+                    >
                       Specification
                     </Typography>
                   </Grid>
                   {selectedProducts.map((productId, index) => (
                     <Grid item xs={3} key={index}>
-                      <Typography variant="subtitle2" className="font-semibold text-green-500">
-                        {productSpecs[productId]?.name || `Product ${index + 1}`}
+                      <Typography
+                        variant="subtitle2"
+                        className="font-semibold text-green-500"
+                      >
+                        {productSpecs[productId]?.name ||
+                          `Product ${index + 1}`}
                       </Typography>
                     </Grid>
                   ))}
                   {[...Array(3 - selectedProducts.length)].map((_, index) => (
                     <Grid item xs={3} key={index}>
-                      <Typography variant="subtitle2" className="text-gray-500 italic">
+                      <Typography
+                        variant="subtitle2"
+                        className="text-gray-500 italic"
+                      >
                         Select a product
                       </Typography>
                     </Grid>
@@ -1102,14 +1516,17 @@ const App = () => {
       <Box
         className="absolute inset-0 z-0"
         sx={{
-          background: 'radial-gradient(circle at center, rgba(60, 90, 30, 0.1) 0%, transparent 70%)'
+          background:
+            'radial-gradient(circle at center, rgba(60, 90, 30, 0.1) 0%, transparent 70%)',
         }}
       />
 
       <Container className="relative z-10">
         <Typography
           variant="h2"
-          className={`text-3xl font-bold mb-4 relative ${isTablet ? "text-center after:left-1/2 after:-translate-x-1/2" : ""}`}
+          className={`text-3xl font-bold mb-4 relative ${
+            isTablet ? 'text-center after:left-1/2 after:-translate-x-1/2' : ''
+          }`}
           sx={{
             position: 'relative',
             '&::after': {
@@ -1119,17 +1536,20 @@ const App = () => {
               left: 0,
               width: '80px',
               height: '4px',
-              backgroundColor: '#3c5a1e'
-            }
+              backgroundColor: '#3c5a1e',
+            },
           }}
         >
           Qortex OS Platform
         </Typography>
         <Typography
           variant="subtitle1"
-          className={`text-xl text-gray-400 mb-12 max-w-3xl ${isTablet ? "text-center mx-auto" : ""}`}
+          className={`text-xl text-gray-400 mb-12 max-w-3xl ${
+            isTablet ? 'text-center mx-auto' : ''
+          }`}
         >
-          Our proprietary operating system powers all Quantum robots, enabling rapid deployment, seamless integration, and unparalleled performance.
+          Our proprietary operating system powers all Quantum robots, enabling
+          rapid deployment, seamless integration, and unparalleled performance.
         </Typography>
 
         {/* Deployment Comparison */}
@@ -1145,7 +1565,10 @@ const App = () => {
                 </Typography>
               </Box>
               <CardContent className="p-6 flex-grow">
-                <Typography variant="h3" className="text-4xl font-bold text-center mb-6">
+                <Typography
+                  variant="h3"
+                  className="text-4xl font-bold text-center mb-6"
+                >
                   4-16 Weeks
                 </Typography>
 
@@ -1236,11 +1659,15 @@ const App = () => {
                   Qortex OS Deployment
                 </Typography>
                 <Typography variant="body2" className="text-gray-400">
-                  Visual programming, plug-and-play integration, AI configuration
+                  Visual programming, plug-and-play integration, AI
+                  configuration
                 </Typography>
               </Box>
               <CardContent className="p-6 flex-grow">
-                <Typography variant="h3" className="text-4xl font-bold text-center mb-6 text-green-500">
+                <Typography
+                  variant="h3"
+                  className="text-4xl font-bold text-center mb-6 text-green-500"
+                >
                   4-10 Days
                 </Typography>
 
@@ -1329,9 +1756,17 @@ const App = () => {
         <Box className="relative my-16 max-w-4xl mx-auto">
           <Box className="rounded-lg overflow-hidden">
             <Grid container>
-              <Grid item xs={12} md={6} className="relative" sx={{ zIndex: 10 }}>
+              <Grid
+                item
+                xs={12}
+                md={6}
+                className="relative"
+                sx={{ zIndex: 10 }}
+              >
                 <Box className="bg-gray-800 p-8 h-full">
-                  <Typography variant="h6" className="text-center mb-4">Traditional Robotics</Typography>
+                  <Typography variant="h6" className="text-center mb-4">
+                    Traditional Robotics
+                  </Typography>
                   <Box
                     component="pre"
                     className="text-left text-xs bg-gray-900 bg-opacity-30 p-4 overflow-auto max-h-80"
@@ -1407,9 +1842,17 @@ try {
                   </Box>
                 </Box>
               </Grid>
-              <Grid item xs={12} md={6} className="relative" sx={{ zIndex: 10 }}>
+              <Grid
+                item
+                xs={12}
+                md={6}
+                className="relative"
+                sx={{ zIndex: 10 }}
+              >
                 <Box className="bg-gray-800 p-8 h-full">
-                  <Typography variant="h6" className="text-center mb-4">Qortex OS</Typography>
+                  <Typography variant="h6" className="text-center mb-4">
+                    Qortex OS
+                  </Typography>
                   <Box
                     component="pre"
                     className="text-left text-sm bg-green-900 bg-opacity-20 p-4 overflow-auto max-h-80"
@@ -1445,13 +1888,13 @@ qortex.teach("Gentle placement", () => {
           <Box
             className="absolute top-0 left-1/2 bottom-0 w-1 bg-green-700 transform -translate-x-1/2"
             sx={{
-              display: { xs: 'none', md: 'block' }
+              display: { xs: 'none', md: 'block' },
             }}
           />
           <Box
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white cursor-pointer"
             sx={{
-              display: { xs: 'none', md: 'flex' }
+              display: { xs: 'none', md: 'flex' },
             }}
           >
             <SwapHorizIcon />
@@ -1461,16 +1904,37 @@ qortex.teach("Gentle placement", () => {
         {/* Metrics */}
         <Box className="flex flex-wrap justify-around gap-8 my-16">
           <Box className="text-center">
-            <Typography variant="h3" className="text-4xl font-bold text-green-500">80%</Typography>
-            <Typography variant="body2" className="text-gray-400">Less code required</Typography>
+            <Typography
+              variant="h3"
+              className="text-4xl font-bold text-green-500"
+            >
+              80%
+            </Typography>
+            <Typography variant="body2" className="text-gray-400">
+              Less code required
+            </Typography>
           </Box>
           <Box className="text-center">
-            <Typography variant="h3" className="text-4xl font-bold text-green-500">95%</Typography>
-            <Typography variant="body2" className="text-gray-400">Faster setup time</Typography>
+            <Typography
+              variant="h3"
+              className="text-4xl font-bold text-green-500"
+            >
+              95%
+            </Typography>
+            <Typography variant="body2" className="text-gray-400">
+              Faster setup time
+            </Typography>
           </Box>
           <Box className="text-center">
-            <Typography variant="h3" className="text-4xl font-bold text-green-500">99.8%</Typography>
-            <Typography variant="body2" className="text-gray-400">System reliability</Typography>
+            <Typography
+              variant="h3"
+              className="text-4xl font-bold text-green-500"
+            >
+              99.8%
+            </Typography>
+            <Typography variant="body2" className="text-gray-400">
+              System reliability
+            </Typography>
           </Box>
         </Box>
 
@@ -1486,7 +1950,8 @@ qortex.teach("Gentle placement", () => {
                   Rapid Integration
                 </Typography>
                 <Typography variant="body2" className="text-gray-400">
-                  Connect with existing systems through standard protocols and pre-built connectors.
+                  Connect with existing systems through standard protocols and
+                  pre-built connectors.
                 </Typography>
               </Box>
             </Box>
@@ -1502,7 +1967,8 @@ qortex.teach("Gentle placement", () => {
                   Optimized Runtime
                 </Typography>
                 <Typography variant="body2" className="text-gray-400">
-                  Real-time performance optimization through adaptive learning algorithms.
+                  Real-time performance optimization through adaptive learning
+                  algorithms.
                 </Typography>
               </Box>
             </Box>
@@ -1518,7 +1984,8 @@ qortex.teach("Gentle placement", () => {
                   Multi-Robot Coordination
                 </Typography>
                 <Typography variant="body2" className="text-gray-400">
-                  Seamlessly coordinate multiple robots for complex operations and workflows.
+                  Seamlessly coordinate multiple robots for complex operations
+                  and workflows.
                 </Typography>
               </Box>
             </Box>
@@ -1534,7 +2001,8 @@ qortex.teach("Gentle placement", () => {
                   Predictive Maintenance
                 </Typography>
                 <Typography variant="body2" className="text-gray-400">
-                  AI-powered system health monitoring to prevent downtime and extend equipment life.
+                  AI-powered system health monitoring to prevent downtime and
+                  extend equipment life.
                 </Typography>
               </Box>
             </Box>
@@ -1550,7 +2018,8 @@ qortex.teach("Gentle placement", () => {
                   Natural Language Processing
                 </Typography>
                 <Typography variant="body2" className="text-gray-400">
-                  Control robots with simple voice or typed commands without complex programming.
+                  Control robots with simple voice or typed commands without
+                  complex programming.
                 </Typography>
               </Box>
             </Box>
@@ -1566,7 +2035,8 @@ qortex.teach("Gentle placement", () => {
                   Adaptive Learning
                 </Typography>
                 <Typography variant="body2" className="text-gray-400">
-                  System improves over time by analyzing performance data and user interactions.
+                  System improves over time by analyzing performance data and
+                  user interactions.
                 </Typography>
               </Box>
             </Box>
@@ -1580,7 +2050,10 @@ qortex.teach("Gentle placement", () => {
             size="large"
             className="bg-green-700 hover:bg-green-800"
           >
-            Deploy with Qortex <span className="inline-block bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded ml-2 animate-pulse">FREE</span>
+            Deploy with Qortex{' '}
+            <span className="inline-block bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded ml-2 animate-pulse">
+              FREE
+            </span>
           </Button>
         </Box>
       </Container>
@@ -1593,7 +2066,9 @@ qortex.teach("Gentle placement", () => {
       <Container>
         <Typography
           variant="h2"
-          className={`text-3xl font-bold mb-4 relative ${isTablet ? "text-center after:left-1/2 after:-translate-x-1/2" : ""}`}
+          className={`text-3xl font-bold mb-4 relative ${
+            isTablet ? 'text-center after:left-1/2 after:-translate-x-1/2' : ''
+          }`}
           sx={{
             position: 'relative',
             '&::after': {
@@ -1603,17 +2078,20 @@ qortex.teach("Gentle placement", () => {
               left: 0,
               width: '80px',
               height: '4px',
-              backgroundColor: '#3c5a1e'
-            }
+              backgroundColor: '#3c5a1e',
+            },
           }}
         >
           Use Cases by Industry
         </Typography>
         <Typography
           variant="subtitle1"
-          className={`text-xl text-gray-400 mb-12 max-w-3xl ${isTablet ? "text-center mx-auto" : ""}`}
+          className={`text-xl text-gray-400 mb-12 max-w-3xl ${
+            isTablet ? 'text-center mx-auto' : ''
+          }`}
         >
-          Discover how our robotic solutions are transforming operations across various industries.
+          Discover how our robotic solutions are transforming operations across
+          various industries.
         </Typography>
 
         {/* Industry Filters */}
@@ -1622,35 +2100,63 @@ qortex.teach("Gentle placement", () => {
             <Button
               variant={industryFilter === 'all' ? 'contained' : 'outlined'}
               onClick={() => setIndustryFilter('all')}
-              className={industryFilter === 'all' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+              className={
+                industryFilter === 'all'
+                  ? 'bg-green-700'
+                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+              }
             >
               All Industries
             </Button>
             <Button
-              variant={industryFilter === 'pharmaceutical' ? 'contained' : 'outlined'}
+              variant={
+                industryFilter === 'pharmaceutical' ? 'contained' : 'outlined'
+              }
               onClick={() => setIndustryFilter('pharmaceutical')}
-              className={industryFilter === 'pharmaceutical' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+              className={
+                industryFilter === 'pharmaceutical'
+                  ? 'bg-green-700'
+                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+              }
             >
               Pharmaceutical
             </Button>
             <Button
-              variant={industryFilter === 'logistics' ? 'contained' : 'outlined'}
+              variant={
+                industryFilter === 'logistics' ? 'contained' : 'outlined'
+              }
               onClick={() => setIndustryFilter('logistics')}
-              className={industryFilter === 'logistics' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+              className={
+                industryFilter === 'logistics'
+                  ? 'bg-green-700'
+                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+              }
             >
               Logistics
             </Button>
             <Button
-              variant={industryFilter === 'semiconductor' ? 'contained' : 'outlined'}
+              variant={
+                industryFilter === 'semiconductor' ? 'contained' : 'outlined'
+              }
               onClick={() => setIndustryFilter('semiconductor')}
-              className={industryFilter === 'semiconductor' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+              className={
+                industryFilter === 'semiconductor'
+                  ? 'bg-green-700'
+                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+              }
             >
               Semiconductor
             </Button>
             <Button
-              variant={industryFilter === 'automotive' ? 'contained' : 'outlined'}
+              variant={
+                industryFilter === 'automotive' ? 'contained' : 'outlined'
+              }
               onClick={() => setIndustryFilter('automotive')}
-              className={industryFilter === 'automotive' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+              className={
+                industryFilter === 'automotive'
+                  ? 'bg-green-700'
+                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+              }
             >
               Automotive
             </Button>
@@ -1662,28 +2168,48 @@ qortex.teach("Gentle placement", () => {
               <Button
                 variant={industryFilter === 'food' ? 'contained' : 'outlined'}
                 onClick={() => setIndustryFilter('food')}
-                className={industryFilter === 'food' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+                className={
+                  industryFilter === 'food'
+                    ? 'bg-green-700'
+                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+                }
               >
                 Food & Beverage/Commercial Kitchens
               </Button>
               <Button
                 variant={industryFilter === 'energy' ? 'contained' : 'outlined'}
                 onClick={() => setIndustryFilter('energy')}
-                className={industryFilter === 'energy' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+                className={
+                  industryFilter === 'energy'
+                    ? 'bg-green-700'
+                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+                }
               >
                 Energy & Utilities
               </Button>
               <Button
-                variant={industryFilter === 'construction' ? 'contained' : 'outlined'}
+                variant={
+                  industryFilter === 'construction' ? 'contained' : 'outlined'
+                }
                 onClick={() => setIndustryFilter('construction')}
-                className={industryFilter === 'construction' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+                className={
+                  industryFilter === 'construction'
+                    ? 'bg-green-700'
+                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+                }
               >
                 Construction
               </Button>
               <Button
-                variant={industryFilter === 'agriculture' ? 'contained' : 'outlined'}
+                variant={
+                  industryFilter === 'agriculture' ? 'contained' : 'outlined'
+                }
                 onClick={() => setIndustryFilter('agriculture')}
-                className={industryFilter === 'agriculture' ? 'bg-green-700' : 'text-gray-400 border-gray-700 hover:bg-gray-700'}
+                className={
+                  industryFilter === 'agriculture'
+                    ? 'bg-green-700'
+                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
+                }
               >
                 Agriculture
               </Button>
@@ -1696,7 +2222,9 @@ qortex.teach("Gentle placement", () => {
               onClick={() => setShowMoreIndustries(!showMoreIndustries)}
               className="text-gray-400 border-gray-700 hover:bg-gray-700"
             >
-              {showMoreIndustries ? 'View Less Industries' : 'View More Industries'}
+              {showMoreIndustries
+                ? 'View Less Industries'
+                : 'View More Industries'}
             </Button>
           </Box>
         </Box>
@@ -1704,13 +2232,27 @@ qortex.teach("Gentle placement", () => {
         {/* Use Cases Grid */}
         <Grid container spacing={4}>
           {/* Pharmaceutical Manufacturing */}
-          <Grid item xs={12} sm={6} md={4} data-industry="pharmaceutical" style={{ display: industryFilter === 'all' || industryFilter === 'pharmaceutical' ? 'block' : 'none' }}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            data-industry="pharmaceutical"
+            style={{
+              display:
+                industryFilter === 'all' || industryFilter === 'pharmaceutical'
+                  ? 'block'
+                  : 'none',
+            }}
+          >
             <Card className="bg-gray-700 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-5px) hover:shadow-xl">
               <Box className="flex items-center gap-4 p-4 bg-green-900 bg-opacity-10 border-b border-gray-600">
                 <Box className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-green-500 flex-shrink-0">
                   <i className="fas fa-prescription-bottle-alt"></i>
                 </Box>
-                <Typography variant="h6">Pharmaceutical Manufacturing</Typography>
+                <Typography variant="h6">
+                  Pharmaceutical Manufacturing
+                </Typography>
               </Box>
               <CardMedia
                 component="img"
@@ -1720,24 +2262,46 @@ qortex.teach("Gentle placement", () => {
               />
               <CardContent className="p-6 flex-grow flex flex-col">
                 <Box className="mb-4">
-                  <Typography variant="subtitle2" className="flex items-center gap-2 mb-2 font-semibold">
-                    <Box component="i" className="fas fa-exclamation-circle text-green-500"></Box>
+                  <Typography
+                    variant="subtitle2"
+                    className="flex items-center gap-2 mb-2 font-semibold"
+                  >
+                    <Box
+                      component="i"
+                      className="fas fa-exclamation-circle text-green-500"
+                    ></Box>
                     Pain Points Addressed
                   </Typography>
                   <Box className="flex flex-wrap gap-2">
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Contamination Risk</Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Regulatory Compliance</Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Batch Consistency</Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Labor Shortages</Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Contamination Risk
+                    </Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Regulatory Compliance
+                    </Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Batch Consistency
+                    </Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Labor Shortages
+                    </Box>
                   </Box>
                 </Box>
 
                 <Button
-                  startIcon={expandedUseCases.pharma ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                  startIcon={
+                    expandedUseCases.pharma ? (
+                      <ExpandLessIcon />
+                    ) : (
+                      <ExpandMoreIcon />
+                    )
+                  }
                   onClick={() => toggleUseCaseDetails('pharma')}
                   className="text-green-500 justify-start"
                 >
-                  {expandedUseCases.pharma ? 'Hide Details' : 'View More Details'}
+                  {expandedUseCases.pharma
+                    ? 'Hide Details'
+                    : 'View More Details'}
                 </Button>
 
                 {/* Hidden Details */}
@@ -1745,27 +2309,63 @@ qortex.teach("Gentle placement", () => {
                   <Box className="mt-4 pt-4 border-t border-gray-600">
                     {/* ROI Metrics */}
                     <Box className="mb-4 bg-green-900 bg-opacity-10 p-4 rounded">
-                      <Typography variant="subtitle2" className="flex items-center gap-2 mb-2 font-semibold">
-                        <Box component="i" className="fas fa-chart-line text-green-500"></Box>
+                      <Typography
+                        variant="subtitle2"
+                        className="flex items-center gap-2 mb-2 font-semibold"
+                      >
+                        <Box
+                          component="i"
+                          className="fas fa-chart-line text-green-500"
+                        ></Box>
                         ROI Metrics
                       </Typography>
                       <Grid container spacing={2}>
                         <Grid item xs={4}>
                           <Box className="text-center">
-                            <Typography variant="h6" className="text-green-500 font-bold">99.9%</Typography>
-                            <Typography variant="caption" className="text-gray-400">Defect Detection</Typography>
+                            <Typography
+                              variant="h6"
+                              className="text-green-500 font-bold"
+                            >
+                              99.9%
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              className="text-gray-400"
+                            >
+                              Defect Detection
+                            </Typography>
                           </Box>
                         </Grid>
                         <Grid item xs={4}>
                           <Box className="text-center">
-                            <Typography variant="h6" className="text-green-500 font-bold">14mo</Typography>
-                            <Typography variant="caption" className="text-gray-400">ROI Period</Typography>
+                            <Typography
+                              variant="h6"
+                              className="text-green-500 font-bold"
+                            >
+                              14mo
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              className="text-gray-400"
+                            >
+                              ROI Period
+                            </Typography>
                           </Box>
                         </Grid>
                         <Grid item xs={4}>
                           <Box className="text-center">
-                            <Typography variant="h6" className="text-green-500 font-bold">45%</Typography>
-                            <Typography variant="caption" className="text-gray-400">Labor Savings</Typography>
+                            <Typography
+                              variant="h6"
+                              className="text-green-500 font-bold"
+                            >
+                              45%
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              className="text-gray-400"
+                            >
+                              Labor Savings
+                            </Typography>
                           </Box>
                         </Grid>
                       </Grid>
@@ -1773,8 +2373,14 @@ qortex.teach("Gentle placement", () => {
 
                     {/* Applicable Robots */}
                     <Box className="mb-4">
-                      <Typography variant="subtitle2" className="flex items-center gap-2 mb-2 font-semibold">
-                        <Box component="i" className="fas fa-robot text-green-500"></Box>
+                      <Typography
+                        variant="subtitle2"
+                        className="flex items-center gap-2 mb-2 font-semibold"
+                      >
+                        <Box
+                          component="i"
+                          className="fas fa-robot text-green-500"
+                        ></Box>
                         Applicable Robots
                       </Typography>
                       <Box className="flex flex-wrap gap-2">
@@ -1825,7 +2431,19 @@ qortex.teach("Gentle placement", () => {
           </Grid>
 
           {/* Logistics & Distribution */}
-          <Grid item xs={12} sm={6} md={4} data-industry="logistics" style={{ display: industryFilter === 'all' || industryFilter === 'logistics' ? 'block' : 'none' }}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            data-industry="logistics"
+            style={{
+              display:
+                industryFilter === 'all' || industryFilter === 'logistics'
+                  ? 'block'
+                  : 'none',
+            }}
+          >
             <Card className="bg-gray-700 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-5px) hover:shadow-xl">
               <Box className="flex items-center gap-4 p-4 bg-green-900 bg-opacity-10 border-b border-gray-600">
                 <Box className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-green-500 flex-shrink-0">
@@ -1841,24 +2459,46 @@ qortex.teach("Gentle placement", () => {
               />
               <CardContent className="p-6 flex-grow flex flex-col">
                 <Box className="mb-4">
-                  <Typography variant="subtitle2" className="flex items-center gap-2 mb-2 font-semibold">
-                    <Box component="i" className="fas fa-exclamation-circle text-green-500"></Box>
+                  <Typography
+                    variant="subtitle2"
+                    className="flex items-center gap-2 mb-2 font-semibold"
+                  >
+                    <Box
+                      component="i"
+                      className="fas fa-exclamation-circle text-green-500"
+                    ></Box>
                     Pain Points Addressed
                   </Typography>
                   <Box className="flex flex-wrap gap-2">
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Order Fulfillment Speed</Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Labor Costs</Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Space Utilization</Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Inventory Accuracy</Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Order Fulfillment Speed
+                    </Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Labor Costs
+                    </Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Space Utilization
+                    </Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Inventory Accuracy
+                    </Box>
                   </Box>
                 </Box>
 
                 <Button
-                  startIcon={expandedUseCases.logistics ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                  startIcon={
+                    expandedUseCases.logistics ? (
+                      <ExpandLessIcon />
+                    ) : (
+                      <ExpandMoreIcon />
+                    )
+                  }
                   onClick={() => toggleUseCaseDetails('logistics')}
                   className="text-green-500 justify-start"
                 >
-                  {expandedUseCases.logistics ? 'Hide Details' : 'View More Details'}
+                  {expandedUseCases.logistics
+                    ? 'Hide Details'
+                    : 'View More Details'}
                 </Button>
 
                 {/* Hidden Details */}
@@ -1866,27 +2506,63 @@ qortex.teach("Gentle placement", () => {
                   <Box className="mt-4 pt-4 border-t border-gray-600">
                     {/* ROI Metrics */}
                     <Box className="mb-4 bg-green-900 bg-opacity-10 p-4 rounded">
-                      <Typography variant="subtitle2" className="flex items-center gap-2 mb-2 font-semibold">
-                        <Box component="i" className="fas fa-chart-line text-green-500"></Box>
+                      <Typography
+                        variant="subtitle2"
+                        className="flex items-center gap-2 mb-2 font-semibold"
+                      >
+                        <Box
+                          component="i"
+                          className="fas fa-chart-line text-green-500"
+                        ></Box>
                         ROI Metrics
                       </Typography>
                       <Grid container spacing={2}>
                         <Grid item xs={4}>
                           <Box className="text-center">
-                            <Typography variant="h6" className="text-green-500 font-bold">3x</Typography>
-                            <Typography variant="caption" className="text-gray-400">Throughput</Typography>
+                            <Typography
+                              variant="h6"
+                              className="text-green-500 font-bold"
+                            >
+                              3x
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              className="text-gray-400"
+                            >
+                              Throughput
+                            </Typography>
                           </Box>
                         </Grid>
                         <Grid item xs={4}>
                           <Box className="text-center">
-                            <Typography variant="h6" className="text-green-500 font-bold">10mo</Typography>
-                            <Typography variant="caption" className="text-gray-400">ROI Period</Typography>
+                            <Typography
+                              variant="h6"
+                              className="text-green-500 font-bold"
+                            >
+                              10mo
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              className="text-gray-400"
+                            >
+                              ROI Period
+                            </Typography>
                           </Box>
                         </Grid>
                         <Grid item xs={4}>
                           <Box className="text-center">
-                            <Typography variant="h6" className="text-green-500 font-bold">99.8%</Typography>
-                            <Typography variant="caption" className="text-gray-400">Pick Accuracy</Typography>
+                            <Typography
+                              variant="h6"
+                              className="text-green-500 font-bold"
+                            >
+                              99.8%
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              className="text-gray-400"
+                            >
+                              Pick Accuracy
+                            </Typography>
                           </Box>
                         </Grid>
                       </Grid>
@@ -1894,8 +2570,14 @@ qortex.teach("Gentle placement", () => {
 
                     {/* Applicable Robots */}
                     <Box className="mb-4">
-                      <Typography variant="subtitle2" className="flex items-center gap-2 mb-2 font-semibold">
-                        <Box component="i" className="fas fa-robot text-green-500"></Box>
+                      <Typography
+                        variant="subtitle2"
+                        className="flex items-center gap-2 mb-2 font-semibold"
+                      >
+                        <Box
+                          component="i"
+                          className="fas fa-robot text-green-500"
+                        ></Box>
                         Applicable Robots
                       </Typography>
                       <Box className="flex flex-wrap gap-2">
@@ -1946,13 +2628,27 @@ qortex.teach("Gentle placement", () => {
           </Grid>
 
           {/* Semiconductor Manufacturing */}
-          <Grid item xs={12} sm={6} md={4} data-industry="semiconductor" style={{ display: industryFilter === 'all' || industryFilter === 'semiconductor' ? 'block' : 'none' }}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            data-industry="semiconductor"
+            style={{
+              display:
+                industryFilter === 'all' || industryFilter === 'semiconductor'
+                  ? 'block'
+                  : 'none',
+            }}
+          >
             <Card className="bg-gray-700 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-5px) hover:shadow-xl">
               <Box className="flex items-center gap-4 p-4 bg-green-900 bg-opacity-10 border-b border-gray-600">
                 <Box className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-green-500 flex-shrink-0">
                   <i className="fas fa-microchip"></i>
                 </Box>
-                <Typography variant="h6">Semiconductor Manufacturing</Typography>
+                <Typography variant="h6">
+                  Semiconductor Manufacturing
+                </Typography>
               </Box>
               <CardMedia
                 component="img"
@@ -1962,24 +2658,46 @@ qortex.teach("Gentle placement", () => {
               />
               <CardContent className="p-6 flex-grow flex flex-col">
                 <Box className="mb-4">
-                  <Typography variant="subtitle2" className="flex items-center gap-2 mb-2 font-semibold">
-                    <Box component="i" className="fas fa-exclamation-circle text-green-500"></Box>
+                  <Typography
+                    variant="subtitle2"
+                    className="flex items-center gap-2 mb-2 font-semibold"
+                  >
+                    <Box
+                      component="i"
+                      className="fas fa-exclamation-circle text-green-500"
+                    ></Box>
                     Pain Points Addressed
                   </Typography>
                   <Box className="flex flex-wrap gap-2">
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Cleanroom Requirements</Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Precision Handling</Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Contamination</Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Yield Rates</Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Cleanroom Requirements
+                    </Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Precision Handling
+                    </Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Contamination
+                    </Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Yield Rates
+                    </Box>
                   </Box>
                 </Box>
 
                 <Button
-                  startIcon={expandedUseCases.semiconductor ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                  startIcon={
+                    expandedUseCases.semiconductor ? (
+                      <ExpandLessIcon />
+                    ) : (
+                      <ExpandMoreIcon />
+                    )
+                  }
                   onClick={() => toggleUseCaseDetails('semiconductor')}
                   className="text-green-500 justify-start"
                 >
-                  {expandedUseCases.semiconductor ? 'Hide Details' : 'View More Details'}
+                  {expandedUseCases.semiconductor
+                    ? 'Hide Details'
+                    : 'View More Details'}
                 </Button>
 
                 {/* Hidden Details */}
@@ -1987,27 +2705,63 @@ qortex.teach("Gentle placement", () => {
                   <Box className="mt-4 pt-4 border-t border-gray-600">
                     {/* ROI Metrics */}
                     <Box className="mb-4 bg-green-900 bg-opacity-10 p-4 rounded">
-                      <Typography variant="subtitle2" className="flex items-center gap-2 mb-2 font-semibold">
-                        <Box component="i" className="fas fa-chart-line text-green-500"></Box>
+                      <Typography
+                        variant="subtitle2"
+                        className="flex items-center gap-2 mb-2 font-semibold"
+                      >
+                        <Box
+                          component="i"
+                          className="fas fa-chart-line text-green-500"
+                        ></Box>
                         ROI Metrics
                       </Typography>
                       <Grid container spacing={2}>
                         <Grid item xs={4}>
                           <Box className="text-center">
-                            <Typography variant="h6" className="text-green-500 font-bold">±0.001mm</Typography>
-                            <Typography variant="caption" className="text-gray-400">Precision</Typography>
+                            <Typography
+                              variant="h6"
+                              className="text-green-500 font-bold"
+                            >
+                              ±0.001mm
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              className="text-gray-400"
+                            >
+                              Precision
+                            </Typography>
                           </Box>
                         </Grid>
                         <Grid item xs={4}>
                           <Box className="text-center">
-                            <Typography variant="h6" className="text-green-500 font-bold">16mo</Typography>
-                            <Typography variant="caption" className="text-gray-400">ROI Period</Typography>
+                            <Typography
+                              variant="h6"
+                              className="text-green-500 font-bold"
+                            >
+                              16mo
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              className="text-gray-400"
+                            >
+                              ROI Period
+                            </Typography>
                           </Box>
                         </Grid>
                         <Grid item xs={4}>
                           <Box className="text-center">
-                            <Typography variant="h6" className="text-green-500 font-bold">52%</Typography>
-                            <Typography variant="caption" className="text-gray-400">Yield Increase</Typography>
+                            <Typography
+                              variant="h6"
+                              className="text-green-500 font-bold"
+                            >
+                              52%
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              className="text-gray-400"
+                            >
+                              Yield Increase
+                            </Typography>
                           </Box>
                         </Grid>
                       </Grid>
@@ -2015,8 +2769,14 @@ qortex.teach("Gentle placement", () => {
 
                     {/* Applicable Robots */}
                     <Box className="mb-4">
-                      <Typography variant="subtitle2" className="flex items-center gap-2 mb-2 font-semibold">
-                        <Box component="i" className="fas fa-robot text-green-500"></Box>
+                      <Typography
+                        variant="subtitle2"
+                        className="flex items-center gap-2 mb-2 font-semibold"
+                      >
+                        <Box
+                          component="i"
+                          className="fas fa-robot text-green-500"
+                        ></Box>
                         Applicable Robots
                       </Typography>
                       <Box className="flex flex-wrap gap-2">
@@ -2068,7 +2828,19 @@ qortex.teach("Gentle placement", () => {
 
           {/* Add other industry use cases following the same pattern */}
           {/* Automotive Manufacturing */}
-          <Grid item xs={12} sm={6} md={4} data-industry="automotive" style={{ display: industryFilter === 'all' || industryFilter === 'automotive' ? 'block' : 'none' }}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            data-industry="automotive"
+            style={{
+              display:
+                industryFilter === 'all' || industryFilter === 'automotive'
+                  ? 'block'
+                  : 'none',
+            }}
+          >
             <Card className="bg-gray-700 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-5px) hover:shadow-xl">
               <Box className="flex items-center gap-4 p-4 bg-green-900 bg-opacity-10 border-b border-gray-600">
                 <Box className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-green-500 flex-shrink-0">
@@ -2084,24 +2856,46 @@ qortex.teach("Gentle placement", () => {
               />
               <CardContent className="p-6 flex-grow flex flex-col">
                 <Box className="mb-4">
-                  <Typography variant="subtitle2" className="flex items-center gap-2 mb-2 font-semibold">
-                    <Box component="i" className="fas fa-exclamation-circle text-green-500"></Box>
+                  <Typography
+                    variant="subtitle2"
+                    className="flex items-center gap-2 mb-2 font-semibold"
+                  >
+                    <Box
+                      component="i"
+                      className="fas fa-exclamation-circle text-green-500"
+                    ></Box>
                     Pain Points Addressed
                   </Typography>
                   <Box className="flex flex-wrap gap-2">
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Assembly Speed</Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Weld Quality</Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Worker Safety</Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Material Handling</Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Assembly Speed
+                    </Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Weld Quality
+                    </Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Worker Safety
+                    </Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Material Handling
+                    </Box>
                   </Box>
                 </Box>
 
                 <Button
-                  startIcon={expandedUseCases.automotive ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                  startIcon={
+                    expandedUseCases.automotive ? (
+                      <ExpandLessIcon />
+                    ) : (
+                      <ExpandMoreIcon />
+                    )
+                  }
                   onClick={() => toggleUseCaseDetails('automotive')}
                   className="text-green-500 justify-start"
                 >
-                  {expandedUseCases.automotive ? 'Hide Details' : 'View More Details'}
+                  {expandedUseCases.automotive
+                    ? 'Hide Details'
+                    : 'View More Details'}
                 </Button>
 
                 {/* Hidden Details */}
@@ -2109,27 +2903,63 @@ qortex.teach("Gentle placement", () => {
                   <Box className="mt-4 pt-4 border-t border-gray-600">
                     {/* ROI Metrics */}
                     <Box className="mb-4 bg-green-900 bg-opacity-10 p-4 rounded">
-                      <Typography variant="subtitle2" className="flex items-center gap-2 mb-2 font-semibold">
-                        <Box component="i" className="fas fa-chart-line text-green-500"></Box>
+                      <Typography
+                        variant="subtitle2"
+                        className="flex items-center gap-2 mb-2 font-semibold"
+                      >
+                        <Box
+                          component="i"
+                          className="fas fa-chart-line text-green-500"
+                        ></Box>
                         ROI Metrics
                       </Typography>
                       <Grid container spacing={2}>
                         <Grid item xs={4}>
                           <Box className="text-center">
-                            <Typography variant="h6" className="text-green-500 font-bold">28%</Typography>
-                            <Typography variant="caption" className="text-gray-400">Speed Increase</Typography>
+                            <Typography
+                              variant="h6"
+                              className="text-green-500 font-bold"
+                            >
+                              28%
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              className="text-gray-400"
+                            >
+                              Speed Increase
+                            </Typography>
                           </Box>
                         </Grid>
                         <Grid item xs={4}>
                           <Box className="text-center">
-                            <Typography variant="h6" className="text-green-500 font-bold">12mo</Typography>
-                            <Typography variant="caption" className="text-gray-400">ROI Period</Typography>
+                            <Typography
+                              variant="h6"
+                              className="text-green-500 font-bold"
+                            >
+                              12mo
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              className="text-gray-400"
+                            >
+                              ROI Period
+                            </Typography>
                           </Box>
                         </Grid>
                         <Grid item xs={4}>
                           <Box className="text-center">
-                            <Typography variant="h6" className="text-green-500 font-bold">92%</Typography>
-                            <Typography variant="caption" className="text-gray-400">Defect Reduction</Typography>
+                            <Typography
+                              variant="h6"
+                              className="text-green-500 font-bold"
+                            >
+                              92%
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              className="text-gray-400"
+                            >
+                              Defect Reduction
+                            </Typography>
                           </Box>
                         </Grid>
                       </Grid>
@@ -2137,8 +2967,14 @@ qortex.teach("Gentle placement", () => {
 
                     {/* Applicable Robots */}
                     <Box className="mb-4">
-                      <Typography variant="subtitle2" className="flex items-center gap-2 mb-2 font-semibold">
-                        <Box component="i" className="fas fa-robot text-green-500"></Box>
+                      <Typography
+                        variant="subtitle2"
+                        className="flex items-center gap-2 mb-2 font-semibold"
+                      >
+                        <Box
+                          component="i"
+                          className="fas fa-robot text-green-500"
+                        ></Box>
                         Applicable Robots
                       </Typography>
                       <Box className="flex flex-wrap gap-2">
@@ -2189,7 +3025,19 @@ qortex.teach("Gentle placement", () => {
           </Grid>
 
           {/* Food & Beverage */}
-          <Grid item xs={12} sm={6} md={4} data-industry="food" style={{ display: industryFilter === 'all' || industryFilter === 'food' ? 'block' : 'none' }}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            data-industry="food"
+            style={{
+              display:
+                industryFilter === 'all' || industryFilter === 'food'
+                  ? 'block'
+                  : 'none',
+            }}
+          >
             <Card className="bg-gray-700 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-5px) hover:shadow-xl">
               <Box className="flex items-center gap-4 p-4 bg-green-900 bg-opacity-10 border-b border-gray-600">
                 <Box className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-green-500 flex-shrink-0">
@@ -2205,20 +3053,40 @@ qortex.teach("Gentle placement", () => {
               />
               <CardContent className="p-6 flex-grow flex flex-col">
                 <Box className="mb-4">
-                  <Typography variant="subtitle2" className="flex items-center gap-2 mb-2 font-semibold">
-                    <Box component="i" className="fas fa-exclamation-circle text-green-500"></Box>
+                  <Typography
+                    variant="subtitle2"
+                    className="flex items-center gap-2 mb-2 font-semibold"
+                  >
+                    <Box
+                      component="i"
+                      className="fas fa-exclamation-circle text-green-500"
+                    ></Box>
                     Pain Points Addressed
                   </Typography>
                   <Box className="flex flex-wrap gap-2">
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Hygiene Requirements</Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Labor Costs</Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Food Safety</Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">Packaging Efficiency</Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Hygiene Requirements
+                    </Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Labor Costs
+                    </Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Food Safety
+                    </Box>
+                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
+                      Packaging Efficiency
+                    </Box>
                   </Box>
                 </Box>
 
                 <Button
-                  startIcon={expandedUseCases.food ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                  startIcon={
+                    expandedUseCases.food ? (
+                      <ExpandLessIcon />
+                    ) : (
+                      <ExpandMoreIcon />
+                    )
+                  }
                   onClick={() => toggleUseCaseDetails('food')}
                   className="text-green-500 justify-start"
                 >
@@ -2230,27 +3098,63 @@ qortex.teach("Gentle placement", () => {
                   <Box className="mt-4 pt-4 border-t border-gray-600">
                     {/* ROI Metrics */}
                     <Box className="mb-4 bg-green-900 bg-opacity-10 p-4 rounded">
-                      <Typography variant="subtitle2" className="flex items-center gap-2 mb-2 font-semibold">
-                        <Box component="i" className="fas fa-chart-line text-green-500"></Box>
+                      <Typography
+                        variant="subtitle2"
+                        className="flex items-center gap-2 mb-2 font-semibold"
+                      >
+                        <Box
+                          component="i"
+                          className="fas fa-chart-line text-green-500"
+                        ></Box>
                         ROI Metrics
                       </Typography>
                       <Grid container spacing={2}>
                         <Grid item xs={4}>
                           <Box className="text-center">
-                            <Typography variant="h6" className="text-green-500 font-bold">2.5x</Typography>
-                            <Typography variant="caption" className="text-gray-400">Throughput</Typography>
+                            <Typography
+                              variant="h6"
+                              className="text-green-500 font-bold"
+                            >
+                              2.5x
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              className="text-gray-400"
+                            >
+                              Throughput
+                            </Typography>
                           </Box>
                         </Grid>
                         <Grid item xs={4}>
                           <Box className="text-center">
-                            <Typography variant="h6" className="text-green-500 font-bold">9mo</Typography>
-                            <Typography variant="caption" className="text-gray-400">ROI Period</Typography>
+                            <Typography
+                              variant="h6"
+                              className="text-green-500 font-bold"
+                            >
+                              9mo
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              className="text-gray-400"
+                            >
+                              ROI Period
+                            </Typography>
                           </Box>
                         </Grid>
                         <Grid item xs={4}>
                           <Box className="text-center">
-                            <Typography variant="h6" className="text-green-500 font-bold">98%</Typography>
-                            <Typography variant="caption" className="text-gray-400">Quality Rate</Typography>
+                            <Typography
+                              variant="h6"
+                              className="text-green-500 font-bold"
+                            >
+                              98%
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              className="text-gray-400"
+                            >
+                              Quality Rate
+                            </Typography>
                           </Box>
                         </Grid>
                       </Grid>
@@ -2258,8 +3162,14 @@ qortex.teach("Gentle placement", () => {
 
                     {/* Applicable Robots */}
                     <Box className="mb-4">
-                      <Typography variant="subtitle2" className="flex items-center gap-2 mb-2 font-semibold">
-                        <Box component="i" className="fas fa-robot text-green-500"></Box>
+                      <Typography
+                        variant="subtitle2"
+                        className="flex items-center gap-2 mb-2 font-semibold"
+                      >
+                        <Box
+                          component="i"
+                          className="fas fa-robot text-green-500"
+                        ></Box>
                         Applicable Robots
                       </Typography>
                       <Box className="flex flex-wrap gap-2">
@@ -2335,57 +3245,77 @@ qortex.teach("Gentle placement", () => {
           <Box
             component="img"
             src={getPlaceholderImage(800, 400)}
-            alt={`${activeWorkflow.charAt(0).toUpperCase() + activeWorkflow.slice(1)} Workflow`}
+            alt={`${
+              activeWorkflow.charAt(0).toUpperCase() + activeWorkflow.slice(1)
+            } Workflow`}
             className="w-full h-full object-cover"
           />
           <Box className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black to-transparent">
             <Typography variant="h4" className="font-bold">
-              {activeWorkflow.charAt(0).toUpperCase() + activeWorkflow.slice(1)} Manufacturing Workflow
+              {activeWorkflow.charAt(0).toUpperCase() + activeWorkflow.slice(1)}{' '}
+              Manufacturing Workflow
             </Typography>
           </Box>
         </Box>
 
         <DialogContent>
           <Box className="mt-6 border-t border-gray-700 pt-6">
-            <Typography variant="h6" className="flex items-center gap-2 font-semibold mb-4">
+            <Typography
+              variant="h6"
+              className="flex items-center gap-2 font-semibold mb-4"
+            >
               <AccountTreeIcon className="text-green-500" />
               Automated Manufacturing Process Flow
             </Typography>
             <Box className="relative h-64 bg-gray-700 p-6 rounded">
               {/* Workflow Step 1 */}
               <Box className="absolute top-8 left-8 bg-gray-800 p-3 rounded w-32 text-center transform transition-transform hover:scale-105 hover:bg-green-700 hover:z-10">
-                <Box className="inline-block w-6 h-6 bg-green-700 rounded-full mb-1 font-semibold">1</Box>
+                <Box className="inline-block w-6 h-6 bg-green-700 rounded-full mb-1 font-semibold">
+                  1
+                </Box>
                 <Typography variant="body2">Raw Material Handling</Typography>
               </Box>
 
               {/* Workflow Step 2 */}
               <Box className="absolute top-24 left-44 bg-gray-800 p-3 rounded w-32 text-center transform transition-transform hover:scale-105 hover:bg-green-700 hover:z-10">
-                <Box className="inline-block w-6 h-6 bg-green-700 rounded-full mb-1 font-semibold">2</Box>
+                <Box className="inline-block w-6 h-6 bg-green-700 rounded-full mb-1 font-semibold">
+                  2
+                </Box>
                 <Typography variant="body2">Formulation & Mixing</Typography>
               </Box>
 
               {/* Workflow Step 3 */}
               <Box className="absolute top-8 left-80 bg-gray-800 p-3 rounded w-32 text-center transform transition-transform hover:scale-105 hover:bg-green-700 hover:z-10">
-                <Box className="inline-block w-6 h-6 bg-green-700 rounded-full mb-1 font-semibold">3</Box>
+                <Box className="inline-block w-6 h-6 bg-green-700 rounded-full mb-1 font-semibold">
+                  3
+                </Box>
                 <Typography variant="body2">Quality Inspection</Typography>
               </Box>
 
               {/* Workflow Step 4 */}
               <Box className="absolute top-24 right-44 bg-gray-800 p-3 rounded w-32 text-center transform transition-transform hover:scale-105 hover:bg-green-700 hover:z-10">
-                <Box className="inline-block w-6 h-6 bg-green-700 rounded-full mb-1 font-semibold">4</Box>
+                <Box className="inline-block w-6 h-6 bg-green-700 rounded-full mb-1 font-semibold">
+                  4
+                </Box>
                 <Typography variant="body2">Packaging</Typography>
               </Box>
 
               {/* Workflow Step 5 */}
               <Box className="absolute top-8 right-8 bg-gray-800 p-3 rounded w-32 text-center transform transition-transform hover:scale-105 hover:bg-green-700 hover:z-10">
-                <Box className="inline-block w-6 h-6 bg-green-700 rounded-full mb-1 font-semibold">5</Box>
+                <Box className="inline-block w-6 h-6 bg-green-700 rounded-full mb-1 font-semibold">
+                  5
+                </Box>
                 <Typography variant="body2">Palletizing & Shipping</Typography>
               </Box>
             </Box>
           </Box>
 
           <Typography variant="body1" className="my-6">
-            Our {activeWorkflow} manufacturing solution integrates robotic systems at each critical stage of production, from raw material handling to final packaging. This fully validated system complies with industry standards and provides complete traceability throughout the production process.
+            Our {activeWorkflow} manufacturing solution integrates robotic
+            systems at each critical stage of production, from raw material
+            handling to final packaging. This fully validated system complies
+            with industry standards and provides complete traceability
+            throughout the production process.
           </Typography>
 
           <Grid container spacing={3} className="mb-6">
@@ -2436,7 +3366,9 @@ qortex.teach("Gentle placement", () => {
       <Container>
         <Typography
           variant="h2"
-          className={`text-3xl font-bold mb-4 relative ${isTablet ? "text-center after:left-1/2 after:-translate-x-1/2" : ""}`}
+          className={`text-3xl font-bold mb-4 relative ${
+            isTablet ? 'text-center after:left-1/2 after:-translate-x-1/2' : ''
+          }`}
           sx={{
             position: 'relative',
             '&::after': {
@@ -2446,15 +3378,17 @@ qortex.teach("Gentle placement", () => {
               left: 0,
               width: '80px',
               height: '4px',
-              backgroundColor: '#3c5a1e'
-            }
+              backgroundColor: '#3c5a1e',
+            },
           }}
         >
           Our Team
         </Typography>
         <Typography
           variant="subtitle1"
-          className={`text-xl text-gray-400 mb-12 max-w-3xl ${isTablet ? "text-center mx-auto" : ""}`}
+          className={`text-xl text-gray-400 mb-12 max-w-3xl ${
+            isTablet ? 'text-center mx-auto' : ''
+          }`}
         >
           Meet the experts behind Quantum Robotics' revolutionary technology.
         </Typography>
@@ -2472,14 +3406,14 @@ qortex.teach("Gentle placement", () => {
                   sx={{
                     transition: 'transform 0.3s ease',
                     '&:hover': {
-                      transform: 'scale(1.05)'
-                    }
+                      transform: 'scale(1.05)',
+                    },
                   }}
                 />
                 <Box
                   className="absolute inset-0 bg-green-800 bg-opacity-80 flex items-center justify-center gap-4 opacity-0 hover:opacity-100 transition-opacity duration-300"
                   sx={{
-                    transition: 'opacity 0.3s ease'
+                    transition: 'opacity 0.3s ease',
                   }}
                 >
                   <IconButton className="bg-gray-900 text-white hover:bg-green-700 hover:transform-gpu hover:translate-y-(-3px) transition-all">
@@ -2498,7 +3432,9 @@ qortex.teach("Gentle placement", () => {
                   Chief Executive Officer
                 </Typography>
                 <Typography variant="body2" className="text-gray-400">
-                  Former robotics engineer with 15+ years experience in industrial automation. Led multiple successful startups in the manufacturing technology space.
+                  Former robotics engineer with 15+ years experience in
+                  industrial automation. Led multiple successful startups in the
+                  manufacturing technology space.
                 </Typography>
               </CardContent>
             </Card>
@@ -2516,14 +3452,14 @@ qortex.teach("Gentle placement", () => {
                   sx={{
                     transition: 'transform 0.3s ease',
                     '&:hover': {
-                      transform: 'scale(1.05)'
-                    }
+                      transform: 'scale(1.05)',
+                    },
                   }}
                 />
                 <Box
                   className="absolute inset-0 bg-green-800 bg-opacity-80 flex items-center justify-center gap-4 opacity-0 hover:opacity-100 transition-opacity duration-300"
                   sx={{
-                    transition: 'opacity 0.3s ease'
+                    transition: 'opacity 0.3s ease',
                   }}
                 >
                   <IconButton className="bg-gray-900 text-white hover:bg-green-700 hover:transform-gpu hover:translate-y-(-3px) transition-all">
@@ -2542,7 +3478,9 @@ qortex.teach("Gentle placement", () => {
                   Chief Technology Officer
                 </Typography>
                 <Typography variant="body2" className="text-gray-400">
-                  AI and robotics Ph.D. with background in developing learning algorithms for complex robotic systems. Previously led R&D at Boston Dynamics.
+                  AI and robotics Ph.D. with background in developing learning
+                  algorithms for complex robotic systems. Previously led R&D at
+                  Boston Dynamics.
                 </Typography>
               </CardContent>
             </Card>
@@ -2560,14 +3498,14 @@ qortex.teach("Gentle placement", () => {
                   sx={{
                     transition: 'transform 0.3s ease',
                     '&:hover': {
-                      transform: 'scale(1.05)'
-                    }
+                      transform: 'scale(1.05)',
+                    },
                   }}
                 />
                 <Box
                   className="absolute inset-0 bg-green-800 bg-opacity-80 flex items-center justify-center gap-4 opacity-0 hover:opacity-100 transition-opacity duration-300"
                   sx={{
-                    transition: 'opacity 0.3s ease'
+                    transition: 'opacity 0.3s ease',
                   }}
                 >
                   <IconButton className="bg-gray-900 text-white hover:bg-green-700 hover:transform-gpu hover:translate-y-(-3px) transition-all">
@@ -2586,7 +3524,9 @@ qortex.teach("Gentle placement", () => {
                   VP of Operations
                 </Typography>
                 <Typography variant="body2" className="text-gray-400">
-                  Operations expert specializing in supply chain optimization and manufacturing efficiency. Transformed operations at multiple Fortune 500 companies.
+                  Operations expert specializing in supply chain optimization
+                  and manufacturing efficiency. Transformed operations at
+                  multiple Fortune 500 companies.
                 </Typography>
               </CardContent>
             </Card>
@@ -2604,14 +3544,14 @@ qortex.teach("Gentle placement", () => {
                   sx={{
                     transition: 'transform 0.3s ease',
                     '&:hover': {
-                      transform: 'scale(1.05)'
-                    }
+                      transform: 'scale(1.05)',
+                    },
                   }}
                 />
                 <Box
                   className="absolute inset-0 bg-green-800 bg-opacity-80 flex items-center justify-center gap-4 opacity-0 hover:opacity-100 transition-opacity duration-300"
                   sx={{
-                    transition: 'opacity 0.3s ease'
+                    transition: 'opacity 0.3s ease',
                   }}
                 >
                   <IconButton className="bg-gray-900 text-white hover:bg-green-700 hover:transform-gpu hover:translate-y-(-3px) transition-all">
@@ -2630,7 +3570,9 @@ qortex.teach("Gentle placement", () => {
                   Chief Design Officer
                 </Typography>
                 <Typography variant="body2" className="text-gray-400">
-                  Award-winning industrial designer focused on creating intuitive, human-centered robotic systems that seamlessly integrate into existing workflows.
+                  Award-winning industrial designer focused on creating
+                  intuitive, human-centered robotic systems that seamlessly
+                  integrate into existing workflows.
                 </Typography>
               </CardContent>
             </Card>
@@ -2648,7 +3590,11 @@ qortex.teach("Gentle placement", () => {
           <Grid item xs={12} md={5}>
             <Typography
               variant="h2"
-              className={`text-3xl font-bold mb-4 relative ${isTablet ? "text-center after:left-1/2 after:-translate-x-1/2" : ""}`}
+              className={`text-3xl font-bold mb-4 relative ${
+                isTablet
+                  ? 'text-center after:left-1/2 after:-translate-x-1/2'
+                  : ''
+              }`}
               sx={{
                 position: 'relative',
                 '&::after': {
@@ -2658,28 +3604,56 @@ qortex.teach("Gentle placement", () => {
                   left: 0,
                   width: '80px',
                   height: '4px',
-                  backgroundColor: '#3c5a1e'
-                }
+                  backgroundColor: '#3c5a1e',
+                },
               }}
             >
               Contact Quantum
             </Typography>
-            <Typography variant="body1" className={`text-gray-400 mt-8 mb-6 ${isTablet ? "text-center" : ""}`}>
-              Join our <span className="inline-block bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded ml-2 animate-pulse">FREE</span> pilot program to be among the first to implement our cutting-edge robotics solutions in your operations. Our pilot program provides hands-on experience with our technology along with dedicated implementation support and custom configuration.
+            <Typography
+              variant="body1"
+              className={`text-gray-400 mt-8 mb-6 ${
+                isTablet ? 'text-center' : ''
+              }`}
+            >
+              Join our{' '}
+              <span className="inline-block bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded ml-2 animate-pulse">
+                FREE
+              </span>{' '}
+              pilot program to be among the first to implement our cutting-edge
+              robotics solutions in your operations. Our pilot program provides
+              hands-on experience with our technology along with dedicated
+              implementation support and custom configuration.
             </Typography>
-            <Typography variant="body1" className={`text-gray-400 mb-6 ${isTablet ? "text-center" : ""}`}>
-              Fill out the form to schedule a personalized demo tailored to your industry needs.
+            <Typography
+              variant="body1"
+              className={`text-gray-400 mb-6 ${isTablet ? 'text-center' : ''}`}
+            >
+              Fill out the form to schedule a personalized demo tailored to your
+              industry needs.
             </Typography>
 
-            <Box className={`bg-gray-700 rounded-md inline-flex overflow-hidden mb-8 ${isTablet ? "mx-auto" : ""}`}>
+            <Box
+              className={`bg-gray-700 rounded-md inline-flex overflow-hidden mb-8 ${
+                isTablet ? 'mx-auto' : ''
+              }`}
+            >
               <Button
-                className={`px-4 py-2 ${contactFormType === 'comprehensive' ? 'bg-green-700 text-white' : 'text-gray-400'}`}
+                className={`px-4 py-2 ${
+                  contactFormType === 'comprehensive'
+                    ? 'bg-green-700 text-white'
+                    : 'text-gray-400'
+                }`}
                 onClick={() => setContactFormType('comprehensive')}
               >
                 Pilot Program Sign Up
               </Button>
               <Button
-                className={`px-4 py-2 ${contactFormType === 'quick' ? 'bg-green-700 text-white' : 'text-gray-400'}`}
+                className={`px-4 py-2 ${
+                  contactFormType === 'quick'
+                    ? 'bg-green-700 text-white'
+                    : 'text-gray-400'
+                }`}
                 onClick={() => setContactFormType('quick')}
               >
                 General Inquiries
@@ -2845,8 +3819,13 @@ qortex.teach("Gentle placement", () => {
                             />
                           }
                           label={
-                            <Typography variant="body2" className="text-gray-400">
-                              I consent to Quantum Robotics processing my data and contacting me about their products and services.*
+                            <Typography
+                              variant="body2"
+                              className="text-gray-400"
+                            >
+                              I consent to Quantum Robotics processing my data
+                              and contacting me about their products and
+                              services.*
                             </Typography>
                           }
                         />
@@ -2986,7 +3965,9 @@ qortex.teach("Gentle placement", () => {
                         </Grid>
                         <Grid item xs={12}>
                           <FormControl fullWidth variant="outlined">
-                            <InputLabel className="text-gray-400">Industry*</InputLabel>
+                            <InputLabel className="text-gray-400">
+                              Industry*
+                            </InputLabel>
                             <Select
                               label="Industry*"
                               name="industry"
@@ -3001,24 +3982,35 @@ qortex.teach("Gentle placement", () => {
                                 '&:hover .MuiOutlinedInput-notchedOutline': {
                                   borderColor: 'rgba(255, 255, 255, 0.5)',
                                 },
-                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                  borderColor: '#3c5a1e',
-                                },
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline':
+                                  {
+                                    borderColor: '#3c5a1e',
+                                  },
                                 '& .MuiSvgIcon-root': {
                                   color: 'white',
                                 },
                               }}
                             >
                               <MenuItem value="">Select your industry</MenuItem>
-                              <MenuItem value="manufacturing">Manufacturing</MenuItem>
+                              <MenuItem value="manufacturing">
+                                Manufacturing
+                              </MenuItem>
                               <MenuItem value="food">Food & Beverage</MenuItem>
                               <MenuItem value="pharma">Pharmaceutical</MenuItem>
-                              <MenuItem value="logistics">Logistics & Distribution</MenuItem>
+                              <MenuItem value="logistics">
+                                Logistics & Distribution
+                              </MenuItem>
                               <MenuItem value="retail">Retail</MenuItem>
-                              <MenuItem value="agriculture">Agriculture</MenuItem>
+                              <MenuItem value="agriculture">
+                                Agriculture
+                              </MenuItem>
                               <MenuItem value="healthcare">Healthcare</MenuItem>
-                              <MenuItem value="energy">Renewable Energy</MenuItem>
-                              <MenuItem value="construction">Construction</MenuItem>
+                              <MenuItem value="energy">
+                                Renewable Energy
+                              </MenuItem>
+                              <MenuItem value="construction">
+                                Construction
+                              </MenuItem>
                               <MenuItem value="other">Other</MenuItem>
                             </Select>
                           </FormControl>
@@ -3038,7 +4030,10 @@ qortex.teach("Gentle placement", () => {
                     {/* For brevity, only showing first step. In a real app, you'd implement other steps similarly */}
                     {contactStep > 0 && contactStep < 3 && (
                       <Box className="text-center py-8">
-                        <Typography variant="body1" className="mb-4">Additional form steps would appear here in a real application.</Typography>
+                        <Typography variant="body1" className="mb-4">
+                          Additional form steps would appear here in a real
+                          application.
+                        </Typography>
                         <Box className="flex justify-between">
                           <Button
                             variant="outlined"
@@ -3061,9 +4056,17 @@ qortex.teach("Gentle placement", () => {
                     {/* Final Step */}
                     {contactStep === 3 && (
                       <Box className="py-4">
-                        <Typography variant="h6" className="mb-4">Ready to submit your application for the pilot program?</Typography>
-                        <Typography variant="body1" className="mb-6 text-gray-400">
-                          Our team will review your information and contact you within 2 business days to discuss the next steps in your robotics journey.
+                        <Typography variant="h6" className="mb-4">
+                          Ready to submit your application for the pilot
+                          program?
+                        </Typography>
+                        <Typography
+                          variant="body1"
+                          className="mb-6 text-gray-400"
+                        >
+                          Our team will review your information and contact you
+                          within 2 business days to discuss the next steps in
+                          your robotics journey.
                         </Typography>
 
                         <Grid container spacing={3}>
@@ -3084,8 +4087,13 @@ qortex.teach("Gentle placement", () => {
                                 />
                               }
                               label={
-                                <Typography variant="body2" className="text-gray-400">
-                                  I consent to Quantum Robotics processing my data and contacting me about their products and services.*
+                                <Typography
+                                  variant="body2"
+                                  className="text-gray-400"
+                                >
+                                  I consent to Quantum Robotics processing my
+                                  data and contacting me about their products
+                                  and services.*
                                 </Typography>
                               }
                             />
@@ -3119,227 +4127,6 @@ qortex.teach("Gentle placement", () => {
     </Box>
   );
 
-  // Render Footer
-  const renderFooter = () => (
-    <Box component="footer" className="py-12 bg-gray-700 border-t border-gray-600">
-      <Container>
-        <Grid container spacing={6}>
-          <Grid item xs={12} md={3}>
-            <Typography variant="h6" className="font-semibold mb-6 relative">
-              Contact
-              <Box
-                className="absolute bottom-(-8px) left-0 w-10 h-1 bg-green-700"
-                sx={{
-                  content: '""',
-                  position: 'absolute',
-                  bottom: '-8px',
-                  left: 0,
-                  width: '40px',
-                  height: '3px',
-                  backgroundColor: '#3c5a1e'
-                }}
-              />
-            </Typography>
-            <Box className="space-y-3">
-              <Box className="flex items-start gap-3 text-gray-400">
-                <MapIcon className="mt-1 text-green-500 flex-shrink-0" />
-                <Typography variant="body2">123 Innovation Way, Robotics Park, CA 94103</Typography>
-              </Box>
-              <Box className="flex items-start gap-3 text-gray-400">
-                <PhoneIcon className="mt-1 text-green-500 flex-shrink-0" />
-                <Typography variant="body2">+1 (555) 123-4567</Typography>
-              </Box>
-              <Box className="flex items-start gap-3 text-gray-400">
-                <EmailIcon className="mt-1 text-green-500 flex-shrink-0" />
-                <Typography variant="body2">info@quantumrobotics.tech</Typography>
-              </Box>
-            </Box>
-            <Box className="flex gap-2 mt-4">
-              <IconButton className="bg-gray-800 text-gray-400 hover:bg-green-700 hover:text-white transition-transform hover:translate-y-(-3px)">
-                <LinkedInIcon />
-              </IconButton>
-              <IconButton className="bg-gray-800 text-gray-400 hover:bg-green-700 hover:text-white transition-transform hover:translate-y-(-3px)">
-                <TwitterIcon />
-              </IconButton>
-              <IconButton className="bg-gray-800 text-gray-400 hover:bg-green-700 hover:text-white transition-transform hover:translate-y-(-3px)">
-                <YouTubeIcon />
-              </IconButton>
-              <IconButton className="bg-gray-800 text-gray-400 hover:bg-green-700 hover:text-white transition-transform hover:translate-y-(-3px)">
-                <GitHubIcon />
-              </IconButton>
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="h6" className="font-semibold mb-6 relative">
-              Company
-              <Box
-                className="absolute bottom-(-8px) left-0 w-10 h-1 bg-green-700"
-                sx={{
-                  content: '""',
-                  position: 'absolute',
-                  bottom: '-8px',
-                  left: 0,
-                  width: '40px',
-                  height: '3px',
-                  backgroundColor: '#3c5a1e'
-                }}
-              />
-            </Typography>
-            <Box className="space-y-2">
-              <Box>
-                <Button
-                  href="#vision-mission"
-                  color="inherit"
-                  className="text-gray-400 hover:text-green-500 justify-start px-0"
-                >
-                  About Us
-                </Button>
-              </Box>
-              <Box>
-                <Button
-                  href="#team"
-                  color="inherit"
-                  className="text-gray-400 hover:text-green-500 justify-start px-0"
-                >
-                  Our Team
-                </Button>
-              </Box>
-              <Box>
-                <Button
-                  href="#blog"
-                  color="inherit"
-                  className="text-gray-400 hover:text-green-500 justify-start px-0"
-                >
-                  Blog
-                </Button>
-              </Box>
-              <Box>
-                <Button
-                  href="#contact"
-                  color="inherit"
-                  className="text-gray-400 hover:text-green-500 justify-start px-0"
-                >
-                  Careers
-                </Button>
-              </Box>
-              <Box>
-                <Button
-                  href="#contact"
-                  color="inherit"
-                  className="text-gray-400 hover:text-green-500 justify-start px-0"
-                >
-                  Investor Relations
-                </Button>
-              </Box>
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="h6" className="font-semibold mb-6 relative">
-              Products
-              <Box
-                className="absolute bottom-(-8px) left-0 w-10 h-1 bg-green-700"
-                sx={{
-                  content: '""',
-                  position: 'absolute',
-                  bottom: '-8px',
-                  left: 0,
-                  width: '40px',
-                  height: '3px',
-                  backgroundColor: '#3c5a1e'
-                }}
-              />
-            </Typography>
-            <Box className="space-y-2">
-              <Box>
-                <Button
-                  href="#products"
-                  color="inherit"
-                  className="text-gray-400 hover:text-green-500 justify-start px-0"
-                >
-                  QuantumFlex™
-                </Button>
-              </Box>
-              <Box>
-                <Button
-                  href="#products"
-                  color="inherit"
-                  className="text-gray-400 hover:text-green-500 justify-start px-0"
-                >
-                  QuantumCo™
-                </Button>
-              </Box>
-              <Box>
-                <Button
-                  href="#products"
-                  color="inherit"
-                  className="text-gray-400 hover:text-green-500 justify-start px-0"
-                >
-                  QuantumDelta™
-                </Button>
-              </Box>
-              <Box>
-                <Button
-                  href="#products"
-                  color="inherit"
-                  className="text-gray-400 hover:text-green-500 justify-start px-0"
-                >
-                  QuantumSwift™
-                </Button>
-              </Box>
-              <Box>
-                <Button
-                  href="#products"
-                  color="inherit"
-                  className="text-gray-400 hover:text-green-500 justify-start px-0"
-                >
-                  QuantumMover™
-                </Button>
-              </Box>
-              <Box>
-                <Button
-                  href="#products"
-                  color="inherit"
-                  className="text-gray-400 hover:text-green-500 justify-start px-0"
-                >
-                  QuantumAero™
-                </Button>
-              </Box>
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} md={3}>
-            <Typography variant="h6" className="font-semibold mb-6 relative">
-              Quantum Robotics
-              <Box
-                className="absolute bottom-(-8px) left-0 w-10 h-1 bg-green-700"
-                sx={{
-                  content: '""',
-                  position: 'absolute',
-                  bottom: '-8px',
-                  left: 0,
-                  width: '40px',
-                  height: '3px',
-                  backgroundColor: '#3c5a1e'
-                }}
-              />
-            </Typography>
-            <Typography variant="body2" className="text-gray-400 mb-6">
-              Revolutionizing industrial automation with precision robotics and intelligent systems.
-            </Typography>
-          </Grid>
-        </Grid>
-
-        <Box className="mt-16 pt-8 border-t border-gray-600 text-center text-gray-400">
-          <Typography variant="body2">
-            &copy; 2025 Quantum Robotics. All rights reserved.
-          </Typography>
-        </Box>
-      </Container>
-    </Box>
-  );
-
   // Main app component
   return (
     <Box className="bg-gray-900 text-white min-h-screen">
@@ -3363,7 +4150,7 @@ qortex.teach("Gentle placement", () => {
       </Box>
 
       {/* Footer */}
-      {renderFooter()}
+      <Footer />
 
       {/* Workflow Modal */}
       {renderWorkflowModal()}
