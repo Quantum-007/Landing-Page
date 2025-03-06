@@ -16,8 +16,9 @@ const VisionMission = () => {
                 }
               >
                 <Typography
-                  variant="h2"
-                  className={`text-3xl font-bold mb-6 relative ${
+                  variant="h4"
+                  fontWeight="600"
+                  className={`text-3xl font-bold pb-2 relative ${
                     isTablet ? 'after:left-1/2 after:-translate-x-1/2' : ''
                   }`}
                   sx={{
@@ -35,7 +36,8 @@ const VisionMission = () => {
                 >
                   Our Vision
                 </Typography>
-                <Typography variant="body1" className="text-gray-400 mt-10">
+
+                <Typography variant="body1" className="text-[#b0b0b0] pt-5">
                   At Quantum Robotics, we envision a future where advanced
                   robotics solutions seamlessly integrate into industrial
                   workflows, enhancing human capabilities rather than replacing
@@ -81,8 +83,9 @@ const VisionMission = () => {
                 }
               >
                 <Typography
-                  variant="h2"
-                  className={`text-3xl font-bold mb-6 relative ${
+                  variant="h4"
+                  fontWeight="600"
+                  className={`text-3xl font-bold pb-2 relative ${
                     isTablet ? 'after:left-1/2 after:-translate-x-1/2' : ''
                   }`}
                   sx={{
@@ -100,7 +103,7 @@ const VisionMission = () => {
                 >
                   Our Mission
                 </Typography>
-                <Typography variant="body1" className="text-gray-400 mt-8">
+                <Typography variant="body1" className="text-[#b0b0b0] pt-5">
                   Our mission is to democratize access to advanced robotics
                   technology by developing solutions that are not only powerful
                   and precise but also accessible, scalable, and sustainable. We
