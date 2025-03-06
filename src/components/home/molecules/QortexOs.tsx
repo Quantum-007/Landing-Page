@@ -5,22 +5,22 @@ import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import {
   Box,
-  Container,
   Grid,
-  Typography,
-  Button,
-  useMediaQuery,
   Card,
+  Button,
+  Container,
+  Typography,
   CardContent,
+  useMediaQuery,
 } from '@mui/material';
 import {
   Bolt as BoltIcon,
-  Memory as MemoryIcon,
-  AccountTree as AccountTreeIcon,
   Build as BuildIcon,
-  ChatBubbleOutline as ChatBubbleOutlineIcon,
-  Psychology as PsychologyIcon,
+  Memory as MemoryIcon,
   SwapHoriz as SwapHorizIcon,
+  Psychology as PsychologyIcon,
+  AccountTree as AccountTreeIcon,
+  ChatBubbleOutline as ChatBubbleOutlineIcon,
 } from '@mui/icons-material';
 
 const QortexOS: React.FC = () => {
@@ -29,19 +29,13 @@ const QortexOS: React.FC = () => {
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <Box id="qortex" className="py-20 bg-gray-900 relative overflow-hidden">
-      {/* Background gradient */}
-      <Box
-        className="absolute inset-0 z-0"
-        sx={{
-          background:
-            'radial-gradient(circle at center, rgba(60, 90, 30, 0.1) 0%, transparent 70%)',
-        }}
-      />
+    <Box id="qortex" className="py-20 bg-[#121212]">
+      <Box className="absolute inset-0 z-0" />
 
       <Container className="relative z-10">
         <Typography
-          variant="h2"
+          variant="h4"
+          fontWeight="600"
           className={`text-3xl font-bold mb-4 relative ${
             isTablet ? 'text-center after:left-1/2 after:-translate-x-1/2' : ''
           }`}
@@ -60,9 +54,10 @@ const QortexOS: React.FC = () => {
         >
           Qortex OS Platform
         </Typography>
+
         <Typography
           variant="subtitle1"
-          className={`text-xl text-gray-400 mb-12 max-w-3xl ${
+          className={`text-xl text-[#b0b0b0] py-5 max-w-3xl ${
             isTablet ? 'text-center mx-auto' : ''
           }`}
         >
@@ -72,8 +67,8 @@ const QortexOS: React.FC = () => {
 
         <Grid container spacing={6} className="mb-16">
           <Grid item xs={12} md={6}>
-            <Card className="bg-gray-800 h-full flex flex-col">
-              <Box className="bg-gray-700 p-4 text-center border-b border-gray-600">
+            <Card className="bg-[#2d2d2d] h-full flex flex-col">
+              <Box className="bg-[#2d2d2d] p-4 text-center border-b border-gray-600">
                 <Typography variant="h5" className="font-semibold">
                   Traditional Deployment
                 </Typography>
@@ -279,7 +274,7 @@ const QortexOS: React.FC = () => {
                 className="relative"
                 sx={{ zIndex: 10 }}
               >
-                <Box className="bg-gray-800 p-8 h-full">
+                <Box className="bg-[#2d2d2d] p-8 h-full">
                   <Typography variant="h6" className="text-center mb-4">
                     Traditional Robotics
                   </Typography>
@@ -365,7 +360,7 @@ try {
                 className="relative"
                 sx={{ zIndex: 10 }}
               >
-                <Box className="bg-gray-800 p-8 h-full">
+                <Box className="bg-[#2d2d2d] p-8 h-full">
                   <Typography variant="h6" className="text-center mb-4">
                     Qortex OS
                   </Typography>
@@ -422,33 +417,33 @@ qortex.teach("Gentle placement", () => {
           <Box className="text-center">
             <Typography
               variant="h3"
-              className="text-4xl font-bold text-green-500"
+              className="text-4xl font-bold text-[#5a7d2f]"
             >
               80%
             </Typography>
-            <Typography variant="body2" className="text-gray-400">
+            <Typography variant="body2" className="text-[#b0b0b0]">
               Less code required
             </Typography>
           </Box>
           <Box className="text-center">
             <Typography
               variant="h3"
-              className="text-4xl font-bold text-green-500"
+              className="text-4xl font-bold text-[#5a7d2f]"
             >
               95%
             </Typography>
-            <Typography variant="body2" className="text-gray-400">
+            <Typography variant="body2" className="text-[#b0b0b0]">
               Faster setup time
             </Typography>
           </Box>
           <Box className="text-center">
             <Typography
               variant="h3"
-              className="text-4xl font-bold text-green-500"
+              className="text-4xl font-bold text-[#5a7d2f]"
             >
               99.8%
             </Typography>
-            <Typography variant="body2" className="text-gray-400">
+            <Typography variant="body2" className="text-[#b0b0b0]">
               System reliability
             </Typography>
           </Box>
@@ -458,14 +453,14 @@ qortex.teach("Gentle placement", () => {
         <Grid container spacing={4} className="mt-16">
           <Grid item xs={12} sm={6} md={4}>
             <Box className="flex items-start gap-4">
-              <Box className="text-2xl text-green-500">
+              <Box className="text-2xl text-[#5a7d2f]">
                 <BoltIcon fontSize="inherit" />
               </Box>
               <Box>
                 <Typography variant="h6" className="font-semibold mb-2">
                   Rapid Integration
                 </Typography>
-                <Typography variant="body2" className="text-gray-400">
+                <Typography variant="body2" className="text-[#b0b0b0]">
                   Connect with existing systems through standard protocols and
                   pre-built connectors.
                 </Typography>
@@ -475,14 +470,14 @@ qortex.teach("Gentle placement", () => {
 
           <Grid item xs={12} sm={6} md={4}>
             <Box className="flex items-start gap-4">
-              <Box className="text-2xl text-green-500">
+              <Box className="text-2xl text-[#5a7d2f]">
                 <MemoryIcon fontSize="inherit" />
               </Box>
               <Box>
                 <Typography variant="h6" className="font-semibold mb-2">
                   Optimized Runtime
                 </Typography>
-                <Typography variant="body2" className="text-gray-400">
+                <Typography variant="body2" className="text-[#b0b0b0]">
                   Real-time performance optimization through adaptive learning
                   algorithms.
                 </Typography>
@@ -492,14 +487,14 @@ qortex.teach("Gentle placement", () => {
 
           <Grid item xs={12} sm={6} md={4}>
             <Box className="flex items-start gap-4">
-              <Box className="text-2xl text-green-500">
+              <Box className="text-2xl text-[#5a7d2f]">
                 <AccountTreeIcon fontSize="inherit" />
               </Box>
               <Box>
                 <Typography variant="h6" className="font-semibold mb-2">
                   Multi-Robot Coordination
                 </Typography>
-                <Typography variant="body2" className="text-gray-400">
+                <Typography variant="body2" className="text-[#b0b0b0]">
                   Seamlessly coordinate multiple robots for complex operations
                   and workflows.
                 </Typography>
@@ -509,14 +504,14 @@ qortex.teach("Gentle placement", () => {
 
           <Grid item xs={12} sm={6} md={4}>
             <Box className="flex items-start gap-4">
-              <Box className="text-2xl text-green-500">
+              <Box className="text-2xl text-[#5a7d2f]">
                 <BuildIcon fontSize="inherit" />
               </Box>
               <Box>
                 <Typography variant="h6" className="font-semibold mb-2">
                   Predictive Maintenance
                 </Typography>
-                <Typography variant="body2" className="text-gray-400">
+                <Typography variant="body2" className="text-[#b0b0b0]">
                   AI-powered system health monitoring to prevent downtime and
                   extend equipment life.
                 </Typography>
@@ -526,14 +521,14 @@ qortex.teach("Gentle placement", () => {
 
           <Grid item xs={12} sm={6} md={4}>
             <Box className="flex items-start gap-4">
-              <Box className="text-2xl text-green-500">
+              <Box className="text-2xl text-[#5a7d2f]">
                 <ChatBubbleOutlineIcon fontSize="inherit" />
               </Box>
               <Box>
                 <Typography variant="h6" className="font-semibold mb-2">
                   Natural Language Processing
                 </Typography>
-                <Typography variant="body2" className="text-gray-400">
+                <Typography variant="body2" className="text-[#b0b0b0]">
                   Control robots with simple voice or typed commands without
                   complex programming.
                 </Typography>
@@ -543,14 +538,14 @@ qortex.teach("Gentle placement", () => {
 
           <Grid item xs={12} sm={6} md={4}>
             <Box className="flex items-start gap-4">
-              <Box className="text-2xl text-green-500">
+              <Box className="text-2xl text-[#5a7d2f]">
                 <PsychologyIcon fontSize="inherit" />
               </Box>
               <Box>
                 <Typography variant="h6" className="font-semibold mb-2">
                   Adaptive Learning
                 </Typography>
-                <Typography variant="body2" className="text-gray-400">
+                <Typography variant="body2" className="text-[#b0b0b0]">
                   System improves over time by analyzing performance data and
                   user interactions.
                 </Typography>
@@ -564,12 +559,13 @@ qortex.teach("Gentle placement", () => {
             variant="contained"
             href="#contact"
             size="large"
-            className="bg-green-700 hover:bg-green-800"
+            sx={{
+              bgcolor: '#3c5a1e',
+              fontWeight: 'bold',
+              '&:hover': { bgcolor: 'var(--accent-hover)' },
+            }}
           >
-            Deploy with Qortex{' '}
-            <span className="inline-block bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded ml-2 animate-pulse">
-              FREE
-            </span>
+            Deploy with Qortex
           </Button>
         </Box>
       </Container>
