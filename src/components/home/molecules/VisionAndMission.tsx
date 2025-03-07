@@ -1,4 +1,5 @@
-import { getPlaceholderImage } from '@/utils/placeHolderImage';
+import Image from 'next/image';
+
 import { Box, Container, Grid, Typography } from '@mui/material';
 
 const VisionMission = () => {
@@ -18,18 +19,18 @@ const VisionMission = () => {
                 <Typography
                   variant="h4"
                   fontWeight="600"
-                  className={`text-3xl font-bold pb-2 relative ${
+                  className={`text-3xl font-bold pb-1 relative ${
                     isTablet ? 'after:left-1/2 after:-translate-x-1/2' : ''
                   }`}
                   sx={{
                     position: 'relative',
                     '&::after': {
-                      content: '""',
-                      position: 'absolute',
-                      bottom: '-10px',
                       left: 0,
-                      width: '60px',
                       height: '3px',
+                      content: '""',
+                      width: '180px',
+                      bottom: '-10px',
+                      position: 'absolute',
                       backgroundColor: '#3c5a1e',
                     },
                   }}
@@ -50,10 +51,12 @@ const VisionMission = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               <Box className="rounded-lg overflow-hidden shadow-2xl">
-                <Box
-                  component="img"
-                  src={getPlaceholderImage(600, 400)}
-                  alt="Future of Industrial Automation"
+                <Image
+                  width={600}
+                  height={500}
+                  loading="lazy"
+                  alt="precision"
+                  src="/assets/home/our-vision.svg"
                   className="w-full h-full object-cover"
                 />
               </Box>
@@ -68,10 +71,12 @@ const VisionMission = () => {
           >
             <Grid item xs={12} md={6}>
               <Box className="rounded-lg overflow-hidden shadow-2xl">
-                <Box
-                  component="img"
-                  src={getPlaceholderImage(600, 400)}
-                  alt="Sustainable Robotics"
+                <Image
+                  width={600}
+                  height={500}
+                  loading="lazy"
+                  alt="precision"
+                  src="/assets/home/our-mission.svg"
                   className="w-full h-full object-cover"
                 />
               </Box>
@@ -85,24 +90,25 @@ const VisionMission = () => {
                 <Typography
                   variant="h4"
                   fontWeight="600"
-                  className={`text-3xl font-bold pb-2 relative ${
+                  className={`text-3xl font-bold pb-1 relative ${
                     isTablet ? 'after:left-1/2 after:-translate-x-1/2' : ''
                   }`}
                   sx={{
                     position: 'relative',
                     '&::after': {
-                      content: '""',
-                      position: 'absolute',
-                      bottom: '-10px',
                       left: 0,
-                      width: '60px',
+                      width: '200px',
                       height: '3px',
+                      content: '""',
+                      bottom: '-10px',
+                      position: 'absolute',
                       backgroundColor: '#3c5a1e',
                     },
                   }}
                 >
                   Our Mission
                 </Typography>
+
                 <Typography variant="body1" className="text-[#b0b0b0] pt-5">
                   Our mission is to democratize access to advanced robotics
                   technology by developing solutions that are not only powerful

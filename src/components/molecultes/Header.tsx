@@ -106,7 +106,7 @@ const Header = () => {
               sx={{
                 bgcolor: '#3c5a1e',
                 fontWeight: 'bold',
-                '&:hover': { bgcolor: 'var(--accent-hover)' },
+                '&:hover': { bgcolor: '#2c6e31' },
               }}
             >
               Join Pilot Program *

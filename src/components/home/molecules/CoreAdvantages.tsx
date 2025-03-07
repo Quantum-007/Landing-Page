@@ -18,9 +18,9 @@ const CoreAdvantages = () => {
               content: '""',
               position: 'absolute',
               bottom: '-10px',
-              left: '4%',
+              left: '12%',
               transform: 'translateX(-50%)',
-              width: '80px',
+              width: '270px',
               height: '4px',
               backgroundColor: '#3c5a1e',
             },
@@ -60,8 +60,6 @@ const CoreAdvantages = () => {
               backgroundColor: '#1e1e1e',
               color: 'white',
               flex: '1 1 300px',
-              maxWidth: '350px',
-              minHeight: '250px',
             }}
           >
             <CardContent sx={{ p: 4, textAlign: 'start' }}>

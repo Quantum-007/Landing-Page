@@ -1,7 +1,7 @@
 import React from 'react';
+import Image from 'next/image';
 
 import { Box, Container, Grid, Typography, Button } from '@mui/material';
-import Image from 'next/image';
 
 const IndustrialAutomation = () => {
   return (
@@ -60,7 +60,7 @@ const IndustrialAutomation = () => {
                   sx={{
                     bgcolor: '#3c5a1e',
                     fontWeight: 'bold',
-                    '&:hover': { bgcolor: 'var(--accent-hover)' },
+                    '&:hover': { bgcolor: '#2c6e31' },
                   }}
                 >
                   Join Pilot Program *
@@ -74,7 +74,7 @@ const IndustrialAutomation = () => {
                     borderColor: '#3c5a1e',
                     color: 'white',
                     '&:hover': {
-                      bgcolor: 'var(--accent-hover)',
+                      bgcolor: '#2c6e31',
                       borderColor: '#3c5a1e',
                     },
                   }}
@@ -120,7 +120,7 @@ const IndustrialAutomation = () => {
               height={500}
               loading="lazy"
               alt="precision"
-              src="/assets/home/precision.png"
+              src="/assets/home/precision.svg"
             />
           </Grid>
         </Grid>
