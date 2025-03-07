@@ -65,7 +65,7 @@ const CoreAdvantages = () => {
             }}
           >
             <CardContent sx={{ p: 4, textAlign: 'start' }}>
-              <Box className="text-4xl text-green-500 mb-4">
+              <Box className="text-4xl text-[#5a7d2f] mb-4">
                 <ShieldIcon fontSize="inherit" />
               </Box>
               <Typography variant="h5" className="font-bold mb-3">
@@ -76,7 +76,7 @@ const CoreAdvantages = () => {
                 sx={{
                   color: '#b0b0b0',
                   textAlign: 'start',
-                  fontSize: '20px',
+                  fontSize: '18px',
                   marginTop: 2,
                 }}
               >
@@ -99,7 +99,7 @@ const CoreAdvantages = () => {
             }}
           >
             <CardContent sx={{ p: 4, textAlign: 'start' }}>
-              <Box className="text-4xl text-green-500 mb-4">
+              <Box className="text-4xl text-[#5a7d2f] mb-4">
                 <TrendingUpIcon fontSize="inherit" />
               </Box>
               <Typography variant="h5" className="font-bold mb-3">
@@ -110,7 +110,7 @@ const CoreAdvantages = () => {
                 sx={{
                   color: '#b0b0b0',
                   textAlign: 'start',
-                  fontSize: '20px',
+                  fontSize: '18px',
                   marginTop: 2,
                 }}
               >
@@ -133,7 +133,7 @@ const CoreAdvantages = () => {
             }}
           >
             <CardContent sx={{ p: 4, textAlign: 'start' }}>
-              <Box className="text-4xl text-green-500 mb-4">
+              <Box className="text-4xl text-[#5a7d2f] mb-4">
                 <TrendingUpIcon fontSize="inherit" />
               </Box>
 
@@ -145,7 +145,7 @@ const CoreAdvantages = () => {
                 sx={{
                   color: '#b0b0b0',
                   textAlign: 'start',
-                  fontSize: '20px',
+                  fontSize: '18px',
                   marginTop: 2,
                 }}
               >

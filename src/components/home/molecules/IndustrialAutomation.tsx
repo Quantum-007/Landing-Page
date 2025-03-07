@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { getPlaceholderImage } from '@/utils/placeHolderImage';
 import { Box, Container, Grid, Typography, Button } from '@mui/material';
+import Image from 'next/image';
 
 const IndustrialAutomation = () => {
   return (
@@ -108,17 +108,19 @@ const IndustrialAutomation = () => {
               </Box>
             </Box>
           </Grid>
+
           <Grid
             item
-            xs={12}
             md={6}
+            xs={12}
             className="flex justify-center md:justify-end"
           >
-            <Box
-              component="img"
-              className="rounded-md shadow-2xl"
-              src={getPlaceholderImage(600, 400)}
-              alt="Quantum Robotics Industrial Automation Solutions"
+            <Image
+              width={600}
+              height={500}
+              loading="lazy"
+              alt="precision"
+              src="/assets/home/precision.png"
             />
           </Grid>
         </Grid>
