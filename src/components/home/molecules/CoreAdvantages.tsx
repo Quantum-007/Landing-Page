@@ -9,8 +9,9 @@ const CoreAdvantages = () => {
     <Box id="features" className="py-20" sx={{ backgroundColor: '#121212' }}>
       <Container>
         <Typography
-          variant="h2"
-          className="text-3xl text-start font-bold mb-4 relative"
+          variant="h4"
+          fontWeight="600"
+          className="text-3xl text-start font-bold pb-2 relative"
           sx={{
             position: 'relative',
             '&::after': {
@@ -29,14 +30,14 @@ const CoreAdvantages = () => {
         </Typography>
 
         <Typography
-          variant="subtitle1"
+          variant="body1"
           sx={{
-            mt: 6,
+            mt: 5,
+            mx: 'auto',
+            maxWidth: 'xl',
             color: '#b0b0b0',
             textAlign: 'start',
-            maxWidth: 'xl',
-            fontSize: '24px',
-            mx: 'auto',
+            fontSize: '1.2rem',
           }}
         >
           Our solutions are built on three foundational pillars that ensure

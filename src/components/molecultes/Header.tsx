@@ -55,7 +55,7 @@ const Header = () => {
       }}
     >
       <Container maxWidth="xl">
-        <Toolbar className="flex justify-between p-4 md:mx-[90px]">
+        <Toolbar className="flex justify-center items-center p-4 gap-8">
           <Typography
             href="#"
             variant="h5"
