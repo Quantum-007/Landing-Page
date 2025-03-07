@@ -1,16 +1,16 @@
 'use clinet';
 
 import React from 'react';
+import QortexDemo from '../atoms/QortextDemo';
+import DeploymentComparison from '../atoms/DeploymentComparison';
 
 import { useTheme } from '@mui/material/styles';
 import {
   Box,
   Grid,
-  Card,
   Button,
   Container,
   Typography,
-  CardContent,
   useMediaQuery,
 } from '@mui/material';
 import {
@@ -27,6 +27,45 @@ const QortexOS: React.FC = () => {
   const theme = useTheme();
 
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+
+  const features = [
+    {
+      icon: BoltIcon,
+      title: 'Rapid Integration',
+      description:
+        'Connect with existing systems through standard protocols and pre-built connectors.',
+    },
+    {
+      icon: MemoryIcon,
+      title: 'Optimized Runtime',
+      description:
+        'Real-time performance optimization through adaptive learning algorithms.',
+    },
+    {
+      icon: AccountTreeIcon,
+      title: 'Multi-Robot Coordination',
+      description:
+        'Seamlessly coordinate multiple robots for complex operations and workflows.',
+    },
+    {
+      icon: BuildIcon,
+      title: 'Predictive Maintenance',
+      description:
+        'AI-powered system health monitoring to prevent downtime and extend equipment life.',
+    },
+    {
+      icon: ChatBubbleOutlineIcon,
+      title: 'Natural Language Processing',
+      description:
+        'Control robots with simple voice or typed commands without complex programming.',
+    },
+    {
+      icon: PsychologyIcon,
+      title: 'Adaptive Learning',
+      description:
+        'System improves over time by analyzing performance data and user interactions.',
+    },
+  ];
 
   return (
     <Box id="qortex" className="py-20 bg-[#121212]">
@@ -46,7 +85,7 @@ const QortexOS: React.FC = () => {
               position: 'absolute',
               bottom: '-10px',
               left: 0,
-              width: '80px',
+              width: '320px',
               height: '4px',
               backgroundColor: '#3c5a1e',
             },
@@ -65,205 +104,8 @@ const QortexOS: React.FC = () => {
           rapid deployment, seamless integration, and unparalleled performance.
         </Typography>
 
-        <Grid container spacing={6} className="mb-16">
-          <Grid item xs={12} md={6}>
-            <Card className="bg-[#2d2d2d] h-full flex flex-col">
-              <Box className="bg-[#2d2d2d] p-4 text-center border-b border-gray-600">
-                <Typography variant="h5" className="font-semibold">
-                  Traditional Deployment
-                </Typography>
-                <Typography variant="body2" className="text-gray-400">
-                  Complex programming, custom integration, extensive testing
-                </Typography>
-              </Box>
-              <CardContent className="p-6 flex-grow">
-                <Typography
-                  variant="h3"
-                  className="text-4xl font-bold text-center mb-6"
-                >
-                  4-16 Weeks
-                </Typography>
+        <DeploymentComparison />
 
-                <Box className="space-y-4">
-                  {/* Step 1 */}
-                  <Box className="flex items-start gap-4">
-                    <Box className="w-8 h-8 rounded-full bg-gray-700 flex-shrink-0 flex items-center justify-center font-semibold">
-                      1
-                    </Box>
-                    <Box>
-                      <Typography variant="subtitle1" className="font-semibold">
-                        Requirements Analysis
-                      </Typography>
-                      <Typography variant="body2" className="text-gray-400">
-                        1-2 weeks of meetings and assessments
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  {/* Step 2 */}
-                  <Box className="flex items-start gap-4">
-                    <Box className="w-8 h-8 rounded-full bg-gray-700 flex-shrink-0 flex items-center justify-center font-semibold">
-                      2
-                    </Box>
-                    <Box>
-                      <Typography variant="subtitle1" className="font-semibold">
-                        Custom Programming
-                      </Typography>
-                      <Typography variant="body2" className="text-gray-400">
-                        2-4 weeks of specialized coding
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  {/* Step 3 */}
-                  <Box className="flex items-start gap-4">
-                    <Box className="w-8 h-8 rounded-full bg-gray-700 flex-shrink-0 flex items-center justify-center font-semibold">
-                      3
-                    </Box>
-                    <Box>
-                      <Typography variant="subtitle1" className="font-semibold">
-                        Integration
-                      </Typography>
-                      <Typography variant="body2" className="text-gray-400">
-                        1-3 weeks adapting to existing systems
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  {/* Step 4 */}
-                  <Box className="flex items-start gap-4">
-                    <Box className="w-8 h-8 rounded-full bg-gray-700 flex-shrink-0 flex items-center justify-center font-semibold">
-                      4
-                    </Box>
-                    <Box>
-                      <Typography variant="subtitle1" className="font-semibold">
-                        Testing & Debugging
-                      </Typography>
-                      <Typography variant="body2" className="text-gray-400">
-                        1-2 weeks of validation
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  {/* Step 5 */}
-                  <Box className="flex items-start gap-4">
-                    <Box className="w-8 h-8 rounded-full bg-gray-700 flex-shrink-0 flex items-center justify-center font-semibold">
-                      5
-                    </Box>
-                    <Box>
-                      <Typography variant="subtitle1" className="font-semibold">
-                        Staff Training
-                      </Typography>
-                      <Typography variant="body2" className="text-gray-400">
-                        3-5 days of operator training
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          <Grid item xs={12} md={6}>
-            <Card className="bg-gray-800 h-full flex flex-col border-2 border-green-700">
-              <Box className="bg-gray-700 p-4 text-center border-b border-gray-600">
-                <Typography variant="h5" className="font-semibold">
-                  Qortex OS Deployment
-                </Typography>
-                <Typography variant="body2" className="text-gray-400">
-                  Visual programming, plug-and-play integration, AI
-                  configuration
-                </Typography>
-              </Box>
-              <CardContent className="p-6 flex-grow">
-                <Typography
-                  variant="h3"
-                  className="text-4xl font-bold text-center mb-6 text-green-500"
-                >
-                  4-10 Days
-                </Typography>
-
-                <Box className="space-y-4">
-                  <Box className="flex items-start gap-4">
-                    <Box className="w-8 h-8 rounded-full bg-green-700 flex-shrink-0 flex items-center justify-center font-semibold">
-                      1
-                    </Box>
-                    <Box>
-                      <Typography variant="subtitle1" className="font-semibold">
-                        Rapid Assessment
-                      </Typography>
-                      <Typography variant="body2" className="text-gray-400">
-                        2-4 hours with AI-assisted analysis
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  {/* Step 2 */}
-                  <Box className="flex items-start gap-4">
-                    <Box className="w-8 h-8 rounded-full bg-green-700 flex-shrink-0 flex items-center justify-center font-semibold">
-                      2
-                    </Box>
-                    <Box>
-                      <Typography variant="subtitle1" className="font-semibold">
-                        Visual Task Creation
-                      </Typography>
-                      <Typography variant="body2" className="text-gray-400">
-                        1-2 days of drag & drop programming
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  {/* Step 3 */}
-                  <Box className="flex items-start gap-4">
-                    <Box className="w-8 h-8 rounded-full bg-green-700 flex-shrink-0 flex items-center justify-center font-semibold">
-                      3
-                    </Box>
-                    <Box>
-                      <Typography variant="subtitle1" className="font-semibold">
-                        Auto-Integration
-                      </Typography>
-                      <Typography variant="body2" className="text-gray-400">
-                        1-2 days with pre-built connectors
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  {/* Step 4 */}
-                  <Box className="flex items-start gap-4">
-                    <Box className="w-8 h-8 rounded-full bg-green-700 flex-shrink-0 flex items-center justify-center font-semibold">
-                      4
-                    </Box>
-                    <Box>
-                      <Typography variant="subtitle1" className="font-semibold">
-                        AI-Optimized Testing
-                      </Typography>
-                      <Typography variant="body2" className="text-gray-400">
-                        1-2 days of automated validation
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  {/* Step 5 */}
-                  <Box className="flex items-start gap-4">
-                    <Box className="w-8 h-8 rounded-full bg-green-700 flex-shrink-0 flex items-center justify-center font-semibold">
-                      5
-                    </Box>
-                    <Box>
-                      <Typography variant="subtitle1" className="font-semibold">
-                        Intuitive Interface
-                      </Typography>
-                      <Typography variant="body2" className="text-gray-400">
-                        2-4 hours of guided onboarding
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-
-        {/* Code Comparison */}
         <Box className="relative my-16 max-w-4xl mx-auto">
           <Box className="rounded-lg overflow-hidden">
             <Grid container>
@@ -412,12 +254,12 @@ qortex.teach("Gentle placement", () => {
           </Box>
         </Box>
 
-        {/* Metrics */}
         <Box className="flex flex-wrap justify-around gap-8 my-16">
           <Box className="text-center">
             <Typography
               variant="h3"
-              className="text-4xl font-bold text-[#5a7d2f]"
+              sx={{ fontWeight: 600 }}
+              className="text-4xl text-[#5a7d2f]"
             >
               80%
             </Typography>
@@ -449,120 +291,40 @@ qortex.teach("Gentle placement", () => {
           </Box>
         </Box>
 
-        {/* Features Grid */}
+        <QortexDemo />
+
         <Grid container spacing={4} className="mt-16">
-          <Grid item xs={12} sm={6} md={4}>
-            <Box className="flex items-start gap-4">
-              <Box className="text-2xl text-[#5a7d2f]">
-                <BoltIcon fontSize="inherit" />
+          {features.map(({ icon: Icon, title, description }, index) => (
+            <Grid key={index} item xs={12} sm={6} md={4}>
+              <Box className="flex items-start gap-4">
+                <Box className="text-2xl text-[#5a7d2f]">
+                  <Icon fontSize="inherit" />
+                </Box>
+                <Box>
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: '600' }}
+                    className="mb-2 text-[#f2f2f2]"
+                  >
+                    {title}
+                  </Typography>
+                  <Typography variant="body2" className="text-[#b0b0b0]">
+                    {description}
+                  </Typography>
+                </Box>
               </Box>
-              <Box>
-                <Typography variant="h6" className="font-semibold mb-2">
-                  Rapid Integration
-                </Typography>
-                <Typography variant="body2" className="text-[#b0b0b0]">
-                  Connect with existing systems through standard protocols and
-                  pre-built connectors.
-                </Typography>
-              </Box>
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <Box className="flex items-start gap-4">
-              <Box className="text-2xl text-[#5a7d2f]">
-                <MemoryIcon fontSize="inherit" />
-              </Box>
-              <Box>
-                <Typography variant="h6" className="font-semibold mb-2">
-                  Optimized Runtime
-                </Typography>
-                <Typography variant="body2" className="text-[#b0b0b0]">
-                  Real-time performance optimization through adaptive learning
-                  algorithms.
-                </Typography>
-              </Box>
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <Box className="flex items-start gap-4">
-              <Box className="text-2xl text-[#5a7d2f]">
-                <AccountTreeIcon fontSize="inherit" />
-              </Box>
-              <Box>
-                <Typography variant="h6" className="font-semibold mb-2">
-                  Multi-Robot Coordination
-                </Typography>
-                <Typography variant="body2" className="text-[#b0b0b0]">
-                  Seamlessly coordinate multiple robots for complex operations
-                  and workflows.
-                </Typography>
-              </Box>
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <Box className="flex items-start gap-4">
-              <Box className="text-2xl text-[#5a7d2f]">
-                <BuildIcon fontSize="inherit" />
-              </Box>
-              <Box>
-                <Typography variant="h6" className="font-semibold mb-2">
-                  Predictive Maintenance
-                </Typography>
-                <Typography variant="body2" className="text-[#b0b0b0]">
-                  AI-powered system health monitoring to prevent downtime and
-                  extend equipment life.
-                </Typography>
-              </Box>
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <Box className="flex items-start gap-4">
-              <Box className="text-2xl text-[#5a7d2f]">
-                <ChatBubbleOutlineIcon fontSize="inherit" />
-              </Box>
-              <Box>
-                <Typography variant="h6" className="font-semibold mb-2">
-                  Natural Language Processing
-                </Typography>
-                <Typography variant="body2" className="text-[#b0b0b0]">
-                  Control robots with simple voice or typed commands without
-                  complex programming.
-                </Typography>
-              </Box>
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <Box className="flex items-start gap-4">
-              <Box className="text-2xl text-[#5a7d2f]">
-                <PsychologyIcon fontSize="inherit" />
-              </Box>
-              <Box>
-                <Typography variant="h6" className="font-semibold mb-2">
-                  Adaptive Learning
-                </Typography>
-                <Typography variant="body2" className="text-[#b0b0b0]">
-                  System improves over time by analyzing performance data and
-                  user interactions.
-                </Typography>
-              </Box>
-            </Box>
-          </Grid>
+            </Grid>
+          ))}
         </Grid>
 
         <Box className="text-center mt-12">
           <Button
-            variant="contained"
             href="#contact"
-            size="large"
+            variant="contained"
             sx={{
               bgcolor: '#3c5a1e',
               fontWeight: 'bold',
-              '&:hover': { bgcolor: 'var(--accent-hover)' },
+              '&:hover': { bgcolor: '#2c6e31' },
             }}
           >
             Deploy with Qortex

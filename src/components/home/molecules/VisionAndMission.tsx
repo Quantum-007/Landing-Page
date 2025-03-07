@@ -1,15 +1,24 @@
 import Image from 'next/image';
 
-import { Box, Container, Grid, Typography } from '@mui/material';
+import {
+  Box,
+  Grid,
+  useTheme,
+  Container,
+  Typography,
+  useMediaQuery,
+} from '@mui/material';
 
-const VisionMission = () => {
-  const isTablet = window.innerWidth < 1024;
+const VisionAndMission = () => {
+  const theme = useTheme();
+
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <Box id="vision-mission" className="py-20 bg-[#1e1e1e]">
       <Container>
-        <Box className="space-y-20">
-          <Grid container spacing={6} alignItems="center">
+        <Box className="space-y-10">
+          <Grid container spacing={6}>
             <Grid item xs={12} md={6}>
               <Box
                 className={
@@ -66,7 +75,6 @@ const VisionMission = () => {
           <Grid
             container
             spacing={6}
-            alignItems="center"
             direction={isTablet ? 'column-reverse' : 'row'}
           >
             <Grid item xs={12} md={6}>
@@ -127,4 +135,4 @@ const VisionMission = () => {
   );
 };
 
-export default VisionMission;
+export default VisionAndMission;

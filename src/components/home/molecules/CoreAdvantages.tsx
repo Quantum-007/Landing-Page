@@ -15,13 +15,13 @@ const CoreAdvantages = () => {
           sx={{
             position: 'relative',
             '&::after': {
-              content: '""',
-              position: 'absolute',
-              bottom: '-10px',
               left: '12%',
-              transform: 'translateX(-50%)',
-              width: '270px',
+              content: '""',
               height: '4px',
+              width: '280px',
+              bottom: '-10px',
+              position: 'absolute',
+              transform: 'translateX(-50%)',
               backgroundColor: '#3c5a1e',
             },
           }}
@@ -57,9 +57,9 @@ const CoreAdvantages = () => {
           <Card
             className="transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl"
             sx={{
-              backgroundColor: '#1e1e1e',
               color: 'white',
               flex: '1 1 300px',
+              backgroundColor: '#1e1e1e',
             }}
           >
             <CardContent sx={{ p: 4, textAlign: 'start' }}>
@@ -89,11 +89,11 @@ const CoreAdvantages = () => {
           <Card
             className="transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl"
             sx={{
-              backgroundColor: '#1e1e1e',
               color: 'white',
               flex: '1 1 300px',
               maxWidth: '350px',
               minHeight: '250px',
+              backgroundColor: '#1e1e1e',
             }}
           >
             <CardContent sx={{ p: 4, textAlign: 'start' }}>

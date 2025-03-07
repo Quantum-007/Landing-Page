@@ -3,45 +3,337 @@ import React, { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { getPlaceholderImage } from '@/utils/placeHolderImage';
 import {
-  Button,
   Box,
-  Typography,
   Card,
-  CardContent,
-  CardMedia,
-  Container,
   Grid,
+  Button,
+  Container,
+  CardMedia,
+  Typography,
+  CardContent,
   useMediaQuery,
 } from '@mui/material';
 import {
-  AccountTree as AccountTreeIcon,
+  Info as InfoIcon,
   ExpandMore as ExpandMoreIcon,
   ExpandLess as ExpandLessIcon,
-  PlayCircle as PlayCircleIcon,
-  FileDocument as FileDocumentIcon,
+  LocalPharmacy as PharmacyIcon,
+  LocalShipping as LogisticsIcon,
+  Memory as MicrochipIcon,
+  DirectionsCar as CarIcon,
+  Restaurant as FoodIcon,
 } from '@mui/icons-material';
 
-const UseCases: React.FC = () => {
-  const [industryFilter, setIndustryFilter] = useState('all');
-  const [showMoreIndustries, setShowMoreIndustries] = useState(false);
-  const [expandedUseCases, setExpandedUseCases] = useState({});
+// Constants for reusability
+const INDUSTRY_CATEGORIES = {
+  MAIN: [
+    { key: 'all', label: 'All Industries' },
+    { key: 'pharmaceutical', label: 'Pharmaceutical' },
+    { key: 'logistics', label: 'Logistics' },
+    { key: 'semiconductor', label: 'Semiconductor' },
+    { key: 'automotive', label: 'Automotive' },
+  ],
+  SECONDARY: [
+    { key: 'food', label: 'Food & Beverage/Commercial Kitchens' },
+    { key: 'energy', label: 'Energy & Utilities' },
+    { key: 'construction', label: 'Construction' },
+    { key: 'agriculture', label: 'Agriculture' },
+  ],
+};
 
-  const toggleUseCaseDetails = (caseId) => {
+// Industry data structure
+const INDUSTRY_DATA = [
+  {
+    id: 'pharma',
+    key: 'pharmaceutical',
+    title: 'Pharmaceutical Manufacturing',
+    icon: <PharmacyIcon sx={{ color: '#5a7d2f' }} />,
+    painPoints: [
+      'Contamination Risk',
+      'Regulatory Compliance',
+      'Batch Consistency',
+      'Labor Shortages',
+    ],
+    metrics: [
+      { value: '99.9%', label: 'Defect Detection' },
+      { value: '14mo', label: 'ROI Period' },
+      { value: '45%', label: 'Labor Savings' },
+    ],
+    robots: ['QuantumCo™', 'QuantumDelta™', 'QuantumMover™'],
+  },
+  {
+    id: 'logistics',
+    key: 'logistics',
+    title: 'Logistics & Distribution',
+    icon: <LogisticsIcon sx={{ color: '#5a7d2f' }} />,
+    painPoints: [
+      'Order Fulfillment Speed',
+      'Labor Costs',
+      'Space Utilization',
+      'Inventory Accuracy',
+    ],
+    metrics: [
+      { value: '3x', label: 'Throughput' },
+      { value: '10mo', label: 'ROI Period' },
+      { value: '99.8%', label: 'Pick Accuracy' },
+    ],
+    robots: ['QuantumMover™', 'QuantumFlex™', 'QuantumAero™'],
+  },
+  {
+    id: 'semiconductor',
+    key: 'semiconductor',
+    title: 'Semiconductor Manufacturing',
+    icon: <MicrochipIcon sx={{ color: '#5a7d2f' }} />,
+    painPoints: [
+      'Cleanroom Requirements',
+      'Precision Handling',
+      'Contamination',
+      'Yield Rates',
+    ],
+    metrics: [
+      { value: '±0.001mm', label: 'Precision' },
+      { value: '16mo', label: 'ROI Period' },
+      { value: '52%', label: 'Yield Increase' },
+    ],
+    robots: ['QuantumSwift™', 'QuantumDelta™', 'QuantumCo™'],
+  },
+  {
+    id: 'automotive',
+    key: 'automotive',
+    title: 'Automotive Manufacturing',
+    icon: <CarIcon sx={{ color: '#5a7d2f' }} />, // Replaced icon
+    painPoints: [
+      'Assembly Speed',
+      'Weld Quality',
+      'Worker Safety',
+      'Material Handling',
+    ],
+    metrics: [
+      { value: '28%', label: 'Speed Increase' },
+      { value: '12mo', label: 'ROI Period' },
+      { value: '92%', label: 'Defect Reduction' },
+    ],
+    robots: ['QuantumFlex™', 'QuantumCo™', 'QuantumMover™'],
+  },
+  {
+    id: 'food',
+    key: 'food',
+    title: 'Food & Beverage Production',
+    icon: <FoodIcon sx={{ color: '#5a7d2f' }} />, // Replaced icon
+    painPoints: [
+      'Hygiene Requirements',
+      'Labor Costs',
+      'Food Safety',
+      'Packaging Efficiency',
+    ],
+    metrics: [
+      { value: '2.5x', label: 'Throughput' },
+      { value: '9mo', label: 'ROI Period' },
+      { value: '98%', label: 'Quality Rate' },
+    ],
+    robots: ['QuantumDelta™', 'QuantumCo™', 'QuantumSwift™'],
+  },
+];
+
+const UseCases: React.FC = () => {
+  const theme = useTheme();
+
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+
+  const [industryFilter, setIndustryFilter] = useState<string>('all');
+  const [showMoreIndustries, setShowMoreIndustries] = useState<boolean>(false);
+  const [expandedUseCases, setExpandedUseCases] = useState<
+    Record<string, boolean>
+  >({});
+
+  const toggleUseCaseDetails = (caseId: string) => {
     setExpandedUseCases((prev) => ({
       ...prev,
       [caseId]: !prev[caseId],
     }));
   };
 
-  const theme = useTheme();
+  const renderIndustryFilters = (
+    industries: typeof INDUSTRY_CATEGORIES.MAIN,
+  ) => (
+    <Box className="flex flex-wrap justify-center gap-2 mb-4">
+      {industries.map(({ key, label }) => (
+        <Button
+          key={key}
+          onClick={() => setIndustryFilter(key)}
+          variant={industryFilter === key ? 'contained' : 'outlined'}
+          sx={{
+            fontSize: 12,
+            borderColor: '#2d2d2d',
+            '&:hover': { bgcolor: '#2d2d2d' },
+            color: industryFilter === key ? 'white' : '#b0b0b0',
+            bgcolor: industryFilter === key ? '#3c5a1e' : '#2d2d2d',
+          }}
+        >
+          {label}
+        </Button>
+      ))}
+    </Box>
+  );
 
-  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+  const renderMetricsSection = (
+    metrics: { value: string; label: string }[],
+  ) => (
+    <Box className="mb-4 bg-[#3c5a1e1a] bg-opacity-10 p-4 rounded">
+      <Typography
+        variant="subtitle2"
+        className="flex items-center gap-2 mb-2 font-semibold text-[#f2f2f2]"
+      >
+        ROI Metrics
+      </Typography>
+
+      <Grid container spacing={2}>
+        {metrics.map(({ value, label }, index) => (
+          <Grid item xs={4} key={index}>
+            <Box className="text-center">
+              <Typography variant="h6" className="text-[#5a7d2f] font-bold">
+                {value}
+              </Typography>
+              <Typography
+                variant="caption"
+                className="text-[#b0b0b0]"
+                sx={{ fontSize: 10 }}
+              >
+                {label}
+              </Typography>
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+  );
+
+  const renderIndustryCard = (industry: (typeof INDUSTRY_DATA)[0]) => {
+    const isExpanded = expandedUseCases[industry.id] || false;
+
+    return (
+      <Grid
+        item
+        xs={12}
+        sm={6}
+        md={4}
+        data-industry={industry.key}
+        style={{
+          display:
+            industryFilter === 'all' || industryFilter === industry.key
+              ? 'block'
+              : 'none',
+        }}
+        key={industry.id}
+      >
+        <Card
+          sx={{ borderRadius: 3, backgroundColor: '#2d2d2d' }}
+          className="h-full flex flex-col transition-transform duration-300 hover:translate-y-(-5px) hover:shadow-xl"
+        >
+          <Box
+            sx={{ backgroundColor: '#3c5a1e1a' }}
+            className="flex items-center gap-4 p-4 border-b border-[#3a3a3a]"
+          >
+            <Box
+              sx={{
+                width: 40,
+                height: 40,
+                display: 'flex',
+                borderRadius: '50%',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#1e1e1e',
+              }}
+            >
+              {industry.icon}
+            </Box>
+
+            <Typography
+              variant="body1"
+              sx={{ fontWeight: '600' }}
+              className="text-[#f2f2f2]"
+            >
+              {industry.title}
+            </Typography>
+          </Box>
+
+          <CardMedia
+            height="160"
+            component="img"
+            alt={`${industry.title} Robotics`}
+            image={getPlaceholderImage(400, 200)}
+          />
+
+          <CardContent className="p-6 flex-grow flex flex-col bg-[#2d2d2d]">
+            <Box className="mb-4">
+              <Typography
+                variant="subtitle2"
+                className="flex items-center gap-2 pb-4 font-semibold text-[#f2f2f2]"
+              >
+                <InfoIcon fontSize="small" className="text-[#5a7d2f]" />
+                Pain Points Addressed
+              </Typography>
+              <Box className="flex flex-wrap gap-2">
+                {industry.painPoints.map((point, idx) => (
+                  <Box
+                    key={idx}
+                    className="bg-[#1e1e1e] px-2 py-1 rounded text-xs text-[#b0b0b0]"
+                  >
+                    {point}
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+
+            <Button
+              startIcon={isExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              onClick={() => toggleUseCaseDetails(industry.id)}
+              sx={{
+                color: '#5a7d2f',
+                fontSize: '0.75rem',
+                justifyContent: 'start',
+              }}
+            >
+              {isExpanded ? 'Hide Details' : 'View More Details'}
+            </Button>
+
+            {isExpanded && (
+              <Box className="mt-4 pt-4 border-t border-[#3a3a3a]">
+                {renderMetricsSection(industry.metrics)}
+
+                <Box className="mb-4">
+                  <Typography
+                    variant="subtitle2"
+                    className="flex items-center gap-2 mb-2 font-semibold text-[#f2f2f2]"
+                  >
+                    Applicable Robots
+                  </Typography>
+
+                  <Box className="flex flex-wrap gap-2 pt-2">
+                    {industry.robots.map((robot, idx) => (
+                      <Box
+                        key={idx}
+                        className="bg-[#3C5A1E33] text-[#5a7d2f] px-2 py-1 rounded text-xs"
+                      >
+                        {robot}
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+              </Box>
+            )}
+          </CardContent>
+        </Card>
+      </Grid>
+    );
+  };
 
   return (
-    <Box id="use-cases" className="py-20 bg-gray-800">
+    <Box id="use-cases" className="py-20 bg-[#1e1e1e]">
       <Container>
         <Typography
-          variant="h2"
+          variant="h4"
+          fontWeight="600"
           className={`text-3xl font-bold mb-4 relative ${
             isTablet ? 'text-center after:left-1/2 after:-translate-x-1/2' : ''
           }`}
@@ -52,7 +344,7 @@ const UseCases: React.FC = () => {
               position: 'absolute',
               bottom: '-10px',
               left: 0,
-              width: '80px',
+              width: '370px',
               height: '4px',
               backgroundColor: '#3c5a1e',
             },
@@ -60,9 +352,10 @@ const UseCases: React.FC = () => {
         >
           Use Cases by Industry
         </Typography>
+
         <Typography
           variant="subtitle1"
-          className={`text-xl text-gray-400 mb-12 max-w-3xl ${
+          className={`text-xl text-[#b0b0b0] pt-5 max-w-3xl ${
             isTablet ? 'text-center mx-auto' : ''
           }`}
         >
@@ -70,133 +363,23 @@ const UseCases: React.FC = () => {
           various industries.
         </Typography>
 
-        {/* Industry Filters */}
-        <Box className="mb-12">
-          <Box className="flex flex-wrap justify-center gap-2 mb-4">
-            <Button
-              variant={industryFilter === 'all' ? 'contained' : 'outlined'}
-              onClick={() => setIndustryFilter('all')}
-              className={
-                industryFilter === 'all'
-                  ? 'bg-green-700'
-                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
-              }
-            >
-              All Industries
-            </Button>
-            <Button
-              variant={
-                industryFilter === 'pharmaceutical' ? 'contained' : 'outlined'
-              }
-              onClick={() => setIndustryFilter('pharmaceutical')}
-              className={
-                industryFilter === 'pharmaceutical'
-                  ? 'bg-green-700'
-                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
-              }
-            >
-              Pharmaceutical
-            </Button>
-            <Button
-              variant={
-                industryFilter === 'logistics' ? 'contained' : 'outlined'
-              }
-              onClick={() => setIndustryFilter('logistics')}
-              className={
-                industryFilter === 'logistics'
-                  ? 'bg-green-700'
-                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
-              }
-            >
-              Logistics
-            </Button>
-            <Button
-              variant={
-                industryFilter === 'semiconductor' ? 'contained' : 'outlined'
-              }
-              onClick={() => setIndustryFilter('semiconductor')}
-              className={
-                industryFilter === 'semiconductor'
-                  ? 'bg-green-700'
-                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
-              }
-            >
-              Semiconductor
-            </Button>
-            <Button
-              variant={
-                industryFilter === 'automotive' ? 'contained' : 'outlined'
-              }
-              onClick={() => setIndustryFilter('automotive')}
-              className={
-                industryFilter === 'automotive'
-                  ? 'bg-green-700'
-                  : 'text-gray-400 border-gray-700 hover:bg-gray-700'
-              }
-            >
-              Automotive
-            </Button>
-          </Box>
+        <Box className="my-10">
+          {renderIndustryFilters(INDUSTRY_CATEGORIES.MAIN)}
 
-          {/* Additional industries - hidden by default */}
-          {showMoreIndustries && (
-            <Box className="flex flex-wrap justify-center gap-2 mb-4">
-              <Button
-                variant={industryFilter === 'food' ? 'contained' : 'outlined'}
-                onClick={() => setIndustryFilter('food')}
-                className={
-                  industryFilter === 'food'
-                    ? 'bg-green-700'
-                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
-                }
-              >
-                Food & Beverage/Commercial Kitchens
-              </Button>
-              <Button
-                variant={industryFilter === 'energy' ? 'contained' : 'outlined'}
-                onClick={() => setIndustryFilter('energy')}
-                className={
-                  industryFilter === 'energy'
-                    ? 'bg-green-700'
-                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
-                }
-              >
-                Energy & Utilities
-              </Button>
-              <Button
-                variant={
-                  industryFilter === 'construction' ? 'contained' : 'outlined'
-                }
-                onClick={() => setIndustryFilter('construction')}
-                className={
-                  industryFilter === 'construction'
-                    ? 'bg-green-700'
-                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
-                }
-              >
-                Construction
-              </Button>
-              <Button
-                variant={
-                  industryFilter === 'agriculture' ? 'contained' : 'outlined'
-                }
-                onClick={() => setIndustryFilter('agriculture')}
-                className={
-                  industryFilter === 'agriculture'
-                    ? 'bg-green-700'
-                    : 'text-gray-400 border-gray-700 hover:bg-gray-700'
-                }
-              >
-                Agriculture
-              </Button>
-            </Box>
-          )}
+          {showMoreIndustries &&
+            renderIndustryFilters(INDUSTRY_CATEGORIES.SECONDARY)}
 
           <Box className="flex justify-center">
             <Button
               variant="outlined"
               onClick={() => setShowMoreIndustries(!showMoreIndustries)}
-              className="text-gray-400 border-gray-700 hover:bg-gray-700"
+              sx={{
+                fontSize: 12,
+                color: '#b0b0b0',
+                bgcolor: '#2d2d2d',
+                borderColor: '#2d2d2d',
+                '&:hover': { bgcolor: '#2d2d2d' },
+              }}
             >
               {showMoreIndustries
                 ? 'View Less Industries'
@@ -205,966 +388,8 @@ const UseCases: React.FC = () => {
           </Box>
         </Box>
 
-        {/* Use Cases Grid */}
         <Grid container spacing={4}>
-          {/* Pharmaceutical Manufacturing */}
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            data-industry="pharmaceutical"
-            style={{
-              display:
-                industryFilter === 'all' || industryFilter === 'pharmaceutical'
-                  ? 'block'
-                  : 'none',
-            }}
-          >
-            <Card className="bg-gray-700 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-5px) hover:shadow-xl">
-              <Box className="flex items-center gap-4 p-4 bg-green-900 bg-opacity-10 border-b border-gray-600">
-                <Box className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-green-500 flex-shrink-0">
-                  <i className="fas fa-prescription-bottle-alt"></i>
-                </Box>
-                <Typography variant="h6">
-                  Pharmaceutical Manufacturing
-                </Typography>
-              </Box>
-              <CardMedia
-                component="img"
-                height="160"
-                image={getPlaceholderImage(400, 200)}
-                alt="Pharmaceutical Manufacturing Robotics"
-              />
-              <CardContent className="p-6 flex-grow flex flex-col">
-                <Box className="mb-4">
-                  <Typography
-                    variant="subtitle2"
-                    className="flex items-center gap-2 mb-2 font-semibold"
-                  >
-                    <Box
-                      component="i"
-                      className="fas fa-exclamation-circle text-green-500"
-                    ></Box>
-                    Pain Points Addressed
-                  </Typography>
-                  <Box className="flex flex-wrap gap-2">
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Contamination Risk
-                    </Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Regulatory Compliance
-                    </Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Batch Consistency
-                    </Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Labor Shortages
-                    </Box>
-                  </Box>
-                </Box>
-
-                <Button
-                  startIcon={
-                    expandedUseCases.pharma ? (
-                      <ExpandLessIcon />
-                    ) : (
-                      <ExpandMoreIcon />
-                    )
-                  }
-                  onClick={() => toggleUseCaseDetails('pharma')}
-                  className="text-green-500 justify-start"
-                >
-                  {expandedUseCases.pharma
-                    ? 'Hide Details'
-                    : 'View More Details'}
-                </Button>
-
-                {/* Hidden Details */}
-                {expandedUseCases.pharma && (
-                  <Box className="mt-4 pt-4 border-t border-gray-600">
-                    {/* ROI Metrics */}
-                    <Box className="mb-4 bg-green-900 bg-opacity-10 p-4 rounded">
-                      <Typography
-                        variant="subtitle2"
-                        className="flex items-center gap-2 mb-2 font-semibold"
-                      >
-                        <Box
-                          component="i"
-                          className="fas fa-chart-line text-green-500"
-                        ></Box>
-                        ROI Metrics
-                      </Typography>
-                      <Grid container spacing={2}>
-                        <Grid item xs={4}>
-                          <Box className="text-center">
-                            <Typography
-                              variant="h6"
-                              className="text-green-500 font-bold"
-                            >
-                              99.9%
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className="text-gray-400"
-                            >
-                              Defect Detection
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Box className="text-center">
-                            <Typography
-                              variant="h6"
-                              className="text-green-500 font-bold"
-                            >
-                              14mo
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className="text-gray-400"
-                            >
-                              ROI Period
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Box className="text-center">
-                            <Typography
-                              variant="h6"
-                              className="text-green-500 font-bold"
-                            >
-                              45%
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className="text-gray-400"
-                            >
-                              Labor Savings
-                            </Typography>
-                          </Box>
-                        </Grid>
-                      </Grid>
-                    </Box>
-
-                    {/* Applicable Robots */}
-                    <Box className="mb-4">
-                      <Typography
-                        variant="subtitle2"
-                        className="flex items-center gap-2 mb-2 font-semibold"
-                      >
-                        <Box
-                          component="i"
-                          className="fas fa-robot text-green-500"
-                        ></Box>
-                        Applicable Robots
-                      </Typography>
-                      <Box className="flex flex-wrap gap-2">
-                        <Box className="bg-green-900 bg-opacity-20 text-green-500 px-2 py-1 rounded text-xs">
-                          QuantumCo™
-                        </Box>
-                        <Box className="bg-green-900 bg-opacity-20 text-green-500 px-2 py-1 rounded text-xs">
-                          QuantumDelta™
-                        </Box>
-                        <Box className="bg-green-900 bg-opacity-20 text-green-500 px-2 py-1 rounded text-xs">
-                          QuantumMover™
-                        </Box>
-                      </Box>
-                    </Box>
-
-                    {/* Action Buttons */}
-                    <Box className="flex flex-wrap gap-2">
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        startIcon={<AccountTreeIcon />}
-                        onClick={() => openWorkflowModal('pharma')}
-                        className="text-gray-300 border-gray-600 hover:bg-gray-600"
-                      >
-                        View Workflow
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        startIcon={<PlayCircleIcon />}
-                        className="text-gray-300 border-gray-600 hover:bg-gray-600"
-                      >
-                        Watch Demo
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        startIcon={<FileDocumentIcon />}
-                        className="text-gray-300 border-gray-600 hover:bg-gray-600"
-                      >
-                        Case Study
-                      </Button>
-                    </Box>
-                  </Box>
-                )}
-              </CardContent>
-            </Card>
-          </Grid>
-
-          {/* Logistics & Distribution */}
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            data-industry="logistics"
-            style={{
-              display:
-                industryFilter === 'all' || industryFilter === 'logistics'
-                  ? 'block'
-                  : 'none',
-            }}
-          >
-            <Card className="bg-gray-700 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-5px) hover:shadow-xl">
-              <Box className="flex items-center gap-4 p-4 bg-green-900 bg-opacity-10 border-b border-gray-600">
-                <Box className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-green-500 flex-shrink-0">
-                  <i className="fas fa-dolly"></i>
-                </Box>
-                <Typography variant="h6">Logistics & Distribution</Typography>
-              </Box>
-              <CardMedia
-                component="img"
-                height="160"
-                image={getPlaceholderImage(400, 200)}
-                alt="Logistics & Distribution Robotics"
-              />
-              <CardContent className="p-6 flex-grow flex flex-col">
-                <Box className="mb-4">
-                  <Typography
-                    variant="subtitle2"
-                    className="flex items-center gap-2 mb-2 font-semibold"
-                  >
-                    <Box
-                      component="i"
-                      className="fas fa-exclamation-circle text-green-500"
-                    ></Box>
-                    Pain Points Addressed
-                  </Typography>
-                  <Box className="flex flex-wrap gap-2">
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Order Fulfillment Speed
-                    </Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Labor Costs
-                    </Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Space Utilization
-                    </Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Inventory Accuracy
-                    </Box>
-                  </Box>
-                </Box>
-
-                <Button
-                  startIcon={
-                    expandedUseCases.logistics ? (
-                      <ExpandLessIcon />
-                    ) : (
-                      <ExpandMoreIcon />
-                    )
-                  }
-                  onClick={() => toggleUseCaseDetails('logistics')}
-                  className="text-green-500 justify-start"
-                >
-                  {expandedUseCases.logistics
-                    ? 'Hide Details'
-                    : 'View More Details'}
-                </Button>
-
-                {/* Hidden Details */}
-                {expandedUseCases.logistics && (
-                  <Box className="mt-4 pt-4 border-t border-gray-600">
-                    {/* ROI Metrics */}
-                    <Box className="mb-4 bg-green-900 bg-opacity-10 p-4 rounded">
-                      <Typography
-                        variant="subtitle2"
-                        className="flex items-center gap-2 mb-2 font-semibold"
-                      >
-                        <Box
-                          component="i"
-                          className="fas fa-chart-line text-green-500"
-                        ></Box>
-                        ROI Metrics
-                      </Typography>
-                      <Grid container spacing={2}>
-                        <Grid item xs={4}>
-                          <Box className="text-center">
-                            <Typography
-                              variant="h6"
-                              className="text-green-500 font-bold"
-                            >
-                              3x
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className="text-gray-400"
-                            >
-                              Throughput
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Box className="text-center">
-                            <Typography
-                              variant="h6"
-                              className="text-green-500 font-bold"
-                            >
-                              10mo
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className="text-gray-400"
-                            >
-                              ROI Period
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Box className="text-center">
-                            <Typography
-                              variant="h6"
-                              className="text-green-500 font-bold"
-                            >
-                              99.8%
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className="text-gray-400"
-                            >
-                              Pick Accuracy
-                            </Typography>
-                          </Box>
-                        </Grid>
-                      </Grid>
-                    </Box>
-
-                    {/* Applicable Robots */}
-                    <Box className="mb-4">
-                      <Typography
-                        variant="subtitle2"
-                        className="flex items-center gap-2 mb-2 font-semibold"
-                      >
-                        <Box
-                          component="i"
-                          className="fas fa-robot text-green-500"
-                        ></Box>
-                        Applicable Robots
-                      </Typography>
-                      <Box className="flex flex-wrap gap-2">
-                        <Box className="bg-green-900 bg-opacity-20 text-green-500 px-2 py-1 rounded text-xs">
-                          QuantumMover™
-                        </Box>
-                        <Box className="bg-green-900 bg-opacity-20 text-green-500 px-2 py-1 rounded text-xs">
-                          QuantumFlex™
-                        </Box>
-                        <Box className="bg-green-900 bg-opacity-20 text-green-500 px-2 py-1 rounded text-xs">
-                          QuantumAero™
-                        </Box>
-                      </Box>
-                    </Box>
-                  </Box>
-                )}
-              </CardContent>
-            </Card>
-          </Grid>
-
-          {/* Semiconductor Manufacturing */}
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            data-industry="semiconductor"
-            style={{
-              display:
-                industryFilter === 'all' || industryFilter === 'semiconductor'
-                  ? 'block'
-                  : 'none',
-            }}
-          >
-            <Card className="bg-gray-700 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-5px) hover:shadow-xl">
-              <Box className="flex items-center gap-4 p-4 bg-green-900 bg-opacity-10 border-b border-gray-600">
-                <Box className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-green-500 flex-shrink-0">
-                  <i className="fas fa-microchip"></i>
-                </Box>
-                <Typography variant="h6">
-                  Semiconductor Manufacturing
-                </Typography>
-              </Box>
-              <CardMedia
-                component="img"
-                height="160"
-                image={getPlaceholderImage(400, 200)}
-                alt="Semiconductor Manufacturing Robotics"
-              />
-              <CardContent className="p-6 flex-grow flex flex-col">
-                <Box className="mb-4">
-                  <Typography
-                    variant="subtitle2"
-                    className="flex items-center gap-2 mb-2 font-semibold"
-                  >
-                    <Box
-                      component="i"
-                      className="fas fa-exclamation-circle text-green-500"
-                    ></Box>
-                    Pain Points Addressed
-                  </Typography>
-                  <Box className="flex flex-wrap gap-2">
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Cleanroom Requirements
-                    </Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Precision Handling
-                    </Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Contamination
-                    </Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Yield Rates
-                    </Box>
-                  </Box>
-                </Box>
-
-                <Button
-                  startIcon={
-                    expandedUseCases.semiconductor ? (
-                      <ExpandLessIcon />
-                    ) : (
-                      <ExpandMoreIcon />
-                    )
-                  }
-                  onClick={() => toggleUseCaseDetails('semiconductor')}
-                  className="text-green-500 justify-start"
-                >
-                  {expandedUseCases.semiconductor
-                    ? 'Hide Details'
-                    : 'View More Details'}
-                </Button>
-
-                {/* Hidden Details */}
-                {expandedUseCases.semiconductor && (
-                  <Box className="mt-4 pt-4 border-t border-gray-600">
-                    {/* ROI Metrics */}
-                    <Box className="mb-4 bg-green-900 bg-opacity-10 p-4 rounded">
-                      <Typography
-                        variant="subtitle2"
-                        className="flex items-center gap-2 mb-2 font-semibold"
-                      >
-                        <Box
-                          component="i"
-                          className="fas fa-chart-line text-green-500"
-                        ></Box>
-                        ROI Metrics
-                      </Typography>
-                      <Grid container spacing={2}>
-                        <Grid item xs={4}>
-                          <Box className="text-center">
-                            <Typography
-                              variant="h6"
-                              className="text-green-500 font-bold"
-                            >
-                              ±0.001mm
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className="text-gray-400"
-                            >
-                              Precision
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Box className="text-center">
-                            <Typography
-                              variant="h6"
-                              className="text-green-500 font-bold"
-                            >
-                              16mo
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className="text-gray-400"
-                            >
-                              ROI Period
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Box className="text-center">
-                            <Typography
-                              variant="h6"
-                              className="text-green-500 font-bold"
-                            >
-                              52%
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className="text-gray-400"
-                            >
-                              Yield Increase
-                            </Typography>
-                          </Box>
-                        </Grid>
-                      </Grid>
-                    </Box>
-
-                    {/* Applicable Robots */}
-                    <Box className="mb-4">
-                      <Typography
-                        variant="subtitle2"
-                        className="flex items-center gap-2 mb-2 font-semibold"
-                      >
-                        <Box
-                          component="i"
-                          className="fas fa-robot text-green-500"
-                        ></Box>
-                        Applicable Robots
-                      </Typography>
-                      <Box className="flex flex-wrap gap-2">
-                        <Box className="bg-green-900 bg-opacity-20 text-green-500 px-2 py-1 rounded text-xs">
-                          QuantumSwift™
-                        </Box>
-                        <Box className="bg-green-900 bg-opacity-20 text-green-500 px-2 py-1 rounded text-xs">
-                          QuantumDelta™
-                        </Box>
-                        <Box className="bg-green-900 bg-opacity-20 text-green-500 px-2 py-1 rounded text-xs">
-                          QuantumCo™
-                        </Box>
-                      </Box>
-                    </Box>
-
-                    {/* Action Buttons */}
-                    <Box className="flex flex-wrap gap-2">
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        startIcon={<AccountTreeIcon />}
-                        onClick={() => openWorkflowModal('semiconductor')}
-                        className="text-gray-300 border-gray-600 hover:bg-gray-600"
-                      >
-                        View Workflow
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        startIcon={<PlayCircleIcon />}
-                        className="text-gray-300 border-gray-600 hover:bg-gray-600"
-                      >
-                        Watch Demo
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        startIcon={<FileDocumentIcon />}
-                        className="text-gray-300 border-gray-600 hover:bg-gray-600"
-                      >
-                        Case Study
-                      </Button>
-                    </Box>
-                  </Box>
-                )}
-              </CardContent>
-            </Card>
-          </Grid>
-
-          {/* Add other industry use cases following the same pattern */}
-          {/* Automotive Manufacturing */}
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            data-industry="automotive"
-            style={{
-              display:
-                industryFilter === 'all' || industryFilter === 'automotive'
-                  ? 'block'
-                  : 'none',
-            }}
-          >
-            <Card className="bg-gray-700 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-5px) hover:shadow-xl">
-              <Box className="flex items-center gap-4 p-4 bg-green-900 bg-opacity-10 border-b border-gray-600">
-                <Box className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-green-500 flex-shrink-0">
-                  <i className="fas fa-car"></i>
-                </Box>
-                <Typography variant="h6">Automotive Manufacturing</Typography>
-              </Box>
-              <CardMedia
-                component="img"
-                height="160"
-                image={getPlaceholderImage(400, 200)}
-                alt="Automotive Manufacturing Robotics"
-              />
-              <CardContent className="p-6 flex-grow flex flex-col">
-                <Box className="mb-4">
-                  <Typography
-                    variant="subtitle2"
-                    className="flex items-center gap-2 mb-2 font-semibold"
-                  >
-                    <Box
-                      component="i"
-                      className="fas fa-exclamation-circle text-green-500"
-                    ></Box>
-                    Pain Points Addressed
-                  </Typography>
-                  <Box className="flex flex-wrap gap-2">
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Assembly Speed
-                    </Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Weld Quality
-                    </Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Worker Safety
-                    </Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Material Handling
-                    </Box>
-                  </Box>
-                </Box>
-
-                <Button
-                  startIcon={
-                    expandedUseCases.automotive ? (
-                      <ExpandLessIcon />
-                    ) : (
-                      <ExpandMoreIcon />
-                    )
-                  }
-                  onClick={() => toggleUseCaseDetails('automotive')}
-                  className="text-green-500 justify-start"
-                >
-                  {expandedUseCases.automotive
-                    ? 'Hide Details'
-                    : 'View More Details'}
-                </Button>
-
-                {/* Hidden Details */}
-                {expandedUseCases.automotive && (
-                  <Box className="mt-4 pt-4 border-t border-gray-600">
-                    {/* ROI Metrics */}
-                    <Box className="mb-4 bg-green-900 bg-opacity-10 p-4 rounded">
-                      <Typography
-                        variant="subtitle2"
-                        className="flex items-center gap-2 mb-2 font-semibold"
-                      >
-                        <Box
-                          component="i"
-                          className="fas fa-chart-line text-green-500"
-                        ></Box>
-                        ROI Metrics
-                      </Typography>
-                      <Grid container spacing={2}>
-                        <Grid item xs={4}>
-                          <Box className="text-center">
-                            <Typography
-                              variant="h6"
-                              className="text-green-500 font-bold"
-                            >
-                              28%
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className="text-gray-400"
-                            >
-                              Speed Increase
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Box className="text-center">
-                            <Typography
-                              variant="h6"
-                              className="text-green-500 font-bold"
-                            >
-                              12mo
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className="text-gray-400"
-                            >
-                              ROI Period
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Box className="text-center">
-                            <Typography
-                              variant="h6"
-                              className="text-green-500 font-bold"
-                            >
-                              92%
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className="text-gray-400"
-                            >
-                              Defect Reduction
-                            </Typography>
-                          </Box>
-                        </Grid>
-                      </Grid>
-                    </Box>
-
-                    {/* Applicable Robots */}
-                    <Box className="mb-4">
-                      <Typography
-                        variant="subtitle2"
-                        className="flex items-center gap-2 mb-2 font-semibold"
-                      >
-                        <Box
-                          component="i"
-                          className="fas fa-robot text-green-500"
-                        ></Box>
-                        Applicable Robots
-                      </Typography>
-                      <Box className="flex flex-wrap gap-2">
-                        <Box className="bg-green-900 bg-opacity-20 text-green-500 px-2 py-1 rounded text-xs">
-                          QuantumFlex™
-                        </Box>
-                        <Box className="bg-green-900 bg-opacity-20 text-green-500 px-2 py-1 rounded text-xs">
-                          QuantumCo™
-                        </Box>
-                        <Box className="bg-green-900 bg-opacity-20 text-green-500 px-2 py-1 rounded text-xs">
-                          QuantumMover™
-                        </Box>
-                      </Box>
-                    </Box>
-
-                    {/* Action Buttons */}
-                    <Box className="flex flex-wrap gap-2">
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        startIcon={<AccountTreeIcon />}
-                        onClick={() => openWorkflowModal('automotive')}
-                        className="text-gray-300 border-gray-600 hover:bg-gray-600"
-                      >
-                        View Workflow
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        startIcon={<PlayCircleIcon />}
-                        className="text-gray-300 border-gray-600 hover:bg-gray-600"
-                      >
-                        Watch Demo
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        startIcon={<FileDocumentIcon />}
-                        className="text-gray-300 border-gray-600 hover:bg-gray-600"
-                      >
-                        Case Study
-                      </Button>
-                    </Box>
-                  </Box>
-                )}
-              </CardContent>
-            </Card>
-          </Grid>
-
-          {/* Food & Beverage */}
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            data-industry="food"
-            style={{
-              display:
-                industryFilter === 'all' || industryFilter === 'food'
-                  ? 'block'
-                  : 'none',
-            }}
-          >
-            <Card className="bg-gray-700 h-full flex flex-col transition-transform duration-300 hover:translate-y-(-5px) hover:shadow-xl">
-              <Box className="flex items-center gap-4 p-4 bg-green-900 bg-opacity-10 border-b border-gray-600">
-                <Box className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-green-500 flex-shrink-0">
-                  <i className="fas fa-utensils"></i>
-                </Box>
-                <Typography variant="h6">Food & Beverage Production</Typography>
-              </Box>
-              <CardMedia
-                component="img"
-                height="160"
-                image={getPlaceholderImage(400, 200)}
-                alt="Food & Beverage Robotics"
-              />
-              <CardContent className="p-6 flex-grow flex flex-col">
-                <Box className="mb-4">
-                  <Typography
-                    variant="subtitle2"
-                    className="flex items-center gap-2 mb-2 font-semibold"
-                  >
-                    <Box
-                      component="i"
-                      className="fas fa-exclamation-circle text-green-500"
-                    ></Box>
-                    Pain Points Addressed
-                  </Typography>
-                  <Box className="flex flex-wrap gap-2">
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Hygiene Requirements
-                    </Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Labor Costs
-                    </Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Food Safety
-                    </Box>
-                    <Box className="bg-gray-800 px-2 py-1 rounded text-xs">
-                      Packaging Efficiency
-                    </Box>
-                  </Box>
-                </Box>
-
-                <Button
-                  startIcon={
-                    expandedUseCases.food ? (
-                      <ExpandLessIcon />
-                    ) : (
-                      <ExpandMoreIcon />
-                    )
-                  }
-                  onClick={() => toggleUseCaseDetails('food')}
-                  className="text-green-500 justify-start"
-                >
-                  {expandedUseCases.food ? 'Hide Details' : 'View More Details'}
-                </Button>
-
-                {/* Hidden Details */}
-                {expandedUseCases.food && (
-                  <Box className="mt-4 pt-4 border-t border-gray-600">
-                    {/* ROI Metrics */}
-                    <Box className="mb-4 bg-green-900 bg-opacity-10 p-4 rounded">
-                      <Typography
-                        variant="subtitle2"
-                        className="flex items-center gap-2 mb-2 font-semibold"
-                      >
-                        <Box
-                          component="i"
-                          className="fas fa-chart-line text-green-500"
-                        ></Box>
-                        ROI Metrics
-                      </Typography>
-                      <Grid container spacing={2}>
-                        <Grid item xs={4}>
-                          <Box className="text-center">
-                            <Typography
-                              variant="h6"
-                              className="text-green-500 font-bold"
-                            >
-                              2.5x
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className="text-gray-400"
-                            >
-                              Throughput
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Box className="text-center">
-                            <Typography
-                              variant="h6"
-                              className="text-green-500 font-bold"
-                            >
-                              9mo
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className="text-gray-400"
-                            >
-                              ROI Period
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Box className="text-center">
-                            <Typography
-                              variant="h6"
-                              className="text-green-500 font-bold"
-                            >
-                              98%
-                            </Typography>
-                            <Typography
-                              variant="caption"
-                              className="text-gray-400"
-                            >
-                              Quality Rate
-                            </Typography>
-                          </Box>
-                        </Grid>
-                      </Grid>
-                    </Box>
-
-                    {/* Applicable Robots */}
-                    <Box className="mb-4">
-                      <Typography
-                        variant="subtitle2"
-                        className="flex items-center gap-2 mb-2 font-semibold"
-                      >
-                        <Box
-                          component="i"
-                          className="fas fa-robot text-green-500"
-                        ></Box>
-                        Applicable Robots
-                      </Typography>
-                      <Box className="flex flex-wrap gap-2">
-                        <Box className="bg-green-900 bg-opacity-20 text-green-500 px-2 py-1 rounded text-xs">
-                          QuantumDelta™
-                        </Box>
-                        <Box className="bg-green-900 bg-opacity-20 text-green-500 px-2 py-1 rounded text-xs">
-                          QuantumCo™
-                        </Box>
-                        <Box className="bg-green-900 bg-opacity-20 text-green-500 px-2 py-1 rounded text-xs">
-                          QuantumSwift™
-                        </Box>
-                      </Box>
-                    </Box>
-
-                    {/* Action Buttons */}
-                    <Box className="flex flex-wrap gap-2">
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        startIcon={<AccountTreeIcon />}
-                        onClick={() => openWorkflowModal('food')}
-                        className="text-gray-300 border-gray-600 hover:bg-gray-600"
-                      >
-                        View Workflow
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        startIcon={<PlayCircleIcon />}
-                        className="text-gray-300 border-gray-600 hover:bg-gray-600"
-                      >
-                        Watch Demo
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        size="small"
-                        startIcon={<FileDocumentIcon />}
-                        className="text-gray-300 border-gray-600 hover:bg-gray-600"
-                      >
-                        Case Study
-                      </Button>
-                    </Box>
-                  </Box>
-                )}
-              </CardContent>
-            </Card>
-          </Grid>
+          {INDUSTRY_DATA.map((industry) => renderIndustryCard(industry))}
         </Grid>
       </Container>
     </Box>
