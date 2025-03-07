@@ -3,17 +3,17 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
+import { getPlaceholderImage } from '@/utils/placeHolderImage';
 import {
   Box,
-  Container,
-  Typography,
   Grid,
   Card,
   CardMedia,
-  CardContent,
+  Container,
   IconButton,
+  Typography,
+  CardContent,
 } from '@mui/material';
-import { getPlaceholderImage } from '@/utils/placeHolderImage';
 
 const teamMembers = [
   {
@@ -23,8 +23,24 @@ const teamMembers = [
       'Former robotics engineer with 15+ years experience in industrial automation. Led multiple successful startups in the manufacturing technology space.',
     image: getPlaceholderImage(400, 500),
     socials: [
-      { icon: <LinkedInIcon />, key: 'linkedin' },
-      { icon: <TwitterIcon />, key: 'twitter' },
+      {
+        icon: (
+          <LinkedInIcon
+            fontSize="large"
+            className="bg-gray-900 hover:bg-[#5a7d2f] p-2 rounded-full text-[#b0b0b0]"
+          />
+        ),
+        key: 'linkedin',
+      },
+      {
+        icon: (
+          <TwitterIcon
+            fontSize="large"
+            className="bg-gray-900 hover:bg-[#5a7d2f] p-2 rounded-full text-[#b0b0b0]"
+          />
+        ),
+        key: 'twitter',
+      },
     ],
   },
   {
@@ -34,8 +50,24 @@ const teamMembers = [
       'AI and robotics Ph.D. with background in developing learning algorithms for complex robotic systems. Previously led R&D at Boston Dynamics.',
     image: getPlaceholderImage(400, 500),
     socials: [
-      { icon: <LinkedInIcon />, key: 'linkedin' },
-      { icon: <GitHubIcon />, key: 'github' },
+      {
+        icon: (
+          <LinkedInIcon
+            fontSize="large"
+            className="bg-gray-900 hover:bg-[#5a7d2f] p-2 rounded-full text-[#b0b0b0]"
+          />
+        ),
+        key: 'linkedin',
+      },
+      {
+        icon: (
+          <GitHubIcon
+            fontSize="large"
+            className="bg-gray-900 hover:bg-[#5a7d2f] p-2 rounded-full text-[#b0b0b0]"
+          />
+        ),
+        key: 'github',
+      },
     ],
   },
   {
@@ -45,8 +77,24 @@ const teamMembers = [
       'Operations expert specializing in supply chain optimization and manufacturing efficiency. Transformed operations at multiple Fortune 500 companies.',
     image: getPlaceholderImage(400, 500),
     socials: [
-      { icon: <LinkedInIcon />, key: 'linkedin' },
-      { icon: <TwitterIcon />, key: 'twitter' },
+      {
+        icon: (
+          <LinkedInIcon
+            fontSize="large"
+            className="bg-gray-900 hover:bg-[#5a7d2f] p-2 rounded-full text-[#b0b0b0]"
+          />
+        ),
+        key: 'linkedin',
+      },
+      {
+        icon: (
+          <TwitterIcon
+            fontSize="large"
+            className="bg-gray-900 hover:bg-[#5a7d2f] p-2 rounded-full text-[#b0b0b0]"
+          />
+        ),
+        key: 'twitter',
+      },
     ],
   },
   {
@@ -56,26 +104,43 @@ const teamMembers = [
       'Award-winning industrial designer focused on creating intuitive, human-centered robotic systems that seamlessly integrate into existing workflows.',
     image: getPlaceholderImage(400, 500),
     socials: [
-      { icon: <LinkedInIcon />, key: 'linkedin' },
-      { icon: <TwitterIcon />, key: 'twitter' },
+      {
+        icon: (
+          <LinkedInIcon
+            fontSize="large"
+            className="bg-gray-900 hover:bg-[#5a7d2f] p-2 rounded-full text-[#b0b0b0]"
+          />
+        ),
+        key: 'linkedin',
+      },
+      {
+        icon: (
+          <TwitterIcon
+            fontSize="large"
+            className="bg-gray-900 hover:bg-[#5a7d2f] p-2 rounded-full text-[#b0b0b0]"
+          />
+        ),
+        key: 'twitter',
+      },
     ],
   },
 ];
 
 const TeamSection = () => {
   return (
-    <Box id="team" className="py-20 bg-gray-900">
+    <Box id="team" className="py-20 bg-[#121212]">
       <Container>
         <Typography
-          variant="h2"
-          className="text-3xl font-bold mb-4 relative text-center"
+          variant="h4"
+          fontWeight="600"
+          className="text-3xl text-start font-bold pb-2 relative"
           sx={{
             position: 'relative',
             '&::after': {
               content: '""',
               position: 'absolute',
               bottom: '-10px',
-              left: '50%',
+              left: '4%',
               transform: 'translateX(-50%)',
               width: '80px',
               height: '4px',
@@ -85,23 +150,34 @@ const TeamSection = () => {
         >
           Our Team
         </Typography>
+
         <Typography
-          variant="subtitle1"
-          className="text-xl text-gray-400 mb-12 max-w-3xl text-center mx-auto"
+          variant="body1"
+          sx={{
+            mt: 4,
+            mx: 'auto',
+            maxWidth: 'xl',
+            color: '#b0b0b0',
+            textAlign: 'start',
+            fontSize: '1.2rem',
+          }}
         >
           Meet the experts behind Quantum Robotics&apos; revolutionary
           technology.
         </Typography>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={4} marginTop={0.5}>
           {teamMembers.map((member, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
-              <Card className="bg-gray-800 h-full transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl overflow-hidden">
-                <Box className="relative h-80">
+              <Card
+                className="bg-[#1e1e1e] h-full overflow-hidden rounded-lg"
+                sx={{ borderRadius: 2 }}
+              >
+                <Box className="relative h-80 bg-[#1e1e1e]">
                   <CardMedia
                     component="img"
-                    image={member.image}
                     alt={member.name}
+                    image={member.image}
                     className="h-full w-full object-cover transition-transform duration-300"
                     sx={{
                       transition: 'transform 0.3s ease',
@@ -109,30 +185,37 @@ const TeamSection = () => {
                     }}
                   />
                   <Box
-                    className="absolute inset-0 bg-green-800 bg-opacity-80 flex items-center justify-center gap-4 opacity-0 hover:opacity-100 transition-opacity duration-300"
-                    sx={{ transition: 'opacity 0.3s ease' }}
+                    sx={{
+                      transition: 'opacity 0.3s ease',
+                      backgroundColor: 'rgb(44 122 49 / 80%)',
+                    }}
+                    className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 hover:opacity-100 transition-opacity duration-300"
                   >
                     {member.socials.map(({ icon, key }) => (
                       <IconButton
                         key={key}
-                        className="bg-gray-900 text-white hover:bg-green-700 transition-transform duration-300 hover:-translate-y-1"
+                        className="text-white transition-transform duration-300 hover:-translate-y-1"
                       >
                         {icon}
                       </IconButton>
                     ))}
                   </Box>
                 </Box>
-                <CardContent className="p-6">
-                  <Typography variant="h6" className="font-semibold mb-1">
+
+                <CardContent className="bg-[#1e1e1e]">
+                  <Typography
+                    variant="h6"
+                    className="text-[#f2f2f2] font-semibold pb-2"
+                  >
                     {member.name}
                   </Typography>
                   <Typography
                     variant="subtitle2"
-                    className="text-green-500 mb-3"
+                    className="text-[#5a7d2f] pb-2"
                   >
                     {member.role}
                   </Typography>
-                  <Typography variant="body2" className="text-gray-400">
+                  <Typography variant="body2" className="text-[#b0b0b0]">
                     {member.description}
                   </Typography>
                 </CardContent>

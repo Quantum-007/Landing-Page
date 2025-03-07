@@ -46,12 +46,12 @@ const CoreAdvantages = () => {
 
         <Box
           sx={{
+            gap: 4,
+            marginTop: 4,
             display: 'flex',
             flexWrap: 'wrap',
-            gap: 4,
             alignItems: 'flex-start',
             justifyContent: 'flex-start',
-            marginTop: 4,
           }}
         >
           <Card
