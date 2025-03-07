@@ -1,6 +1,7 @@
 import './globals.css';
 import Header from '@/components/molecultes/Header';
 import Footer from '@/components/molecultes/Footer';
+import ApolloClientProvider from "@/components/ApolloClientProvider"
 
 import type { Metadata } from 'next';
 
@@ -24,9 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
-        <Header />
-        <main className="pt-16">{children}</main>
-        <Footer />
+        <ApolloClientProvider>
+          <Header />
+          <main className="pt-16">{children}</main>
+          <Footer />
+        </ApolloClientProvider>
       </body>
     </html>
   );

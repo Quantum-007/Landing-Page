@@ -19,6 +19,12 @@ import {
   FormControl,
 } from '@mui/material';
 
+import { useMutation } from '@apollo/client';
+import { CreateContactQuantumInfoDocument } from '@/lib/gql/graphql';
+import { common } from '@mui/material/colors';
+
+
+
 interface FormData {
   name: string;
   email: string;
@@ -40,6 +46,8 @@ const Contact = () => {
     industry: '',
   });
 
+  const [createContactQuantumInfo] = useMutation(CreateContactQuantumInfoDocument);
+
   const isTablet = false; // You can replace this with actual logic for detecting tablet
 
   const handleFormChange = (
@@ -52,11 +60,26 @@ const Contact = () => {
     }));
   };
 
-  // Handle form submission
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(formData); // Handle form submission logic here
   };
+
+  const HandleNextFirstStep = async (e: FormEvent) => {
+    e.preventDefault();
+    const { data } = await createContactQuantumInfo({
+      variables: {
+        input: {
+          attributes: {
+            name: formData.name,
+            email: formData.email,
+            company: formData.company,
+            industry: formData.industry
+          }
+        }
+      }
+    });
+  }
+
   return (
     <Box id="contact" className="py-20 bg-gray-800">
       <Container>
@@ -64,11 +87,10 @@ const Contact = () => {
           <Grid item xs={12} md={5}>
             <Typography
               variant="h2"
-              className={`text-3xl font-bold mb-4 relative ${
-                isTablet
-                  ? 'text-center after:left-1/2 after:-translate-x-1/2'
-                  : ''
-              }`}
+              className={`text-3xl font-bold mb-4 relative ${isTablet
+                ? 'text-center after:left-1/2 after:-translate-x-1/2'
+                : ''
+                }`}
               sx={{
                 position: 'relative',
                 '&::after': {
@@ -86,9 +108,8 @@ const Contact = () => {
             </Typography>
             <Typography
               variant="body1"
-              className={`text-gray-400 mt-8 mb-6 ${
-                isTablet ? 'text-center' : ''
-              }`}
+              className={`text-gray-400 mt-8 mb-6 ${isTablet ? 'text-center' : ''
+                }`}
             >
               Join our{' '}
               <span className="inline-block bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded ml-2 animate-pulse">
@@ -108,26 +129,23 @@ const Contact = () => {
             </Typography>
 
             <Box
-              className={`bg-gray-700 rounded-md inline-flex overflow-hidden mb-8 ${
-                isTablet ? 'mx-auto' : ''
-              }`}
+              className={`bg-gray-700 rounded-md inline-flex overflow-hidden mb-8 ${isTablet ? 'mx-auto' : ''
+                }`}
             >
               <Button
-                className={`px-4 py-2 ${
-                  contactFormType === 'comprehensive'
-                    ? 'bg-green-700 text-white'
-                    : 'text-gray-400'
-                }`}
+                className={`px-4 py-2 ${contactFormType === 'comprehensive'
+                  ? 'bg-green-700 text-white'
+                  : 'text-gray-400'
+                  }`}
                 onClick={() => setContactFormType('comprehensive')}
               >
                 Pilot Program Sign Up
               </Button>
               <Button
-                className={`px-4 py-2 ${
-                  contactFormType === 'quick'
-                    ? 'bg-green-700 text-white'
-                    : 'text-gray-400'
-                }`}
+                className={`px-4 py-2 ${contactFormType === 'quick'
+                  ? 'bg-green-700 text-white'
+                  : 'text-gray-400'
+                  }`}
                 onClick={() => setContactFormType('quick')}
               >
                 General Inquiries
@@ -283,7 +301,7 @@ const Contact = () => {
                             fullWidth
                             required
                             InputProps={{
-                              className: 'bg-gray-800 rounded-md',
+                              className: 'bg-white rounded-md',
                             }}
                             InputLabelProps={{
                               className: 'text-gray-400',
@@ -301,7 +319,7 @@ const Contact = () => {
                             fullWidth
                             required
                             InputProps={{
-                              className: 'bg-gray-800 rounded-md',
+                              className: 'bg-white rounded-md',
                             }}
                             InputLabelProps={{
                               className: 'text-gray-400',
@@ -318,7 +336,7 @@ const Contact = () => {
                             fullWidth
                             required
                             InputProps={{
-                              className: 'bg-gray-800 rounded-md',
+                              className: 'bg-white rounded-md',
                             }}
                             InputLabelProps={{
                               className: 'text-gray-400',
@@ -336,7 +354,7 @@ const Contact = () => {
                               value={formData.industry}
                               onChange={handleFormChange}
                               required
-                              className="bg-gray-800 rounded-md text-white"
+                              className="bg-white rounded-md text-white"
                               sx={{
                                 '& .MuiOutlinedInput-notchedOutline': {
                                   borderColor: 'rgba(255, 255, 255, 0.23)',
@@ -345,9 +363,9 @@ const Contact = () => {
                                   borderColor: 'rgba(255, 255, 255, 0.5)',
                                 },
                                 '&.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                  {
-                                    borderColor: '#3c5a1e',
-                                  },
+                                {
+                                  borderColor: '#3c5a1e',
+                                },
                                 '& .MuiSvgIcon-root': {
                                   color: 'white',
                                 },
@@ -380,7 +398,7 @@ const Contact = () => {
                         <Grid item xs={12} className="flex justify-end">
                           <Button
                             variant="contained"
-                            onClick={() => setContactStep(1)}
+                            onClick={HandleNextFirstStep}
                             className="px-6 py-2 bg-green-700 hover:bg-green-800"
                           >
                             Next: Current Setup

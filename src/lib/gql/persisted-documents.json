@@ -1,0 +1,4 @@
+{
+  "5549eec00460e8b67b5ae2dfb814bf4409579d2e": "mutation createContactQuantumInfo($input: CreateContactQuantumInfoInput!) { __typename createContactQuantumInfo(input: $input) { __typename errors success } }",
+  "6e2096b69e2883a88d4ff4e6da4005323d094335": "query blueCollarFaqs { __typename blueCollarFaqs { __typename answer id question } }"
+}
