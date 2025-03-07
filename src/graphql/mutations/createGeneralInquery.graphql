@@ -1,0 +1,6 @@
+mutation createGeneralInquery($input: CreateGeneralInqueryInput!) {
+  createGeneralInquery(input: $input) {
+    success
+    errors
+  }
+}

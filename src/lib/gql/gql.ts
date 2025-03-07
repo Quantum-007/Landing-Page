@@ -14,12 +14,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-    "mutation createContactQuantumInfo($input: CreateContactQuantumInfoInput!) {\n  createContactQuantumInfo(input: $input) {\n    success\n    errors\n  }\n}": typeof types.CreateContactQuantumInfoDocument,
-    "query blueCollarFaqs {\n  blueCollarFaqs {\n    id\n    answer\n    question\n  }\n}": typeof types.BlueCollarFaqsDocument,
+    "mutation createGeneralInquery($input: CreateGeneralInqueryInput!) {\n  createGeneralInquery(input: $input) {\n    success\n    errors\n  }\n}": typeof types.CreateGeneralInqueryDocument,
 };
 const documents: Documents = {
-    "mutation createContactQuantumInfo($input: CreateContactQuantumInfoInput!) {\n  createContactQuantumInfo(input: $input) {\n    success\n    errors\n  }\n}": types.CreateContactQuantumInfoDocument,
-    "query blueCollarFaqs {\n  blueCollarFaqs {\n    id\n    answer\n    question\n  }\n}": types.BlueCollarFaqsDocument,
+    "mutation createGeneralInquery($input: CreateGeneralInqueryInput!) {\n  createGeneralInquery(input: $input) {\n    success\n    errors\n  }\n}": types.CreateGeneralInqueryDocument,
 };
 
 /**
@@ -39,11 +37,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "mutation createContactQuantumInfo($input: CreateContactQuantumInfoInput!) {\n  createContactQuantumInfo(input: $input) {\n    success\n    errors\n  }\n}"): (typeof documents)["mutation createContactQuantumInfo($input: CreateContactQuantumInfoInput!) {\n  createContactQuantumInfo(input: $input) {\n    success\n    errors\n  }\n}"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "query blueCollarFaqs {\n  blueCollarFaqs {\n    id\n    answer\n    question\n  }\n}"): (typeof documents)["query blueCollarFaqs {\n  blueCollarFaqs {\n    id\n    answer\n    question\n  }\n}"];
+export function graphql(source: "mutation createGeneralInquery($input: CreateGeneralInqueryInput!) {\n  createGeneralInquery(input: $input) {\n    success\n    errors\n  }\n}"): (typeof documents)["mutation createGeneralInquery($input: CreateGeneralInqueryInput!) {\n  createGeneralInquery(input: $input) {\n    success\n    errors\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

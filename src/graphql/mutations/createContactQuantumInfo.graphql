@@ -1,6 +1,0 @@
-mutation createContactQuantumInfo($input: CreateContactQuantumInfoInput!) {
-  createContactQuantumInfo(input: $input) {
-    success
-    errors
-  }
-}

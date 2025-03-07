@@ -174,8 +174,8 @@ const Footer = () => {
                 { text: 'About Us', href: '#vision-mission' },
                 { text: 'Our Team', href: '#team' },
                 { text: 'Blog', href: '#blog' },
-                { text: 'Careers', href: '#contact' },
-                { text: 'Investor Relations', href: '#contact' },
+                { text: 'Careers', href: '#contact?message=careers' },
+                { text: 'Investor Relations', href: '#contact?message=investor' },
               ].map((item) => (
                 <Box key={item.text}>
                   <Link

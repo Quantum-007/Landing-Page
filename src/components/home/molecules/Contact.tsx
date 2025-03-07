@@ -20,8 +20,7 @@ import {
 } from '@mui/material';
 
 import { useMutation } from '@apollo/client';
-import { CreateContactQuantumInfoDocument } from '@/lib/gql/graphql';
-import { common } from '@mui/material/colors';
+import { CreateGeneralInqueryDocument } from '@/lib/gql/graphql';
 
 
 
@@ -37,6 +36,7 @@ interface FormData {
 const Contact = () => {
   const [contactStep, setContactStep] = useState(0);
   const [contactFormType, setContactFormType] = useState('comprehensive');
+  const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -46,69 +46,113 @@ const Contact = () => {
     industry: '',
   });
 
-  const [createContactQuantumInfo] = useMutation(CreateContactQuantumInfoDocument);
+  const [createGeneralInquery] = useMutation(CreateGeneralInqueryDocument);
 
-  const isTablet = false; // You can replace this with actual logic for detecting tablet
+  const isTablet = window.innerWidth < 1024;
 
-  const handleFormChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
+
+  const handleFormChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const { name, value, checked, type } = event.target;
+
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
-
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
   };
 
-  const HandleNextFirstStep = async (e: FormEvent) => {
+  const HandleSubmitGeneralInquery = async (e: FormEvent) => {
     e.preventDefault();
-    const { data } = await createContactQuantumInfo({
+    setLoading(true);
+    const { data } = await createGeneralInquery({
       variables: {
         input: {
           attributes: {
             name: formData.name,
             email: formData.email,
             company: formData.company,
-            industry: formData.industry
+            message: formData.message,
+            consent: formData.consent
           }
         }
       }
     });
+
+
+    if (data?.createGeneralInquery?.success) {
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        message: '',
+        consent: false,
+        industry: '',
+      })
+      setLoading(false);
+
+    }
   }
 
+  const commonInputStyles = {
+    InputProps: {
+      sx: {
+        color: 'white',
+        '&.MuiOutlinedInput-root': {
+          backgroundColor: '#121212',
+          '& fieldset': {
+            borderColor: 'transparent',
+          },
+          '&:hover fieldset': {
+            borderColor: '#3c5a1e',
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: '#3c5a1e',
+          },
+        },
+      },
+    },
+    InputLabelProps: {
+      className: 'text-white',
+      sx: {
+        color: 'white',
+        '&.Mui-focused': {
+          color: 'white',
+        },
+      },
+    },
+  };
+
   return (
-    <Box id="contact" className="py-20 bg-gray-800">
+    <Box id="contact" className="py-20 bg-[#1e1e1e]">
       <Container>
         <Grid container spacing={6}>
           <Grid item xs={12} md={5}>
             <Typography
-              variant="h2"
-              className={`text-3xl font-bold mb-4 relative ${isTablet
-                ? 'text-center after:left-1/2 after:-translate-x-1/2'
-                : ''
+              variant="h4"
+              fontWeight="600"
+              className={`text-3xl font-bold pb-1 relative ${isTablet ? 'after:left-1/2 after:-translate-x-1/2' : ''
                 }`}
               sx={{
                 position: 'relative',
                 '&::after': {
-                  content: '""',
-                  position: 'absolute',
-                  bottom: '-10px',
                   left: 0,
-                  width: '80px',
-                  height: '4px',
+                  height: '3px',
+                  content: '""',
+                  width: '180px',
+                  bottom: '-10px',
+                  position: 'absolute',
                   backgroundColor: '#3c5a1e',
                 },
               }}
             >
               Contact Quantum
             </Typography>
+
             <Typography
               variant="body1"
-              className={`text-gray-400 mt-8 mb-6 ${isTablet ? 'text-center' : ''
+              className={`text-[#b0b0b0] pt-8 ${isTablet ? 'text-center' : ''
                 }`}
             >
               Join our{' '}
@@ -120,32 +164,36 @@ const Contact = () => {
               hands-on experience with our technology along with dedicated
               implementation support and custom configuration.
             </Typography>
+
             <Typography
               variant="body1"
-              className={`text-gray-400 mb-6 ${isTablet ? 'text-center' : ''}`}
+              className={`text-[#b0b0b0] pt-4 ${isTablet ? 'text-center' : ''}`}
             >
               Fill out the form to schedule a personalized demo tailored to your
               industry needs.
             </Typography>
 
             <Box
-              className={`bg-gray-700 rounded-md inline-flex overflow-hidden mb-8 ${isTablet ? 'mx-auto' : ''
-                }`}
+              className={`rounded-md inline-flex overflow-hidden mt-8 ${isTablet ? 'mx-auto' : ''}`}
             >
               <Button
-                className={`px-4 py-2 ${contactFormType === 'comprehensive'
-                  ? 'bg-green-700 text-white'
-                  : 'text-gray-400'
-                  }`}
+                sx={{
+
+                  backgroundColor: contactFormType === 'comprehensive' ? '#3c5a1e' : '#2d2d2d',
+                  color: contactFormType === 'comprehensive' ? 'white' : 'grey',
+                  transform: 'none'
+                }}
                 onClick={() => setContactFormType('comprehensive')}
               >
                 Pilot Program Sign Up
               </Button>
               <Button
-                className={`px-4 py-2 ${contactFormType === 'quick'
-                  ? 'bg-green-700 text-white'
-                  : 'text-gray-400'
-                  }`}
+                sx={{
+
+                  backgroundColor: contactFormType === 'quick' ? '#3c5a1e' : '#2d2d2d',
+                  color: contactFormType === 'quick' ? 'white' : 'grey',
+                  transform: 'none'
+                }}
                 onClick={() => setContactFormType('quick')}
               >
                 General Inquiries
@@ -154,32 +202,28 @@ const Contact = () => {
           </Grid>
 
           <Grid item xs={12} md={7}>
-            <Card className="bg-gray-700 shadow-lg">
-              <CardContent className="p-6">
+            <Card className="shadow-lg">
+              <CardContent className="p-6 bg-[#2d2d2d]">
                 {contactFormType === 'quick' ? (
                   // General Inquiries Form
                   <form onSubmit={handleFormSubmit}>
                     <Grid container spacing={3}>
                       <Grid item xs={12}>
                         <TextField
-                          label="Full Name*"
+                          label="Full Name"
                           name="name"
                           value={formData.name}
                           onChange={handleFormChange}
                           variant="outlined"
                           fullWidth
                           required
-                          InputProps={{
-                            className: 'bg-gray-800 rounded-md',
-                          }}
-                          InputLabelProps={{
-                            className: 'text-gray-400',
-                          }}
+                          {...commonInputStyles}
                         />
                       </Grid>
+
                       <Grid item xs={12}>
                         <TextField
-                          label="Email Address*"
+                          label="Email Address"
                           name="email"
                           type="email"
                           value={formData.email}
@@ -188,13 +232,12 @@ const Contact = () => {
                           fullWidth
                           required
                           InputProps={{
-                            className: 'bg-gray-800 rounded-md',
+                            ...commonInputStyles.InputProps,
+                            className: 'bg-gray-800',
                           }}
-                          InputLabelProps={{
-                            className: 'text-gray-400',
-                          }}
-                        />
+                          InputLabelProps={commonInputStyles.InputLabelProps} />
                       </Grid>
+
                       <Grid item xs={12}>
                         <TextField
                           label="Company Name"
@@ -204,16 +247,16 @@ const Contact = () => {
                           variant="outlined"
                           fullWidth
                           InputProps={{
-                            className: 'bg-gray-800 rounded-md',
+                            ...commonInputStyles.InputProps,
+                            className: 'bg-gray-800',
                           }}
-                          InputLabelProps={{
-                            className: 'text-gray-400',
-                          }}
+                          InputLabelProps={commonInputStyles.InputLabelProps}
                         />
                       </Grid>
+
                       <Grid item xs={12}>
                         <TextField
-                          label="Message*"
+                          label="Message"
                           name="message"
                           value={formData.message}
                           onChange={handleFormChange}
@@ -223,13 +266,13 @@ const Contact = () => {
                           rows={4}
                           required
                           InputProps={{
-                            className: 'bg-gray-800 rounded-md',
+                            ...commonInputStyles.InputProps,
+                            className: 'bg-gray-800',
                           }}
-                          InputLabelProps={{
-                            className: 'text-gray-400',
-                          }}
+                          InputLabelProps={commonInputStyles.InputLabelProps}
                         />
                       </Grid>
+
                       <Grid item xs={12}>
                         <FormControlLabel
                           control={
@@ -247,23 +290,29 @@ const Contact = () => {
                             />
                           }
                           label={
-                            <Typography
-                              variant="body2"
-                              className="text-gray-400"
-                            >
-                              I consent to Quantum Robotics processing my data
-                              and contacting me about their products and
-                              services.*
+                            <Typography variant="body2" className="text-gray-400 pt-4">
+                              I consent to Quantum Robotics processing my data and contacting me about their products and services.*
                             </Typography>
                           }
                         />
                       </Grid>
+
                       <Grid item xs={12}>
                         <Button
-                          type="submit"
-                          variant="contained"
+                          variant='contained'
+                          type='submit'
                           fullWidth
-                          className="py-3 bg-green-700 hover:bg-green-800"
+                          loading={loading}
+                          sx={{
+
+                            backgroundColor: '#3c5a1e',
+                            color: 'white',
+                            transform: 'none',
+                            '& .MuiCircularProgress-root': {
+                              color: 'white',
+                            }
+                          }}
+                          onClick={HandleSubmitGeneralInquery}
                         >
                           Submit
                         </Button>
@@ -398,7 +447,7 @@ const Contact = () => {
                         <Grid item xs={12} className="flex justify-end">
                           <Button
                             variant="contained"
-                            onClick={HandleNextFirstStep}
+                            onClick={() => { setContactStep(2) }}
                             className="px-6 py-2 bg-green-700 hover:bg-green-800"
                           >
                             Next: Current Setup
