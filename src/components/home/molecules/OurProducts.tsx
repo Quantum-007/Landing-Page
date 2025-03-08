@@ -50,7 +50,6 @@ const OurProducts = () => {
         <Swiper
           loop={true}
           grabCursor={true}
-          slidesPerView={3}
           spaceBetween={10}
           effect="coverflow"
           navigation={false}
@@ -72,8 +71,8 @@ const OurProducts = () => {
             slideShadows: false,
           }}
           breakpoints={{
-            768: { slidesPerView: 2 },
             640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
         >
