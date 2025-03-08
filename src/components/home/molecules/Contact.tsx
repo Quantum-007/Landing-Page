@@ -311,7 +311,7 @@ const Contact = () => {
                   left: 0,
                   height: '3px',
                   content: '""',
-                  width: '180px',
+                  width: '290px',
                   bottom: '-10px',
                   position: 'absolute',
                   backgroundColor: '#3c5a1e',
@@ -326,7 +326,7 @@ const Contact = () => {
               className={`text-[#b0b0b0] pt-8 ${isTablet ? 'text-center' : ''}`}
             >
               Join our{' '}
-              <span className="inline-block bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded ml-2 animate-pulse">
+              <span className="inline-block bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded animate-pulse">
                 FREE
               </span>{' '}
               pilot program to be among the first to implement our cutting-edge
@@ -447,10 +447,10 @@ const Contact = () => {
                         <FormControlLabel
                           control={
                             <Checkbox
+                              required
                               name="consent"
                               checked={formData.consent}
                               onChange={handleFormChange}
-                              required
                               sx={{
                                 color: 'rgba(255, 255, 255, 0.7)',
                                 '&.Mui-checked': {
@@ -466,7 +466,7 @@ const Contact = () => {
                             >
                               I consent to Quantum Robotics processing my data
                               and contacting me about their products and
-                              services.*
+                              services.
                             </Typography>
                           }
                         />
@@ -1070,9 +1070,9 @@ const Contact = () => {
             onClose={() => setOpen(false)}
           >
             <Alert
-              onClose={() => setOpen(false)}
               severity={severity}
               sx={{ width: '100%' }}
+              onClose={() => setOpen(false)}
             >
               {message}
             </Alert>

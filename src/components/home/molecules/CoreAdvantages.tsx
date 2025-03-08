@@ -4,25 +4,46 @@ import {
   TrendingUp as TrendingUpIcon,
 } from '@mui/icons-material';
 
+const advantages = [
+  {
+    title: 'Reliability & Quality',
+    description:
+      'Our robotics systems achieve 99.8% operational reliability through redundant systems, predictive maintenance algorithms, and industrial-grade components designed for continuous operation in demanding environments.',
+    icon: <ShieldIcon fontSize="large" />,
+  },
+  {
+    title: 'Cost Savings',
+    description:
+      'Customers typically experience a 35% reduction in operational costs through improved efficiency, reduced waste, lower energy consumption, and optimized resource utilization across their manufacturing and logistics processes.',
+    icon: <TrendingUpIcon fontSize="large" />,
+  },
+  {
+    title: 'Precision & Consistency',
+    description:
+      'Our systems deliver sub-millimeter precision with consistency that human operations cannot match, reducing defects and enabling complex manufacturing processes that were previously impossible.',
+    icon: <TrendingUpIcon fontSize="large" />,
+  },
+];
+
 const CoreAdvantages = () => {
   return (
-    <Box id="features" className="py-20" sx={{ backgroundColor: '#121212' }}>
+    <Box id="features" sx={{ py: 10, backgroundColor: '#121212' }}>
       <Container>
         <Typography
           variant="h4"
           fontWeight="600"
-          className="text-3xl text-start font-bold pb-2 relative"
           sx={{
+            pb: 1,
             position: 'relative',
             '&::after': {
               left: '12%',
-              content: '""',
               height: '4px',
+              content: '""',
               width: '280px',
               bottom: '-10px',
               position: 'absolute',
-              transform: 'translateX(-50%)',
               backgroundColor: '#3c5a1e',
+              transform: 'translateX(-50%)',
             },
           }}
         >
@@ -31,14 +52,7 @@ const CoreAdvantages = () => {
 
         <Typography
           variant="body1"
-          sx={{
-            mt: 5,
-            mx: 'auto',
-            maxWidth: 'xl',
-            color: '#b0b0b0',
-            textAlign: 'start',
-            fontSize: '1.2rem',
-          }}
+          sx={{ mt: 4, maxWidth: 'xl', color: '#b0b0b0', fontSize: '1.2rem' }}
         >
           Our solutions are built on three foundational pillars that ensure
           superior performance across all deployments.
@@ -46,114 +60,42 @@ const CoreAdvantages = () => {
 
         <Box
           sx={{
+            mt: 4,
             gap: 4,
-            marginTop: 4,
             display: 'flex',
             flexWrap: 'wrap',
-            alignItems: 'flex-start',
             justifyContent: 'flex-start',
           }}
         >
-          <Card
-            className="transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl"
-            sx={{
-              color: 'white',
-              flex: '1 1 300px',
-              backgroundColor: '#1e1e1e',
-            }}
-          >
-            <CardContent sx={{ p: 4, textAlign: 'start' }}>
-              <Box className="text-4xl text-[#5a7d2f] mb-4">
-                <ShieldIcon fontSize="inherit" />
-              </Box>
-              <Typography variant="h5" className="font-bold mb-3">
-                Reliability & Quality
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{
-                  color: '#b0b0b0',
-                  textAlign: 'start',
-                  fontSize: '18px',
-                  marginTop: 2,
-                }}
-              >
-                Our robotics systems achieve 99.8% operational reliability
-                through redundant systems, predictive maintenance algorithms,
-                and industrial-grade components designed for continuous
-                operation in demanding environments.
-              </Typography>
-            </CardContent>
-          </Card>
-
-          <Card
-            className="transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl"
-            sx={{
-              color: 'white',
-              flex: '1 1 300px',
-              maxWidth: '350px',
-              minHeight: '250px',
-              backgroundColor: '#1e1e1e',
-            }}
-          >
-            <CardContent sx={{ p: 4, textAlign: 'start' }}>
-              <Box className="text-4xl text-[#5a7d2f] mb-4">
-                <TrendingUpIcon fontSize="inherit" />
-              </Box>
-              <Typography variant="h5" className="font-bold mb-3">
-                Cost Savings
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{
-                  color: '#b0b0b0',
-                  textAlign: 'start',
-                  fontSize: '18px',
-                  marginTop: 2,
-                }}
-              >
-                Customers typically experience 35% reduction in operational
-                costs through improved efficiency, reduced waste, lower energy
-                consumption, and optimized resource utilization across their
-                manufacturing and logistics processes.
-              </Typography>
-            </CardContent>
-          </Card>
-
-          <Card
-            className="transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl"
-            sx={{
-              backgroundColor: '#1e1e1e',
-              color: 'white',
-              flex: '1 1 300px',
-              maxWidth: '350px',
-              minHeight: '250px',
-            }}
-          >
-            <CardContent sx={{ p: 4, textAlign: 'start' }}>
-              <Box className="text-4xl text-[#5a7d2f] mb-4">
-                <TrendingUpIcon fontSize="inherit" />
-              </Box>
-
-              <Typography variant="h5" className="font-bold mb-3">
-                Precision & Consistency
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{
-                  color: '#b0b0b0',
-                  textAlign: 'start',
-                  fontSize: '18px',
-                  marginTop: 2,
-                }}
-              >
-                Our systems deliver sub- millimeter precision with consistency
-                that human operations cannot match, reducing defects, and
-                enabling complex manufacturing processes that were previously
-                impossible.
-              </Typography>
-            </CardContent>
-          </Card>
+          {advantages.map(({ title, description, icon }, index) => (
+            <Card
+              key={index}
+              className="transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl"
+              sx={{
+                color: 'white',
+                display: 'flex',
+                borderRadius: 2,
+                flex: '1 1 300px',
+                flexDirection: 'column',
+                backgroundColor: '#1e1e1e',
+              }}
+            >
+              <CardContent sx={{ p: 4, flexGrow: 1 }}>
+                <Box sx={{ fontSize: '2rem', color: '#5a7d2f', mb: 2 }}>
+                  {icon}
+                </Box>
+                <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>
+                  {title}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ color: '#b0b0b0', fontSize: '18px' }}
+                >
+                  {description}
+                </Typography>
+              </CardContent>
+            </Card>
+          ))}
         </Box>
       </Container>
     </Box>

@@ -63,7 +63,10 @@ const IndustrialAutomation = () => {
                     '&:hover': { bgcolor: '#2c6e31' },
                   }}
                 >
-                  Join Pilot Program *
+                  Join Pilot Program
+                  <span className="inline-block bg-green-600 text-white text-xs font-semibold px-2 py-1 ml-2 rounded animate-pulse">
+                    FREE
+                  </span>
                 </Button>
 
                 <Button
@@ -86,21 +89,26 @@ const IndustrialAutomation = () => {
                 <Box className="flex flex-col">
                   <Typography
                     variant="h4"
-                    className="text-4xl font-bold text-[#3c5a1e]"
+                    sx={{ fontWeight: 600 }}
+                    className="text-4xl text-[#3c5a1e]"
                   >
                     99.8%
                   </Typography>
+
                   <Typography variant="body2" className="text-[#b0b0b0]">
                     Operational Reliability
                   </Typography>
                 </Box>
+
                 <Box className="flex flex-col">
                   <Typography
                     variant="h4"
-                    className="text-4xl font-bold text-[#3c5a1e]"
+                    sx={{ fontWeight: 600 }}
+                    className="text-4xl text-[#3c5a1e]"
                   >
                     35%
                   </Typography>
+
                   <Typography variant="body2" className="text-[#b0b0b0]">
                     Average Cost Reduction
                   </Typography>

@@ -109,7 +109,10 @@ const Header = () => {
                 '&:hover': { bgcolor: '#2c6e31' },
               }}
             >
-              Join Pilot Program *
+              Join Pilot Program
+              <span className="inline-block bg-green-600 text-white text-xs font-semibold px-2 py-1 ml-2 rounded animate-pulse">
+                FREE
+              </span>
             </Button>
           </Box>
 

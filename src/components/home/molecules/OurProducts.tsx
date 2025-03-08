@@ -29,7 +29,7 @@ const OurProducts = () => {
         <Typography
           variant="h4"
           fontWeight="600"
-          className="text-3xl text-start font-bold pb-2 text-white relative"
+          className="text-3xl text-start font-bold pb-1 text-white relative"
           sx={{
             position: 'relative',
             '&::after': {
@@ -39,8 +39,8 @@ const OurProducts = () => {
               width: '220px',
               bottom: '-10px',
               position: 'absolute',
-              transform: 'translateX(-50%)',
               backgroundColor: '#3c5a1e',
+              transform: 'translateX(-50%)',
             },
           }}
         >

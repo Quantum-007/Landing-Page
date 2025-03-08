@@ -106,7 +106,6 @@ const QortexOS: React.FC = () => {
 
         <DeploymentComparison />
         <CodeComparison />
-
         <QortexDemo />
 
         <Grid container spacing={4} className="mt-16">

@@ -1,17 +1,96 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 
+interface ResponseItem {
+  type: 'user' | 'thinking' | 'action' | 'error';
+  text: string;
+}
+
 const QortexDemo = () => {
-  const [command, setCommand] = useState('');
-  const [response, setResponse] = useState(
-    'Enter a command to see Qortex OS in action...',
-  );
+  const responseAreaRef = useRef<HTMLDivElement | null>(null);
+
+  const [command, setCommand] = useState<string>('');
+  const [responses, setResponses] = useState<ResponseItem[]>([]);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+
+  const YOUR_API_KEY =
+    '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';
+
+  useEffect(() => {
+    if (responseAreaRef.current) {
+      responseAreaRef.current.scrollTop = responseAreaRef.current.scrollHeight;
+    }
+  }, [responses]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setResponses([
+        {
+          type: 'action',
+          text: 'Qortex NLP system online. Ready to accept natural language commands. What operation would you like to perform?',
+        },
+      ]);
+    }, 500);
+  }, []);
+
+  const processCommand = async (input: string) => {
+    if (!input.trim() || isProcessing) return;
+
+    try {
+      setResponses((prev) => [...prev, { type: 'user', text: input }]);
+      setIsProcessing(true);
+      setResponses((prev) => [
+        ...prev,
+        { type: 'thinking', text: 'Processing...' },
+      ]);
+
+      const response = await fetch('https://api.anthropic.com/api/qortex-nlp', {
+        method: 'POST',
+        body: JSON.stringify({ command: input }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${YOUR_API_KEY}`,
+        },
+      });
+
+      if (!response.ok) throw new Error('Failed to process command');
+
+      const data: { thinking: string; action: string } = await response.json();
+
+      setResponses((prev) =>
+        prev.map((res) =>
+          res.type === 'thinking'
+            ? { type: 'thinking', text: data.thinking }
+            : res,
+        ),
+      );
+
+      setTimeout(() => {
+        setResponses((prev) => [
+          ...prev,
+          { type: 'action', text: data.action },
+        ]);
+        setIsProcessing(false);
+      }, 1000);
+    } catch (error) {
+      console.error('Error processing command:', error);
+      setResponses((prev) =>
+        prev.map((res) =>
+          res.type === 'thinking'
+            ? {
+                type: 'error',
+                text: 'Error processing command. Please try again.',
+              }
+            : res,
+        ),
+      );
+      setIsProcessing(false);
+    }
+  };
 
   const handleCommandSubmit = () => {
-    if (command.trim()) {
-      setResponse(`Processing: "${command}"`);
-      setCommand('');
-    }
+    processCommand(command);
+    setCommand('');
   };
 
   return (
@@ -21,6 +100,7 @@ const QortexDemo = () => {
       </Typography>
 
       <Box className="flex flex-col gap-6">
+        {/* Input Field */}
         <Box className="flex gap-4">
           <TextField
             fullWidth
@@ -29,13 +109,11 @@ const QortexDemo = () => {
             placeholder="Try a command, e.g. 'Pick up items from bin A and place in storage area B'"
             value={command}
             onChange={(e) => setCommand(e.target.value)}
+            disabled={isProcessing}
             InputProps={{
               className: 'bg-[#1e1e1e] text-white rounded-md',
               sx: {
-                '& input': {
-                  color: 'white',
-                  fontSize: '16px',
-                },
+                '& input': { color: 'white', fontSize: '16px' },
                 '& input::placeholder': {
                   opacity: 1,
                   color: '#b0b0b0',
@@ -48,6 +126,7 @@ const QortexDemo = () => {
           <Button
             variant="contained"
             onClick={handleCommandSubmit}
+            disabled={isProcessing}
             sx={{
               bgcolor: '#3c5a1e',
               fontWeight: 'bold',
@@ -58,10 +137,45 @@ const QortexDemo = () => {
           </Button>
         </Box>
 
-        <Box className="bg-[#1e1e1e] border-l-4 border-[#3c5a1e] rounded-lg p-6 min-h-[120px]">
-          <Typography className="text-[#b0b0b0] italic mb-2">
-            {response}
-          </Typography>
+        {/* Response Area */}
+        <Box
+          ref={responseAreaRef}
+          className="bg-[#1e1e1e] border-l-4 border-[#3c5a1e] rounded-lg p-6 min-h-[120px] overflow-y-auto max-h-64"
+        >
+          {responses.map((response, index) => (
+            <Typography
+              key={index}
+              className={`mb-2 ${
+                response.type === 'user'
+                  ? 'text-blue-400'
+                  : response.type === 'thinking'
+                  ? 'text-gray-400 italic'
+                  : response.type === 'error'
+                  ? 'text-red-400'
+                  : 'text-[#b0b0b0]'
+              }`}
+            >
+              {response.type === 'user' && (
+                <span className="text-blue-400 font-medium">➤ You: </span>
+              )}
+              {response.type === 'thinking' && (
+                <span className="text-yellow-500 font-medium">
+                  ⟳ Processing:{' '}
+                </span>
+              )}
+              {response.type === 'action' && (
+                <span className="text-green-500 font-medium">✓ Action: </span>
+              )}
+              {response.type === 'error' && (
+                <span className="text-red-500 font-medium">✗ Error: </span>
+              )}
+              {response.text}
+            </Typography>
+          ))}
+
+          {isProcessing && (
+            <Typography className="text-green-500">•••</Typography>
+          )}
         </Box>
       </Box>
     </Box>
