@@ -1,7 +1,12 @@
-import { CheckCircle } from '@mui/icons-material';
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import { Snackbar, Alert, AlertColor } from '@mui/material';
 
+import { useMutation } from '@apollo/client';
+import { CheckCircle } from '@mui/icons-material';
+import { Snackbar, Alert, AlertColor } from '@mui/material';
+import {
+  CreateGeneralInqueryDocument,
+  CreatePilotProgramInfoDocument,
+} from '@/lib/gql/graphql';
 import {
   Box,
   Container,
@@ -24,10 +29,6 @@ import {
   FormControl,
 } from '@mui/material';
 
-import { useMutation } from '@apollo/client';
-
-import { CreateGeneralInqueryDocument, CreatePilotProgramInfoDocument } from '@/lib/gql/graphql';
-
 interface FormData {
   name: string;
   email: string;
@@ -47,20 +48,25 @@ interface FormData {
 }
 
 const Contact = () => {
-  const steps = ['Your Info', 'Current Setup', 'Challenges', 'Desired Outcomes'];
+  const steps = [
+    'Your Info',
+    'Current Setup',
+    'Challenges',
+    'Desired Outcomes',
+  ];
   const challengesList = [
-    "Labor Shortage",
-    "Quality Control",
-    "Throughput",
-    "Consistency",
-    "Operating Costs",
-    "Worker Safety",
-    "Production Flexibility",
-    "Space Constraints",
+    'Labor Shortage',
+    'Quality Control',
+    'Throughput',
+    'Consistency',
+    'Operating Costs',
+    'Worker Safety',
+    'Production Flexibility',
+    'Space Constraints',
   ];
 
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [contactStep, setContactStep] = useState(0);
   const [severity, setSeverity] = useState<AlertColor>('success');
   const [contactFormType, setContactFormType] = useState('comprehensive');
@@ -80,11 +86,13 @@ const Contact = () => {
     roboticSolutions: [],
     implementationTimeline: '',
     additionalNotes: '',
-    specificChallanges: ''
+    specificChallanges: '',
   });
 
   const [createGeneralInquery] = useMutation(CreateGeneralInqueryDocument);
-  const [createPilotProgramInfoDocument] = useMutation(CreatePilotProgramInfoDocument);
+  const [createPilotProgramInfoDocument] = useMutation(
+    CreatePilotProgramInfoDocument,
+  );
 
   const isTablet = window.innerWidth < 1024;
 
@@ -92,7 +100,7 @@ const Contact = () => {
     const { name, value, checked, type } = event.target;
 
     setFormData((prevData) => {
-      if (name === "challenges") {
+      if (name === 'challenges') {
         return {
           ...prevData,
           challenges: checked
@@ -103,7 +111,7 @@ const Contact = () => {
 
       return {
         ...prevData,
-        [name]: type === "checkbox" ? checked : value,
+        [name]: type === 'checkbox' ? checked : value,
       };
     });
   };
@@ -116,7 +124,12 @@ const Contact = () => {
     const { active, completed, icon } = props;
 
     if (completed) {
-      return <CheckCircle style={{ color: '#3c5a1e' }} sx={{ width: '30px', height: '30px' }} />;
+      return (
+        <CheckCircle
+          style={{ color: '#3c5a1e' }}
+          sx={{ width: '30px', height: '30px' }}
+        />
+      );
     }
     if (active) {
       return (
@@ -170,26 +183,25 @@ const Contact = () => {
             email: formData.email,
             company: formData.company,
             message: formData.message,
-            consent: formData.consent
-          }
-        }
-      }
+            consent: formData.consent,
+          },
+        },
+      },
     });
 
     if (data?.createGeneralInquery?.success) {
-      resetFormData()
+      resetFormData();
       setLoading(false);
       setMessage('Your Inquery has been saved!');
       setSeverity('success');
       setOpen(true);
     }
     setLoading(false);
-  }
+  };
 
   const SubmitPilotProgramForm = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
 
     try {
       const { data } = await createPilotProgramInfoDocument({
@@ -209,11 +221,10 @@ const Contact = () => {
               roboticSolutions: formData.roboticSolutions,
               implementationTimeline: formData.implementationTimeline,
               additionalNotes: formData.additionalNotes,
-              specificChallanges: formData.specificChallanges
-
-            }
-          }
-        }
+              specificChallanges: formData.specificChallanges,
+            },
+          },
+        },
       });
 
       if (data?.createPilotProgramInfo?.success) {
@@ -224,10 +235,13 @@ const Contact = () => {
         setOpen(true);
         setLoading(false);
       } else {
-        console.error("Submission failed:", data?.createPilotProgramInfo?.errors);
+        console.error(
+          'Submission failed:',
+          data?.createPilotProgramInfo?.errors,
+        );
       }
     } catch (error) {
-      console.error("Request failed:", error);
+      console.error('Request failed:', error);
     }
   };
 
@@ -247,9 +261,9 @@ const Contact = () => {
       roboticSolutions: [],
       implementationTimeline: '',
       additionalNotes: '',
-      specificChallanges: ''
-    })
-  }
+      specificChallanges: '',
+    });
+  };
 
   const commonInputStyles = {
     InputProps: {
@@ -288,8 +302,9 @@ const Contact = () => {
             <Typography
               variant="h4"
               fontWeight="600"
-              className={`text-3xl font-bold pb-1 relative ${isTablet ? 'after:left-1/2 after:-translate-x-1/2' : ''
-                }`}
+              className={`text-3xl font-bold pb-1 relative ${
+                isTablet ? 'after:left-1/2 after:-translate-x-1/2' : ''
+              }`}
               sx={{
                 position: 'relative',
                 '&::after': {
@@ -308,8 +323,7 @@ const Contact = () => {
 
             <Typography
               variant="body1"
-              className={`text-[#b0b0b0] pt-8 ${isTablet ? 'text-center' : ''
-                }`}
+              className={`text-[#b0b0b0] pt-8 ${isTablet ? 'text-center' : ''}`}
             >
               Join our{' '}
               <span className="inline-block bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded ml-2 animate-pulse">
@@ -330,14 +344,16 @@ const Contact = () => {
             </Typography>
 
             <Box
-              className={`rounded-md inline-flex overflow-hidden mt-8 ${isTablet ? 'mx-auto' : ''}`}
+              className={`rounded-md inline-flex overflow-hidden mt-8 ${
+                isTablet ? 'mx-auto' : ''
+              }`}
             >
               <Button
                 sx={{
-
-                  backgroundColor: contactFormType === 'comprehensive' ? '#3c5a1e' : '#2d2d2d',
+                  backgroundColor:
+                    contactFormType === 'comprehensive' ? '#3c5a1e' : '#2d2d2d',
                   color: contactFormType === 'comprehensive' ? 'white' : 'grey',
-                  transform: 'none'
+                  transform: 'none',
                 }}
                 onClick={() => setContactFormType('comprehensive')}
               >
@@ -345,10 +361,10 @@ const Contact = () => {
               </Button>
               <Button
                 sx={{
-
-                  backgroundColor: contactFormType === 'quick' ? '#3c5a1e' : '#2d2d2d',
+                  backgroundColor:
+                    contactFormType === 'quick' ? '#3c5a1e' : '#2d2d2d',
                   color: contactFormType === 'quick' ? 'white' : 'grey',
-                  transform: 'none'
+                  transform: 'none',
                 }}
                 onClick={() => setContactFormType('quick')}
               >
@@ -390,7 +406,8 @@ const Contact = () => {
                           InputProps={{
                             ...commonInputStyles.InputProps,
                           }}
-                          InputLabelProps={commonInputStyles.InputLabelProps} />
+                          InputLabelProps={commonInputStyles.InputLabelProps}
+                        />
                       </Grid>
 
                       <Grid item xs={12}>
@@ -443,8 +460,13 @@ const Contact = () => {
                             />
                           }
                           label={
-                            <Typography variant="body2" className="text-gray-400 pt-4">
-                              I consent to Quantum Robotics processing my data and contacting me about their products and services.*
+                            <Typography
+                              variant="body2"
+                              className="text-gray-400 pt-4"
+                            >
+                              I consent to Quantum Robotics processing my data
+                              and contacting me about their products and
+                              services.*
                             </Typography>
                           }
                         />
@@ -452,18 +474,17 @@ const Contact = () => {
 
                       <Grid item xs={12}>
                         <Button
-                          variant='contained'
-                          type='submit'
+                          variant="contained"
+                          type="submit"
                           fullWidth
                           loading={loading}
                           sx={{
-
                             backgroundColor: '#3c5a1e',
                             color: 'white',
                             transform: 'none',
                             '& .MuiCircularProgress-root': {
                               color: 'white',
-                            }
+                            },
                           }}
                           onClick={HandleSubmitGeneralInquery}
                         >
@@ -474,14 +495,18 @@ const Contact = () => {
                   </form>
                 ) : (
                   <form onSubmit={handleFormSubmit}>
-                    <Stepper activeStep={contactStep} className="mb-8" alternativeLabel>
+                    <Stepper
+                      activeStep={contactStep}
+                      className="mb-8"
+                      alternativeLabel
+                    >
                       {steps.map((step, index) => (
                         <Step key={index}>
                           <StepLabel
                             StepIconComponent={CustomStepIcon}
                             sx={{
-                              "& .MuiStepLabel-label": {
-                                color: "white !important",
+                              '& .MuiStepLabel-label': {
+                                color: 'white !important',
                               },
                             }}
                           >
@@ -564,24 +589,35 @@ const Contact = () => {
                                 '&:hover .MuiOutlinedInput-notchedOutline': {
                                   borderColor: '#3c5a1e',
                                 },
-                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                  borderColor: '#3c5a1e',
-                                },
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline':
+                                  {
+                                    borderColor: '#3c5a1e',
+                                  },
                                 '.MuiSvgIcon-root': {
                                   color: 'white',
                                 },
                               }}
                             >
                               <MenuItem value="">Select your industry</MenuItem>
-                              <MenuItem value="manufacturing">Manufacturing</MenuItem>
+                              <MenuItem value="manufacturing">
+                                Manufacturing
+                              </MenuItem>
                               <MenuItem value="food">Food & Beverage</MenuItem>
                               <MenuItem value="pharma">Pharmaceutical</MenuItem>
-                              <MenuItem value="logistics">Logistics & Distribution</MenuItem>
+                              <MenuItem value="logistics">
+                                Logistics & Distribution
+                              </MenuItem>
                               <MenuItem value="retail">Retail</MenuItem>
-                              <MenuItem value="agriculture">Agriculture</MenuItem>
+                              <MenuItem value="agriculture">
+                                Agriculture
+                              </MenuItem>
                               <MenuItem value="healthcare">Healthcare</MenuItem>
-                              <MenuItem value="energy">Renewable Energy</MenuItem>
-                              <MenuItem value="construction">Construction</MenuItem>
+                              <MenuItem value="energy">
+                                Renewable Energy
+                              </MenuItem>
+                              <MenuItem value="construction">
+                                Construction
+                              </MenuItem>
                               <MenuItem value="other">Other</MenuItem>
                             </Select>
                           </FormControl>
@@ -589,15 +625,16 @@ const Contact = () => {
                         <Grid item xs={12} className="flex justify-end">
                           <Button
                             variant="contained"
-                            onClick={() => { setContactStep(1) }}
+                            onClick={() => {
+                              setContactStep(1);
+                            }}
                             sx={{
-
                               backgroundColor: '#3c5a1e',
                               color: 'white',
                               transform: 'none',
                               '& .MuiCircularProgress-root': {
                                 color: 'white',
-                              }
+                              },
                             }}
                           >
                             Next: Current Setup
@@ -609,10 +646,16 @@ const Contact = () => {
                       <Grid container spacing={3}>
                         {/* Current Level of Automation */}
                         <Grid item xs={10}>
-                          <Typography variant="h6" className='text-white'>Current Level of Automation</Typography>
+                          <Typography variant="h6" className="text-white">
+                            Current Level of Automation
+                          </Typography>
                           <Slider
                             value={formData.automationLevel}
-                            onChange={(e, value) => handleFormChange({ target: { name: 'automationLevel', value } })}
+                            onChange={(e, value) =>
+                              handleFormChange({
+                                target: { name: 'automationLevel', value },
+                              })
+                            }
                             step={1}
                             min={0}
                             max={10}
@@ -622,12 +665,19 @@ const Contact = () => {
                             ]}
                             sx={{ color: '#3c5a1e', marginLeft: 4 }}
                           />
-                          <Typography align="center" sx={{ color: '#3c5a1e', fontWeight: 'bold', marginBottom: 4 }}>
+                          <Typography
+                            align="center"
+                            sx={{
+                              color: '#3c5a1e',
+                              fontWeight: 'bold',
+                              marginBottom: 4,
+                            }}
+                          >
                             {formData.automationLevel <= 3
                               ? `Low Automation (${formData.automationLevel}/10)`
                               : formData.automationLevel <= 7
-                                ? `Moderate Automation (${formData.automationLevel}/10)`
-                                : `High Automation (${formData.automationLevel}/10)`}
+                              ? `Moderate Automation (${formData.automationLevel}/10)`
+                              : `High Automation (${formData.automationLevel}/10)`}
                           </Typography>
                         </Grid>
 
@@ -645,11 +695,11 @@ const Contact = () => {
                             MenuProps: {
                               PaperProps: {
                                 sx: {
-                                  bgcolor: "#2d2d2d",
-                                  "& .MuiMenuItem-root": {
-                                    color: "white",
-                                    "&:hover": {
-                                      bgcolor: "gray",
+                                  bgcolor: '#2d2d2d',
+                                  '& .MuiMenuItem-root': {
+                                    color: 'white',
+                                    '&:hover': {
+                                      bgcolor: 'gray',
                                     },
                                   },
                                 },
@@ -659,12 +709,18 @@ const Contact = () => {
                           InputProps={{ ...commonInputStyles.InputProps }}
                           InputLabelProps={commonInputStyles.InputLabelProps}
                         >
-                          <MenuItem value="small">Small (1-50 employees)</MenuItem>
-                          <MenuItem value="medium">Medium (51-200 employees)</MenuItem>
-                          <MenuItem value="large">Large (200-1000 employees)</MenuItem>
-                          <MenuItem value="enterprise">Enterprise (1000+ employees)</MenuItem>
-
-
+                          <MenuItem value="small">
+                            Small (1-50 employees)
+                          </MenuItem>
+                          <MenuItem value="medium">
+                            Medium (51-200 employees)
+                          </MenuItem>
+                          <MenuItem value="large">
+                            Large (200-1000 employees)
+                          </MenuItem>
+                          <MenuItem value="enterprise">
+                            Enterprise (1000+ employees)
+                          </MenuItem>
                         </TextField>
 
                         <Grid item xs={12}>
@@ -710,95 +766,121 @@ const Contact = () => {
                       </Grid>
                     )}
 
-                    {contactStep == 2 && (<Box>
-                      <Typography variant="h6" className="text-white" gutterBottom>
-                        What challenges are you looking to address? *
-                      </Typography>
+                    {contactStep == 2 && (
+                      <Box>
+                        <Typography
+                          variant="h6"
+                          className="text-white"
+                          gutterBottom
+                        >
+                          What challenges are you looking to address? *
+                        </Typography>
 
-                      <Grid container spacing={2}>
-                        {challengesList.map((challenge, index) => (
-                          <Grid item xs={6} sm={4} key={index}>
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  name="challenges"
-                                  value={challenge}
-                                  checked={formData.challenges.includes(challenge)}
-                                  onChange={(e) => handleFormChange(e)}
-                                  sx={{
-                                    '&.Mui-checked': {
-                                      color: 'rgb(60, 90, 30)',
-                                    },
-                                  }}
-                                />
-                              }
-                              label={challenge}
-                              sx={{
-                                color: 'white',
-                              }}
-                            />
-                          </Grid>
-                        ))}
-                      </Grid>
+                        <Grid container spacing={2}>
+                          {challengesList.map((challenge, index) => (
+                            <Grid item xs={6} sm={4} key={index}>
+                              <FormControlLabel
+                                control={
+                                  <Checkbox
+                                    name="challenges"
+                                    value={challenge}
+                                    checked={formData.challenges.includes(
+                                      challenge,
+                                    )}
+                                    onChange={(e) => handleFormChange(e)}
+                                    sx={{
+                                      '&.Mui-checked': {
+                                        color: 'rgb(60, 90, 30)',
+                                      },
+                                    }}
+                                  />
+                                }
+                                label={challenge}
+                                sx={{
+                                  color: 'white',
+                                }}
+                              />
+                            </Grid>
+                          ))}
+                        </Grid>
 
-                      <Typography variant="h6" className="text-white" sx={{ mt: 3 }}>
-                        Describe specific challenges in more detail
-                      </Typography>
-                      <TextField
-                        name="specificChallanges"
-                        value={formData.specificChallanges}
-                        onChange={handleFormChange}
-                        InputProps={{ ...commonInputStyles.InputProps }}
-                        InputLabelProps={commonInputStyles.InputLabelProps}
-                        multiline
-                        rows={4}
-                        variant="outlined"
-                        fullWidth
-                      />
-                      <Grid item xs={12} className="flex justify-between pt-6">
-                        <Button
+                        <Typography
+                          variant="h6"
+                          className="text-white"
+                          sx={{ mt: 3 }}
+                        >
+                          Describe specific challenges in more detail
+                        </Typography>
+                        <TextField
+                          name="specificChallanges"
+                          value={formData.specificChallanges}
+                          onChange={handleFormChange}
+                          InputProps={{ ...commonInputStyles.InputProps }}
+                          InputLabelProps={commonInputStyles.InputLabelProps}
+                          multiline
+                          rows={4}
                           variant="outlined"
-                          onClick={() => setContactStep(1)}
-                          sx={{
-                            backgroundColor: '#2d2d2d',
-                            color: 'white',
-                            borderColor: '#3c5a1e',
-                            '&:hover': {
-                              backgroundColor: '#3c5a1e',
+                          fullWidth
+                        />
+                        <Grid
+                          item
+                          xs={12}
+                          className="flex justify-between pt-6"
+                        >
+                          <Button
+                            variant="outlined"
+                            onClick={() => setContactStep(1)}
+                            sx={{
+                              backgroundColor: '#2d2d2d',
+                              color: 'white',
                               borderColor: '#3c5a1e',
-                            },
-                          }}
-                        >
-                          Previous
-                        </Button>
-                        <Button
-                          variant="contained"
-                          onClick={() => setContactStep(3)}
-                          sx={{ backgroundColor: '#3c5a1e', color: 'white' }}
-                        >
-                          Next: Desired Outcomes
-                        </Button>
-                      </Grid>
-                    </Box>)
-                    }
+                              '&:hover': {
+                                backgroundColor: '#3c5a1e',
+                                borderColor: '#3c5a1e',
+                              },
+                            }}
+                          >
+                            Previous
+                          </Button>
+                          <Button
+                            variant="contained"
+                            onClick={() => setContactStep(3)}
+                            sx={{ backgroundColor: '#3c5a1e', color: 'white' }}
+                          >
+                            Next: Desired Outcomes
+                          </Button>
+                        </Grid>
+                      </Box>
+                    )}
                     {contactStep === 3 && (
                       <Grid container spacing={3}>
                         {/* Desired ROI Timeframe */}
                         <Grid item xs={10}>
-                          <Typography variant="h6" className="text-white">Desired ROI Timeframe</Typography>
+                          <Typography variant="h6" className="text-white">
+                            Desired ROI Timeframe
+                          </Typography>
                           <Slider
                             value={formData.roiTimeframe}
-                            onChange={(e, value) => setFormData({ ...formData, roiTimeframe: value })}
+                            onChange={(e, value) =>
+                              setFormData({ ...formData, roiTimeframe: value })
+                            }
                             step={6}
                             min={6}
                             max={24}
                             marks={[
-                              { value: 6, label: "6 months" },
-                              { value: 24, label: "24+ months" },
+                              { value: 6, label: '6 months' },
+                              { value: 24, label: '24+ months' },
                             ]}
                             sx={{ color: '#3c5a1e', marginLeft: 4 }}
                           />
-                          <Typography align="center" sx={{ color: '#3c5a1e', fontWeight: 'bold', marginBottom: 4 }}>
+                          <Typography
+                            align="center"
+                            sx={{
+                              color: '#3c5a1e',
+                              fontWeight: 'bold',
+                              marginBottom: 4,
+                            }}
+                          >
                             {formData.roiTimeframe} months
                           </Typography>
                         </Grid>
@@ -810,7 +892,13 @@ const Contact = () => {
                             label="What robotics solutions are you most interested in?"
                             name="roboticSolutions"
                             value={formData.roboticSolutions}
-                            onChange={(event) => setFormData({ ...formData, roboticSolutions: event.target.value as unknown as string[] })}
+                            onChange={(event) =>
+                              setFormData({
+                                ...formData,
+                                roboticSolutions: event.target
+                                  .value as unknown as string[],
+                              })
+                            }
                             variant="outlined"
                             fullWidth
                             SelectProps={{
@@ -818,11 +906,11 @@ const Contact = () => {
                               MenuProps: {
                                 PaperProps: {
                                   sx: {
-                                    bgcolor: "#2d2d2d",
-                                    "& .MuiMenuItem-root": {
-                                      color: "white",
-                                      "&:hover": {
-                                        bgcolor: "gray",
+                                    bgcolor: '#2d2d2d',
+                                    '& .MuiMenuItem-root': {
+                                      color: 'white',
+                                      '&:hover': {
+                                        bgcolor: 'gray',
                                       },
                                     },
                                   },
@@ -833,11 +921,11 @@ const Contact = () => {
                             InputLabelProps={commonInputStyles.InputLabelProps}
                           >
                             {[
-                              "Collaborative Robots",
-                              "Delta/Picking Robots",
-                              "Mobile Robots",
-                              "Aerial/Drone Systems",
-                              "Custom Solutions",
+                              'Collaborative Robots',
+                              'Delta/Picking Robots',
+                              'Mobile Robots',
+                              'Aerial/Drone Systems',
+                              'Custom Solutions',
                             ].map((option) => (
                               <MenuItem key={option} value={option}>
                                 {option}
@@ -853,18 +941,23 @@ const Contact = () => {
                             label="Desired Implementation Timeline"
                             name="implementationTimeline"
                             value={formData.implementationTimeline}
-                            onChange={(event) => setFormData({ ...formData, implementationTimeline: event.target.value })}
+                            onChange={(event) =>
+                              setFormData({
+                                ...formData,
+                                implementationTimeline: event.target.value,
+                              })
+                            }
                             variant="outlined"
                             fullWidth
                             SelectProps={{
                               MenuProps: {
                                 PaperProps: {
                                   sx: {
-                                    bgcolor: "#2d2d2d",
-                                    "& .MuiMenuItem-root": {
-                                      color: "white",
-                                      "&:hover": {
-                                        bgcolor: "gray",
+                                    bgcolor: '#2d2d2d',
+                                    '& .MuiMenuItem-root': {
+                                      color: 'white',
+                                      '&:hover': {
+                                        bgcolor: 'gray',
                                       },
                                     },
                                   },
@@ -874,7 +967,11 @@ const Contact = () => {
                             InputProps={{ ...commonInputStyles.InputProps }}
                             InputLabelProps={commonInputStyles.InputLabelProps}
                           >
-                            {["Immediate (0-3 months)", "Short-Term (3-6 months)", "Long-Term (6+ months)"].map((option) => (
+                            {[
+                              'Immediate (0-3 months)',
+                              'Short-Term (3-6 months)',
+                              'Long-Term (6+ months)',
+                            ].map((option) => (
                               <MenuItem key={option} value={option}>
                                 {option}
                               </MenuItem>
@@ -916,12 +1013,18 @@ const Contact = () => {
                             }
                             label={
                               <Typography sx={{ color: 'white' }}>
-                                I consent to Quantum Robotics processing my data and contacting me about their products and services.
+                                I consent to Quantum Robotics processing my data
+                                and contacting me about their products and
+                                services.
                               </Typography>
                             }
                           />
                         </Grid>
-                        <Grid item xs={12} className="flex justify-between pt-6">
+                        <Grid
+                          item
+                          xs={12}
+                          className="flex justify-between pt-6"
+                        >
                           <Button
                             variant="outlined"
                             onClick={() => setContactStep(2)}
@@ -938,17 +1041,16 @@ const Contact = () => {
                             Previous
                           </Button>
                           <Button
-                            variant='contained'
-                            type='submit'
+                            variant="contained"
+                            type="submit"
                             loading={loading}
                             sx={{
-
                               backgroundColor: '#3c5a1e',
                               color: 'white',
                               transform: 'none',
                               '& .MuiCircularProgress-root': {
                                 color: 'white',
-                              }
+                              },
                             }}
                             onClick={SubmitPilotProgramForm}
                           >
@@ -957,21 +1059,27 @@ const Contact = () => {
                         </Grid>
                       </Grid>
                     )}
-
                   </form>
                 )}
               </CardContent>
             </Card>
           </Grid>
-          <Snackbar open={open} autoHideDuration={6000} onClose={() => setOpen(false)}>
-            <Alert onClose={() => setOpen(false)} severity={severity} sx={{ width: '100%' }}>
+          <Snackbar
+            open={open}
+            autoHideDuration={6000}
+            onClose={() => setOpen(false)}
+          >
+            <Alert
+              onClose={() => setOpen(false)}
+              severity={severity}
+              sx={{ width: '100%' }}
+            >
               {message}
             </Alert>
           </Snackbar>
-
         </Grid>
-      </Container >
-    </Box >
+      </Container>
+    </Box>
   );
 };
 

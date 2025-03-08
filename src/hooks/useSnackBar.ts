@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react';
 import { AlertColor } from '@mui/material';
+import { useState, useCallback } from 'react';
 
 export function useSnackbar() {
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
