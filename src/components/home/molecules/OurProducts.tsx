@@ -55,10 +55,8 @@ const OurProducts = () => {
           navigation={false}
           centeredSlides={true}
           className="swiper-container"
+          pagination={{ clickable: true }}
           modules={[EffectCoverflow, Pagination, Autoplay]}
-          pagination={{
-            clickable: true,
-          }}
           autoplay={{
             delay: 3000,
             disableOnInteraction: false,
