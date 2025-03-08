@@ -15,9 +15,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 type Documents = {
     "mutation createGeneralInquery($input: CreateGeneralInqueryInput!) {\n  createGeneralInquery(input: $input) {\n    success\n    errors\n  }\n}": typeof types.CreateGeneralInqueryDocument,
+    "mutation createPilotProgramInfo($input: CreatePilotProgramInfoInput!) {\n  createPilotProgramInfo(input: $input) {\n    success\n    errors\n  }\n}": typeof types.CreatePilotProgramInfoDocument,
 };
 const documents: Documents = {
     "mutation createGeneralInquery($input: CreateGeneralInqueryInput!) {\n  createGeneralInquery(input: $input) {\n    success\n    errors\n  }\n}": types.CreateGeneralInqueryDocument,
+    "mutation createPilotProgramInfo($input: CreatePilotProgramInfoInput!) {\n  createPilotProgramInfo(input: $input) {\n    success\n    errors\n  }\n}": types.CreatePilotProgramInfoDocument,
 };
 
 /**
@@ -38,6 +40,10 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation createGeneralInquery($input: CreateGeneralInqueryInput!) {\n  createGeneralInquery(input: $input) {\n    success\n    errors\n  }\n}"): (typeof documents)["mutation createGeneralInquery($input: CreateGeneralInqueryInput!) {\n  createGeneralInquery(input: $input) {\n    success\n    errors\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation createPilotProgramInfo($input: CreatePilotProgramInfoInput!) {\n  createPilotProgramInfo(input: $input) {\n    success\n    errors\n  }\n}"): (typeof documents)["mutation createPilotProgramInfo($input: CreatePilotProgramInfoInput!) {\n  createPilotProgramInfo(input: $input) {\n    success\n    errors\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

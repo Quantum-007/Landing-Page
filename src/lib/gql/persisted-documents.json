@@ -1,3 +1,4 @@
 {
-  "9cf64342b1eaf8a8d76cc9e23ecb152196a7f4df": "mutation createGeneralInquery($input: CreateGeneralInqueryInput!) { __typename createGeneralInquery(input: $input) { __typename errors success } }"
+  "9cf64342b1eaf8a8d76cc9e23ecb152196a7f4df": "mutation createGeneralInquery($input: CreateGeneralInqueryInput!) { __typename createGeneralInquery(input: $input) { __typename errors success } }",
+  "7b5c701696cd471b5e7555698803bc21ba389850": "mutation createPilotProgramInfo($input: CreatePilotProgramInfoInput!) { __typename createPilotProgramInfo(input: $input) { __typename errors success } }"
 }
