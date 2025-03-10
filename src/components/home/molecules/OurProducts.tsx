@@ -212,7 +212,7 @@ const OurProducts = () => {
           }
         `}</style>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={4} paddingTop={4}>
           {INDUSTRY_DATA.map((industry) => (
             <ProductCard key={industry.id} industry={industry} />
           ))}
