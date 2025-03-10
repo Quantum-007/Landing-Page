@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 
-import { useMutation } from '@apollo/client';
 import { CheckCircle } from '@mui/icons-material';
+import { PiloProgramFormData } from '@/types/forms/form'
 import {
   Snackbar,
   Alert,
@@ -11,10 +11,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { useQuantumStore } from '@/providers/QuantumStoreProvider';
-import {
-  CreateGeneralInqueryDocument,
-  CreatePilotProgramInfoDocument,
-} from '@/lib/gql/graphql';
+
 import {
   Box,
   Container,
@@ -36,24 +33,6 @@ import {
   InputLabel,
   FormControl,
 } from '@mui/material';
-
-interface FormData {
-  name: string;
-  email: string;
-  company: string;
-  message: string;
-  consent: boolean;
-  industry: string;
-  challenges: string[];
-  roiTimeframe: number;
-  operationSize: string;
-  currentSystems: string;
-  additionalNotes: string;
-  automationLevel: number;
-  roboticSolutions: string[];
-  specificChallanges: string;
-  implementationTimeline: string;
-}
 
 const Contact = () => {
   const theme = useTheme();
@@ -83,7 +62,7 @@ const Contact = () => {
   const [severity, setSeverity] = useState<AlertColor>('success');
   const [contactFormType, setContactFormType] = useState('comprehensive');
   const [alertmessage, setAlertMessage] = useState<string>('');
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<PiloProgramFormData>({
     name: '',
     email: '',
     company: '',
@@ -117,11 +96,6 @@ const Contact = () => {
       clearTab();
     }
   }, [clearMessage, clearTab, formData, message, tabName]);
-
-  const [createGeneralInquery] = useMutation(CreateGeneralInqueryDocument);
-  const [createPilotProgramInfoDocument] = useMutation(
-    CreatePilotProgramInfoDocument,
-  );
 
   const handleFormChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { name, value, checked, type } = event.target;
@@ -216,75 +190,69 @@ const Contact = () => {
   const HandleSubmitGeneralInquery = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const { data } = await createGeneralInquery({
-      variables: {
-        input: {
-          attributes: {
-            name: formData.name,
-            email: formData.email,
-            company: formData.company,
-            message: formData.message,
-            consent: formData.consent,
-          },
-        },
-      },
-    });
 
-    if (data?.createGeneralInquery?.success) {
-      resetFormData();
+    const formDataToSend = {
+      name: formData.name,
+      email: formData.email,
+      company: formData.company,
+      message: formData.message,
+      consent: formData.consent,
+    };
+
+    try {
+      const res = await fetch('/api/createGeneralInquery', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formDataToSend),
+      });
+
+      if (res.ok) {
+        resetFormData();
+      } else {
+        setLoading(false);
+        setAlertMessage('There was an error submitting your inquiry.');
+        setSeverity('error');
+        setOpen(true);
+      }
+    } catch (error) {
       setLoading(false);
-      setAlertMessage('Your Inquery has been saved!');
-      setSeverity('success');
-      clearMessage();
+      setAlertMessage('Something went wrong, please try again later.');
+      setSeverity('error');
       setOpen(true);
+      console.error('Error submitting form:', error);
     }
-    setLoading(false);
   };
 
-  const SubmitPilotProgramForm = async (e: FormEvent) => {
+
+  const handleSubmitPilotProgramInfo = async (e: React.FormEvent) => {
     e.preventDefault();
+
     setLoading(true);
 
     try {
-      const { data } = await createPilotProgramInfoDocument({
-        variables: {
-          input: {
-            attributes: {
-              name: formData.name,
-              email: formData.email,
-              company: formData.company,
-              consent: formData.consent,
-              industry: formData.industry,
-              automationLevel: formData.automationLevel,
-              operationSize: formData.operationSize,
-              currentSystems: formData.currentSystems,
-              challenges: formData.challenges,
-              roiTimeframe: formData.roiTimeframe,
-              roboticSolutions: formData.roboticSolutions,
-              implementationTimeline: formData.implementationTimeline,
-              additionalNotes: formData.additionalNotes,
-              specificChallanges: formData.specificChallanges,
-            },
-          },
+      const res = await fetch('/api/createPilotProgramInfo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ formData }),
       });
 
-      if (data?.createPilotProgramInfo?.success) {
+      if (res.ok) {
         resetFormData();
-        setContactStep(0);
-        setAlertMessage('Your Info has been saved!');
-        setSeverity('success');
-        setOpen(true);
-        clearMessage();
-        setLoading(false);
       } else {
-        console.error(
-          'Submission failed:',
-          data?.createPilotProgramInfo?.errors,
-        );
+        setAlertMessage('Something went wrong!');
+        setSeverity('error');
+        setOpen(true);
       }
     } catch (error) {
-      console.error('Request failed:', error);
+      setAlertMessage('Network error, please try again later.');
+      setSeverity('error');
+      console.error('Fetch Error:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -306,6 +274,11 @@ const Contact = () => {
       additionalNotes: '',
       specificChallanges: '',
     });
+    setLoading(false);
+    setAlertMessage('Your request has been saved!');
+    setSeverity('success');
+    clearMessage();
+    setOpen(true);
   };
 
   const commonInputStyles = {
@@ -345,9 +318,8 @@ const Contact = () => {
             <Typography
               variant="h4"
               fontWeight="600"
-              className={`text-3xl font-bold pb-1 relative ${
-                isTablet ? 'after:left-1/2 after:-translate-x-1/2' : ''
-              }`}
+              className={`text-3xl font-bold pb-1 relative ${isTablet ? 'after:left-1/2 after:-translate-x-1/2' : ''
+                }`}
               sx={{
                 '&::after': {
                   content: '""',
@@ -387,9 +359,8 @@ const Contact = () => {
             </Typography>
 
             <Box
-              className={`rounded-md inline-flex overflow-hidden mt-8 ${
-                isTablet ? 'mx-auto' : ''
-              }`}
+              className={`rounded-md inline-flex overflow-hidden mt-8 ${isTablet ? 'mx-auto' : ''
+                }`}
             >
               <Button
                 sx={{
@@ -632,9 +603,9 @@ const Contact = () => {
                                   borderColor: '#3c5a1e',
                                 },
                                 '&.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                  {
-                                    borderColor: '#3c5a1e',
-                                  },
+                                {
+                                  borderColor: '#3c5a1e',
+                                },
                                 '.MuiSvgIcon-root': {
                                   color: 'white',
                                 },
@@ -714,8 +685,8 @@ const Contact = () => {
                             {formData.automationLevel <= 3
                               ? `Low Automation (${formData.automationLevel}/10)`
                               : formData.automationLevel <= 7
-                              ? `Moderate Automation (${formData.automationLevel}/10)`
-                              : `High Automation (${formData.automationLevel}/10)`}
+                                ? `Moderate Automation (${formData.automationLevel}/10)`
+                                : `High Automation (${formData.automationLevel}/10)`}
                           </Typography>
                         </Grid>
 
@@ -1095,7 +1066,7 @@ const Contact = () => {
                                 color: 'white',
                               },
                             }}
-                            onClick={SubmitPilotProgramForm}
+                            onClick={handleSubmitPilotProgramInfo}
                           >
                             Submit Request
                           </Button>
