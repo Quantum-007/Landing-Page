@@ -33,32 +33,21 @@ const QortexDemo = () => {
   const processCommand = async (input: string) => {
     if (!input.trim() || isProcessing) return;
 
-    try {
-      setResponses((prev) => [...prev, { type: 'user', text: input }]);
-      setIsProcessing(true);
-      setResponses((prev) => [
-        ...prev,
-        { type: 'thinking', text: 'Processing...' },
-      ]);
+    setResponses((prev) => [...prev, { type: 'user', text: input }]);
+    setIsProcessing(true);
+    setResponses((prev) => [
+      ...prev,
+      { type: 'thinking', text: 'Processing...' },
+    ]);
 
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+    try {
+      const response = await fetch('/api/anthropic', {
         method: 'POST',
-        mode: 'cors',
-        credentials: 'omit',
-        headers: {
-          'x-api-key':
-            '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',
-          'anthropic-version': '2023-06-01',
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'claude-3-7-sonnet-20250219',
-          max_tokens: 1024,
-          messages: [{ role: 'user', content: input }],
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ input }),
       });
 
-      console.log(response);
+      const data = await response.json();
 
       setResponses((prev) =>
         prev.map((res) =>
@@ -68,15 +57,21 @@ const QortexDemo = () => {
         ),
       );
 
-      // setTimeout(() => {
-      //   setResponses((prev) => [
-      //     ...prev,
-      //     { type: 'action', text: message.content },
-      //   ]);
-      //   setIsProcessing(false);
-      // }, 1000);
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      setTimeout(() => {
+        setResponses((prev) => [
+          ...prev,
+          { type: 'action', text: data?.content?.[0]?.text },
+        ]);
+
+        setIsProcessing(false);
+      }, 1000);
     } catch (error) {
       console.error('Error processing command:', error);
+
       setResponses((prev) =>
         prev.map((res) =>
           res.type === 'thinking'
@@ -87,6 +82,7 @@ const QortexDemo = () => {
             : res,
         ),
       );
+
       setIsProcessing(false);
     }
   };

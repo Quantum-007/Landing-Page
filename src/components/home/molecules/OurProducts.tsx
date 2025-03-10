@@ -47,6 +47,15 @@ const OurProducts = () => {
           Our Products
         </Typography>
 
+        <Typography
+          variant="body1"
+          className="py-5"
+          sx={{ maxWidth: 'xl', color: '#b0b0b0', fontSize: '1.2rem' }}
+        >
+          Discover our range of core robotics platforms designed for specific
+          industrial applications.
+        </Typography>
+
         <Swiper
           loop={true}
           grabCursor={true}
@@ -106,6 +115,9 @@ const OurProducts = () => {
             transform: scale(1.2);
           }
         `}</style>
+
+        {/* Product sections */}
+        <Box></Box>
       </Container>
     </Box>
   );
