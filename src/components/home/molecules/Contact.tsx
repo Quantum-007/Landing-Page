@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 
 import { useMutation } from '@apollo/client';
 import { CheckCircle } from '@mui/icons-material';
-import { Snackbar, Alert, AlertColor } from '@mui/material';
+import { Snackbar, Alert, AlertColor, SelectChangeEvent } from '@mui/material';
 import {
   CreateGeneralInqueryDocument,
   CreatePilotProgramInfoDocument,
@@ -104,7 +104,7 @@ const Contact = () => {
         return {
           ...prevData,
           challenges: checked
-            ? [...prevData.challenges, value] // Add value if checked
+            ? [...prevData.challenges, value]
             : prevData.challenges.filter((challenge) => challenge !== value), // Remove if unchecked
         };
       }
@@ -114,6 +114,20 @@ const Contact = () => {
         [name]: type === 'checkbox' ? checked : value,
       };
     });
+  };
+
+  const handleSelectChange = (event: SelectChangeEvent<string>): void => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const handleSliderChange = (event: Event, value: number | number[]) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      automationLevel: Array.isArray(value) ? value[0] : value,
+    }));
   };
 
   const handleFormSubmit = (e: FormEvent) => {
@@ -578,7 +592,7 @@ const Contact = () => {
                               label="Industry*"
                               name="industry"
                               value={formData.industry}
-                              onChange={handleFormChange}
+                              onChange={handleSelectChange}
                               required
                               sx={{
                                 backgroundColor: '#121212',
@@ -651,11 +665,7 @@ const Contact = () => {
                           </Typography>
                           <Slider
                             value={formData.automationLevel}
-                            onChange={(e, value) =>
-                              handleFormChange({
-                                target: { name: 'automationLevel', value },
-                              })
-                            }
+                            onChange={handleSliderChange}
                             step={1}
                             min={0}
                             max={10}
@@ -862,7 +872,10 @@ const Contact = () => {
                           <Slider
                             value={formData.roiTimeframe}
                             onChange={(e, value) =>
-                              setFormData({ ...formData, roiTimeframe: value })
+                              setFormData({
+                                ...formData,
+                                roiTimeframe: value as number,
+                              })
                             }
                             step={6}
                             min={6}
