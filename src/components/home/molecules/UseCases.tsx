@@ -24,7 +24,6 @@ import {
   Restaurant as FoodIcon,
 } from '@mui/icons-material';
 
-// Constants for reusability
 const INDUSTRY_CATEGORIES = {
   MAIN: [
     { key: 'all', label: 'All Industries' },
@@ -41,7 +40,6 @@ const INDUSTRY_CATEGORIES = {
   ],
 };
 
-// Industry data structure
 const INDUSTRY_DATA = [
   {
     id: 'pharma',

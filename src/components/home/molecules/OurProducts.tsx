@@ -1,14 +1,15 @@
 'use client';
 
 import 'swiper/css';
+import 'swiper/css/autoplay';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
-import 'swiper/css/autoplay'; // Import Autoplay CSS
 
 import Image from 'next/image';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Box, Container, Typography } from '@mui/material';
-import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules'; // Import Autoplay
+import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 
 const productImages = [
   '/assets/home/our_products/Slide-1.svg',

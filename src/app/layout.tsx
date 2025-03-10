@@ -1,7 +1,8 @@
 import './globals.css';
+
 import Header from '@/components/molecultes/Header';
 import Footer from '@/components/molecultes/Footer';
-import ApolloClientProvider from "@/components/ApolloClientProvider"
+import ApolloClientProvider from '@/components/ApolloClientProvider';
 
 import type { Metadata } from 'next';
 

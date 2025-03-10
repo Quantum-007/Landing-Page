@@ -66,7 +66,7 @@ const VisionAndMission = () => {
                   loading="lazy"
                   alt="precision"
                   src="/assets/home/our-vision.svg"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-4xl"
                 />
               </Box>
             </Grid>
@@ -85,7 +85,7 @@ const VisionAndMission = () => {
                   loading="lazy"
                   alt="precision"
                   src="/assets/home/our-mission.svg"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-4xl"
                 />
               </Box>
             </Grid>
