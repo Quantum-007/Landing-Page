@@ -53,7 +53,7 @@ export async function POST(req: Request) {
         messages: [
           {
             role: 'user',
-            content: `Respond to this robotics command with two separate responses: first a thinking response showing your analysis, then an action response showing what operations will be performed. Be specific and technical. Command: "${input}"`,
+            content: `Respond to this robotics command with two separate responses: first a thinking response showing your analysis, then an action response showing what operations will be performed. Be specific, concise, and technical. Command: "${input}"`,
           },
         ],
         temperature: 1.0,
