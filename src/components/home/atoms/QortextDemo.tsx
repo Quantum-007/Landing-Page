@@ -13,9 +13,6 @@ const QortexDemo = () => {
   const [responses, setResponses] = useState<ResponseItem[]>([]);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
-  const YOUR_API_KEY =
-    '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';
-
   useEffect(() => {
     if (responseAreaRef.current) {
       responseAreaRef.current.scrollTop = responseAreaRef.current.scrollHeight;
@@ -44,34 +41,40 @@ const QortexDemo = () => {
         { type: 'thinking', text: 'Processing...' },
       ]);
 
-      const response = await fetch('https://api.anthropic.com/api/qortex-nlp', {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
-        body: JSON.stringify({ command: input }),
+        mode: 'cors',
+        credentials: 'omit',
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${YOUR_API_KEY}`,
+          'x-api-key':
+            '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',
+          'anthropic-version': '2023-06-01',
+          'content-type': 'application/json',
         },
+        body: JSON.stringify({
+          model: 'claude-3-7-sonnet-20250219',
+          max_tokens: 1024,
+          messages: [{ role: 'user', content: input }],
+        }),
       });
 
-      if (!response.ok) throw new Error('Failed to process command');
-
-      const data: { thinking: string; action: string } = await response.json();
+      console.log(response);
 
       setResponses((prev) =>
         prev.map((res) =>
           res.type === 'thinking'
-            ? { type: 'thinking', text: data.thinking }
+            ? { type: 'thinking', text: 'Response received...' }
             : res,
         ),
       );
 
-      setTimeout(() => {
-        setResponses((prev) => [
-          ...prev,
-          { type: 'action', text: data.action },
-        ]);
-        setIsProcessing(false);
-      }, 1000);
+      // setTimeout(() => {
+      //   setResponses((prev) => [
+      //     ...prev,
+      //     { type: 'action', text: message.content },
+      //   ]);
+      //   setIsProcessing(false);
+      // }, 1000);
     } catch (error) {
       console.error('Error processing command:', error);
       setResponses((prev) =>
