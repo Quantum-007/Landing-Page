@@ -184,9 +184,17 @@ const Footer = () => {
                 { text: 'Our Team', href: '#team' },
                 { text: 'Blog', href: '#blog' },
                 {
-                  text: 'Careers', href: '#contact', message: "I'm interested in career opportunities at Quantum Robotics."
+                  text: 'Careers',
+                  href: '#contact',
+                  message:
+                    "I'm interested in career opportunities at Quantum Robotics.",
                 },
-                { text: 'Investor Relations', href: '#contact', message: "I'm interested in investment opportunities with Quantum Robotics." },
+                {
+                  text: 'Investor Relations',
+                  href: '#contact',
+                  message:
+                    "I'm interested in investment opportunities with Quantum Robotics.",
+                },
               ].map((item) => (
                 <Box key={item.text}>
                   <Link

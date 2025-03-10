@@ -5,7 +5,7 @@ import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 import { Box, Container, Grid, Typography, Button } from '@mui/material';
 
 const IndustrialAutomation = () => {
-  const { setTab } = useQuantumStore((state) => state)
+  const { setTab } = useQuantumStore((state) => state);
   return (
     <Box
       id="hero"

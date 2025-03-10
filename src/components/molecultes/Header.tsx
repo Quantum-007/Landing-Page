@@ -1,9 +1,9 @@
 'use client';
 
 import MenuIcon from '@mui/icons-material/Menu';
-import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 
 import { useState, useEffect } from 'react';
+import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 import {
   Box,
   List,
@@ -47,8 +47,9 @@ const Header = () => {
   return (
     <AppBar
       position="fixed"
-      className={`transition-all duration-300 bg-opacity-95 backdrop-blur-md ${isScrolled ? 'shadow-md' : 'border-b border-[#3a3a3a]'
-        }`}
+      className={`transition-all duration-300 bg-opacity-95 backdrop-blur-md ${
+        isScrolled ? 'shadow-md' : 'border-b border-[#3a3a3a]'
+      }`}
       sx={{
         zIndex: 1000,
         backdropFilter: 'blur(8px)',

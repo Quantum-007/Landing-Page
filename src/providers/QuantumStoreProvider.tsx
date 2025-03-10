@@ -14,7 +14,9 @@ export interface QuantumStoreProviderProps {
   children: ReactNode;
 }
 
-export const QuantumStoreProvider = ({ children }: QuantumStoreProviderProps) => {
+export const QuantumStoreProvider = ({
+  children,
+}: QuantumStoreProviderProps) => {
   const storeRef = useRef<QuantumStoreApi | null>(null);
   if (!storeRef.current) {
     storeRef.current = createQuantumStore();
@@ -27,7 +29,9 @@ export const QuantumStoreProvider = ({ children }: QuantumStoreProviderProps) =>
   );
 };
 
-export const useQuantumStore = <T,>(selector: (store: QuantumStore) => T): T => {
+export const useQuantumStore = <T,>(
+  selector: (store: QuantumStore) => T,
+): T => {
   const quatumStoreContext = useContext(QuantumStoreContext);
 
   if (!quatumStoreContext) {

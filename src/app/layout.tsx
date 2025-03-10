@@ -2,12 +2,12 @@ import './globals.css';
 
 import Header from '@/components/molecultes/Header';
 import Footer from '@/components/molecultes/Footer';
-import ApolloClientProvider from "@/components/ApolloClientProvider"
-import { QuantumStoreProvider } from '@/providers/QuantumStoreProvider';
+import ApolloClientProvider from '@/components/ApolloClientProvider';
 
 import type { Metadata } from 'next';
 
 import { Inter } from 'next/font/google';
+import { QuantumStoreProvider } from '@/providers/QuantumStoreProvider';
 
 const inter = Inter({
   variable: '--font-inter',

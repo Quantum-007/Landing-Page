@@ -22,9 +22,7 @@ const defaultState: QuantumState = {
 
 const isClient = typeof window !== 'undefined';
 
-export const createQuantumStore = (
-  initState: QuantumState = defaultState,
-) => {
+export const createQuantumStore = (initState: QuantumState = defaultState) => {
   return createStore<QuantumStore>()(
     persist(
       (set) => ({
