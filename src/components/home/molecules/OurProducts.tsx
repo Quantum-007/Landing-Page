@@ -6,9 +6,10 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
 
 import Image from 'next/image';
+import ProductCard from '../atoms/ProductCard';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Grid, Container, Typography } from '@mui/material';
 import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
 
 const productImages = [
@@ -17,6 +18,101 @@ const productImages = [
   '/assets/home/our_products/Slide-3.svg',
   '/assets/home/our_products/Slide-4.svg',
   '/assets/home/our_products/Slide-5.svg',
+];
+
+const INDUSTRY_DATA = [
+  {
+    id: 'quantum-flex',
+    title: 'QuantumFlex™',
+    robotType: '6-Axis Articulated Robot',
+    description:
+      'Versatile 6-axis articulated robot for complex manufacturing, welding, and material handling tasks.',
+    metrics: [
+      { value: '210kg', label: 'Payload' },
+      { value: '2.8m', label: 'Reach' },
+      { value: '±0.08mm', label: 'Precision' },
+      { value: '180°/s', label: 'Speed' },
+    ],
+    painPoints: ['Flexible Mounting', 'Heavy Payload', 'Path Planning'],
+  },
+  {
+    id: 'quantum-co',
+    title: 'QuantumCo™',
+    robotType: 'Collaborative Robot',
+    description:
+      'Advanced collaborative robot designed to work alongside human operators in mixed manufacturing environments.',
+    metrics: [
+      { value: '35kg', label: 'Payload' },
+      { value: '1.7m', label: 'Reach' },
+      { value: '±0.03mm', label: 'Precision' },
+      { value: '120°/s', label: 'Speed' },
+    ],
+    painPoints: ['Force Sensing', 'Multi-Tool Support', 'Adaptive Learning'],
+  },
+  {
+    id: 'quantum-delta',
+    title: 'QuantumDelta™',
+    robotType: 'Delta Robot',
+    description:
+      'High-speed picking and placing robot optimized for food, pharmaceutical, and small component assembly.',
+    metrics: [
+      { value: '8kg', label: 'Payload' },
+      { value: '1.2m', label: 'Workspace' },
+      { value: '±0.02mm', label: 'Precision' },
+      { value: '200/min', label: 'Cycle Rate' },
+    ],
+    painPoints: ['High-Speed', 'Precision Control', 'Washdown Ready'],
+  },
+  {
+    id: 'quantum-swift',
+    title: 'QuantumSwift™',
+    robotType: 'SCARA Robot',
+    description:
+      'Selective Compliance Articulated Robot Arm designed for precise assembly and handling operations.',
+    metrics: [
+      { value: '20kg', label: 'Payload' },
+      { value: '850mm', label: 'Reach' },
+      { value: '±0.01mm', label: 'Precision' },
+      { value: '7m/s', label: 'Speed' },
+    ],
+    painPoints: ['Compact Design', 'High Throughput', 'IoT Enabled'],
+  },
+  {
+    id: 'quantum-mover',
+    title: 'QuantumMover™',
+    robotType: 'Autonomous Mobile Robot',
+    description:
+      'Self-navigating mobile robot for material transport across factory floors, warehouses, and distribution centers.',
+    metrics: [
+      { value: '1500kg', label: 'Payload' },
+      { value: '2.0m/s', label: 'Speed' },
+      { value: '±10mm', label: 'Navigation' },
+      { value: '10hrs', label: 'Runtime' },
+    ],
+    painPoints: [
+      'Dynamic Navigation',
+      'Fleet Management',
+      'Obstacle Avoidance',
+    ],
+  },
+  {
+    id: 'quantum-aero',
+    title: 'QuantumAero™',
+    robotType: 'Drone/UAV',
+    description:
+      'Autonomous aerial system for inventory management, inspection, and light cargo transport.',
+    metrics: [
+      { value: '5kg', label: 'Payload' },
+      { value: '45min', label: 'Flight Time' },
+      { value: '10km', label: 'Range' },
+      { value: '±5cm', label: 'Positioning' },
+    ],
+    painPoints: [
+      'Indoor Navigation',
+      'Computer Vision',
+      'Extended Flight Time',
+    ],
+  },
 ];
 
 const OurProducts = () => {
@@ -116,8 +212,11 @@ const OurProducts = () => {
           }
         `}</style>
 
-        {/* Product sections */}
-        <Box></Box>
+        <Grid container spacing={4}>
+          {INDUSTRY_DATA.map((industry) => (
+            <ProductCard key={industry.id} industry={industry} />
+          ))}
+        </Grid>
       </Container>
     </Box>
   );
