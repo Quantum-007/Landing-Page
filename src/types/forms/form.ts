@@ -1,4 +1,3 @@
-
 export interface PiloProgramFormData {
   name: string;
   email: string;
@@ -16,7 +15,6 @@ export interface PiloProgramFormData {
   specificChallanges: string;
   implementationTimeline: string;
 }
-
 
 export interface GeneralInqueryFormData {
   name: string;

@@ -5,7 +5,6 @@ export async function POST(req: Request) {
   try {
     const formData: GeneralInqueryFormData = await req.json();
 
-
     console.log('Received form data for general Inquery:', formData);
 
     return NextResponse.json({
@@ -20,7 +19,10 @@ export async function POST(req: Request) {
       );
     } else {
       return NextResponse.json(
-        { error: 'Something went wrong, but no specific error message is available.' },
+        {
+          error:
+            'Something went wrong, but no specific error message is available.',
+        },
         { status: 500 },
       );
     }
