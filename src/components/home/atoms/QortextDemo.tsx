@@ -49,13 +49,18 @@ const QortexDemo = () => {
 
       const data = await response.json();
 
-      setResponses((prev) =>
-        prev.map((res) =>
-          res.type === 'thinking'
-            ? { type: 'thinking', text: 'Response received...' }
-            : res,
-        ),
-      );
+      setResponses((prev) => {
+        const newResponses = [...prev];
+
+        for (let i = newResponses.length - 1; i >= 0; i--) {
+          if (newResponses[i].type === 'thinking') {
+            newResponses[i] = { type: 'thinking', text: data.thinking };
+            break;
+          }
+        }
+
+        return newResponses;
+      });
 
       if (data.error) {
         throw new Error(data.error);
@@ -64,24 +69,28 @@ const QortexDemo = () => {
       setTimeout(() => {
         setResponses((prev) => [
           ...prev,
-          { type: 'action', text: data?.content?.[0]?.text },
+          { type: 'action', text: data.action },
         ]);
-
         setIsProcessing(false);
       }, 1000);
     } catch (error) {
       console.error('Error processing command:', error);
 
-      setResponses((prev) =>
-        prev.map((res) =>
-          res.type === 'thinking'
-            ? {
-                type: 'error',
-                text: 'Error processing command. Please try again.',
-              }
-            : res,
-        ),
-      );
+      setResponses((prev) => {
+        const newResponses = [...prev];
+
+        for (let i = newResponses.length - 1; i >= 0; i--) {
+          if (newResponses[i].type === 'thinking') {
+            newResponses[i] = {
+              type: 'error',
+              text: 'Error processing command. Please try again.',
+            };
+            break;
+          }
+        }
+
+        return newResponses;
+      });
 
       setIsProcessing(false);
     }
