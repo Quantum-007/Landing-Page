@@ -1,6 +1,7 @@
 'use client';
 
 import MenuIcon from '@mui/icons-material/Menu';
+import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 
 import { useState, useEffect } from 'react';
 import {
@@ -32,6 +33,8 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
+  const { setTab } = useQuantumStore((state) => state);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -44,9 +47,8 @@ const Header = () => {
   return (
     <AppBar
       position="fixed"
-      className={`transition-all duration-300 bg-opacity-95 backdrop-blur-md ${
-        isScrolled ? 'shadow-md' : 'border-b border-[#3a3a3a]'
-      }`}
+      className={`transition-all duration-300 bg-opacity-95 backdrop-blur-md ${isScrolled ? 'shadow-md' : 'border-b border-[#3a3a3a]'
+        }`}
       sx={{
         zIndex: 1000,
         backdropFilter: 'blur(8px)',
@@ -103,6 +105,7 @@ const Header = () => {
             <Button
               href="#contact"
               variant="contained"
+              onClick={() => setTab('comprehensive')}
               sx={{
                 bgcolor: '#3c5a1e',
                 fontWeight: 'bold',

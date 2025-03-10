@@ -1,9 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
+import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 
 import { Box, Container, Grid, Typography, Button } from '@mui/material';
 
 const IndustrialAutomation = () => {
+  const { setTab } = useQuantumStore((state) => state)
   return (
     <Box
       id="hero"
@@ -57,6 +59,7 @@ const IndustrialAutomation = () => {
                 <Button
                   href="#contact"
                   variant="contained"
+                  onClick={() => setTab('comprehensive')}
                   sx={{
                     bgcolor: '#3c5a1e',
                     fontWeight: 'bold',
@@ -71,8 +74,8 @@ const IndustrialAutomation = () => {
 
                 <Button
                   size="large"
-                  href="#products"
                   variant="outlined"
+                  href="#our-products"
                   sx={{
                     borderColor: '#3c5a1e',
                     color: 'white',

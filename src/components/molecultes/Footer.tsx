@@ -18,8 +18,17 @@ import {
   YouTube as YouTubeIcon,
   LinkedIn as LinkedInIcon,
 } from '@mui/icons-material';
+import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 
 const Footer = () => {
+  const { setMessage } = useQuantumStore((state) => state);
+
+  const handleClick = (message: string | null) => {
+    if (message) {
+      setMessage(message);
+    }
+  };
+
   return (
     <Box
       component="footer"
@@ -174,15 +183,15 @@ const Footer = () => {
                 { text: 'About Us', href: '#vision-mission' },
                 { text: 'Our Team', href: '#team' },
                 { text: 'Blog', href: '#blog' },
-                { text: 'Careers', href: '#contact?message=careers' },
                 {
-                  text: 'Investor Relations',
-                  href: '#contact?message=investor',
+                  text: 'Careers', href: '#contact', message: "I'm interested in career opportunities at Quantum Robotics."
                 },
+                { text: 'Investor Relations', href: '#contact', message: "I'm interested in investment opportunities with Quantum Robotics." },
               ].map((item) => (
                 <Box key={item.text}>
                   <Link
                     href={item.href}
+                    onClick={() => handleClick(item.message ?? null)}
                     sx={{
                       color: '#b0b0b0',
                       textDecoration: 'none',

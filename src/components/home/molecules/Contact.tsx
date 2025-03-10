@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 
 import { useMutation } from '@apollo/client';
 import { CheckCircle } from '@mui/icons-material';
@@ -10,6 +10,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 import {
   CreateGeneralInqueryDocument,
   CreatePilotProgramInfoDocument,
@@ -81,7 +82,7 @@ const Contact = () => {
   const [contactStep, setContactStep] = useState(0);
   const [severity, setSeverity] = useState<AlertColor>('success');
   const [contactFormType, setContactFormType] = useState('comprehensive');
-  const [message, setMessage] = useState<string>('');
+  const [alertmessage, setAlertMessage] = useState<string>('');
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -99,6 +100,21 @@ const Contact = () => {
     additionalNotes: '',
     specificChallanges: '',
   });
+
+  const { message, clearMessage, tabName, clearTab } = useQuantumStore((state) => state);
+
+  useEffect(() => {
+    if (message) {
+      setFormData((prev) => ({ ...prev, message }));
+      clearMessage();
+      setContactFormType('quick');
+    }
+
+    if (tabName) {
+      setContactFormType(tabName);
+      clearTab();
+    }
+  }, [clearMessage, clearTab, formData, message, tabName]);
 
   const [createGeneralInquery] = useMutation(CreateGeneralInqueryDocument);
   const [createPilotProgramInfoDocument] = useMutation(
@@ -215,8 +231,9 @@ const Contact = () => {
     if (data?.createGeneralInquery?.success) {
       resetFormData();
       setLoading(false);
-      setMessage('Your Inquery has been saved!');
+      setAlertMessage('Your Inquery has been saved!');
       setSeverity('success');
+      clearMessage();
       setOpen(true);
     }
     setLoading(false);
@@ -253,9 +270,10 @@ const Contact = () => {
       if (data?.createPilotProgramInfo?.success) {
         resetFormData();
         setContactStep(0);
-        setMessage('Your Info has been saved!');
+        setAlertMessage('Your Info has been saved!');
         setSeverity('success');
         setOpen(true);
+        clearMessage();
         setLoading(false);
       } else {
         console.error(
@@ -325,7 +343,8 @@ const Contact = () => {
             <Typography
               variant="h4"
               fontWeight="600"
-              className="text-3xl font-bold pb-1 relative inline-block text-center"
+              className={`text-3xl font-bold pb-1 relative ${isTablet ? 'after:left-1/2 after:-translate-x-1/2' : ''
+                }`}
               sx={{
                 '&::after': {
                   content: '""',
@@ -365,9 +384,8 @@ const Contact = () => {
             </Typography>
 
             <Box
-              className={`rounded-md inline-flex overflow-hidden mt-8 ${
-                isTablet ? 'mx-auto' : ''
-              }`}
+              className={`rounded-md inline-flex overflow-hidden mt-8 ${isTablet ? 'mx-auto' : ''
+                }`}
             >
               <Button
                 sx={{
@@ -610,9 +628,9 @@ const Contact = () => {
                                   borderColor: '#3c5a1e',
                                 },
                                 '&.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                  {
-                                    borderColor: '#3c5a1e',
-                                  },
+                                {
+                                  borderColor: '#3c5a1e',
+                                },
                                 '.MuiSvgIcon-root': {
                                   color: 'white',
                                 },
@@ -692,8 +710,8 @@ const Contact = () => {
                             {formData.automationLevel <= 3
                               ? `Low Automation (${formData.automationLevel}/10)`
                               : formData.automationLevel <= 7
-                              ? `Moderate Automation (${formData.automationLevel}/10)`
-                              : `High Automation (${formData.automationLevel}/10)`}
+                                ? `Moderate Automation (${formData.automationLevel}/10)`
+                                : `High Automation (${formData.automationLevel}/10)`}
                           </Typography>
                         </Grid>
 
@@ -1096,7 +1114,7 @@ const Contact = () => {
               sx={{ width: '100%' }}
               onClose={() => setOpen(false)}
             >
-              {message}
+              {alertmessage}
             </Alert>
           </Snackbar>
         </Grid>

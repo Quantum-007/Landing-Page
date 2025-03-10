@@ -2,7 +2,8 @@ import './globals.css';
 
 import Header from '@/components/molecultes/Header';
 import Footer from '@/components/molecultes/Footer';
-import ApolloClientProvider from '@/components/ApolloClientProvider';
+import ApolloClientProvider from "@/components/ApolloClientProvider"
+import { QuantumStoreProvider } from '@/providers/QuantumStoreProvider';
 
 import type { Metadata } from 'next';
 
@@ -27,9 +28,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
         <ApolloClientProvider>
-          <Header />
-          <main className="pt-16">{children}</main>
-          <Footer />
+          <QuantumStoreProvider>
+            <Header />
+            <main className="pt-16">{children}</main>
+            <Footer />
+          </QuantumStoreProvider>
         </ApolloClientProvider>
       </body>
     </html>
