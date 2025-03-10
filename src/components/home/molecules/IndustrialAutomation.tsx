@@ -70,9 +70,9 @@ const IndustrialAutomation = () => {
                 </Button>
 
                 <Button
-                  variant="outlined"
                   size="large"
                   href="#products"
+                  variant="outlined"
                   sx={{
                     borderColor: '#3c5a1e',
                     color: 'white',

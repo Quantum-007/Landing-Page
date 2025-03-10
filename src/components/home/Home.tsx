@@ -9,7 +9,6 @@ import IndustrialAutomation from '../home/molecules/IndustrialAutomation';
 
 import { Box } from '@mui/material';
 
-// Dynamic imports with individual fallbacks
 const OurProducts = dynamic(() => import('../home/molecules/OurProducts'), {
   ssr: false,
   loading: HomeLoader,

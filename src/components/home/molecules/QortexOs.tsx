@@ -110,7 +110,7 @@ const QortexOS: React.FC = () => {
 
         <Grid container spacing={4} className="mt-16">
           {features.map(({ icon: Icon, title, description }, index) => (
-            <Grid key={index} item xs={12} sm={6} md={4}>
+            <Grid key={index} item xs={12} sm={6} md={3}>
               <Box className="flex items-start gap-4">
                 <Box className="text-2xl text-[#5a7d2f]">
                   <Icon fontSize="inherit" />

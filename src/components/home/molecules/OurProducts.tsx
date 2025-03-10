@@ -22,7 +22,7 @@ const productImages = [
 const OurProducts = () => {
   return (
     <Box
-      id="our-products"
+      id="products"
       className="py-20 overflow-hidden"
       sx={{ backgroundColor: '#1e1e1e' }}
     >
