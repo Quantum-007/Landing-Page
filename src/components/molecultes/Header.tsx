@@ -33,7 +33,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
-  const { setTab } = useQuantumStore((state) => state);
+  const { setTab, setMessage } = useQuantumStore((state) => state);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,6 +43,11 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleButtonClicked = () => {
+    setTab('comprehensive');
+    setMessage('');
+  };
 
   return (
     <AppBar
@@ -106,7 +111,7 @@ const Header = () => {
             <Button
               href="#contact"
               variant="contained"
-              onClick={() => setTab('comprehensive')}
+              onClick={handleButtonClicked}
               sx={{
                 bgcolor: '#3c5a1e',
                 fontWeight: 'bold',

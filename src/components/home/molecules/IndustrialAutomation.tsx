@@ -1,11 +1,17 @@
 import React from 'react';
 import Image from 'next/image';
-import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 
+import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 import { Box, Container, Grid, Typography, Button } from '@mui/material';
 
 const IndustrialAutomation = () => {
-  const { setTab } = useQuantumStore((state) => state);
+  const { setTab, setMessage } = useQuantumStore((state) => state);
+
+  const handleButtonClicked = () => {
+    setTab('comprehensive');
+    setMessage('');
+  };
+
   return (
     <Box
       id="hero"
@@ -59,7 +65,7 @@ const IndustrialAutomation = () => {
                 <Button
                   href="#contact"
                   variant="contained"
-                  onClick={() => setTab('comprehensive')}
+                  onClick={handleButtonClicked}
                   sx={{
                     bgcolor: '#3c5a1e',
                     fontWeight: 'bold',
