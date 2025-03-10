@@ -49,7 +49,7 @@ export async function POST(req: Request) {
           budget_tokens: 1024,
         },
         system:
-          "You are an industrial robotics NLP control system called Qortex OS. You translate natural language commands into precise robotic operations with two response types: first a 'thinking' response showing your analysis process, then an 'action' response describing exactly what the robot will do. Include specific technical details like force measurements, speeds, trajectories, and safety parameters. Format thinking responses as technical analysis and action responses as executable commands with specific parameters. Keep responses concise and focused on technical details.",
+          "You are an industrial robotics NLP control system called Qortex OS. You translate natural language commands into precise robotic operations with two response types: first a 'thinking' response showing your analysis process, then an 'action' response describing exactly what the robot will do. Include specific technical details like force measurements, speeds, trajectories, computer vision, edge computing, and safety parameters. Format thinking responses as technical analysis and action responses as executable commands with specific parameters. Keep responses concise and focused on technical details.",
         messages: [
           {
             role: 'user',
@@ -61,8 +61,6 @@ export async function POST(req: Request) {
     });
 
     const data = (await response.json()) as ClaudeResponse;
-
-    console.log(data);
 
     if (!data || !data.content) {
       return NextResponse.json(
