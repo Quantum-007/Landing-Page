@@ -11,9 +11,10 @@ import {
   Card,
   Grid,
   Button,
+  Checkbox,
+  CardMedia,
   Typography,
   CardContent,
-  CardMedia,
 } from '@mui/material';
 
 interface Industry {
@@ -41,7 +42,7 @@ const ProductCard = ({ industry }: { industry: Industry }) => {
           image={getPlaceholderImage(400, 200)}
         />
 
-        <CardContent className="p-8 flex-grow flex flex-col bg-[#2d2d2d]">
+        <CardContent className="p-8 flex-grow flex flex-col justify-between bg-[#2d2d2d]">
           <Box>
             <Typography
               variant="subtitle2"
@@ -68,6 +69,7 @@ const ProductCard = ({ industry }: { industry: Industry }) => {
               {industry.painPoints.map((point, idx) => (
                 <Box
                   key={idx}
+                  sx={{ fontSize: '0.7rem' }}
                   className="bg-[#3C5A1E33] px-2 py-1 rounded text-xs text-[#5a7d2f]"
                 >
                   {point}
@@ -76,34 +78,24 @@ const ProductCard = ({ industry }: { industry: Industry }) => {
             </Box>
           </Box>
 
-          <Button
-            onClick={() => setIsExpanded(!isExpanded)}
-            startIcon={isExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            sx={{
-              color: '#5a7d2f',
-              fontSize: '0.75rem',
-              justifyContent: 'start',
-            }}
-          >
-            {isExpanded ? 'Hide Details' : 'View More Details'}
-          </Button>
-
           {isExpanded && (
-            <Box className="mt-4 p-2 bg-[#3c5a1e1a] bg-opacity-10 rounded">
+            <Box className="my-4 p-2 bg-[#3c5a1e1a] bg-opacity-10 rounded-lg">
               <Grid container spacing={1}>
                 {industry.metrics.map(({ value, label }, index) => (
                   <Grid item xs={4} key={index}>
                     <Box className="text-center">
                       <Typography
                         variant="subtitle1"
+                        sx={{ fontSize: '0.9rem' }}
                         className="text-[#5a7d2f] font-bold"
                       >
                         {value}
                       </Typography>
+
                       <Typography
                         variant="caption"
-                        sx={{ fontSize: 10 }}
-                        className="text-[#b0b0b0]"
+                        sx={{ fontSize: '0.6rem' }}
+                        className="text-[#b0b0b0] text-xs"
                       >
                         {label}
                       </Typography>
@@ -113,6 +105,33 @@ const ProductCard = ({ industry }: { industry: Industry }) => {
               </Grid>
             </Box>
           )}
+
+          <Box className="flex flex-row justify-between items-center">
+            <Button
+              onClick={() => setIsExpanded(!isExpanded)}
+              startIcon={isExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              sx={{
+                color: '#5a7d2f',
+                fontSize: '0.75rem',
+                justifyContent: 'start',
+              }}
+            >
+              {isExpanded ? 'Hide Details' : 'View More Details'}
+            </Button>
+
+            <Checkbox
+              required
+              name="compare"
+              checked={false}
+              // onChange={handleFormChange}
+              sx={{
+                color: 'rgba(255, 255, 255, 0.7)',
+                '&.Mui-checked': {
+                  color: '#3c5a1e',
+                },
+              }}
+            />
+          </Box>
         </CardContent>
       </Card>
     </Grid>
