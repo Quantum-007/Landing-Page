@@ -31,17 +31,17 @@ const Footer = () => {
             <Typography
               variant="h6"
               fontWeight="600"
-              className="font-semibold text-[#f2f2f2]"
+              className="font-semibold text-[#f2f2f2] relative inline-block"
               sx={{
-                position: 'relative',
                 '&::after': {
                   content: '""',
                   position: 'absolute',
-                  left: 0,
+                  bottom: '-5px',
+                  left: '50%',
+                  width: '100%',
                   height: '3px',
-                  width: '180px',
-                  bottom: '-10px',
                   backgroundColor: '#3c5a1e',
+                  transform: 'translateX(-50%)',
                 },
               }}
             >
@@ -106,17 +106,17 @@ const Footer = () => {
             <Typography
               variant="h6"
               fontWeight="600"
-              className="font-semibold text-[#f2f2f2]"
+              className="font-semibold text-[#f2f2f2] relative inline-block"
               sx={{
-                position: 'relative',
                 '&::after': {
                   content: '""',
                   position: 'absolute',
-                  left: 0,
+                  bottom: '-5px',
+                  left: '50%',
+                  width: '100%',
                   height: '3px',
-                  width: '90px',
-                  bottom: '-10px',
                   backgroundColor: '#3c5a1e',
+                  transform: 'translateX(-50%)',
                 },
               }}
             >
@@ -152,17 +152,17 @@ const Footer = () => {
             <Typography
               variant="h6"
               fontWeight="600"
-              className="font-semibold text-[#f2f2f2]"
+              className="font-semibold text-[#f2f2f2] relative inline-block"
               sx={{
-                position: 'relative',
                 '&::after': {
                   content: '""',
                   position: 'absolute',
-                  left: 0,
+                  bottom: '-5px',
+                  left: '50%',
+                  width: '100%',
                   height: '3px',
-                  width: '95px',
-                  bottom: '-10px',
                   backgroundColor: '#3c5a1e',
+                  transform: 'translateX(-50%)',
                 },
               }}
             >
@@ -200,17 +200,17 @@ const Footer = () => {
             <Typography
               variant="h6"
               fontWeight="600"
-              className="font-semibold text-[#f2f2f2]"
+              className="font-semibold text-[#f2f2f2] relative inline-block"
               sx={{
-                position: 'relative',
                 '&::after': {
                   content: '""',
                   position: 'absolute',
-                  left: 0,
+                  bottom: '-5px',
+                  left: '50%',
+                  width: '100%',
                   height: '3px',
-                  width: '80px',
-                  bottom: '-10px',
                   backgroundColor: '#3c5a1e',
+                  transform: 'translateX(-50%)',
                 },
               }}
             >

@@ -2,7 +2,14 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 
 import { useMutation } from '@apollo/client';
 import { CheckCircle } from '@mui/icons-material';
-import { Snackbar, Alert, AlertColor, SelectChangeEvent } from '@mui/material';
+import {
+  Snackbar,
+  Alert,
+  AlertColor,
+  SelectChangeEvent,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import {
   CreateGeneralInqueryDocument,
   CreatePilotProgramInfoDocument,
@@ -48,6 +55,10 @@ interface FormData {
 }
 
 const Contact = () => {
+  const theme = useTheme();
+
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+
   const steps = [
     'Your Info',
     'Current Setup',
@@ -93,8 +104,6 @@ const Contact = () => {
   const [createPilotProgramInfoDocument] = useMutation(
     CreatePilotProgramInfoDocument,
   );
-
-  const isTablet = window.innerWidth < 1024;
 
   const handleFormChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { name, value, checked, type } = event.target;
@@ -316,19 +325,17 @@ const Contact = () => {
             <Typography
               variant="h4"
               fontWeight="600"
-              className={`text-3xl font-bold pb-1 relative ${
-                isTablet ? 'after:left-1/2 after:-translate-x-1/2' : ''
-              }`}
+              className="text-3xl font-bold pb-1 relative inline-block text-center"
               sx={{
-                position: 'relative',
                 '&::after': {
-                  left: 0,
-                  height: '3px',
                   content: '""',
-                  width: '290px',
-                  bottom: '-10px',
                   position: 'absolute',
+                  bottom: '-5px',
+                  left: '50%',
+                  width: '100%',
+                  height: '4px',
                   backgroundColor: '#3c5a1e',
+                  transform: 'translateX(-50%)',
                 },
               }}
             >
@@ -391,7 +398,6 @@ const Contact = () => {
             <Card className="shadow-lg">
               <CardContent className="p-6 bg-[#2d2d2d]">
                 {contactFormType === 'quick' ? (
-                  // General Inquiries Form
                   <form onSubmit={handleFormSubmit}>
                     <Grid container spacing={3}>
                       <Grid item xs={12}>

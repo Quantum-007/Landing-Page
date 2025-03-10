@@ -133,18 +133,17 @@ const TeamSection = () => {
         <Typography
           variant="h4"
           fontWeight="600"
-          className="text-3xl text-start font-bold pb-2 relative"
+          className="text-3xl text-start font-bold pb-1 relative inline-block"
           sx={{
-            position: 'relative',
             '&::after': {
-              content: '""',
-              position: 'absolute',
-              bottom: '-10px',
-              left: '4%',
-              transform: 'translateX(-50%)',
-              width: '80px',
+              left: '50%',
+              width: '100%',
               height: '4px',
+              content: '""',
+              bottom: '-5px',
+              position: 'absolute',
               backgroundColor: '#3c5a1e',
+              transform: 'translateX(-50%)',
             },
           }}
         >

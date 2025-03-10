@@ -32,15 +32,14 @@ const CoreAdvantages = () => {
         <Typography
           variant="h4"
           fontWeight="600"
+          className="relative inline-block pb-1"
           sx={{
-            pb: 1,
-            position: 'relative',
             '&::after': {
-              left: '12%',
-              height: '4px',
+              left: '50%',
               content: '""',
-              width: '280px',
-              bottom: '-10px',
+              width: '100%',
+              height: '4px',
+              bottom: '-5px',
               position: 'absolute',
               backgroundColor: '#3c5a1e',
               transform: 'translateX(-50%)',

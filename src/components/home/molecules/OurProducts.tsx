@@ -30,16 +30,15 @@ const OurProducts = () => {
         <Typography
           variant="h4"
           fontWeight="600"
-          className="text-3xl text-start font-bold pb-1 text-white relative"
+          className="text-3xl text-start font-bold pb-1 text-white relative inline-block"
           sx={{
-            position: 'relative',
             '&::after': {
-              left: '10%',
               content: '""',
-              height: '4px',
-              width: '220px',
-              bottom: '-10px',
               position: 'absolute',
+              left: '50%',
+              bottom: '-5px',
+              width: '100%',
+              height: '4px',
               backgroundColor: '#3c5a1e',
               transform: 'translateX(-50%)',
             },

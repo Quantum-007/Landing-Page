@@ -28,17 +28,14 @@ const VisionAndMission = () => {
                 <Typography
                   variant="h4"
                   fontWeight="600"
-                  className={`text-3xl font-bold pb-1 relative ${
-                    isTablet ? 'after:left-1/2 after:-translate-x-1/2' : ''
-                  }`}
+                  className="relative inline-block text-3xl font-bold pb-1"
                   sx={{
-                    position: 'relative',
                     '&::after': {
                       left: 0,
-                      height: '3px',
                       content: '""',
-                      width: '180px',
-                      bottom: '-10px',
+                      width: '100%',
+                      height: '3px',
+                      bottom: '-5px',
                       position: 'absolute',
                       backgroundColor: '#3c5a1e',
                     },
@@ -98,17 +95,14 @@ const VisionAndMission = () => {
                 <Typography
                   variant="h4"
                   fontWeight="600"
-                  className={`text-3xl font-bold pb-1 relative ${
-                    isTablet ? 'after:left-1/2 after:-translate-x-1/2' : ''
-                  }`}
+                  className="relative inline-block text-3xl font-bold pb-1"
                   sx={{
-                    position: 'relative',
                     '&::after': {
                       left: 0,
-                      width: '200px',
-                      height: '3px',
+                      width: '100%',
                       content: '""',
-                      bottom: '-10px',
+                      height: '3px',
+                      bottom: '-5px',
                       position: 'absolute',
                       backgroundColor: '#3c5a1e',
                     },

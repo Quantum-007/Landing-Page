@@ -332,19 +332,19 @@ const UseCases: React.FC = () => {
         <Typography
           variant="h4"
           fontWeight="600"
-          className={`text-3xl font-bold mb-4 relative ${
+          className={`text-3xl font-bold pb-1 relative inline-block ${
             isTablet ? 'text-center after:left-1/2 after:-translate-x-1/2' : ''
           }`}
           sx={{
-            position: 'relative',
             '&::after': {
               content: '""',
               position: 'absolute',
-              bottom: '-10px',
-              left: 0,
-              width: '370px',
+              bottom: '-5px',
+              left: '50%',
+              width: '100%',
               height: '4px',
               backgroundColor: '#3c5a1e',
+              transform: 'translateX(-50%)',
             },
           }}
         >
