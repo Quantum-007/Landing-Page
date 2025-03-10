@@ -482,7 +482,7 @@ const Contact = () => {
                           label={
                             <Typography
                               variant="body2"
-                              className="text-gray-400 pt-4"
+                              className="text-[#b0b0b0]"
                             >
                               I consent to Quantum Robotics processing my data
                               and contacting me about their products and
@@ -1031,7 +1031,7 @@ const Contact = () => {
                               />
                             }
                             label={
-                              <Typography sx={{ color: 'white' }}>
+                              <Typography className="text-[#b0b0b0]">
                                 I consent to Quantum Robotics processing my data
                                 and contacting me about their products and
                                 services.
@@ -1039,6 +1039,7 @@ const Contact = () => {
                             }
                           />
                         </Grid>
+
                         <Grid
                           item
                           xs={12}
@@ -1059,6 +1060,7 @@ const Contact = () => {
                           >
                             Previous
                           </Button>
+
                           <Button
                             variant="contained"
                             type="submit"
@@ -1083,6 +1085,7 @@ const Contact = () => {
               </CardContent>
             </Card>
           </Grid>
+
           <Snackbar
             open={open}
             autoHideDuration={6000}
