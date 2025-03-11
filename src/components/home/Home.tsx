@@ -9,10 +9,10 @@ import IndustrialAutomation from '../home/molecules/IndustrialAutomation';
 
 import { Box } from '@mui/material';
 
-const OurProducts = dynamic(() => import('../home/molecules/OurProducts'), {
-  ssr: false,
-  loading: HomeLoader,
-});
+// const OurProducts = dynamic(() => import('../home/molecules/OurProducts'), {
+//   ssr: false,
+//   loading: HomeLoader,
+// });
 
 const QortexOS = dynamic(() => import('../home/molecules/QortexOs'), {
   ssr: false,
@@ -49,7 +49,7 @@ const Home = () => {
       <VisionAndMission />
       <CoreAdvantages />
 
-      <OurProducts />
+      {/* <OurProducts /> */}
       <QortexOS />
       <UseCases />
       <LatestInsights />
