@@ -145,7 +145,7 @@ try {
 
           {/* Qortex OS side - right side (includes both title and code) */}
           <Box
-            className="absolute top-0 right-0 bottom-0 bg-[#3c5a1e33] overflow-hidden transition-all"
+            className="absolute top-0 right-0 bottom-0 bg-[#30362A] overflow-hidden transition-all"
             sx={{
               width: '100%',
               clipPath: `inset(0 0 0 ${sliderPosition}%)`,
@@ -153,7 +153,7 @@ try {
             }}
           >
             {/* Title area for Qortex side */}
-            <Box className="h-20 bg-[#252f24] flex items-center justify-center text-[#f2f2f2] text-xl font-bold">
+            <Box className="h-20 bg-[#2d2d2d] flex items-center justify-center text-[#f2f2f2] text-xl font-bold">
               Qortex OS
             </Box>
 
@@ -163,7 +163,7 @@ try {
                 <Box
                   component="pre"
                   sx={{ fontFamily: 'monospace' }}
-                  className="text-left text-sm text-green-200 overflow-auto pb-20"
+                  className="text-left text-sm text-[#F2F2F2] overflow-auto pb-20"
                 >
                   {`// Qortex OS - Natural language robotics control
 qortex.command("Pick up the item from bin A and place it in box B");
