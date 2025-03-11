@@ -179,14 +179,22 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({ products }) => {
           </TableRow>
 
           <TableRow>
-            <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Best For</TableCell>
+            <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>
+              Best For
+            </TableCell>
             {products.map((product) => (
-              <TableCell key={product.id} sx={{ color: 'white', textAlign: 'center' }}>
+              <TableCell
+                key={product.id}
+                sx={{ color: 'white', textAlign: 'center' }}
+              >
                 {product.bestFor.join(', ') || '-'}
               </TableCell>
             ))}
             {Array.from({ length: emptyColumns }).map((_, index) => (
-              <TableCell key={`empty-bestfor-${index}`} sx={{ color: 'white', textAlign: 'center' }}>
+              <TableCell
+                key={`empty-bestfor-${index}`}
+                sx={{ color: 'white', textAlign: 'center' }}
+              >
                 -
               </TableCell>
             ))}

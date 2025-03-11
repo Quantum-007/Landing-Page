@@ -51,8 +51,11 @@ const INDUSTRY_DATA = [
       { value: '120°/s', label: 'Speed' },
     ],
     painPoints: ['Force Sensing', 'Multi-Tool Support', 'Adaptive Learning'],
-    bestFor: ['Human - Robot Collaboration', 'Medical Devices', 'Food Production'],
-
+    bestFor: [
+      'Human - Robot Collaboration',
+      'Medical Devices',
+      'Food Production',
+    ],
   },
   {
     id: 'quantum-delta',
