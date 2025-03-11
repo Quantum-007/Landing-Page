@@ -117,6 +117,7 @@ const Contact = () => {
     });
   };
 
+  // console.log('asdasasda);
   const handleSelectChange = (event: SelectChangeEvent<string>): void => {
     setFormData((prevData) => ({
       ...prevData,
@@ -361,8 +362,9 @@ const Contact = () => {
             </Typography>
 
             <Box
-              className={`rounded-md inline-flex overflow-hidden mt-8 ${isTablet ? 'mx-auto' : ''
-                }`}
+              className={`rounded-md inline-flex overflow-hidden mt-8 ${
+                isTablet ? 'mx-auto' : ''
+              }`}
             >
               <Button
                 sx={{
@@ -605,9 +607,9 @@ const Contact = () => {
                                   borderColor: '#3c5a1e',
                                 },
                                 '&.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                {
-                                  borderColor: '#3c5a1e',
-                                },
+                                  {
+                                    borderColor: '#3c5a1e',
+                                  },
                                 '.MuiSvgIcon-root': {
                                   color: 'white',
                                 },
@@ -687,8 +689,8 @@ const Contact = () => {
                             {formData.automationLevel <= 3
                               ? `Low Automation (${formData.automationLevel}/10)`
                               : formData.automationLevel <= 7
-                                ? `Moderate Automation (${formData.automationLevel}/10)`
-                                : `High Automation (${formData.automationLevel}/10)`}
+                              ? `Moderate Automation (${formData.automationLevel}/10)`
+                              : `High Automation (${formData.automationLevel}/10)`}
                           </Typography>
                         </Grid>
 
