@@ -1,12 +1,12 @@
 import {
   Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Paper,
+  TableRow,
+  TableBody,
+  TableHead,
+  TableCell,
   Typography,
+  TableContainer,
 } from '@mui/material';
 
 interface Metric {
@@ -97,48 +97,81 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({ products }) => {
         <TableBody>
           {/* Category */}
           <TableRow sx={{ borderBottom: '1px solid #444' }}>
-            <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Category</TableCell>
+            <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>
+              Category
+            </TableCell>
             {products.map((product) => (
-              <TableCell key={product.id} sx={{ color: 'white', textAlign: 'center' }}>
+              <TableCell
+                key={product.id}
+                sx={{ color: 'white', textAlign: 'center' }}
+              >
                 {product.robotType}
               </TableCell>
             ))}
             {Array.from({ length: emptyColumns }).map((_, index) => (
-              <TableCell key={`empty-cat-${index}`} sx={{ color: 'white', textAlign: 'center' }}>
+              <TableCell
+                key={`empty-cat-${index}`}
+                sx={{ color: 'white', textAlign: 'center' }}
+              >
                 -
               </TableCell>
             ))}
           </TableRow>
 
           {/* Metrics (Payload, Reach, Precision, Speed) */}
-          {['Payload', 'Reach/Range', 'Precision', 'Speed'].map((metricLabel) => (
-            <TableRow key={metricLabel} sx={{ borderBottom: '1px solid #444' }}>
-              <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>{metricLabel}</TableCell>
-              {products.map((product) => {
-                const metric = product.metrics.find((m) => m.label === metricLabel);
-                return (
-                  <TableCell key={product.id} sx={{ color: 'white', textAlign: 'center' }}>
-                    {metric ? metric.value : '-'}
-                  </TableCell>
-                );
-              })}
-              {Array.from({ length: emptyColumns }).map((_, index) => (
-                <TableCell key={`empty-metric-${index}`} sx={{ color: 'white', textAlign: 'center' }}>
-                  -
+          {['Payload', 'Reach/Range', 'Precision', 'Speed'].map(
+            (metricLabel) => (
+              <TableRow
+                key={metricLabel}
+                sx={{ borderBottom: '1px solid #444' }}
+              >
+                <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>
+                  {metricLabel}
                 </TableCell>
-              ))}
-            </TableRow>
-          ))}
+                {products.map((product) => {
+                  const metric = product.metrics.find(
+                    (m) => m.label === metricLabel,
+                  );
+                  return (
+                    <TableCell
+                      key={product.id}
+                      sx={{ color: 'white', textAlign: 'center' }}
+                    >
+                      {metric ? metric.value : '-'}
+                    </TableCell>
+                  );
+                })}
+                {Array.from({ length: emptyColumns }).map((_, index) => (
+                  <TableCell
+                    key={`empty-metric-${index}`}
+                    sx={{ color: 'white', textAlign: 'center' }}
+                  >
+                    -
+                  </TableCell>
+                ))}
+              </TableRow>
+            ),
+          )}
 
           <TableRow sx={{ borderBottom: '1px solid #444' }}>
-            <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Key Features</TableCell>
+            <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>
+              Key Features
+            </TableCell>
             {products.map((product) => (
-              <TableCell key={product.id} sx={{ color: 'white', textAlign: 'center' }}>
-                {product.painPoints.length > 0 ? product.painPoints.join(', ') : '-'}
+              <TableCell
+                key={product.id}
+                sx={{ color: 'white', textAlign: 'center' }}
+              >
+                {product.painPoints.length > 0
+                  ? product.painPoints.join(', ')
+                  : '-'}
               </TableCell>
             ))}
             {Array.from({ length: emptyColumns }).map((_, index) => (
-              <TableCell key={`empty-features-${index}`} sx={{ color: 'white', textAlign: 'center' }}>
+              <TableCell
+                key={`empty-features-${index}`}
+                sx={{ color: 'white', textAlign: 'center' }}
+              >
                 -
               </TableCell>
             ))}

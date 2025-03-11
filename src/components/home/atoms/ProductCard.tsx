@@ -33,7 +33,11 @@ interface ProductCardProps {
   selectedProducts: string[];
 }
 
-const ProductCard = ({ industry, setSelectedProducts, selectedProducts }: ProductCardProps) => {
+const ProductCard = ({
+  industry,
+  setSelectedProducts,
+  selectedProducts,
+}: ProductCardProps) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,13 +69,22 @@ const ProductCard = ({ industry, setSelectedProducts, selectedProducts }: Produc
 
         <CardContent className="p-8 flex-grow flex flex-col justify-between bg-[#2d2d2d]">
           <Box>
-            <Typography variant="subtitle2" className="flex items-center pb-3 font-semibold text-[#5a7d2f]">
+            <Typography
+              variant="subtitle2"
+              className="flex items-center pb-3 font-semibold text-[#5a7d2f]"
+            >
               {industry.robotType}
             </Typography>
-            <Typography variant="h5" className="flex items-center pb-3 font-bold text-[#f2f2f2]">
+            <Typography
+              variant="h5"
+              className="flex items-center pb-3 font-bold text-[#f2f2f2]"
+            >
               {industry.title}
             </Typography>
-            <Typography variant="subtitle2" className="flex items-center pb-3 font-semibold text-[#b0b0b0]">
+            <Typography
+              variant="subtitle2"
+              className="flex items-center pb-3 font-semibold text-[#b0b0b0]"
+            >
               {industry.description}
             </Typography>
 

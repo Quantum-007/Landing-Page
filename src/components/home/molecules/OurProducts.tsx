@@ -9,10 +9,10 @@ import Image from 'next/image';
 import ProductCard from '../atoms/ProductCard';
 import ComparisonTable from '../atoms/ComparisionTable';
 
+import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Box, Grid, Container, Typography } from '@mui/material';
 import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
-import { useState } from 'react';
 
 const productImages = [
   '/assets/home/our_products/Slide-1.svg',
@@ -120,9 +120,8 @@ const INDUSTRY_DATA = [
 const OurProducts = () => {
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
 
-
   const filteredProducts = INDUSTRY_DATA.filter((product) =>
-    selectedProducts.includes(product.id)
+    selectedProducts.includes(product.id),
   );
   return (
     <Box
@@ -230,7 +229,9 @@ const OurProducts = () => {
             />
           ))}
         </Grid>
-        {selectedProducts.length > 0 && <ComparisonTable products={filteredProducts} />}
+        {selectedProducts.length > 0 && (
+          <ComparisonTable products={filteredProducts} />
+        )}
       </Container>
     </Box>
   );
