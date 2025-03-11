@@ -14,5 +14,26 @@ model GeneralInquiry {
   company   String?
   message   String
   consent   Boolean
+  updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
+}
+
+model PilotProgram {
+  id                     Int      @id @default(autoincrement())
+  name                   String
+  email                  String   @unique
+  company                String
+  consent                Boolean
+  industry               String
+  challenges             String[]
+  roiTimeframe           Int
+  operationSize          String
+  currentSystems         String
+  additionalNotes        String
+  automationLevel        Int
+  roboticSolutions       String[]
+  specificChallenges     String
+  implementationTimeline String
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
 }

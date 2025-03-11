@@ -1,4 +1,4 @@
-export interface PiloProgramFormData {
+export interface PilotProgramFormData {
   name: string;
   email: string;
   company: string;

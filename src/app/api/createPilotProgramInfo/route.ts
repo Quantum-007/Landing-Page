@@ -1,15 +1,37 @@
 import { NextResponse } from 'next/server';
-import { PiloProgramFormData } from '@/types/forms/form';
+import { PrismaClient } from '@prisma/client';
+import { PilotProgramFormData } from '@/types/forms/form';
+
+const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
   try {
-    const formData: PiloProgramFormData = await req.json();
+    const formData: PilotProgramFormData = await req.json();
 
-    console.log('Received form data for Pilot Program:', formData);
+    const newPilotProgram = await prisma.pilotProgram.create({
+      data: {
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        consent: formData.consent,
+        industry: formData.industry,
+        challenges: formData.challenges,
+        roiTimeframe: formData.roiTimeframe,
+        operationSize: formData.operationSize,
+        currentSystems: formData.currentSystems,
+        additionalNotes: formData.additionalNotes,
+        automationLevel: formData.automationLevel,
+        roboticSolutions: formData.roboticSolutions,
+        specificChallenges: formData.specificChallanges,
+        implementationTimeline: formData.implementationTimeline,
+      },
+    });
+
+    console.log('Pilot Program record created:', newPilotProgram);
 
     return NextResponse.json({
-      message: 'Form data received successfully',
-      data: formData,
+      message: 'Form data received and record created successfully',
+      data: newPilotProgram,
     });
   } catch (error: unknown) {
     if (error instanceof Error) {

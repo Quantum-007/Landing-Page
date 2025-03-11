@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 
 import { CheckCircle } from '@mui/icons-material';
-import { PiloProgramFormData } from '@/types/forms/form';
+import { PilotProgramFormData } from '@/types/forms/form';
 import {
   Snackbar,
   Alert,
@@ -62,7 +62,7 @@ const Contact = () => {
   const [severity, setSeverity] = useState<AlertColor>('success');
   const [contactFormType, setContactFormType] = useState('comprehensive');
   const [alertmessage, setAlertMessage] = useState<string>('');
-  const [formData, setFormData] = useState<PiloProgramFormData>({
+  const [formData, setFormData] = useState<PilotProgramFormData>({
     name: '',
     email: '',
     company: '',
@@ -241,6 +241,8 @@ const Contact = () => {
         body: JSON.stringify({ formData }),
       });
 
+      console.log('Jion Polit program RESPONSE', res);
+
       if (res.ok) {
         resetFormData();
       } else {
@@ -359,9 +361,8 @@ const Contact = () => {
             </Typography>
 
             <Box
-              className={`rounded-md inline-flex overflow-hidden mt-8 ${
-                isTablet ? 'mx-auto' : ''
-              }`}
+              className={`rounded-md inline-flex overflow-hidden mt-8 ${isTablet ? 'mx-auto' : ''
+                }`}
             >
               <Button
                 sx={{
@@ -604,9 +605,9 @@ const Contact = () => {
                                   borderColor: '#3c5a1e',
                                 },
                                 '&.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                  {
-                                    borderColor: '#3c5a1e',
-                                  },
+                                {
+                                  borderColor: '#3c5a1e',
+                                },
                                 '.MuiSvgIcon-root': {
                                   color: 'white',
                                 },
@@ -686,8 +687,8 @@ const Contact = () => {
                             {formData.automationLevel <= 3
                               ? `Low Automation (${formData.automationLevel}/10)`
                               : formData.automationLevel <= 7
-                              ? `Moderate Automation (${formData.automationLevel}/10)`
-                              : `High Automation (${formData.automationLevel}/10)`}
+                                ? `Moderate Automation (${formData.automationLevel}/10)`
+                                : `High Automation (${formData.automationLevel}/10)`}
                           </Typography>
                         </Grid>
 
