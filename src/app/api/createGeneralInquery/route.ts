@@ -30,7 +30,10 @@ export async function POST(req: Request) {
       );
     } else {
       return NextResponse.json(
-        { error: 'Something went wrong, but no specific error message is available.' },
+        {
+          error:
+            'Something went wrong, but no specific error message is available.',
+        },
         { status: 500 },
       );
     }
