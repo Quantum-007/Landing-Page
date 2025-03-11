@@ -112,12 +112,18 @@ const QortexDemo = () => {
         <Box className="flex gap-4">
           <TextField
             fullWidth
-            variant="outlined"
             size="small"
-            placeholder="Try a command, e.g. 'Pick up items from bin A and place in storage area B'"
             value={command}
-            onChange={(e) => setCommand(e.target.value)}
+            variant="outlined"
             disabled={isProcessing}
+            placeholder="Try a command, e.g. 'Pick up items from bin A and place in storage area B'"
+            onChange={(e) => setCommand(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                handleCommandSubmit();
+              }
+            }}
             InputProps={{
               className: 'bg-[#1e1e1e] text-white rounded-md',
               sx: {
@@ -133,8 +139,8 @@ const QortexDemo = () => {
 
           <Button
             variant="contained"
-            onClick={handleCommandSubmit}
             disabled={isProcessing}
+            onClick={handleCommandSubmit}
             sx={{
               bgcolor: '#3c5a1e',
               fontWeight: 'bold',
