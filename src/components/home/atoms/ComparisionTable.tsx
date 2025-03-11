@@ -20,6 +20,7 @@ interface Product {
   robotType: string;
   metrics: Metric[];
   painPoints: string[];
+  bestFor: string[];
 }
 
 interface ComparisonTableProps {
@@ -177,11 +178,11 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({ products }) => {
             ))}
           </TableRow>
 
-          {/* <TableRow>
+          <TableRow>
             <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Best For</TableCell>
             {products.map((product) => (
               <TableCell key={product.id} sx={{ color: 'white', textAlign: 'center' }}>
-                {product.bestFor || '-'}
+                {product.bestFor.join(', ') || '-'}
               </TableCell>
             ))}
             {Array.from({ length: emptyColumns }).map((_, index) => (
@@ -189,7 +190,7 @@ const ComparisonTable: React.FC<ComparisonTableProps> = ({ products }) => {
                 -
               </TableCell>
             ))}
-          </TableRow> */}
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>

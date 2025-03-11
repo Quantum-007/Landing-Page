@@ -31,11 +31,12 @@ const INDUSTRY_DATA = [
       'Versatile 6-axis articulated robot for complex manufacturing, welding, and material handling tasks.',
     metrics: [
       { value: '210kg', label: 'Payload' },
-      { value: '2.8m', label: 'Reach' },
+      { value: '2.8m', label: 'Reach/Range' },
       { value: '±0.08mm', label: 'Precision' },
       { value: '180°/s', label: 'Speed' },
     ],
     painPoints: ['Flexible Mounting', 'Heavy Payload', 'Path Planning'],
+    bestFor: ['Heavy manufacturing', 'Welding', 'Assembly'],
   },
   {
     id: 'quantum-co',
@@ -45,11 +46,13 @@ const INDUSTRY_DATA = [
       'Advanced collaborative robot designed to work alongside human operators in mixed manufacturing environments.',
     metrics: [
       { value: '35kg', label: 'Payload' },
-      { value: '1.7m', label: 'Reach' },
+      { value: '1.7m', label: 'Reach/Range' },
       { value: '±0.03mm', label: 'Precision' },
       { value: '120°/s', label: 'Speed' },
     ],
     painPoints: ['Force Sensing', 'Multi-Tool Support', 'Adaptive Learning'],
+    bestFor: ['Human - Robot Collaboration', 'Medical Devices', 'Food Production'],
+
   },
   {
     id: 'quantum-delta',
@@ -59,11 +62,12 @@ const INDUSTRY_DATA = [
       'High-speed picking and placing robot optimized for food, pharmaceutical, and small component assembly.',
     metrics: [
       { value: '8kg', label: 'Payload' },
-      { value: '1.2m', label: 'Workspace' },
+      { value: '1.2m', label: 'Reach/Range' },
       { value: '±0.02mm', label: 'Precision' },
-      { value: '200/min', label: 'Cycle Rate' },
+      { value: '200 picks/min', label: 'Speed' },
     ],
     painPoints: ['High-Speed', 'Precision Control', 'Washdown Ready'],
+    bestFor: ['Picking', 'Packaging', 'Sorting applications'],
   },
   {
     id: 'quantum-swift',
@@ -73,11 +77,12 @@ const INDUSTRY_DATA = [
       'Selective Compliance Articulated Robot Arm designed for precise assembly and handling operations.',
     metrics: [
       { value: '20kg', label: 'Payload' },
-      { value: '850mm', label: 'Reach' },
+      { value: '850mm', label: 'Reach/Range' },
       { value: '±0.01mm', label: 'Precision' },
       { value: '7m/s', label: 'Speed' },
     ],
     painPoints: ['Compact Design', 'High Throughput', 'IoT Enabled'],
+    bestFor: ['Electronics Assembly', 'Testing', 'Small Component Handling'],
   },
   {
     id: 'quantum-mover',
@@ -88,14 +93,15 @@ const INDUSTRY_DATA = [
     metrics: [
       { value: '1500kg', label: 'Payload' },
       { value: '2.0m/s', label: 'Speed' },
-      { value: '±10mm', label: 'Navigation' },
-      { value: '10hrs', label: 'Runtime' },
+      { value: '±10mm', label: 'Precision' },
+      { value: 'Site-wide', label: 'Reach/Range' },
     ],
     painPoints: [
       'Dynamic Navigation',
       'Fleet Management',
       'Obstacle Avoidance',
     ],
+    bestFor: ['Material transport', 'warehouse logistics'],
   },
   {
     id: 'quantum-aero',
@@ -105,15 +111,16 @@ const INDUSTRY_DATA = [
       'Autonomous aerial system for inventory management, inspection, and light cargo transport.',
     metrics: [
       { value: '5kg', label: 'Payload' },
-      { value: '45min', label: 'Flight Time' },
-      { value: '10km', label: 'Range' },
-      { value: '±5cm', label: 'Positioning' },
+      { value: '15m/sec', label: 'Speed' },
+      { value: '10km', label: 'Reach/Range' },
+      { value: '±5cm', label: 'Precision' },
     ],
     painPoints: [
       'Indoor Navigation',
       'Computer Vision',
       'Extended Flight Time',
     ],
+    bestFor: ['Inventory scanning', 'inspection', 'Monitorin'],
   },
 ];
 
