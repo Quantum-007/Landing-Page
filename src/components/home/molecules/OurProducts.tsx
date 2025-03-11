@@ -7,10 +7,12 @@ import 'swiper/css/effect-coverflow';
 
 import Image from 'next/image';
 import ProductCard from '../atoms/ProductCard';
+import ComparisonTable from '../atoms/ComparisionTable';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Box, Grid, Container, Typography } from '@mui/material';
 import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
+import { useState } from 'react';
 
 const productImages = [
   '/assets/home/our_products/Slide-1.svg',
@@ -116,6 +118,12 @@ const INDUSTRY_DATA = [
 ];
 
 const OurProducts = () => {
+  const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
+
+
+  const filteredProducts = INDUSTRY_DATA.filter((product) =>
+    selectedProducts.includes(product.id)
+  );
   return (
     <Box
       id="products"
@@ -214,9 +222,15 @@ const OurProducts = () => {
 
         <Grid container spacing={4} paddingTop={4}>
           {INDUSTRY_DATA.map((industry) => (
-            <ProductCard key={industry.id} industry={industry} />
+            <ProductCard
+              key={industry.id}
+              industry={industry}
+              setSelectedProducts={setSelectedProducts}
+              selectedProducts={selectedProducts}
+            />
           ))}
         </Grid>
+        {selectedProducts.length > 0 && <ComparisonTable products={filteredProducts} />}
       </Container>
     </Box>
   );
