@@ -1,0 +1,24 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:oiwxjbFq3BJ3W6xUzPeT@database-quantumfirstiteration.c1yu6e08kzcw.us-west-1.rds.amazonaws.com:5432/postgres?schema=public"
+}
+
+model GeneralInquiry {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  company   String?
+  message   String
+  consent   Boolean
+  createdAt DateTime @default(now())
+}

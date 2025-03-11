@@ -208,11 +208,13 @@ const Contact = () => {
         body: JSON.stringify(formDataToSend),
       });
 
+      console.log('PRISMA RESPONSE==:', res)
+
       if (res.ok) {
         resetFormData();
       } else {
         setLoading(false);
-        setAlertMessage('There was an error submitting your inquiry.');
+        setAlertMessage('There was an error submitting your inquiry');
         setSeverity('error');
         setOpen(true);
       }
@@ -357,9 +359,8 @@ const Contact = () => {
             </Typography>
 
             <Box
-              className={`rounded-md inline-flex overflow-hidden mt-8 ${
-                isTablet ? 'mx-auto' : ''
-              }`}
+              className={`rounded-md inline-flex overflow-hidden mt-8 ${isTablet ? 'mx-auto' : ''
+                }`}
             >
               <Button
                 sx={{
@@ -602,9 +603,9 @@ const Contact = () => {
                                   borderColor: '#3c5a1e',
                                 },
                                 '&.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                  {
-                                    borderColor: '#3c5a1e',
-                                  },
+                                {
+                                  borderColor: '#3c5a1e',
+                                },
                                 '.MuiSvgIcon-root': {
                                   color: 'white',
                                 },
@@ -684,8 +685,8 @@ const Contact = () => {
                             {formData.automationLevel <= 3
                               ? `Low Automation (${formData.automationLevel}/10)`
                               : formData.automationLevel <= 7
-                              ? `Moderate Automation (${formData.automationLevel}/10)`
-                              : `High Automation (${formData.automationLevel}/10)`}
+                                ? `Moderate Automation (${formData.automationLevel}/10)`
+                                : `High Automation (${formData.automationLevel}/10)`}
                           </Typography>
                         </Grid>
 
