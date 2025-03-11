@@ -12,9 +12,9 @@ export async function POST(req: Request) {
       data: {
         name: formData.name,
         email: formData.email,
-        company: formData.company || '',
         message: formData.message,
         consent: formData.consent,
+        company: formData.company || '',
       },
     });
 
