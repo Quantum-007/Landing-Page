@@ -1,6 +1,0 @@
-mutation createPilotProgramInfo($input: CreatePilotProgramInfoInput!) {
-  createPilotProgramInfo(input: $input) {
-    success
-    errors
-  }
-}
