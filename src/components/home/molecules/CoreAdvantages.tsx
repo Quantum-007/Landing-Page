@@ -1,29 +1,5 @@
+import { ADVANTAGES_DATA } from '@/utils/home/core_advantages/data';
 import { Box, Container, Card, CardContent, Typography } from '@mui/material';
-import {
-  Shield as ShieldIcon,
-  TrendingUp as TrendingUpIcon,
-} from '@mui/icons-material';
-
-const advantages = [
-  {
-    title: 'Reliability & Quality',
-    description:
-      'Our robotics systems achieve 99.8% operational reliability through redundant systems, predictive maintenance algorithms, and industrial-grade components designed for continuous operation in demanding environments.',
-    icon: <ShieldIcon fontSize="large" />,
-  },
-  {
-    title: 'Cost Savings',
-    description:
-      'Customers typically experience a 35% reduction in operational costs through improved efficiency, reduced waste, lower energy consumption, and optimized resource utilization across their manufacturing and logistics processes.',
-    icon: <TrendingUpIcon fontSize="large" />,
-  },
-  {
-    title: 'Precision & Consistency',
-    description:
-      'Our systems deliver sub-millimeter precision with consistency that human operations cannot match, reducing defects and enabling complex manufacturing processes that were previously impossible.',
-    icon: <TrendingUpIcon fontSize="large" />,
-  },
-];
 
 const CoreAdvantages = () => {
   return (
@@ -66,7 +42,7 @@ const CoreAdvantages = () => {
             justifyContent: 'flex-start',
           }}
         >
-          {advantages.map(({ title, description, icon }, index) => (
+          {ADVANTAGES_DATA.map(({ title, description, icon }, index) => (
             <Card
               key={index}
               className="transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl"

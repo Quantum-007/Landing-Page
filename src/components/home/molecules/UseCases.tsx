@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { getPlaceholderImage } from '@/utils/placeHolderImage';
 import {
+  INDUSTRY_DATA,
+  INDUSTRY_CATEGORIES,
+} from '@/utils/home/use_cases/data';
+import {
   Box,
   Card,
   Grid,
@@ -15,180 +19,9 @@ import {
 } from '@mui/material';
 import {
   Info as InfoIcon,
-  Restaurant as FoodIcon,
-  Memory as MicrochipIcon,
-  DirectionsCar as CarIcon,
-  ElectricBolt as EnergyIcon,
   ExpandMore as ExpandMoreIcon,
   ExpandLess as ExpandLessIcon,
-  LocalPharmacy as PharmacyIcon,
-  LocalShipping as LogisticsIcon,
-  Agriculture as AgricultureIcon,
-  Construction as ConstructionIcon,
 } from '@mui/icons-material';
-
-const INDUSTRY_CATEGORIES = {
-  MAIN: [
-    { key: 'all', label: 'All Industries' },
-    { key: 'pharmaceutical', label: 'Pharmaceutical' },
-    { key: 'logistics', label: 'Logistics' },
-    { key: 'semiconductor', label: 'Semiconductor' },
-    { key: 'automotive', label: 'Automotive' },
-  ],
-  SECONDARY: [
-    { key: 'food', label: 'Food & Beverage/Commercial Kitchens' },
-    { key: 'energy', label: 'Energy & Utilities' },
-    { key: 'construction', label: 'Construction' },
-    { key: 'agriculture', label: 'Agriculture' },
-  ],
-};
-
-const INDUSTRY_DATA = [
-  {
-    id: 'pharma',
-    key: 'pharmaceutical',
-    title: 'Pharmaceutical Manufacturing',
-    icon: <PharmacyIcon sx={{ color: '#5a7d2f' }} />,
-    painPoints: [
-      'Contamination Risk',
-      'Regulatory Compliance',
-      'Batch Consistency',
-      'Labor Shortages',
-    ],
-    metrics: [
-      { value: '99.9%', label: 'Defect Detection' },
-      { value: '14mo', label: 'ROI Period' },
-      { value: '45%', label: 'Labor Savings' },
-    ],
-    robots: ['QuantumCo™', 'QuantumDelta™', 'QuantumMover™'],
-  },
-  {
-    id: 'logistics',
-    key: 'logistics',
-    title: 'Logistics & Distribution',
-    icon: <LogisticsIcon sx={{ color: '#5a7d2f' }} />,
-    painPoints: [
-      'Order Fulfillment Speed',
-      'Labor Costs',
-      'Space Utilization',
-      'Inventory Accuracy',
-    ],
-    metrics: [
-      { value: '3x', label: 'Throughput' },
-      { value: '10mo', label: 'ROI Period' },
-      { value: '99.8%', label: 'Pick Accuracy' },
-    ],
-    robots: ['QuantumMover™', 'QuantumFlex™', 'QuantumAero™'],
-  },
-  {
-    id: 'semiconductor',
-    key: 'semiconductor',
-    title: 'Semiconductor Manufacturing',
-    icon: <MicrochipIcon sx={{ color: '#5a7d2f' }} />,
-    painPoints: [
-      'Cleanroom Requirements',
-      'Precision Handling',
-      'Contamination',
-      'Yield Rates',
-    ],
-    metrics: [
-      { value: '±0.001mm', label: 'Precision' },
-      { value: '16mo', label: 'ROI Period' },
-      { value: '52%', label: 'Yield Increase' },
-    ],
-    robots: ['QuantumSwift™', 'QuantumDelta™', 'QuantumCo™'],
-  },
-  {
-    id: 'automotive',
-    key: 'automotive',
-    title: 'Automotive Manufacturing',
-    icon: <CarIcon sx={{ color: '#5a7d2f' }} />, // Replaced icon
-    painPoints: [
-      'Assembly Speed',
-      'Weld Quality',
-      'Worker Safety',
-      'Material Handling',
-    ],
-    metrics: [
-      { value: '28%', label: 'Speed Increase' },
-      { value: '12mo', label: 'ROI Period' },
-      { value: '92%', label: 'Defect Reduction' },
-    ],
-    robots: ['QuantumFlex™', 'QuantumCo™', 'QuantumMover™'],
-  },
-  {
-    id: 'food',
-    key: 'food',
-    title: 'Food & Beverage Production',
-    icon: <FoodIcon sx={{ color: '#5a7d2f' }} />, // Replaced icon
-    painPoints: [
-      'Hygiene Requirements',
-      'Labor Costs',
-      'Food Safety',
-      'Packaging Efficiency',
-    ],
-    metrics: [
-      { value: '2.5x', label: 'Throughput' },
-      { value: '9mo', label: 'ROI Period' },
-      { value: '98%', label: 'Quality Rate' },
-    ],
-    robots: ['QuantumDelta™', 'QuantumCo™', 'QuantumSwift™'],
-  },
-  {
-    id: 'energy',
-    key: 'energy',
-    title: 'Energy & Utilities',
-    icon: <EnergyIcon sx={{ color: '#5a7d2f' }} />,
-    painPoints: [
-      'Infrastructure Inspection',
-      'Hazardous Environments',
-      'Remote Operations',
-      'Maintenance Efficiency',
-    ],
-    metrics: [
-      { value: '42%', label: 'Risk Reduction' },
-      { value: '15mo', label: 'ROI Period' },
-      { value: '60%', label: 'Downtime Reduction' },
-    ],
-    robots: ['QuantumMover™', 'QuantumAero™', 'QuantumFlex™'],
-  },
-  {
-    id: 'construction',
-    key: 'construction',
-    title: 'Construction',
-    icon: <ConstructionIcon sx={{ color: '#5a7d2f' }} />,
-    painPoints: [
-      'Labor Shortages',
-      'Safety Hazards',
-      'Precision Requirements',
-      'Project Timelines',
-    ],
-    metrics: [
-      { value: '30%', label: 'Time Savings' },
-      { value: '18mo', label: 'ROI Period' },
-      { value: '75%', label: 'Safety Incident Reduction' },
-    ],
-    robots: ['QuantumFlex™', 'QuantumMover™', 'QuantumAero™'],
-  },
-  {
-    id: 'agriculture',
-    key: 'agriculture',
-    title: 'Agriculture',
-    icon: <AgricultureIcon sx={{ color: '#5a7d2f' }} />,
-    painPoints: [
-      'Labor Shortages',
-      'Harvest Efficiency',
-      'Crop Monitoring',
-      'Resource Optimization',
-    ],
-    metrics: [
-      { value: '40%', label: 'Yield Increase' },
-      { value: '12mo', label: 'ROI Period' },
-      { value: '30%', label: 'Water Savings' },
-    ],
-    robots: ['QuantumMover™', 'QuantumAero™', 'QuantumFlex™'],
-  },
-];
 
 const UseCases: React.FC = () => {
   const theme = useTheme();
@@ -316,7 +149,11 @@ const UseCases: React.FC = () => {
             height="160"
             component="img"
             alt={`${industry.title} Robotics`}
-            image={getPlaceholderImage(400, 200)}
+            image={
+              industry.imageUrl
+                ? industry.imageUrl
+                : getPlaceholderImage(400, 200)
+            }
           />
 
           <CardContent className="p-6 flex-grow flex flex-col bg-[#2d2d2d]">

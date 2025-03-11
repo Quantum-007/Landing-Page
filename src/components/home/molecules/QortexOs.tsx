@@ -6,6 +6,7 @@ import CodeComparison from '../atoms/CodeComparison';
 import DeploymentComparison from '../atoms/DeploymentComparison';
 
 import { useTheme } from '@mui/material/styles';
+import { QORTEX_FEATURES } from '@/utils/home/qortex_os/data';
 import {
   Box,
   Grid,
@@ -14,58 +15,11 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material';
-import {
-  Bolt as BoltIcon,
-  Build as BuildIcon,
-  Memory as MemoryIcon,
-  Psychology as PsychologyIcon,
-  AccountTree as AccountTreeIcon,
-  ChatBubbleOutline as ChatBubbleOutlineIcon,
-} from '@mui/icons-material';
 
 const QortexOS: React.FC = () => {
   const theme = useTheme();
 
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
-
-  const features = [
-    {
-      icon: BoltIcon,
-      title: 'Rapid Integration',
-      description:
-        'Connect with existing systems through standard protocols and pre-built connectors.',
-    },
-    {
-      icon: MemoryIcon,
-      title: 'Optimized Runtime',
-      description:
-        'Real-time performance optimization through adaptive learning algorithms.',
-    },
-    {
-      icon: AccountTreeIcon,
-      title: 'Multi-Robot Coordination',
-      description:
-        'Seamlessly coordinate multiple robots for complex operations and workflows.',
-    },
-    {
-      icon: BuildIcon,
-      title: 'Predictive Maintenance',
-      description:
-        'AI-powered system health monitoring to prevent downtime and extend equipment life.',
-    },
-    {
-      icon: ChatBubbleOutlineIcon,
-      title: 'Natural Language Processing',
-      description:
-        'Control robots with simple voice or typed commands without complex programming.',
-    },
-    {
-      icon: PsychologyIcon,
-      title: 'Adaptive Learning',
-      description:
-        'System improves over time by analyzing performance data and user interactions.',
-    },
-  ];
 
   return (
     <Box id="qortex" className="py-20 bg-[#121212]">
@@ -107,7 +61,7 @@ const QortexOS: React.FC = () => {
         <QortexDemo />
 
         <Grid container spacing={4} className="mt-16">
-          {features.map(({ icon: Icon, title, description }, index) => (
+          {QORTEX_FEATURES.map(({ icon: Icon, title, description }, index) => (
             <Grid key={index} item xs={12} sm={6} md={3}>
               <Box className="flex items-start gap-4">
                 <Box className="text-2xl text-[#5a7d2f]">

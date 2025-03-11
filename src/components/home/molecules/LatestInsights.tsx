@@ -1,80 +1,22 @@
 import { useState } from 'react';
 import { getPlaceholderImage } from '@/utils/placeHolderImage';
 import {
+  BLOG_POSTS,
+  CATEGORIES,
+  FEATURED_ARTICLES,
+} from '@/utils/home/latest_insights/data';
+import {
   Card,
-  CardContent,
-  CardMedia,
-  Button,
-  Chip,
   Box,
+  Chip,
+  Button,
   useTheme,
+  CardMedia,
   Container,
   Typography,
+  CardContent,
   useMediaQuery,
 } from '@mui/material';
-
-const featuredArticles = [
-  {
-    title: 'How Machine Learning is Transforming Industrial Automation',
-    date: 'March 2, 2025',
-    category: 'Machine Learning',
-    image: '/api/placeholder/400/300',
-    excerpt:
-      'Discover how adaptive algorithms are revolutionizing factory floors and creating unprecedented efficiency gains.',
-  },
-  {
-    title: 'AI Integration: From Concept to Reality in Robotics',
-    date: 'February 27, 2025',
-    category: 'AI',
-    image: '/api/placeholder/400/300',
-    excerpt:
-      'A step-by-step guide to implementing artificial intelligence in your robotic systems for enhanced performance.',
-  },
-  {
-    title: 'Top 5 Robotics Innovations Set to Shape 2025',
-    date: 'February 20, 2025',
-    category: 'Trends',
-    image: '/api/placeholder/400/300',
-    excerpt:
-      'Our analysts break down the most impactful emerging technologies that will transform robotics this year.',
-  },
-];
-
-const categories = [
-  'All Posts',
-  'Machine Learning',
-  'AI in Robotics',
-  'Industry Trends',
-  'Case Studies',
-  'Investor Insights',
-];
-
-const blogPosts = [
-  {
-    title: 'Predictive Maintenance with ML Algorithms',
-    date: 'February 15, 2025',
-    category: 'Machine Learning',
-    image: '/api/placeholder/400/300',
-    excerpt:
-      'How machine learning is revolutionizing equipment maintenance by predicting failures before they happen.',
-  },
-  {
-    title: 'Robots That Learn: Exploring Reinforcement Learning Applications',
-    date: 'February 10, 2025',
-    category: 'AI in Robotics',
-    image: '/api/placeholder/400/300',
-    excerpt:
-      'How self-learning robots are adapting to new tasks without explicit programming through reinforcement learning.',
-  },
-  {
-    title: 'Emerging Robotics Trends Investors Should Watch',
-    date: 'February 5, 2025',
-    category: 'Investor Insights',
-    image: '/api/placeholder/400/300',
-    excerpt:
-      'Analysis of market shifts and investment opportunities in the rapidly evolving industrial robotics sector.',
-  },
-];
 
 const LatestInsights = () => {
   const theme = useTheme();
@@ -127,7 +69,7 @@ const LatestInsights = () => {
         </Typography>
 
         <Box className="overflow-x-auto flex gap-6 scrollbar-hide">
-          {featuredArticles.map((article, index) => (
+          {FEATURED_ARTICLES.map((article, index) => (
             <Card
               key={index}
               sx={{ borderRadius: 2, backgroundColor: '#1e1e1e' }}
@@ -183,7 +125,7 @@ const LatestInsights = () => {
         </Box>
 
         <Box className="flex justify-center flex-wrap gap-4 my-14">
-          {categories.map((cat, index) => (
+          {CATEGORIES.map((cat, index) => (
             <Chip
               key={index}
               label={cat}
@@ -204,9 +146,8 @@ const LatestInsights = () => {
           ))}
         </Box>
 
-        {/* Blog Grid */}
         <Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => (
+          {BLOG_POSTS.map((post, index) => (
             <Card
               key={index}
               sx={{ borderRadius: 2, backgroundColor: '#1e1e1e' }}
