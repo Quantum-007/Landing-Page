@@ -15,13 +15,16 @@ import {
 } from '@mui/material';
 import {
   Info as InfoIcon,
+  Restaurant as FoodIcon,
+  Memory as MicrochipIcon,
+  DirectionsCar as CarIcon,
+  ElectricBolt as EnergyIcon,
   ExpandMore as ExpandMoreIcon,
   ExpandLess as ExpandLessIcon,
   LocalPharmacy as PharmacyIcon,
   LocalShipping as LogisticsIcon,
-  Memory as MicrochipIcon,
-  DirectionsCar as CarIcon,
-  Restaurant as FoodIcon,
+  Agriculture as AgricultureIcon,
+  Construction as ConstructionIcon,
 } from '@mui/icons-material';
 
 const INDUSTRY_CATEGORIES = {
@@ -130,6 +133,60 @@ const INDUSTRY_DATA = [
       { value: '98%', label: 'Quality Rate' },
     ],
     robots: ['QuantumDelta™', 'QuantumCo™', 'QuantumSwift™'],
+  },
+  {
+    id: 'energy',
+    key: 'energy',
+    title: 'Energy & Utilities',
+    icon: <EnergyIcon sx={{ color: '#5a7d2f' }} />,
+    painPoints: [
+      'Infrastructure Inspection',
+      'Hazardous Environments',
+      'Remote Operations',
+      'Maintenance Efficiency',
+    ],
+    metrics: [
+      { value: '42%', label: 'Risk Reduction' },
+      { value: '15mo', label: 'ROI Period' },
+      { value: '60%', label: 'Downtime Reduction' },
+    ],
+    robots: ['QuantumMover™', 'QuantumAero™', 'QuantumFlex™'],
+  },
+  {
+    id: 'construction',
+    key: 'construction',
+    title: 'Construction',
+    icon: <ConstructionIcon sx={{ color: '#5a7d2f' }} />,
+    painPoints: [
+      'Labor Shortages',
+      'Safety Hazards',
+      'Precision Requirements',
+      'Project Timelines',
+    ],
+    metrics: [
+      { value: '30%', label: 'Time Savings' },
+      { value: '18mo', label: 'ROI Period' },
+      { value: '75%', label: 'Safety Incident Reduction' },
+    ],
+    robots: ['QuantumFlex™', 'QuantumMover™', 'QuantumAero™'],
+  },
+  {
+    id: 'agriculture',
+    key: 'agriculture',
+    title: 'Agriculture',
+    icon: <AgricultureIcon sx={{ color: '#5a7d2f' }} />,
+    painPoints: [
+      'Labor Shortages',
+      'Harvest Efficiency',
+      'Crop Monitoring',
+      'Resource Optimization',
+    ],
+    metrics: [
+      { value: '40%', label: 'Yield Increase' },
+      { value: '12mo', label: 'ROI Period' },
+      { value: '30%', label: 'Water Savings' },
+    ],
+    robots: ['QuantumMover™', 'QuantumAero™', 'QuantumFlex™'],
   },
 ];
 
