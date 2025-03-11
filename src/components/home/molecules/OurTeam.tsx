@@ -167,7 +167,7 @@ const TeamSection = () => {
 
         <Grid container spacing={4} marginTop={0.5}>
           {teamMembers.map((member, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
+            <Grid item xs={12} sm={6} key={index}>
               <Card
                 className="bg-[#1e1e1e] h-full overflow-hidden rounded-lg"
                 sx={{ borderRadius: 2 }}
