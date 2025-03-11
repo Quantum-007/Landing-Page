@@ -20,10 +20,10 @@ import {
 } from '@mui/material';
 
 const navItems = [
-  { label: 'Products', href: '#products' },
+  // { label: 'Products', href: '#products' },
   { label: 'Qortex OS', href: '#qortex' },
   { label: 'Use Cases', href: '#use-cases' },
-  { label: 'Blog', href: '#blog' },
+  // { label: 'Blog', href: '#blog' },
   { label: 'Team', href: '#team' },
   { label: 'Vision', href: '#vision-mission' },
   { label: 'Contact', href: '#contact' },

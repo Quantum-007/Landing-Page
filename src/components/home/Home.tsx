@@ -24,13 +24,13 @@ const UseCases = dynamic(() => import('../home/molecules/UseCases'), {
   loading: HomeLoader,
 });
 
-const LatestInsights = dynamic(
-  () => import('../home/molecules/LatestInsights'),
-  {
-    ssr: false,
-    loading: HomeLoader,
-  },
-);
+// const LatestInsights = dynamic(
+//   () => import('../home/molecules/LatestInsights'),
+//   {
+//     ssr: false,
+//     loading: HomeLoader,
+//   },
+// );
 
 const OurTeam = dynamic(() => import('../home/molecules/OurTeam'), {
   ssr: false,
@@ -52,7 +52,7 @@ const Home = () => {
       {/* <OurProducts /> */}
       <QortexOS />
       <UseCases />
-      <LatestInsights />
+      {/* <LatestInsights /> */}
       <OurTeam />
       <Contact />
     </Box>

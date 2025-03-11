@@ -36,7 +36,7 @@ const Footer = () => {
     >
       <Container>
         <Grid container spacing={6}>
-          <Grid item xs={12} md={3}>
+          <Grid item xs={12} md={4}>
             <Typography
               variant="h6"
               fontWeight="600"
@@ -111,7 +111,7 @@ const Footer = () => {
             </Box>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
+          {/* <Grid item xs={12} sm={6} md={3}>
             <Typography
               variant="h6"
               fontWeight="600"
@@ -155,9 +155,9 @@ const Footer = () => {
                 </Box>
               ))}
             </Box>
-          </Grid>
+          </Grid> */}
 
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4}>
             <Typography
               variant="h6"
               fontWeight="600"
@@ -213,7 +213,7 @@ const Footer = () => {
             </Box>
           </Grid>
 
-          <Grid item xs={12} md={3}>
+          <Grid item xs={12} md={4}>
             <Typography
               variant="h6"
               fontWeight="600"
