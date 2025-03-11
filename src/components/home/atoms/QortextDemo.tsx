@@ -49,6 +49,10 @@ const QortexDemo = () => {
 
       const data = await response.json();
 
+      if (data.error || data.status === 500) {
+        throw new Error(data.error);
+      }
+
       setResponses((prev) => {
         const newResponses = [...prev];
 
@@ -61,10 +65,6 @@ const QortexDemo = () => {
 
         return newResponses;
       });
-
-      if (data.error) {
-        throw new Error(data.error);
-      }
 
       setTimeout(() => {
         setResponses((prev) => [

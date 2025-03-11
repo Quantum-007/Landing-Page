@@ -93,6 +93,15 @@ export async function POST(req: Request) {
         const parts = text.split('Action:');
         thinking = parts[0].replace('Thinking:', '').trim();
         action = parts[1].trim();
+      } else if (text.includes('\n\n')) {
+        const paragraphs = text.split('\n\n');
+        if (paragraphs.length >= 2) {
+          thinking = paragraphs[0].trim();
+          action = paragraphs.slice(1).join('\n\n').trim();
+        } else {
+          thinking = 'Analyzing command...';
+          action = text.trim();
+        }
       } else {
         thinking = 'Analysis complete.';
         action = text;
@@ -105,6 +114,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       thinking,
       action,
+      status: 200,
     });
   } catch (error) {
     return NextResponse.json(
