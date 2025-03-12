@@ -5,7 +5,11 @@ const CustomStepIcon = (props: StepIconProps) => {
   const { active, completed, icon } = props;
 
   if (completed) {
-    return <CheckCircle style={{ color: '#3c5a1e', width: '30px', height: '30px' }} />;
+    return (
+      <CheckCircle
+        style={{ color: '#3c5a1e', width: '30px', height: '30px' }}
+      />
+    );
   }
 
   return (

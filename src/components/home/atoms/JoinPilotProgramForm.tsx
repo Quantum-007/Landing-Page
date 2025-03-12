@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
-import { Stepper, Step, StepLabel, Button, Snackbar, Alert, Box } from '@mui/material';
-import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 import YourInfoStep from './YourInfoStep';
-import CurrentSetupStep from './CurrentSetupStep';
 import ChallengesStep from './ChallangesStep';
-import DesiredOutcomesStep from './DesiredOutComesStep';
 import CustomStepIcon from './CustomStepIcon';
+import CurrentSetupStep from './CurrentSetupStep';
+import DesiredOutcomesStep from './DesiredOutComesStep';
+
+import React, { useState } from 'react';
+
+import { useQuantumStore } from '@/providers/QuantumStoreProvider';
+import {
+  Stepper,
+  Step,
+  StepLabel,
+  Button,
+  Snackbar,
+  Alert,
+  Box,
+} from '@mui/material';
 
 const steps = ['Your Info', 'Current Setup', 'Challenges', 'Desired Outcomes'];
 
 const JoinPilotProgramForm = () => {
-  const { step, nextStep, prevStep, validateStep, formData, resetForm } = useQuantumStore((state) => state);
+  const { step, nextStep, prevStep, validateStep, formData, resetForm } =
+    useQuantumStore((state) => state);
 
   const [loading, setLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
@@ -70,7 +81,8 @@ const JoinPilotProgramForm = () => {
       <Stepper activeStep={step} alternativeLabel>
         {steps.map((label, index) => (
           <Step key={index}>
-            <StepLabel StepIconComponent={CustomStepIcon}
+            <StepLabel
+              StepIconComponent={CustomStepIcon}
               sx={{
                 '& .MuiStepLabel-label': {
                   color: 'white !important',
@@ -90,7 +102,13 @@ const JoinPilotProgramForm = () => {
         {step === 3 && <DesiredOutcomesStep />}
       </Box>
 
-      <Box sx={{ mt: 6, display: 'flex', justifyContent: step === 0 ? 'flex-end' : 'space-between' }}>
+      <Box
+        sx={{
+          mt: 6,
+          display: 'flex',
+          justifyContent: step === 0 ? 'flex-end' : 'space-between',
+        }}
+      >
         {step !== 0 && (
           <Button
             variant="outlined"
@@ -128,7 +146,11 @@ const JoinPilotProgramForm = () => {
         onClose={() => setOpen(false)}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
-        <Alert onClose={() => setOpen(false)} severity={severity} sx={{ width: '100%' }}>
+        <Alert
+          onClose={() => setOpen(false)}
+          severity={severity}
+          sx={{ width: '100%' }}
+        >
           {alertMessage}
         </Alert>
       </Snackbar>

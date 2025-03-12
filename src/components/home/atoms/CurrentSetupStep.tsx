@@ -2,7 +2,16 @@ import FormField from './FormField';
 
 import { SelectChangeEvent } from '@mui/material/Select';
 import { useQuantumStore } from '@/providers/QuantumStoreProvider';
-import { Grid, Typography, Slider, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@mui/material';
+import {
+  Grid,
+  Typography,
+  Slider,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText,
+} from '@mui/material';
 
 const CurrentSetupStep = () => {
   const { formData, setFormData, errors } = useQuantumStore((state) => state);
@@ -53,8 +62,8 @@ const CurrentSetupStep = () => {
           {formData.automationLevel <= 3
             ? `Low Automation (${formData.automationLevel}/10)`
             : formData.automationLevel <= 7
-              ? `Moderate Automation (${formData.automationLevel}/10)`
-              : `High Automation (${formData.automationLevel}/10)`}
+            ? `Moderate Automation (${formData.automationLevel}/10)`
+            : `High Automation (${formData.automationLevel}/10)`}
         </Typography>
       </Grid>
 
@@ -101,7 +110,9 @@ const CurrentSetupStep = () => {
             <MenuItem value="large">Large (200-1000 employees)</MenuItem>
             <MenuItem value="enterprise">Enterprise (1000+ employees)</MenuItem>
           </Select>
-          {errors.operationSize && <FormHelperText>{errors.operationSize}</FormHelperText>}
+          {errors.operationSize && (
+            <FormHelperText>{errors.operationSize}</FormHelperText>
+          )}
         </FormControl>
       </Grid>
 

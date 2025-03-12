@@ -1,13 +1,11 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect } from 'react';
 import GeneralInquiryForm from '../atoms/GeneralInqueryForm';
 import JoinPilotProgramForm from '../atoms/JoinPilotProgramForm';
 
-import {
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import React, { useState, useEffect } from 'react';
+
+import { useMediaQuery, useTheme } from '@mui/material';
 import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 import {
   Box,
@@ -26,9 +24,7 @@ const Contact = () => {
 
   const [contactFormType, setContactFormType] = useState('comprehensive');
 
-  const { message, tabName, clearTab } = useQuantumStore(
-    (state) => state,
-  );
+  const { message, tabName, clearTab } = useQuantumStore((state) => state);
 
   useEffect(() => {
     if (message) {
@@ -89,8 +85,9 @@ const Contact = () => {
             </Typography>
 
             <Box
-              className={`rounded-md inline-flex overflow-hidden mt-8 ${isTablet ? 'mx-auto' : ''
-                }`}
+              className={`rounded-md inline-flex overflow-hidden mt-8 ${
+                isTablet ? 'mx-auto' : ''
+              }`}
             >
               <Button
                 sx={{
@@ -124,7 +121,6 @@ const Contact = () => {
                   <GeneralInquiryForm />
                 ) : (
                   <JoinPilotProgramForm />
-
                 )}
               </CardContent>
             </Card>

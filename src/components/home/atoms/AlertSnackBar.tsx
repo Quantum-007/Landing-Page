@@ -1,9 +1,9 @@
-import { Alert, Snackbar } from "@mui/material";
+import { Alert, Snackbar } from '@mui/material';
 
 interface AlertSnackbarProps {
   open: boolean;
   message: string;
-  severity: "success" | "error" | "warning" | "info"; // Explicit type
+  severity: 'success' | 'error' | 'warning' | 'info'; // Explicit type
   handleClose: () => void;
 }
 
@@ -15,7 +15,7 @@ const AlertSnackbar: React.FC<AlertSnackbarProps> = ({
 }) => {
   return (
     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-      <Alert severity={severity} onClose={handleClose} sx={{ width: "100%" }}>
+      <Alert severity={severity} onClose={handleClose} sx={{ width: '100%' }}>
         {message}
       </Alert>
     </Snackbar>

@@ -1,7 +1,15 @@
-import { Grid, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@mui/material';
 import FormField from './FormField';
-import { useQuantumStore } from '@/providers/QuantumStoreProvider';
+
 import { SelectChangeEvent } from '@mui/material/Select';
+import { useQuantumStore } from '@/providers/QuantumStoreProvider';
+import {
+  Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText,
+} from '@mui/material';
 
 const YourInfoStep = () => {
   const { formData, setFormData, errors } = useQuantumStore((state) => state);
@@ -57,7 +65,7 @@ const YourInfoStep = () => {
             sx={{
               color: 'white',
               '&.Mui-focused': {
-                color: 'white'
+                color: 'white',
               },
             }}
           >
@@ -76,11 +84,10 @@ const YourInfoStep = () => {
                 borderColor: 'transparent',
               },
               '&:hover .MuiOutlinedInput-notchedOutline': {
-                borderColor: errors.industry ? '#d32f2f' : '#3c5a1e'
+                borderColor: errors.industry ? '#d32f2f' : '#3c5a1e',
               },
-              '&.Mui-focused .MuiOutlinedInput-notchedOutline':
-              {
-                borderColor: errors.industry ? '#d32f2f' : '#3c5a1e'
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: errors.industry ? '#d32f2f' : '#3c5a1e',
               },
               '.MuiSvgIcon-root': {
                 color: 'white',
@@ -99,7 +106,9 @@ const YourInfoStep = () => {
             <MenuItem value="construction">Construction</MenuItem>
             <MenuItem value="other">Other</MenuItem>
           </Select>
-          {errors.industry && <FormHelperText>{errors.industry}</FormHelperText>}
+          {errors.industry && (
+            <FormHelperText>{errors.industry}</FormHelperText>
+          )}
         </FormControl>
       </Grid>
     </Grid>

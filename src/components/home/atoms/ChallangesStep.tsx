@@ -1,15 +1,15 @@
 import React from 'react';
 import FormField from './FormField';
 
+import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 import {
   Box,
   Typography,
   Grid,
   FormControlLabel,
   Checkbox,
-  FormHelperText
+  FormHelperText,
 } from '@mui/material';
-import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 
 const ChallengesStep = () => {
   const { formData, setFormData, errors } = useQuantumStore((state) => state);

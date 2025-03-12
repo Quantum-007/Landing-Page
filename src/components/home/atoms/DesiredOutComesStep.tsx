@@ -1,7 +1,16 @@
 import FormField from './FormField';
 
 import { useQuantumStore } from '@/providers/QuantumStoreProvider';
-import { Grid, Typography, Slider, TextField, MenuItem, FormControlLabel, Checkbox, FormHelperText } from '@mui/material';
+import {
+  Grid,
+  Typography,
+  Slider,
+  TextField,
+  MenuItem,
+  FormControlLabel,
+  Checkbox,
+  FormHelperText,
+} from '@mui/material';
 
 const DesiredOutcomesStep = () => {
   const { formData, setFormData, errors } = useQuantumStore((state) => state);
@@ -13,12 +22,11 @@ const DesiredOutcomesStep = () => {
   };
 
   const handleSelectChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [event.target.name]: event.target.checked });
@@ -194,9 +202,8 @@ const DesiredOutcomesStep = () => {
           }
           label={
             <Typography className="text-[#b0b0b0]">
-              I consent to Quantum Robotics processing my data
-              and contacting me about their products and
-              services.
+              I consent to Quantum Robotics processing my data and contacting me
+              about their products and services.
             </Typography>
           }
         />

@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { TextField } from '@mui/material';
 
 interface FormFieldProps {
   label: string;
@@ -42,23 +42,23 @@ const FormField = ({
       placeholder={placeholder}
       helperText={helperText}
       sx={{
-        "& .MuiOutlinedInput-root": {
-          backgroundColor: "#121212",
-          color: "white",
-          "& fieldset": {
-            borderColor: error ? "#d32f2f" : "transparent",
+        '& .MuiOutlinedInput-root': {
+          backgroundColor: '#121212',
+          color: 'white',
+          '& fieldset': {
+            borderColor: error ? '#d32f2f' : 'transparent',
           },
-          "&:hover fieldset": {
-            borderColor: error ? "#d32f2f" : "#3c5a1e",
+          '&:hover fieldset': {
+            borderColor: error ? '#d32f2f' : '#3c5a1e',
           },
-          "&.Mui-focused fieldset": {
-            borderColor: error ? "#d32f2f" : "#3c5a1e",
+          '&.Mui-focused fieldset': {
+            borderColor: error ? '#d32f2f' : '#3c5a1e',
           },
         },
-        "& .MuiInputLabel-root": {
-          color: "white",
-          "&.Mui-focused": {
-            color: "white",
+        '& .MuiInputLabel-root': {
+          color: 'white',
+          '&.Mui-focused': {
+            color: 'white',
           },
         },
       }}

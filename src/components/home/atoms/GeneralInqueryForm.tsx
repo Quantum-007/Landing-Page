@@ -1,28 +1,26 @@
-"use client";
+'use client';
 
-import { useState, FormEvent, useEffect } from "react";
+import FormField from './FormField';
+import AlertSnackbar from './AlertSnackBar';
+
+import { useState, FormEvent, useEffect } from 'react';
+import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 import {
   Grid,
   FormControlLabel,
   Checkbox,
   Typography,
   Button,
-} from "@mui/material";
-import FormField from "./FormField";
-import AlertSnackbar from "./AlertSnackBar";
-import { useQuantumStore } from "@/providers/QuantumStoreProvider";
+} from '@mui/material';
 
 const GeneralInquiryForm = () => {
-  const { message, clearMessage } = useQuantumStore(
-    (state) => state,
-  );
+  const { message, clearMessage } = useQuantumStore((state) => state);
 
-
-  const [formData, setFormData,] = useState({
-    name: "",
-    email: "",
-    company: "",
-    message: "",
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    message: '',
     consent: false,
   });
 
@@ -38,20 +36,19 @@ const GeneralInquiryForm = () => {
       setFormData((prev) => ({ ...prev, message }));
       clearMessage();
     }
-
   }, [clearMessage, formData, message]);
 
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
-  const [severity, setSeverity] = useState<"success" | "error">("success");
+  const [alertMessage, setAlertMessage] = useState('');
+  const [severity, setSeverity] = useState<'success' | 'error'>('success');
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
 
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === 'checkbox' ? checked : value,
     }));
 
     setErrors((prev) => ({
@@ -74,10 +71,10 @@ const GeneralInquiryForm = () => {
 
   const resetFormData = () => {
     setFormData({
-      name: "",
-      email: "",
-      company: "",
-      message: "",
+      name: '',
+      email: '',
+      company: '',
+      message: '',
       consent: false,
     });
 
@@ -97,27 +94,27 @@ const GeneralInquiryForm = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/createGeneralInquery", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/createGeneralInquery', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
       if (res.ok) {
         resetFormData();
-        setAlertMessage("Your inquiry has been submitted successfully!");
-        setSeverity("success");
+        setAlertMessage('Your inquiry has been submitted successfully!');
+        setSeverity('success');
         setOpen(true);
       } else {
-        setAlertMessage("There was an error submitting your inquiry.");
-        setSeverity("error");
+        setAlertMessage('There was an error submitting your inquiry.');
+        setSeverity('error');
         setOpen(true);
       }
     } catch (error) {
-      setAlertMessage("Something went wrong, please try again later.");
-      setSeverity("error");
+      setAlertMessage('Something went wrong, please try again later.');
+      setSeverity('error');
       setOpen(true);
-      console.error("Error submitting form:", error);
+      console.error('Error submitting form:', error);
     } finally {
       setLoading(false);
     }
@@ -134,7 +131,7 @@ const GeneralInquiryForm = () => {
             onChange={handleFormChange}
             required
             error={errors.name}
-            helperText={errors.name ? "Full Name is required" : ""}
+            helperText={errors.name ? 'Full Name is required' : ''}
           />
         </Grid>
 
@@ -147,7 +144,7 @@ const GeneralInquiryForm = () => {
             required
             type="email"
             error={errors.email}
-            helperText={errors.email ? "Valid Email Address is required" : ""}
+            helperText={errors.email ? 'Valid Email Address is required' : ''}
           />
         </Grid>
 
@@ -170,7 +167,7 @@ const GeneralInquiryForm = () => {
             multiline
             rows={4}
             error={errors.message}
-            helperText={errors.message ? "Message is required" : ""}
+            helperText={errors.message ? 'Message is required' : ''}
           />
         </Grid>
 
@@ -182,14 +179,15 @@ const GeneralInquiryForm = () => {
                 checked={formData.consent}
                 onChange={handleFormChange}
                 sx={{
-                  color: "rgba(255, 255, 255, 0.7)",
-                  "&.Mui-checked": { color: "#3c5a1e" },
+                  color: 'rgba(255, 255, 255, 0.7)',
+                  '&.Mui-checked': { color: '#3c5a1e' },
                 }}
               />
             }
             label={
               <Typography variant="body2" className="text-[#b0b0b0]">
-                I consent to Quantum Robotics processing my data and contacting me about their products and services.*
+                I consent to Quantum Robotics processing my data and contacting
+                me about their products and services.*
               </Typography>
             }
           />
@@ -208,20 +206,20 @@ const GeneralInquiryForm = () => {
             loading={loading}
             disabled={loading}
             sx={{
-              backgroundColor: "#3c5a1e",
-              color: "white",
-              transform: "none",
+              backgroundColor: '#3c5a1e',
+              color: 'white',
+              transform: 'none',
             }}
           >
-            {loading ? "Submitting..." : "Submit"}
+            {loading ? 'Submitting...' : 'Submit'}
           </Button>
         </Grid>
       </Grid>
 
       <AlertSnackbar
         open={open}
-        message={alertMessage}
         severity={severity}
+        message={alertMessage}
         handleClose={() => setOpen(false)}
       />
     </form>
