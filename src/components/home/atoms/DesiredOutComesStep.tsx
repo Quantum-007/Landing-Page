@@ -68,34 +68,59 @@ const DesiredOutcomesStep = () => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={10}>
-        <Typography variant="h6" className="text-white">
+        <Typography variant="body1" className="text-white">
           Desired ROI Timeframe
         </Typography>
         <Slider
           value={formData.roiTimeframe}
           onChange={handleSliderChange}
-          step={6}
+          step={1}
           min={6}
           max={24}
           marks={[
             { value: 6, label: '6 months' },
             { value: 24, label: '24+ months' },
           ]}
-          sx={{ color: '#3c5a1e', marginLeft: 4 }}
+          sx={{
+            marginLeft: 4,
+            marginTop: 4,
+            color: '#1e1e1e',
+            height: 6,
+            '& .MuiSlider-thumb': {
+              backgroundColor: '#3c5a1e',
+              width: 20,
+              height: 20,
+              '&:hover, &.Mui-focusVisible': {
+                boxShadow: '0px 0px 0px 8px rgba(60, 90, 30, 0.16)',
+              },
+            },
+            '& .MuiSlider-track': {
+              backgroundColor: '#1e1e1e',
+            },
+            '& .MuiSlider-rail': {
+              backgroundColor: '#1e1e1e',
+            },
+            '& .MuiSlider-markLabel': {
+              color: '#b0b0b0',
+              top: '-15px',
+
+            },
+          }}
         />
         <Typography
           align="center"
+          variant='h6'
           sx={{
             color: '#3c5a1e',
             fontWeight: 'bold',
-            marginBottom: 4,
+            marginBottom: 2,
           }}
         >
           {formData.roiTimeframe} months
         </Typography>
       </Grid>
 
-      <Grid item xs={10}>
+      <Grid item xs={12}>
         <TextField
           select
           label="What robotics solutions are you most interested in?"
@@ -136,7 +161,7 @@ const DesiredOutcomesStep = () => {
         </TextField>
       </Grid>
 
-      <Grid item xs={10}>
+      <Grid item xs={12}>
         <TextField
           select
           label="Desired Implementation Timeline"
@@ -174,7 +199,7 @@ const DesiredOutcomesStep = () => {
         </TextField>
       </Grid>
 
-      <Grid item xs={10}>
+      <Grid item xs={12}>
         <FormField
           label="Additional Notes"
           name="additionalNotes"

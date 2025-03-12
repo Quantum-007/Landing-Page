@@ -33,8 +33,8 @@ const CurrentSetupStep = () => {
 
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <Typography variant="h6" className="text-white">
+      <Grid item xs={9}>
+        <Typography variant="body1" className="text-white">
           Current Level of Automation
         </Typography>
         <Slider
@@ -47,25 +47,48 @@ const CurrentSetupStep = () => {
             { value: 0, label: 'No Automation' },
             { value: 10, label: 'Fully Automated' },
           ]}
-          sx={{ color: '#3c5a1e', marginLeft: 4 }}
-          valueLabelDisplay="auto"
-          aria-labelledby="automation-level-slider"
+          sx={{
+            color: '#1e1e1e',
+            height: 6,
+            marginLeft: { xs: 5, md: 8 },
+            marginTop: 4,
+            '& .MuiSlider-thumb': {
+              backgroundColor: '#3c5a1e',
+              width: 16,
+              height: 16,
+              '&:hover, &.Mui-focusVisible': {
+                boxShadow: '0px 0px 0px 8px rgba(60, 90, 30, 0.16)',
+              },
+            },
+            '& .MuiSlider-track': {
+              backgroundColor: '#1e1e1e',
+            },
+            '& .MuiSlider-rail': {
+              backgroundColor: '#1e1e1e',
+            },
+            '& .MuiSlider-markLabel': {
+              color: '#b0b0b0',
+              top: '-15px'
+            },
+          }}
         />
         <Typography
           align="center"
+          variant='h6'
           sx={{
             color: '#3c5a1e',
             fontWeight: 'bold',
-            marginBottom: 4,
+            marginBottom: 2,
           }}
         >
           {formData.automationLevel <= 3
             ? `Low Automation (${formData.automationLevel}/10)`
             : formData.automationLevel <= 7
-            ? `Moderate Automation (${formData.automationLevel}/10)`
-            : `High Automation (${formData.automationLevel}/10)`}
+              ? `Moderate Automation (${formData.automationLevel}/10)`
+              : `High Automation (${formData.automationLevel}/10)`}
         </Typography>
       </Grid>
+
 
       <Grid item xs={12}>
         <FormControl
@@ -104,6 +127,20 @@ const CurrentSetupStep = () => {
             name="operationSize"
             value={formData.operationSize || ''}
             onChange={handleSelectChange}
+            multiple={false}
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  bgcolor: '#2d2d2d',
+                  '& .MuiMenuItem-root': {
+                    color: 'white',
+                    '&:hover': {
+                      bgcolor: 'gray',
+                    },
+                  },
+                },
+              },
+            }}
           >
             <MenuItem value="small">Small (1-50 employees)</MenuItem>
             <MenuItem value="medium">Medium (51-200 employees)</MenuItem>
@@ -115,6 +152,7 @@ const CurrentSetupStep = () => {
           )}
         </FormControl>
       </Grid>
+
 
       <Grid item xs={12}>
         <FormField

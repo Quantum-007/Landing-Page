@@ -82,11 +82,11 @@ const ChallengesStep = () => {
         )}
       </Grid>
 
-      <Typography variant="h6" sx={{ mt: 3, color: 'white' }}>
+      <Typography variant="h6" sx={{ mt: 4, color: 'white' }}>
         Describe specific challenges in more detail:
       </Typography>
 
-      <Grid item xs={12} sx={{ mt: 3 }}>
+      <Grid item xs={12} sx={{ mt: 1 }}>
         <FormField
           label="Specific Challanges"
           name="specificChallenges"

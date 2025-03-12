@@ -59,38 +59,54 @@ const YourInfoStep = () => {
         />
       </Grid>
       <Grid item xs={12}>
-        <FormControl fullWidth variant="outlined" error={!!errors.industry}>
-          <InputLabel
-            htmlFor="industry"
-            sx={{
+        <FormControl
+          fullWidth
+          variant="outlined"
+          error={!!errors.industry}
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              backgroundColor: '#121212',
+              color: 'white',
+              '& fieldset': {
+                borderColor: errors.industry ? '#d32f2f' : 'transparent',
+              },
+              '&:hover fieldset': {
+                borderColor: errors.industry ? '#d32f2f' : '#3c5a1e',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: errors.industry ? '#d32f2f' : '#3c5a1e',
+              },
+            },
+            '& .MuiInputLabel-root': {
               color: 'white',
               '&.Mui-focused': {
                 color: 'white',
               },
-            }}
-          >
-            Industry*
-          </InputLabel>
+            },
+            '& .MuiSvgIcon-root': {
+              color: 'white',
+            },
+          }}
+        >
+          <InputLabel id="industry-label">Industry*</InputLabel>
           <Select
+            labelId="industry-label"
             label="Industry*"
             name="industry"
             value={formData.industry}
             onChange={handleSelectChange}
             required
-            sx={{
-              backgroundColor: '#121212',
-              color: 'white',
-              '.MuiOutlinedInput-notchedOutline': {
-                borderColor: 'transparent',
-              },
-              '&:hover .MuiOutlinedInput-notchedOutline': {
-                borderColor: errors.industry ? '#d32f2f' : '#3c5a1e',
-              },
-              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                borderColor: errors.industry ? '#d32f2f' : '#3c5a1e',
-              },
-              '.MuiSvgIcon-root': {
-                color: 'white',
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  bgcolor: '#2d2d2d',
+                  '& .MuiMenuItem-root': {
+                    color: 'white',
+                    '&:hover': {
+                      bgcolor: 'gray',
+                    },
+                  },
+                },
               },
             }}
           >
@@ -106,11 +122,10 @@ const YourInfoStep = () => {
             <MenuItem value="construction">Construction</MenuItem>
             <MenuItem value="other">Other</MenuItem>
           </Select>
-          {errors.industry && (
-            <FormHelperText>{errors.industry}</FormHelperText>
-          )}
+          {errors.industry && <FormHelperText>{errors.industry}</FormHelperText>}
         </FormControl>
       </Grid>
+
     </Grid>
   );
 };
