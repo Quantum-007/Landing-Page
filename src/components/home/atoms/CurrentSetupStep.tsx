@@ -52,6 +52,7 @@ const CurrentSetupStep = () => {
             height: 6,
             marginLeft: { xs: 5, md: 8 },
             marginTop: 4,
+            marginBottom: -4,
             '& .MuiSlider-thumb': {
               backgroundColor: '#3c5a1e',
               width: 16,
@@ -72,6 +73,9 @@ const CurrentSetupStep = () => {
             },
           }}
         />
+      </Grid>
+
+      <Grid item xs={12}>
         <Typography
           align="center"
           variant='h6'
@@ -88,7 +92,6 @@ const CurrentSetupStep = () => {
               : `High Automation (${formData.automationLevel}/10)`}
         </Typography>
       </Grid>
-
 
       <Grid item xs={12}>
         <FormControl

@@ -84,6 +84,7 @@ const DesiredOutcomesStep = () => {
           sx={{
             marginLeft: 4,
             marginTop: 4,
+            marginBottom: -4,
             color: '#1e1e1e',
             height: 6,
             '& .MuiSlider-thumb': {
@@ -107,6 +108,9 @@ const DesiredOutcomesStep = () => {
             },
           }}
         />
+      </Grid>
+
+      <Grid item xs={12} className='w-full'>
         <Typography
           align="center"
           variant='h6'

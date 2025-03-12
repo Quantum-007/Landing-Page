@@ -44,8 +44,6 @@ const ChallengesStep = () => {
     });
   };
 
-  console.log('formData', formData);
-
   return (
     <Box>
       <Typography variant="h6" gutterBottom sx={{ color: 'white' }}>

@@ -144,7 +144,6 @@ const JoinPilotProgramForm = () => {
         open={open}
         autoHideDuration={6000}
         onClose={() => setOpen(false)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
         <Alert
           onClose={() => setOpen(false)}
