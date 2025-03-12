@@ -22,7 +22,7 @@ export async function POST(req: Request) {
         additionalNotes: formData.additionalNotes,
         automationLevel: formData.automationLevel,
         roboticSolutions: formData.roboticSolutions,
-        specificChallenges: formData.specificChallanges,
+        specificChallenges: formData.specificChallenges,
         implementationTimeline: formData.implementationTimeline,
       },
     });
