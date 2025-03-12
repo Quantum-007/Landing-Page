@@ -2,7 +2,6 @@ export interface PilotProgramFormData {
   name: string;
   email: string;
   company: string;
-  message: string;
   consent: boolean;
   industry: string;
   challenges: string[];
@@ -12,7 +11,7 @@ export interface PilotProgramFormData {
   additionalNotes: string;
   automationLevel: number;
   roboticSolutions: string[];
-  specificChallanges: string;
+  specificChallenges: string;
   implementationTimeline: string;
 }
 
