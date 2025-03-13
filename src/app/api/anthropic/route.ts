@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import Bugsnag from '@/lib/bugsnag'
 
 interface ThinkingContent {
   type: 'thinking';
@@ -61,16 +62,20 @@ export async function POST(req: Request) {
     });
 
     const responseText = await response.text();
+    const error = new Error(`API Error: Response text ${JSON.parse(responseText) as ClaudeResponse} -- ${response.status} -- ${response.statusText}`);
+    Bugsnag.notify(error);
     console.log('Raw API Response:', responseText);
 
     if (!response.ok) {
+      const error = new Error(`API Error: Response text ${JSON.parse(responseText) as ClaudeResponse} -- ${response.status} -- ${response.statusText}`);
+      Bugsnag.notify(error);
       console.error('API Error:', response.status, response.statusText);
       return NextResponse.json(
         {
           error: 'API request failed',
           status: response.status,
           statusText: response.statusText,
-          details: responseText, // Include full error response
+          details: responseText,
         },
         { status: response.status },
       );
@@ -81,6 +86,9 @@ export async function POST(req: Request) {
     try {
       data = JSON.parse(responseText) as ClaudeResponse;
     } catch (parseError) {
+      const error = new Error(`API Error: Response text ${JSON.parse(responseText) as ClaudeResponse} -- ${response.status} -- ${response.statusText}`);
+      Bugsnag.notify(error);
+
       console.error('Error parsing API response:', parseError);
       return NextResponse.json(
         {
@@ -120,6 +128,10 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ thinking, action, status: 200 });
   } catch (error) {
+    
+    const errorMesage = new Error(`API Error Message: ${error}`);
+    Bugsnag.notify(errorMesage);
+
     console.error('Server Error:', error);
 
     return NextResponse.json(

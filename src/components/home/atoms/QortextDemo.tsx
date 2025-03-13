@@ -1,3 +1,4 @@
+import Bugsnag from '@/lib/bugsnag'
 import { useState, useRef, useEffect } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 
@@ -47,7 +48,10 @@ const QortexDemo = () => {
         body: JSON.stringify({ input }),
       });
 
+      console.log('response from API:', response)
+
       const data = await response.json();
+      Bugsnag.notify(`$Response form API: ${data}`)
 
       if (data.error || data.status === 500) {
         throw new Error(data.error);
@@ -159,15 +163,14 @@ const QortexDemo = () => {
           {responses.map((response, index) => (
             <Typography
               key={index}
-              className={`mb-2 ${
-                response.type === 'user'
-                  ? 'text-blue-400'
-                  : response.type === 'thinking'
+              className={`mb-2 ${response.type === 'user'
+                ? 'text-blue-400'
+                : response.type === 'thinking'
                   ? 'text-gray-400 italic'
                   : response.type === 'error'
-                  ? 'text-red-400'
-                  : 'text-[#b0b0b0]'
-              }`}
+                    ? 'text-red-400'
+                    : 'text-[#b0b0b0]'
+                }`}
             >
               {response.type === 'user' && (
                 <span className="text-blue-400 font-medium">➤ You: </span>
