@@ -1,7 +1,8 @@
+import Image from 'next/image';
+
 import React, { useState } from 'react';
 
 import { useTheme } from '@mui/material/styles';
-import { getPlaceholderImage } from '@/utils/placeHolderImage';
 import {
   INDUSTRY_DATA,
   INDUSTRY_CATEGORIES,
@@ -12,7 +13,6 @@ import {
   Grid,
   Button,
   Container,
-  CardMedia,
   Typography,
   CardContent,
   useMediaQuery,
@@ -145,16 +145,15 @@ const UseCases: React.FC = () => {
             </Typography>
           </Box>
 
-          <CardMedia
-            height="160"
-            component="img"
-            alt={`${industry.title} Robotics`}
-            image={
-              industry.imageUrl
-                ? industry.imageUrl
-                : getPlaceholderImage(400, 200)
-            }
-          />
+          <Box sx={{ position: 'relative', width: '100%', height: 200 }}>
+            <Image
+              layout="fill"
+              priority={true}
+              objectFit="cover"
+              src={industry.imageUrl}
+              alt={`${industry.title} Robotics`}
+            />
+          </Box>
 
           <CardContent className="p-6 flex-grow flex flex-col bg-[#2d2d2d]">
             <Box className="mb-4">

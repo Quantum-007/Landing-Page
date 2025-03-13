@@ -137,7 +137,7 @@ const IndustrialAutomation = () => {
               height={500}
               loading="lazy"
               alt="precision"
-              src="/assets/home/precision.svg"
+              src="/assets/home/precision-1.jpg"
             />
           </Grid>
         </Grid>

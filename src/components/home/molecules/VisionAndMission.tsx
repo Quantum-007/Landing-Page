@@ -56,14 +56,21 @@ const VisionAndMission = () => {
               </Box>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Box className="rounded-lg overflow-hidden shadow-2xl">
+              <Box
+                sx={{
+                  width: '100%',
+                  overflow: 'hidden',
+                  borderRadius: '16px',
+                  position: 'relative',
+                  aspectRatio: '6 / 5',
+                }}
+              >
                 <Image
-                  width={600}
-                  height={500}
+                  layout="fill"
                   loading="lazy"
-                  alt="precision"
+                  alt="Our Vision"
+                  objectFit="cover"
                   src="/assets/home/our-vision.svg"
-                  className="w-full h-full object-cover rounded-4xl"
                 />
               </Box>
             </Grid>
@@ -75,14 +82,21 @@ const VisionAndMission = () => {
             direction={isTablet ? 'column-reverse' : 'row'}
           >
             <Grid item xs={12} md={6}>
-              <Box className="rounded-lg overflow-hidden shadow-2xl">
+              <Box
+                sx={{
+                  width: '100%',
+                  overflow: 'hidden',
+                  position: 'relative',
+                  aspectRatio: '6 / 5',
+                  borderRadius: '16px',
+                }}
+              >
                 <Image
-                  width={600}
-                  height={500}
-                  loading="lazy"
-                  alt="precision"
-                  src="/assets/home/our-mission.svg"
-                  className="w-full h-full object-cover rounded-4xl"
+                  layout="fill"
+                  priority={true}
+                  objectFit="cover"
+                  alt="Our Mission"
+                  src="/assets/home/our-mission.webp"
                 />
               </Box>
             </Grid>

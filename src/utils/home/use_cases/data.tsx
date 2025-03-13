@@ -30,7 +30,7 @@ export const INDUSTRY_DATA = [
     id: 'pharma',
     key: 'pharmaceutical',
     title: 'Pharmaceutical Manufacturing',
-    imageUrl: '/assets/home/use_cases/Slide-1.svg',
+    imageUrl: '/assets/home/use_cases/pharma.jpg',
     icon: <PharmacyIcon sx={{ color: '#5a7d2f' }} />,
     painPoints: [
       'Contamination Risk',
@@ -49,7 +49,7 @@ export const INDUSTRY_DATA = [
     id: 'logistics',
     key: 'logistics',
     title: 'Logistics & Distribution',
-    imageUrl: '/assets/home/use_cases/Slide-1.svg',
+    imageUrl: '/assets/home/use_cases/logistics.jpg',
     icon: <LogisticsIcon sx={{ color: '#5a7d2f' }} />,
     painPoints: [
       'Order Fulfillment Speed',
@@ -68,8 +68,8 @@ export const INDUSTRY_DATA = [
     id: 'semiconductor',
     key: 'semiconductor',
     title: 'Semiconductor Manufacturing',
-    imageUrl: '/assets/home/use_cases/Slide-1.svg',
     icon: <MicrochipIcon sx={{ color: '#5a7d2f' }} />,
+    imageUrl: '/assets/home/use_cases/semiconductor.jpg',
     painPoints: [
       'Cleanroom Requirements',
       'Precision Handling',
@@ -88,7 +88,7 @@ export const INDUSTRY_DATA = [
     key: 'automotive',
     title: 'Automotive Manufacturing',
     icon: <CarIcon sx={{ color: '#5a7d2f' }} />,
-    imageUrl: '/assets/home/use_cases/Slide-1.svg',
+    imageUrl: '/assets/home/use_cases/carmanufacturing.jpeg',
     painPoints: [
       'Assembly Speed',
       'Weld Quality',
@@ -107,7 +107,7 @@ export const INDUSTRY_DATA = [
     key: 'food',
     title: 'Food & Beverage Production',
     icon: <FoodIcon sx={{ color: '#5a7d2f' }} />,
-    imageUrl: '/assets/home/use_cases/Slide-1.svg',
+    imageUrl: '/assets/home/use_cases/foodrobotics.jpeg',
     painPoints: [
       'Hygiene Requirements',
       'Labor Costs',
@@ -125,7 +125,7 @@ export const INDUSTRY_DATA = [
     id: 'energy',
     key: 'energy',
     title: 'Energy & Utilities',
-    imageUrl: '/assets/home/use_cases/Slide-1.svg',
+    imageUrl: '/assets/home/use_cases/energy.jpeg',
     icon: <EnergyIcon sx={{ color: '#5a7d2f' }} />,
     painPoints: [
       'Infrastructure Inspection',
@@ -144,7 +144,7 @@ export const INDUSTRY_DATA = [
     id: 'construction',
     key: 'construction',
     title: 'Construction',
-    imageUrl: '/assets/home/use_cases/Slide-1.svg',
+    imageUrl: '/assets/home/use_cases/construction.jpeg',
     icon: <ConstructionIcon sx={{ color: '#5a7d2f' }} />,
     painPoints: [
       'Labor Shortages',
@@ -163,7 +163,7 @@ export const INDUSTRY_DATA = [
     id: 'agriculture',
     key: 'agriculture',
     title: 'Agriculture',
-    imageUrl: '/assets/home/use_cases/Slide-1.svg',
+    imageUrl: '/assets/home/use_cases/agriculture.jpeg',
     icon: <AgricultureIcon sx={{ color: '#5a7d2f' }} />,
     painPoints: [
       'Labor Shortages',
