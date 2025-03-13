@@ -61,6 +61,21 @@ export async function POST(req: Request) {
     });
 
     const responseText = await response.text();
+    console.log('Raw API Response:', responseText);
+
+    if (!response.ok) {
+      console.error('API Error:', response.status, response.statusText);
+      return NextResponse.json(
+        {
+          error: 'API request failed',
+          status: response.status,
+          statusText: response.statusText,
+          details: responseText, // Include full error response
+        },
+        { status: response.status },
+      );
+    }
+
     let data: ClaudeResponse;
 
     try {
@@ -70,7 +85,8 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           error: 'Failed to parse response from Claude API',
-          details: responseText,
+          status: response.status,
+          details: responseText, // Show raw response
         },
         { status: 500 },
       );
@@ -78,7 +94,7 @@ export async function POST(req: Request) {
 
     if (!data || !data.content) {
       return NextResponse.json(
-        { error: 'Invalid response from Claude API' },
+        { error: 'Invalid response from Claude API', details: responseText },
         { status: 500 },
       );
     }
@@ -94,45 +110,23 @@ export async function POST(req: Request) {
       action = textBlock.text || '';
     } else if (textBlock) {
       const text = textBlock.text || '';
-
-      if (text.includes('# THINKING') && text.includes('# ACTION')) {
-        const parts = text.split('# ACTION');
-        thinking = parts[0].replace('# THINKING', '').trim();
-        action = parts[1].trim();
-      } else if (text.includes('THINKING') && text.includes('ACTION')) {
-        const parts = text.split('ACTION');
-        thinking = parts[0].replace('THINKING', '').trim();
-        action = parts[1].trim();
-      } else if (text.includes('Thinking:') && text.includes('Action:')) {
-        const parts = text.split('Action:');
-        thinking = parts[0].replace('Thinking:', '').trim();
-        action = parts[1].trim();
-      } else if (text.includes('\n\n')) {
-        const paragraphs = text.split('\n\n');
-        if (paragraphs.length >= 2) {
-          thinking = paragraphs[0].trim();
-          action = paragraphs.slice(1).join('\n\n').trim();
-        } else {
-          thinking = 'Analyzing command...';
-          action = text.trim();
-        }
-      } else {
-        thinking = 'Analysis complete.';
-        action = text;
-      }
+      const parts = text.split(/(# ACTION|ACTION|Action:)/);
+      thinking = parts[0].trim();
+      action = parts.length > 1 ? parts.slice(1).join('').trim() : '';
     } else {
       thinking = 'Analysis complete.';
       action = 'Command processed.';
     }
 
-    return NextResponse.json({
-      thinking,
-      action,
-      status: 200,
-    });
+    return NextResponse.json({ thinking, action, status: 200 });
   } catch (error) {
+    console.error('Server Error:', error);
+
     return NextResponse.json(
-      { error: `Something went wrong, ${error}` },
+      {
+        error: 'Internal Server Error',
+        details: error instanceof Error ? error.message : String(error),
+      },
       { status: 500 },
     );
   }
