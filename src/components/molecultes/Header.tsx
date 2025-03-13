@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { useState, useEffect } from 'react';
@@ -64,16 +65,25 @@ const Header = () => {
     >
       <Container maxWidth="xl">
         <Toolbar className="flex justify-center items-center p-4 gap-8">
-          <Typography
-            href="#"
-            variant="h5"
-            component="a"
-            className="flex items-center"
-            style={{ fontWeight: 'bold', color: 'white' }}
-          >
-            Quantum
-            <span style={{ color: '#5a7d2f' }}>Robotics</span>
-          </Typography>
+          <Box className="flex items-center gap-2">
+            <Image
+              width={50}
+              height={50}
+              src="/assets/logo.svg"
+              alt="Quantum Robotics Logo"
+            />
+
+            <Typography
+              href="#"
+              variant="h5"
+              component="a"
+              className="flex items-center"
+              style={{ fontWeight: 'bold', color: 'white' }}
+            >
+              Quantum
+              <span style={{ color: '#5a7d2f' }}>Robotics</span>
+            </Typography>
+          </Box>
 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }} className="gap-4">
             {navItems.map((item) => (
