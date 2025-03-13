@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import Bugsnag from '@/lib/bugsnag';
+import Bugsnag from '@/lib/bugsnag'
 
 interface ThinkingContent {
   type: 'thinking';
@@ -31,34 +31,25 @@ interface ClaudeResponse {
 }
 
 export async function POST(req: Request) {
-  console.log('REQUEST STARTED')
   try {
+    console.log('Request initiated')
     const { input } = await req.json();
-    console.log('REQUEST Initiated')
 
-    const apiKey = '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';
-    
-    if (!apiKey) {
-      console.error('Missing Anthropic API key');
-      return NextResponse.json(
-        { error: 'Configuration error: Missing API key' },
-        { status: 500 }
-      );
-    }
-
+    console.log('Request initiated with input')
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
-        'x-api-key': apiKey,
+        'x-api-key':
+          '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',
         'anthropic-version': '2023-06-01',
         'content-type': 'application/json',
       },
       body: JSON.stringify({
         model: 'claude-3-7-sonnet-20250219',
-        max_tokens: 200,
+        max_tokens: 1100,
         thinking: {
           type: 'enabled',
-          budget_tokens: 200,
+          budget_tokens: 1024,
         },
         system:
           "You are an industrial robotics NLP control system called Qortex OS. You translate natural language commands into precise robotic operations with two response types: first a 'thinking' response showing your analysis process, then an 'action' response describing exactly what the robot will do. Include specific technical details like force measurements, speeds, trajectories, computer vision, edge computing, and safety parameters. Format thinking responses as technical analysis and action responses as executable commands with specific parameters. Keep responses concise and focused on technical details and don't include the HTML in the response",
@@ -70,23 +61,25 @@ export async function POST(req: Request) {
         ],
         temperature: 1.0,
       }),
-      signal: AbortSignal.timeout(15000),
     });
 
+    
+    
     const responseText = await response.text();
-    Bugsnag.notify(new Error(`API Error: ${response.status} - ${response.statusText} - ${responseText}`));
-
-    console.log('response', response)
+    const error = new Error(`API Error: Response text ${JSON.parse(responseText) as ClaudeResponse} -- ${response.status} -- ${response.statusText}`);
+    Bugsnag.notify(error);
+    console.log('Raw API Response:', responseText);
 
     if (!response.ok) {
+      const error = new Error(`API Error: Response text ${JSON.parse(responseText) as ClaudeResponse} -- ${response.status} -- ${response.statusText}`);
+      Bugsnag.notify(error);
       console.error('API Error:', response.status, response.statusText);
-      Bugsnag.notify(new Error(`API Error: ${response.status} - ${response.statusText}`));
-      
       return NextResponse.json(
         {
           error: 'API request failed',
           status: response.status,
           statusText: response.statusText,
+          details: responseText,
         },
         { status: response.status },
       );
@@ -96,25 +89,29 @@ export async function POST(req: Request) {
 
     try {
       data = JSON.parse(responseText) as ClaudeResponse;
-      console.log('DATA', data)
     } catch (parseError) {
+      const error = new Error(`API Error: Response text ${JSON.parse(responseText) as ClaudeResponse} -- ${response.status} -- ${response.statusText}`);
+      Bugsnag.notify(error);
+
       console.error('Error parsing API response:', parseError);
-      Bugsnag.notify(new Error(`Failed to parse API response: ${parseError instanceof Error ? parseError.message : String(parseError)}`));
+      Bugsnag.notify(error);
 
       return NextResponse.json(
-        { error: 'Failed to parse response from Claude API' },
+        {
+          error: 'Failed to parse response from Claude API',
+          status: response.status,
+          details: responseText, // Show raw response
+        },
         { status: 500 },
       );
     }
 
     if (!data || !data.content) {
       return NextResponse.json(
-        { error: 'Invalid response from Claude API' },
+        { error: 'Invalid response from Claude API', details: responseText },
         { status: 500 },
       );
     }
-
-
 
     let action = '';
     let thinking = '';
@@ -138,7 +135,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ thinking, action, status: 200 });
   } catch (error) {
     console.error('Server Error:', error);
-    Bugsnag.notify(new Error(`Server Error: ${error instanceof Error ? error.message : String(error)}`));
 
     return NextResponse.json(
       {
