@@ -63,8 +63,6 @@ const DesiredOutcomesStep = () => {
     },
   };
 
-  console.log('FormData', formData);
-
   return (
     <Grid container spacing={3}>
       <Grid item xs={10}>
@@ -104,16 +102,15 @@ const DesiredOutcomesStep = () => {
             '& .MuiSlider-markLabel': {
               color: '#b0b0b0',
               top: '-15px',
-
             },
           }}
         />
       </Grid>
 
-      <Grid item xs={12} className='w-full'>
+      <Grid item xs={12} className="w-full">
         <Typography
           align="center"
-          variant='h6'
+          variant="h6"
           sx={{
             color: '#3c5a1e',
             fontWeight: 'bold',

@@ -27,8 +27,6 @@ export async function POST(req: Request) {
       },
     });
 
-    console.log('Pilot Program record created:', newPilotProgram);
-
     return NextResponse.json({
       message: 'Form data received and record created successfully',
       data: newPilotProgram,
