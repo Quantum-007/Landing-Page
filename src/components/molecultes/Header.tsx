@@ -45,9 +45,40 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleButtonClicked = () => {
+  const handleButtonClicked = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    const contactSection = document.getElementById('contact');
+
     setTab('comprehensive');
     setMessage('');
+
+    if (!contactSection) return;
+
+    const targetPosition =
+      contactSection.getBoundingClientRect().top + window.scrollY;
+    const startPosition = window.scrollY;
+    const distance = targetPosition - startPosition;
+    const duration = 1200;
+    let startTime: number | null = null;
+
+    const easeInOutQuad = (t: number) =>
+      t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+    const animateScroll = (currentTime: number) => {
+      if (startTime === null) startTime = currentTime;
+      const elapsedTime = currentTime - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+      const ease = easeInOutQuad(progress);
+
+      window.scrollTo(0, startPosition + distance * ease);
+
+      if (elapsedTime < duration) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    requestAnimationFrame(animateScroll);
   };
 
   return (

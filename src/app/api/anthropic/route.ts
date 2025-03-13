@@ -60,7 +60,21 @@ export async function POST(req: Request) {
       }),
     });
 
-    const data = (await response.json()) as ClaudeResponse;
+    const responseText = await response.text();
+    let data: ClaudeResponse;
+
+    try {
+      data = JSON.parse(responseText) as ClaudeResponse;
+    } catch (parseError) {
+      console.error('Error parsing API response:', parseError);
+      return NextResponse.json(
+        {
+          error: 'Failed to parse response from Claude API',
+          details: responseText,
+        },
+        { status: 500 },
+      );
+    }
 
     if (!data || !data.content) {
       return NextResponse.json(
