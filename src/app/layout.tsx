@@ -17,15 +17,17 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://quantumroboticslab.com/'),
-  title: 'FullKitchen - Restaurant marketing and online ordering platform',
+  title:
+    'Quantum Robotics | NLP-Powered Industrial Automation | The Future of Robotics',
   description:
-    'FullKitchen offers a restaurant software solution to get more customers for restaurants. Online ordering platform with delivery and pickup, integrated loyalty platform, marketing and customer management. Try our data and AI driven restaurant software for free.',
+    'Quantum Robotics: Pioneering industrial automation through advanced NLP, computer vision, and edge computing. Our platform dramatically accelerates robot development and deployment, enabling natural language programming and multi-robot coordination. Building the future of American manufacturing with intelligent robotics that understand human intent and transform productivity. The Tesla of industrial automation.',
   openGraph: {
     url: 'https://quantumroboticslab.com/',
     images: [{ url: '/assets/logo.svg' }],
-    title: 'FullKitchen - Restaurant marketing and online ordering platform',
+    title:
+      'Quantum Robotics | NLP-Powered Industrial Automation | The Future of Robotics',
     description:
-      'FullKitchen offers a restaurant software solution to get more customers for restaurants. Online ordering platform with delivery and pickup, integrated loyalty platform, marketing and customer management. Try our data and AI driven restaurant software for free.',
+      'Quantum Robotics: Pioneering industrial automation through advanced NLP, computer vision, and edge computing. Our platform dramatically accelerates robot development and deployment, enabling natural language programming and multi-robot coordination. Building the future of American manufacturing with intelligent robotics that understand human intent and transform productivity. The Tesla of industrial automation.',
   },
 };
 
@@ -36,6 +38,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/assets/logo.svg" />
+      </head>
       <body className={`${manrope.variable} antialiased`}>
         <ThemeRegistry>
           <QuantumStoreProvider>
