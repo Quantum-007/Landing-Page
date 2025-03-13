@@ -15,7 +15,7 @@ const IndustrialAutomation = () => {
   return (
     <Box
       id="hero"
-      className="flex flex-col items-center overflow-hidden py-20 bg-[#121212]"
+      className="flex flex-col items-center overflow-hidden pt-20 bg-[#121212]"
       sx={{
         position: 'relative',
         '&::before': {

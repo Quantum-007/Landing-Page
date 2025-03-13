@@ -13,7 +13,7 @@ const VisionAndMission = () => {
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <Box id="vision-mission" className="py-24 bg-[#1e1e1e]">
+    <Box id="vision-mission" className="pt-5 pb-20 bg-[#1e1e1e]">
       <Container>
         <Grid container spacing={10} alignItems="center">
           <Grid item xs={12} md={6}>
@@ -57,8 +57,8 @@ const VisionAndMission = () => {
               }}
             >
               <Image
-                layout="fill"
                 priority
+                layout="fill"
                 objectFit="cover"
                 alt="Our Mission"
                 src="/assets/home/our-mission.webp"
@@ -107,8 +107,8 @@ const VisionAndMission = () => {
               }}
             >
               <Image
+                priority
                 layout="fill"
-                loading="lazy"
                 alt="Our Vision"
                 objectFit="cover"
                 src="/assets/home/our-vision.svg"
