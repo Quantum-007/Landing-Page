@@ -31,9 +31,11 @@ interface ClaudeResponse {
 }
 
 export async function POST(req: Request) {
+  console.log('REQUEST STARTED')
   try {
     const { input } = await req.json();
-    
+    console.log('REQUEST Initiated')
+
     const apiKey = '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';
     
     if (!apiKey) {
@@ -53,10 +55,10 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         model: 'claude-3-7-sonnet-20250219',
-        max_tokens: 1100,
+        max_tokens: 200,
         thinking: {
           type: 'enabled',
-          budget_tokens: 1024,
+          budget_tokens: 200,
         },
         system:
           "You are an industrial robotics NLP control system called Qortex OS. You translate natural language commands into precise robotic operations with two response types: first a 'thinking' response showing your analysis process, then an 'action' response describing exactly what the robot will do. Include specific technical details like force measurements, speeds, trajectories, computer vision, edge computing, and safety parameters. Format thinking responses as technical analysis and action responses as executable commands with specific parameters. Keep responses concise and focused on technical details and don't include the HTML in the response",
@@ -74,7 +76,8 @@ export async function POST(req: Request) {
     const responseText = await response.text();
     Bugsnag.notify(new Error(`API Error: ${response.status} - ${response.statusText} - ${responseText}`));
 
-    
+    console.log('response', response)
+
     if (!response.ok) {
       console.error('API Error:', response.status, response.statusText);
       Bugsnag.notify(new Error(`API Error: ${response.status} - ${response.statusText}`));
@@ -93,6 +96,7 @@ export async function POST(req: Request) {
 
     try {
       data = JSON.parse(responseText) as ClaudeResponse;
+      console.log('DATA', data)
     } catch (parseError) {
       console.error('Error parsing API response:', parseError);
       Bugsnag.notify(new Error(`Failed to parse API response: ${parseError instanceof Error ? parseError.message : String(parseError)}`));
@@ -109,6 +113,8 @@ export async function POST(req: Request) {
         { status: 500 },
       );
     }
+
+
 
     let action = '';
     let thinking = '';
