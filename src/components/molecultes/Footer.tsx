@@ -1,22 +1,24 @@
 'use client';
 
+import Image from 'next/image';
+
 import {
   Box,
   Grid,
   Link,
   Container,
   Typography,
-  IconButton,
+  // IconButton,
 } from '@mui/material';
 
 import {
   Map as MapIcon,
   Phone as PhoneIcon,
   Email as EmailIcon,
-  GitHub as GitHubIcon,
-  Twitter as TwitterIcon,
-  YouTube as YouTubeIcon,
-  LinkedIn as LinkedInIcon,
+  // GitHub as GitHubIcon,
+  // Twitter as TwitterIcon,
+  // YouTube as YouTubeIcon,
+  // LinkedIn as LinkedInIcon,
 } from '@mui/icons-material';
 import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 
@@ -57,12 +59,19 @@ const Footer = () => {
               Quantum Robotics
             </Typography>
 
-            <Typography variant="body1" className="text-[#b0b0b0] pt-5">
+            <Typography variant="body1" className="text-[#b0b0b0] py-5">
               Revolutionizing industrial automation with precision robotics and
               intelligent systems.
             </Typography>
 
-            <Box className="flex gap-2 mt-3">
+            <Image
+              width={100}
+              height={100}
+              src="/assets/logo.svg"
+              alt="Quantum Robotics Logo"
+            />
+
+            {/* <Box className="flex gap-2 mt-3">
               {[
                 {
                   icon: (
@@ -108,7 +117,7 @@ const Footer = () => {
                   {item.icon}
                 </IconButton>
               ))}
-            </Box>
+            </Box> */}
           </Grid>
 
           {/* <Grid item xs={12} sm={6} md={3}>
@@ -238,17 +247,17 @@ const Footer = () => {
               <Box className="flex items-center justify-start gap-3 text-[#b0b0b0]">
                 <MapIcon className="mt-1 text-[#3c5a1e] flex-shrink-0" />
                 <Typography variant="body2">
-                  123 Innovation Way, Robotics Park, CA 94103
+                  RoboHouse, New York, NY 10036, United States
                 </Typography>
               </Box>
               <Box className="flex items-center justify-start gap-3 text-[#b0b0b0]">
                 <PhoneIcon className="mt-1 text-[#3c5a1e] flex-shrink-0" />
-                <Typography variant="body2">+1 (555) 123-4567</Typography>
+                <Typography variant="body2">+1 (650)-273-0693</Typography>
               </Box>
               <Box className="flex items-center justify-start gap-3 text-[#b0b0b0]">
                 <EmailIcon className="mt-1 text-[#3c5a1e] flex-shrink-0" />
                 <Typography variant="body2">
-                  info@quantumrobotics.tech
+                  abdul@quantumroboticslab.com
                 </Typography>
               </Box>
             </Box>

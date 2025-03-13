@@ -1,17 +1,22 @@
-import { getPlaceholderImage } from '@/utils/placeHolderImage';
 import {
-  GitHub as GitHubIcon,
-  Twitter as TwitterIcon,
+  // GitHub as GitHubIcon,
+  // Twitter as TwitterIcon,
   LinkedIn as LinkedInIcon,
 } from '@mui/icons-material';
 
 export const TEAM_MEMBERS = [
   {
-    name: 'Sarah Chen',
-    role: 'Chief Executive Officer',
-    description:
-      'Former robotics engineer with 15+ years experience in industrial automation. Led multiple successful startups in the manufacturing technology space.',
-    image: getPlaceholderImage(400, 500),
+    name: 'Abdul',
+    role: 'CEO',
+    description: 'Seasoned operator with cross-industry expertise',
+    details: [
+      'Former Director of Product at Revinate, San Francisco',
+      'Founded and scaled cryptocurrency exchange in Dubai',
+      'Developed machine learning software for disease prediction',
+      'Defense consultant at Booz Allen Hamilton, specializing in weapons systems',
+      'Economics, University of Maryland',
+    ],
+    image: 'assets/home/our_team/abdul.jpg',
     socials: [
       {
         icon: (
@@ -21,24 +26,22 @@ export const TEAM_MEMBERS = [
           />
         ),
         key: 'linkedin',
-      },
-      {
-        icon: (
-          <TwitterIcon
-            fontSize="large"
-            className="bg-gray-900 hover:bg-[#5a7d2f] p-2 rounded-full text-[#b0b0b0]"
-          />
-        ),
-        key: 'twitter',
+        url: 'https://www.linkedin.com/in/abdulgmanan/',
       },
     ],
   },
   {
-    name: 'Marcus Johnson',
-    role: 'Chief Technology Officer',
+    name: 'Ali',
+    role: 'CTO',
     description:
-      'AI and robotics Ph.D. with background in developing learning algorithms for complex robotic systems. Previously led R&D at Boston Dynamics.',
-    image: getPlaceholderImage(400, 500),
+      'Engineering leader with passion for hardware and software innovation',
+    details: [
+      'Robotics Engineer at Amazon',
+      'Software and Hardware Engineer at Google',
+      'Computer Engineering, University of Maryland',
+      'Specialized focus in NLP, edge computing, and computer vision',
+    ],
+    image: 'assets/home/our_team/ali.png',
     socials: [
       {
         icon: (
@@ -48,16 +51,17 @@ export const TEAM_MEMBERS = [
           />
         ),
         key: 'linkedin',
+        url: 'https://www.linkedin.com/in/ali-manan/',
       },
-      {
-        icon: (
-          <GitHubIcon
-            fontSize="large"
-            className="bg-gray-900 hover:bg-[#5a7d2f] p-2 rounded-full text-[#b0b0b0]"
-          />
-        ),
-        key: 'github',
-      },
+      // {
+      //   icon: (
+      //     <GitHubIcon
+      //       fontSize="large"
+      //       className="bg-gray-900 hover:bg-[#5a7d2f] p-2 rounded-full text-[#b0b0b0]"
+      //     />
+      //   ),
+      //   key: 'github',
+      // },
     ],
   },
   // {
