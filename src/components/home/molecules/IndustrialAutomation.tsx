@@ -1,8 +1,8 @@
 import React from 'react';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 import { useQuantumStore } from '@/providers/QuantumStoreProvider';
-import { Box, Container, Grid, Typography, Button } from '@mui/material';
+import { Box, Container, Typography, Button } from '@mui/material';
 
 const IndustrialAutomation = () => {
   const { setTab, setMessage } = useQuantumStore((state) => state);
@@ -15,7 +15,7 @@ const IndustrialAutomation = () => {
   return (
     <Box
       id="hero"
-      className="flex items-center relative overflow-hidden py-20 bg-[#121212]"
+      className="flex flex-col items-center overflow-hidden py-20 bg-[#121212]"
       sx={{
         position: 'relative',
         '&::before': {
@@ -31,116 +31,72 @@ const IndustrialAutomation = () => {
         },
       }}
     >
-      <Container className="relative z-2">
-        <Grid container spacing={4} alignItems="center">
-          <Grid item xs={12} md={6}>
-            <Box>
-              <Typography
-                variant="body1"
-                fontWeight="600"
-                className="font-bold pb-4 tracking-wider uppercase text-[#5a7d2f]"
-              >
-                INDUSTRIAL AUTOMATION
-              </Typography>
+      <Container className="relative z-2 flex flex-col items-center text-center">
+        <Typography
+          variant="body1"
+          fontWeight="600"
+          className="font-bold pb-4 tracking-wider uppercase text-[#5a7d2f]"
+        >
+          Automation From the Future
+        </Typography>
 
-              <Typography
-                variant="h2"
-                fontWeight="1000"
-                className="text-start pb-4"
-              >
-                Precision Robotics Engineered for Performance
-              </Typography>
+        <Typography variant="h2" fontWeight="1000" className="pb-4 max-w-4xl">
+          Precision Robotics Engineered for Performance
+        </Typography>
 
-              <Typography
-                variant="body1"
-                fontSize="17.6"
-                className="text-[#b0b0b0] mt-6"
-              >
-                Our robotic solutions combine cutting-edge technology with
-                industrial-grade reliability to deliver unmatched efficiency,
-                precision, and cost-effectiveness across multiple industries.
-              </Typography>
+        <Typography
+          variant="body1"
+          fontSize="17.6"
+          className="text-[#b0b0b0] mt-6"
+        >
+          Smart Robotics. Smarter Software. Infinite Possibilities.
+        </Typography>
 
-              <Box className="flex flex-col sm:flex-row gap-4 mb-8 mt-4">
-                <Button
-                  href="#contact"
-                  variant="contained"
-                  onClick={handleButtonClicked}
-                  sx={{
-                    bgcolor: '#3c5a1e',
-                    fontWeight: 'bold',
-                    '&:hover': { bgcolor: '#2c6e31' },
-                  }}
-                >
-                  Join Pilot Program
-                  <span className="inline-block bg-green-600 text-white text-xs font-semibold px-2 py-1 ml-2 rounded animate-pulse">
-                    FREE
-                  </span>
-                </Button>
-
-                <Button
-                  size="large"
-                  variant="outlined"
-                  href="#our-products"
-                  sx={{
-                    borderColor: '#3c5a1e',
-                    color: 'white',
-                    '&:hover': {
-                      bgcolor: '#2c6e31',
-                      borderColor: '#3c5a1e',
-                    },
-                  }}
-                >
-                  Explore Solutions
-                </Button>
-              </Box>
-              <Box className="flex flex-col sm:flex-row gap-8">
-                <Box className="flex flex-col">
-                  <Typography
-                    variant="h4"
-                    sx={{ fontWeight: 600 }}
-                    className="text-4xl text-[#3c5a1e]"
-                  >
-                    99.8%
-                  </Typography>
-
-                  <Typography variant="body2" className="text-[#b0b0b0]">
-                    Operational Reliability
-                  </Typography>
-                </Box>
-
-                <Box className="flex flex-col">
-                  <Typography
-                    variant="h4"
-                    sx={{ fontWeight: 600 }}
-                    className="text-4xl text-[#3c5a1e]"
-                  >
-                    35%
-                  </Typography>
-
-                  <Typography variant="body2" className="text-[#b0b0b0]">
-                    Average Cost Reduction
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
-
-          <Grid
-            item
-            md={6}
-            xs={12}
-            className="flex justify-center md:justify-end"
+        <Box className="flex flex-col sm:flex-row gap-4 mb-8 mt-4">
+          <Button
+            href="#contact"
+            variant="contained"
+            onClick={handleButtonClicked}
+            sx={{
+              bgcolor: '#3c5a1e',
+              fontWeight: 'bold',
+              '&:hover': { bgcolor: '#2c6e31' },
+            }}
           >
-            <Image
-              width={600}
-              height={500}
-              loading="lazy"
-              alt="precision"
-              src="/assets/home/precision.jpg"
-            />
-          </Grid>
-        </Grid>
+            Join Pilot Program
+            <span className="inline-block bg-green-600 text-white text-xs font-semibold px-2 py-1 ml-2 rounded animate-pulse">
+              FREE
+            </span>
+          </Button>
+
+          {/* <Button
+            size="large"
+            variant="outlined"
+            href="#our-products"
+            sx={{
+              borderColor: '#3c5a1e',
+              color: 'white',
+              '&:hover': {
+                bgcolor: '#2c6e31',
+                borderColor: '#3c5a1e',
+              },
+            }}
+          >
+            Explore Solutions
+          </Button> */}
+        </Box>
+
+        {/* <Box className="h-[600] w-full">
+          <Image
+            width={1200}
+            height={600}
+            loading="lazy"
+            alt="precision"
+            layout="intrinsic"
+            className="w-full h-auto"
+            src="/assets/home/precision.svg"
+          />
+        </Box> */}
       </Container>
     </Box>
   );

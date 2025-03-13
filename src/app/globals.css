@@ -1,24 +1,12 @@
-/* globals.css */
+@import 'tailwindcss';
 
 :root {
   --accent-primary: #3c8a2e; /* Main accent color */
   --accent-secondary: #2c7031; /* Secondary accent color */
   --accent-tertiary: #4aad39; /* Tertiary accent color */
   --accent-hover: #5bc74a; /* Hover accent color */
-}
-
-@import 'tailwindcss';
-
-@theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-:root {
-  --background: #121212;
-  --foreground: #171717;
-  --font-stack: 'Inter', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont,
-    sans-serif;
+  --font-manrope: 'Manrope', sans-serif;
+  --font-mono: 'Source Code Pro', monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -31,5 +19,5 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-stack);
+  font-family: var(--font-manrope);
 }

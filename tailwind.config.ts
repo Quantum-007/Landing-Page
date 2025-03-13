@@ -16,7 +16,7 @@ const config: Partial<Config> = {
         accentHover: 'var(--accent-hover)',
       },
       fontFamily: {
-        sans: 'var(--font-sans)',
+        sans: 'var(--font-manrope)', // Set Manrope as the primary font
         mono: 'var(--font-mono)',
       },
     },

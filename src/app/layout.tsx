@@ -2,15 +2,17 @@ import './globals.css';
 
 import Header from '@/components/molecultes/Header';
 import Footer from '@/components/molecultes/Footer';
+import ThemeRegistry from '@/providers/ThemeRegistry';
 
 import type { Metadata } from 'next';
 
-import { Inter } from 'next/font/google';
+import { Manrope } from 'next/font/google';
 import { QuantumStoreProvider } from '@/providers/QuantumStoreProvider';
 
-const inter = Inter({
-  variable: '--font-inter',
+const manrope = Manrope({
+  variable: '--font-manrope',
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
 });
 
 export const metadata: Metadata = {
@@ -25,12 +27,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>
-        <QuantumStoreProvider>
-          <Header />
-          <main className="pt-16">{children}</main>
-          <Footer />
-        </QuantumStoreProvider>
+      <body className={`${manrope.variable} antialiased`}>
+        <ThemeRegistry>
+          <QuantumStoreProvider>
+            <Header />
+            <main className="pt-16">{children}</main>
+            <Footer />
+          </QuantumStoreProvider>
+        </ThemeRegistry>
       </body>
     </html>
   );
