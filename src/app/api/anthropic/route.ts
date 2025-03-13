@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import Bugsnag from '@/lib/bugsnag'
+import Bugsnag from '@/lib/bugsnag';
 
 interface ThinkingContent {
   type: 'thinking';
@@ -33,12 +33,21 @@ interface ClaudeResponse {
 export async function POST(req: Request) {
   try {
     const { input } = await req.json();
+    
+    const apiKey = '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';
+    
+    if (!apiKey) {
+      console.error('Missing Anthropic API key');
+      return NextResponse.json(
+        { error: 'Configuration error: Missing API key' },
+        { status: 500 }
+      );
+    }
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
-        'x-api-key':
-          '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',
+        'x-api-key': apiKey,
         'anthropic-version': '2023-06-01',
         'content-type': 'application/json',
       },
@@ -59,23 +68,22 @@ export async function POST(req: Request) {
         ],
         temperature: 1.0,
       }),
+      signal: AbortSignal.timeout(15000),
     });
 
     const responseText = await response.text();
-    const error = new Error(`API Error: Response text ${JSON.parse(responseText) as ClaudeResponse} -- ${response.status} -- ${response.statusText}`);
-    Bugsnag.notify(error);
-    console.log('Raw API Response:', responseText);
+    Bugsnag.notify(new Error(`API Error: ${response.status} - ${response.statusText} - ${responseText}`));
 
+    
     if (!response.ok) {
-      const error = new Error(`API Error: Response text ${JSON.parse(responseText) as ClaudeResponse} -- ${response.status} -- ${response.statusText}`);
-      Bugsnag.notify(error);
       console.error('API Error:', response.status, response.statusText);
+      Bugsnag.notify(new Error(`API Error: ${response.status} - ${response.statusText}`));
+      
       return NextResponse.json(
         {
           error: 'API request failed',
           status: response.status,
           statusText: response.statusText,
-          details: responseText,
         },
         { status: response.status },
       );
@@ -86,23 +94,18 @@ export async function POST(req: Request) {
     try {
       data = JSON.parse(responseText) as ClaudeResponse;
     } catch (parseError) {
-      const error = new Error(`API Error: Response text ${JSON.parse(responseText) as ClaudeResponse} -- ${response.status} -- ${response.statusText}`);
-      Bugsnag.notify(error);
-
       console.error('Error parsing API response:', parseError);
+      Bugsnag.notify(new Error(`Failed to parse API response: ${parseError instanceof Error ? parseError.message : String(parseError)}`));
+
       return NextResponse.json(
-        {
-          error: 'Failed to parse response from Claude API',
-          status: response.status,
-          details: responseText, // Show raw response
-        },
+        { error: 'Failed to parse response from Claude API' },
         { status: 500 },
       );
     }
 
     if (!data || !data.content) {
       return NextResponse.json(
-        { error: 'Invalid response from Claude API', details: responseText },
+        { error: 'Invalid response from Claude API' },
         { status: 500 },
       );
     }
@@ -128,11 +131,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ thinking, action, status: 200 });
   } catch (error) {
-    
-    const errorMesage = new Error(`API Error Message: ${error}`);
-    Bugsnag.notify(errorMesage);
-
     console.error('Server Error:', error);
+    Bugsnag.notify(new Error(`Server Error: ${error instanceof Error ? error.message : String(error)}`));
 
     return NextResponse.json(
       {

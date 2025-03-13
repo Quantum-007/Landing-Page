@@ -51,7 +51,7 @@ const QortexDemo = () => {
       console.log('response from API:', response)
 
       const data = await response.json();
-      Bugsnag.notify(`$Response form API: ${data}`)
+      Bugsnag.notify(`Response from API: ${JSON.stringify(data, null, 2)}`);
 
       if (data.error || data.status === 500) {
         throw new Error(data.error);
