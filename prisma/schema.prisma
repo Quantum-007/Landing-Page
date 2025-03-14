@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgrestest:postgres@localhost:5432/postgrestest?schema=public"
+  url      = "postgresql://postgres:oiwxjbFq3BJ3W6xUzPeT@database-quantumiteration.c1yu6e08kzcw.us-west-1.rds.amazonaws.com:5432/postgres?schema=public"
 }
 
 model GeneralInquiry {
