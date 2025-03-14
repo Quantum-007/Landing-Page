@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:oiwxjbFq3BJ3W6xUzPeT@database-quantumiteration.c1yu6e08kzcw.us-west-1.rds.amazonaws.com:5432/postgres?schema=public"
+  url      = "postgresql://postgrestest:postgres@localhost:5432/postgrestest?schema=public"
 }
 
 model GeneralInquiry {
@@ -18,7 +18,7 @@ model GeneralInquiry {
   createdAt DateTime @default(now())
 }
 
-model PilotProgram {
+model BusinessPilotProgramInfo {
   id                     Int      @id @default(autoincrement())
   name                   String
   email                  String   @unique
@@ -36,4 +36,12 @@ model PilotProgram {
   implementationTimeline String
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
+}
+
+model CustomerPilotProgramInfo {
+  id      Int     @id @default(autoincrement())
+  name    String
+  email   String  @unique
+  zipCode String
+  consent Boolean
 }
