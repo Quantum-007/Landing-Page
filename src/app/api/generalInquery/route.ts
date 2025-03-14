@@ -6,45 +6,6 @@ import { GeneralInqueryFormData } from '@/types/forms/form';
 
 const prisma = new PrismaClient();
 
-export async function GET_SINGLE(req: Request) {
-  try {
-    const url = new URL(req.url);
-    const id = url.searchParams.get('id');
-    if (!id) {
-      return NextResponse.json(
-        { error: 'Missing inquiry ID' },
-        { status: 400 },
-      );
-    }
-
-    const inquiry = await prisma.generalInquiry.findUnique({
-      where: { id: Number(id) },
-    });
-
-    if (!inquiry) {
-      return NextResponse.json({ error: 'Inquiry not found' }, { status: 404 });
-    }
-
-    return NextResponse.json(inquiry);
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      Bugsnag.notify(error);
-      return NextResponse.json(
-        { error: `Failed to retrieve data: ${error.message}` },
-        { status: 500 },
-      );
-    } else {
-      return NextResponse.json(
-        {
-          error:
-            'Something went wrong, but no specific error message is available.',
-        },
-        { status: 500 },
-      );
-    }
-  }
-}
-
 export async function PUT(req: Request) {
   try {
     const url = new URL(req.url);
