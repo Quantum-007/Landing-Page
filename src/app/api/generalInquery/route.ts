@@ -1,7 +1,8 @@
+import Bugsnag from '@/lib/bugsnag';
+
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { GeneralInqueryFormData } from '@/types/forms/form';
-import Bugsnag from '@/lib/bugsnag';
 
 const prisma = new PrismaClient();
 
@@ -10,7 +11,10 @@ export async function GET_SINGLE(req: Request) {
     const url = new URL(req.url);
     const id = url.searchParams.get('id');
     if (!id) {
-      return NextResponse.json({ error: 'Missing inquiry ID' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Missing inquiry ID' },
+        { status: 400 },
+      );
     }
 
     const inquiry = await prisma.generalInquiry.findUnique({
@@ -18,10 +22,7 @@ export async function GET_SINGLE(req: Request) {
     });
 
     if (!inquiry) {
-      return NextResponse.json(
-        { error: 'Inquiry not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'Inquiry not found' }, { status: 404 });
     }
 
     return NextResponse.json(inquiry);
@@ -30,7 +31,7 @@ export async function GET_SINGLE(req: Request) {
       Bugsnag.notify(error);
       return NextResponse.json(
         { error: `Failed to retrieve data: ${error.message}` },
-        { status: 500 }
+        { status: 500 },
       );
     } else {
       return NextResponse.json(
@@ -38,7 +39,7 @@ export async function GET_SINGLE(req: Request) {
           error:
             'Something went wrong, but no specific error message is available.',
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
   }
@@ -50,15 +51,23 @@ export async function PUT(req: Request) {
     const id = url.searchParams.get('id');
 
     if (!id) {
-      return NextResponse.json({ error: 'Missing inquiry ID' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Missing inquiry ID' },
+        { status: 400 },
+      );
     }
 
     const formData: GeneralInqueryFormData = await req.json();
 
-    if (!formData.name || !formData.email || !formData.message || formData.consent === undefined) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.message ||
+      formData.consent === undefined
+    ) {
       return NextResponse.json(
         { error: 'Missing required fields: name, email, message, consent' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -69,7 +78,7 @@ export async function PUT(req: Request) {
         email: formData.email,
         message: formData.message,
         consent: formData.consent,
-        company: formData.company || '', 
+        company: formData.company || '',
       },
     });
 
@@ -82,7 +91,7 @@ export async function PUT(req: Request) {
       Bugsnag.notify(error);
       return NextResponse.json(
         { error: `Failed to update data: ${error.message}` },
-        { status: 500 }
+        { status: 500 },
       );
     } else {
       return NextResponse.json(
@@ -90,7 +99,7 @@ export async function PUT(req: Request) {
           error:
             'Something went wrong, but no specific error message is available.',
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
   } finally {
@@ -101,10 +110,13 @@ export async function PUT(req: Request) {
 export async function DELETE(req: Request) {
   try {
     const url = new URL(req.url);
-    const id = url.searchParams.get('id'); 
-    
+    const id = url.searchParams.get('id');
+
     if (!id) {
-      return NextResponse.json({ error: 'Missing inquiry ID' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Missing inquiry ID' },
+        { status: 400 },
+      );
     }
 
     const deletedInquiry = await prisma.generalInquiry.delete({
@@ -120,7 +132,7 @@ export async function DELETE(req: Request) {
       Bugsnag.notify(error);
       return NextResponse.json(
         { error: `Failed to delete data: ${error.message}` },
-        { status: 500 }
+        { status: 500 },
       );
     } else {
       return NextResponse.json(
@@ -128,20 +140,19 @@ export async function DELETE(req: Request) {
           error:
             'Something went wrong, but no specific error message is available.',
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
   } finally {
     await prisma.$disconnect();
   }
-  
 }
 
 export async function POST(req: Request) {
   try {
     const formData: GeneralInqueryFormData = await req.json();
 
-    console.log('request initiated', formData)
+    console.log('request initiated', formData);
 
     const newInquiry = await prisma.generalInquiry.create({
       data: {
@@ -161,7 +172,7 @@ export async function POST(req: Request) {
     });
   } catch (error: unknown) {
     if (error instanceof Error) {
-      Bugsnag.notify(error)
+      Bugsnag.notify(error);
       return NextResponse.json(
         { error: `Something went wrong: ${error.message}` },
         { status: 500 },
@@ -195,15 +206,16 @@ export async function GET() {
       Bugsnag.notify(error);
       return NextResponse.json(
         { error: `Failed to retrieve data: ${error.message}` },
-        { status: 500 }
+        { status: 500 },
       );
     } else {
       return NextResponse.json(
-        { error: 'Something went wrong, but no specific error message is available.' },
-        { status: 500 }
+        {
+          error:
+            'Something went wrong, but no specific error message is available.',
+        },
+        { status: 500 },
       );
     }
   }
 }
-
-

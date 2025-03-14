@@ -1,7 +1,8 @@
+import Bugsnag from '@/lib/bugsnag';
+
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { PilotProgramFormData } from '@/types/forms/form';
-import Bugsnag from '@/lib/bugsnag';
 
 const prisma = new PrismaClient();
 
@@ -34,7 +35,7 @@ export async function POST(req: Request) {
     });
   } catch (error: unknown) {
     if (error instanceof Error) {
-      Bugsnag.notify(error)
+      Bugsnag.notify(error);
       return NextResponse.json(
         { error: `Something went wrong, ${error.message}` },
         { status: 500 },
@@ -58,7 +59,7 @@ export async function GET() {
   } catch (error: unknown) {
     return NextResponse.json(
       { error: `Failed to fetch pilot programs: ${error}` },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
