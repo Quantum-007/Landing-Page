@@ -32,10 +32,8 @@ interface ClaudeResponse {
 
 export async function POST(req: Request) {
   try {
-    console.log('Request initiated')
     const { input } = await req.json();
 
-    console.log('Request initiated with input')
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -63,17 +61,11 @@ export async function POST(req: Request) {
       }),
     });
 
-    
-    
     const responseText = await response.text();
-    const error = new Error(`API Error: Response text ${JSON.parse(responseText) as ClaudeResponse} -- ${response.status} -- ${response.statusText}`);
-    Bugsnag.notify(error);
-    console.log('Raw API Response:', responseText);
-
     if (!response.ok) {
       const error = new Error(`API Error: Response text ${JSON.parse(responseText) as ClaudeResponse} -- ${response.status} -- ${response.statusText}`);
       Bugsnag.notify(error);
-      console.error('API Error:', response.status, response.statusText);
+
       return NextResponse.json(
         {
           error: 'API request failed',
@@ -90,10 +82,7 @@ export async function POST(req: Request) {
     try {
       data = JSON.parse(responseText) as ClaudeResponse;
     } catch (parseError) {
-      const error = new Error(`API Error: Response text ${JSON.parse(responseText) as ClaudeResponse} -- ${response.status} -- ${response.statusText}`);
-      Bugsnag.notify(error);
-
-      console.error('Error parsing API response:', parseError);
+      const error = new Error(`Error:  ${parseError}`);
       Bugsnag.notify(error);
 
       return NextResponse.json(
@@ -134,7 +123,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ thinking, action, status: 200 });
   } catch (error) {
-    console.error('Server Error:', error);
+      const errorMessage = new Error(`Error: ${error}`);
+      Bugsnag.notify(errorMessage);
 
     return NextResponse.json(
       {

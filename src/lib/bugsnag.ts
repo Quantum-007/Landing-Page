@@ -2,7 +2,7 @@ import Bugsnag from "@bugsnag/js";
 
 if (!Bugsnag.isStarted()) {
   Bugsnag.start({
-    apiKey: '73b19935a78bb4a6f0db259e4d87b243',
+    apiKey: 'bdd109d0dec2f676a8ab79fe291fdab3',
     releaseStage: process.env.NODE_ENV,
   });
 }

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { GeneralInqueryFormData } from '@/types/forms/form';
+import Bugsnag from '@/lib/bugsnag';
 
 const prisma = new PrismaClient();
 
@@ -24,6 +25,7 @@ export async function POST(req: Request) {
     });
   } catch (error: unknown) {
     if (error instanceof Error) {
+      Bugsnag.notify(error)
       return NextResponse.json(
         { error: `Something went wrong: ${error.message}` },
         { status: 500 },
