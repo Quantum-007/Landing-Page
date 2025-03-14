@@ -24,7 +24,7 @@ import {
   UpdateManyResult
 } from 'react-admin';
 
-const apiUrl: string = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+const apiUrl: string = process.env.NEXT_PUBLIC_API_URL || 'http://quantumroboticslab.com//api';
 const httpClient = fetchUtils.fetchJson;
 
 const getApiUrl = (resource: string): string => `${apiUrl}/${resource}`;
