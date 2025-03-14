@@ -4,7 +4,7 @@ FROM node:20-alpine AS base
 # Step 1. Build the application
 FROM base AS builder
 
-WORKDIR /app
+WORKDIR /QuantumRoboticsLab
 
 # Install dependencies only using Yarn
 COPY package.json yarn.lock ./
@@ -19,7 +19,7 @@ RUN yarn build
 # Step 2. Create production image
 FROM base AS runner
 
-WORKDIR /app
+WORKDIR /QuantumRoboticsLab
 
 # Create a non-root user for security
 RUN addgroup --system --gid 1001 nodejs \
@@ -27,9 +27,9 @@ RUN addgroup --system --gid 1001 nodejs \
 USER nextjs
 
 # Copy necessary files from builder stage
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder /QuantumRoboticsLab/public ./public
+COPY --from=builder --chown=nextjs:nodejs /QuantumRoboticsLab/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /QuantumRoboticsLab/.next/static ./.next/static
 
 # Disable Next.js telemetry
 ENV NEXT_TELEMETRY_DISABLED=1
