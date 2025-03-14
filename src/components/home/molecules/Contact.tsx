@@ -1,7 +1,7 @@
 'use client';
 
 import GeneralInquiryForm from '../atoms/GeneralInqueryForm';
-import JoinPilotProgramForm from '../atoms/JoinPilotProgramForm';
+import JoinPilotProgram from '../atoms/JoinPilotProgram';
 
 import React, { useState, useEffect } from 'react';
 
@@ -85,9 +85,8 @@ const Contact = () => {
             </Typography>
 
             <Box
-              className={`rounded-md inline-flex overflow-hidden mt-8 ${
-                isTablet ? 'mx-auto' : ''
-              }`}
+              className={`rounded-md inline-flex overflow-hidden mt-8 ${isTablet ? 'mx-auto' : ''
+                }`}
             >
               <Button
                 sx={{
@@ -120,7 +119,7 @@ const Contact = () => {
                 {contactFormType === 'quick' ? (
                   <GeneralInquiryForm />
                 ) : (
-                  <JoinPilotProgramForm />
+                  <JoinPilotProgram />
                 )}
               </CardContent>
             </Card>
