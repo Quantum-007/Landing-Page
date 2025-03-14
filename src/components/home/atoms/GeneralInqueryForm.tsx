@@ -94,11 +94,13 @@ const GeneralInquiryForm = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/createGeneralInquery', {
+      const res = await fetch('/api/generalInquery', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
+
+      console.log('res', res);
 
       if (res.ok) {
         resetFormData();

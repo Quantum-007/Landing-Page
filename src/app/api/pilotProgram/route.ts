@@ -50,3 +50,15 @@ export async function POST(req: Request) {
     }
   }
 }
+
+export async function GET() {
+  try {
+    const pilotPrograms = await prisma.pilotProgram.findMany();
+    return NextResponse.json(pilotPrograms);
+  } catch (error: unknown) {
+    return NextResponse.json(
+      { error: `Failed to fetch pilot programs: ${error}` },
+      { status: 500 }
+    );
+  }
+}

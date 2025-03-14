@@ -42,7 +42,7 @@ const JoinPilotProgramForm = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/createPilotProgramInfo', {
+      const res = await fetch('/api/pilotProgram', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
