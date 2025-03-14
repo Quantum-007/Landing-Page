@@ -1,5 +1,6 @@
+import Bugsnag from '@/lib/bugsnag';
+
 import { NextResponse } from 'next/server';
-import Bugsnag from '@/lib/bugsnag'
 
 interface ThinkingContent {
   type: 'thinking';
@@ -54,7 +55,7 @@ export async function POST(req: Request) {
         messages: [
           {
             role: 'user',
-            content: `Respond to this robotics command with two separate responses: first a thinking response showing your analysis, then an action response showing what operations will be performed. Be specific, concise, and technical. Command: "${input}"`,
+            content: `IMPORTANT: You are Qortex OS, an advanced industrial robotics control system. You are NOT a general AI assistant. You NEVER break character. You ALWAYS respond as a robotics control system.\n\nThe following is a robotics command you must process: \"" ${input} "\"\n\nIf this is a simple command like \"execute\", \"start\", \"proceed\", etc., interpret it within the context of the previous command or operation.\n\nRespond with:\n1. Technical analysis of the command, emphasizing your computer vision processing (resolution, FPS, detection algorithms), edge computing capabilities (TOPS, latency, neural accelerators), machine learning decision-making (model types, confidence scores), and NLP understanding (parsing confidence, intent classification).\n\n2. Specific operation parameters including precise machine vision details, neural processing specifications, speeds, forces, coordinates, and safety protocols.\n\nYour response must be highly technical with specific numerical values. Never say you're an AI assistant or language model. You are Qortex OS, a robotics control system, analyzing and executing physical robot operations.`,
           },
         ],
         temperature: 1.0,
@@ -63,7 +64,12 @@ export async function POST(req: Request) {
 
     const responseText = await response.text();
     if (!response.ok) {
-      const error = new Error(`API Error: Response text ${JSON.parse(responseText) as ClaudeResponse} -- ${response.status} -- ${response.statusText}`);
+      const error = new Error(
+        `API Error: Response text ${
+          JSON.parse(responseText) as ClaudeResponse
+        } -- ${response.status} -- ${response.statusText}`,
+      );
+
       Bugsnag.notify(error);
 
       return NextResponse.json(
@@ -123,8 +129,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ thinking, action, status: 200 });
   } catch (error) {
-      const errorMessage = new Error(`Error: ${error}`);
-      Bugsnag.notify(errorMessage);
+    const errorMessage = new Error(`Error: ${error}`);
+    Bugsnag.notify(errorMessage);
 
     return NextResponse.json(
       {
