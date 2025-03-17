@@ -5,13 +5,19 @@ FROM node:20-alpine AS base
 FROM base AS builder
 WORKDIR /app
 
-# Install dependencies
+# Copy the package.json, yarn.lock first (for caching purposes)
 COPY package.json yarn.lock ./
+
+# Copy Prisma schema files before installing dependencies
+COPY prisma ./prisma
+
+# Install dependencies
 RUN yarn install --frozen-lockfile
 
+# Copy source code and public assets
 COPY src ./src
 COPY public ./public
-COPY prisma ./prisma
+
 
 # Add all necessary config files here
 COPY next.config.ts .
