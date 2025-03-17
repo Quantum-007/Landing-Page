@@ -20,7 +20,9 @@ RUN echo "Copied Prisma schema files"
 RUN echo "Installing dependencies..." && yarn install --frozen-lockfile && echo "Dependencies installed successfully"
 
 # Copy source code and public assets
+RUN echo "Starting - 1 source code and public assets copying"
 COPY src ./src
+RUN echo "Starting - 2 source code and public assets copying"
 COPY public ./public
 RUN echo "Copied source code and public assets"
 
