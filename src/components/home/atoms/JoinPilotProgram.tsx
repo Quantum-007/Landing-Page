@@ -17,7 +17,7 @@ const JoinPilotProgram = () => {
       {mainFormVisible && (
         <>
           <Typography variant="h5" sx={{ color: 'white', fontWeight: 'bold' }}>
-            Choose How You Would Like to Sign Up:
+            Tell us who you are:
           </Typography>
           <Box className='flex flex-row gap-2 mt-4 w-full'>
             <Button
@@ -29,7 +29,7 @@ const JoinPilotProgram = () => {
                 paddingX: 4
               }}
             >
-              Customer
+              Consumer
             </Button>
             <Button
               variant='contained'
