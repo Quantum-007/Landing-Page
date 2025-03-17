@@ -5,8 +5,6 @@ import {
   GetListParams,
   GetOneParams,
   CreateParams,
-  UpdateParams,
-  DeleteParams,
   GetManyParams,
   GetManyReferenceParams,
   DeleteManyParams,
@@ -16,8 +14,6 @@ import {
   GetListResult,
   GetOneResult,
   CreateResult,
-  UpdateResult,
-  DeleteResult,
   GetManyResult,
   GetManyReferenceResult,
   DeleteManyResult,
@@ -29,7 +25,6 @@ const httpClient = fetchUtils.fetchJson;
 
 const getApiUrl = (resource: string): string => `${apiUrl}/${resource}`;
 
-// Define API response types
 type ApiResponse<T> = {
   length?: number;
   data: T;
@@ -65,18 +60,18 @@ export const dataProvider: DataProvider = {
   getOne: async <RecordType extends RaRecord<Identifier>>(
     resource: string, 
     params: GetOneParams
-  ): Promise<GetOneResult<RecordType>> => {
-    const url = `${getApiUrl(resource)}/${encodeURIComponent(String(params.id))}`;
+  ): Promise<GetOneResult<RecordType>> => {  
+    const url = `${getApiUrl(resource)}?id=${encodeURIComponent(String(params.id))}`;
     console.log('Fetching One:', url);
-
+  
     const { json } = await httpClient(url);
     const response = json as ApiResponse<RecordType>;
-
+  
     return { 
       data: (response.data ?? json) as RecordType 
     };
   },
-
+  
   create: async <RecordType extends RaRecord<Identifier>>(
     resource: string, 
     params: CreateParams
@@ -94,23 +89,18 @@ export const dataProvider: DataProvider = {
     };
   },
 
-  update: async <RecordType extends RaRecord<Identifier>>(
-    resource: string,
-    params: UpdateParams
-  ): Promise<UpdateResult<RecordType>> => {
-    const url = `${getApiUrl(resource)}/${encodeURIComponent(String(params.id))}`;
-    console.log('Updating:', url, params.data);
+  update: async (resource, { id, data }) => {
+    const url = `${getApiUrl(resource)}?id=${id}`; 
 
-    const { json } = await httpClient(url, {
+    const response = await httpClient(url, {
       method: 'PUT',
-      body: JSON.stringify(params.data),
+      body: JSON.stringify(data),
     });
-
-    return { 
-      data: ((json as ApiResponse<RecordType>).data ?? json) as RecordType 
+    return {
+      data: response.json.data,
     };
   },
-
+  
   updateMany: async <RecordType extends RaRecord<Identifier>>(
     resource: string,
     params: UpdateManyParams
@@ -131,22 +121,18 @@ export const dataProvider: DataProvider = {
     };
   },
 
-  delete: async <RecordType extends RaRecord<Identifier>>(
-    resource: string, 
-    params: DeleteParams
-  ): Promise<DeleteResult<RecordType>> => {
-    const url = `${getApiUrl(resource)}/${encodeURIComponent(String(params.id))}`;
-    console.log('Deleting:', url);
-
+  delete: async (resource, { id }) => {
+    const url = `${getApiUrl(resource)}?id=${id}`; 
+  
     const { json } = await httpClient(url, {
       method: 'DELETE',
     });
-
-    return { 
-      data: ((json as ApiResponse<RecordType>).data ?? json) as RecordType 
+  
+    return {
+      data: json,
     };
   },
-
+  
   getMany: async <RecordType extends RaRecord<Identifier>>(
     resource: string, 
     params: GetManyParams

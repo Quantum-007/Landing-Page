@@ -42,20 +42,58 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    const url = new URL(req.url);
+    const id = url.searchParams.get('id');
+
+    if (id) {
+      if (isNaN(Number(id))) {
+        return NextResponse.json(
+          { error: 'Invalid customer ID' },
+          { status: 400 }
+        );
+      }
+
+      const customer = await prisma.customerPilotProgramInfo.findUnique({
+        where: { id: Number(id) },
+      });
+
+      if (!customer) {
+        return NextResponse.json(
+          { error: 'Customer not found' },
+          { status: 404 }
+        );
+      }
+
+      return NextResponse.json({
+        message: 'Customer retrieved successfully',
+        data: customer,
+      });
+    }
+
     const customers = await prisma.customerPilotProgramInfo.findMany();
 
     return NextResponse.json({
       message: 'Customers retrieved successfully',
       data: customers,
     });
-  } catch (error) {
-    Bugsnag.notify(error as Error);
-    return NextResponse.json(
-      { error: `Failed to retrieve data: ${(error as Error).message}` },
-      { status: 500 },
-    );
+  } catch (error: unknown) {
+    console.error('Error fetching customers:', error);
+    if (error instanceof Error) {
+      Bugsnag.notify(error);
+      return NextResponse.json(
+        { error: `Failed to retrieve data: ${error.message}` },
+        { status: 500 }
+      );
+    } else {
+      return NextResponse.json(
+        { error: 'Something went wrong, but no specific error message is available.' },
+        { status: 500 }
+      );
+    }
+  } finally {
+    await prisma.$disconnect();
   }
 }
 

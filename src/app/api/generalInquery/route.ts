@@ -11,9 +11,9 @@ export async function PUT(req: Request) {
     const url = new URL(req.url);
     const id = url.searchParams.get('id');
 
-    if (!id) {
+    if (!id || isNaN(Number(id))) {
       return NextResponse.json(
-        { error: 'Missing inquiry ID' },
+        { error: 'Invalid or missing inquiry ID' },
         { status: 400 },
       );
     }
@@ -68,15 +68,19 @@ export async function PUT(req: Request) {
   }
 }
 
+
 export async function DELETE(req: Request) {
+  console.log('REQUEST INITIATED')
   try {
     const url = new URL(req.url);
     const id = url.searchParams.get('id');
 
-    if (!id) {
+    console.log('ROUTE URL', url, id);
+
+    if (!id || isNaN(Number(id))) {
       return NextResponse.json(
-        { error: 'Missing inquiry ID' },
-        { status: 400 },
+        { error: 'Invalid or missing inquiry ID' },
+        { status: 400 }
       );
     }
 
@@ -93,21 +97,21 @@ export async function DELETE(req: Request) {
       Bugsnag.notify(error);
       return NextResponse.json(
         { error: `Failed to delete data: ${error.message}` },
-        { status: 500 },
+        { status: 500 }
       );
     } else {
       return NextResponse.json(
         {
-          error:
-            'Something went wrong, but no specific error message is available.',
+          error: 'Something went wrong, but no specific error message is available.',
         },
-        { status: 500 },
+        { status: 500 }
       );
     }
   } finally {
     await prisma.$disconnect();
   }
 }
+
 
 export async function POST(req: Request) {
   try {
@@ -152,8 +156,36 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    const url = new URL(req.url);
+    const id = url.searchParams.get('id');
+
+    if (id) {
+      if (isNaN(Number(id))) {
+        return NextResponse.json(
+          { error: 'Invalid inquiry ID' },
+          { status: 400 }
+        );
+      }
+
+      const inquiry = await prisma.generalInquiry.findUnique({
+        where: { id: Number(id) },
+      });
+
+      if (!inquiry) {
+        return NextResponse.json(
+          { error: 'Inquiry not found' },
+          { status: 404 }
+        );
+      }
+
+      return NextResponse.json({
+        message: 'Inquiry retrieved successfully',
+        data: inquiry,
+      });
+    }
+
     const inquiries = await prisma.generalInquiry.findMany();
 
     return NextResponse.json({
@@ -162,21 +194,20 @@ export async function GET() {
     });
   } catch (error: unknown) {
     console.error('Error fetching inquiries:', error);
-
     if (error instanceof Error) {
       Bugsnag.notify(error);
       return NextResponse.json(
         { error: `Failed to retrieve data: ${error.message}` },
-        { status: 500 },
+        { status: 500 }
       );
     } else {
       return NextResponse.json(
-        {
-          error:
-            'Something went wrong, but no specific error message is available.',
-        },
-        { status: 500 },
+        { error: 'Something went wrong, but no specific error message is available.' },
+        { status: 500 }
       );
     }
+  } finally {
+    await prisma.$disconnect();
   }
 }
+

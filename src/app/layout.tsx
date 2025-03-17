@@ -1,7 +1,4 @@
 import './globals.css';
-
-import Header from '@/components/molecultes/Header';
-import Footer from '@/components/molecultes/Footer';
 import ThemeRegistry from '@/providers/ThemeRegistry';
 
 import type { Metadata } from 'next';
@@ -44,9 +41,7 @@ export default function RootLayout({
       <body className={`${manrope.variable} antialiased`}>
         <ThemeRegistry>
           <QuantumStoreProvider>
-            <Header />
             <main className="pt-16">{children}</main>
-            <Footer />
           </QuantumStoreProvider>
         </ThemeRegistry>
       </body>
