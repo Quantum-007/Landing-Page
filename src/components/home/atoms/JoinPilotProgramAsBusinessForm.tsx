@@ -22,7 +22,9 @@ const steps = ['Your Info', 'Current Setup', 'Challenges', 'Desired Outcomes'];
 type JoinPilotProgramAsBusinessFormProps = {
   onBack: (value: boolean) => void;
 };
-const JoinPilotProgramAsBusinessForm: React.FC<JoinPilotProgramAsBusinessFormProps> = ({ onBack }) => {
+const JoinPilotProgramAsBusinessForm: React.FC<
+  JoinPilotProgramAsBusinessFormProps
+> = ({ onBack }) => {
   const { step, nextStep, prevStep, validateStep, formData, resetForm } =
     useQuantumStore((state) => state);
 

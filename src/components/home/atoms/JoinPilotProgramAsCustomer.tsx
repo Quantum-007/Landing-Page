@@ -17,7 +17,9 @@ import React from 'react';
 type JoinPilotProgramAsCustomerFormProps = {
   onBack: (value: boolean) => void;
 };
-const JoinPilotProgramAsCustomer: React.FC<JoinPilotProgramAsCustomerFormProps> = ({ onBack }) => {
+const JoinPilotProgramAsCustomer: React.FC<
+  JoinPilotProgramAsCustomerFormProps
+> = ({ onBack }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -182,10 +184,9 @@ const JoinPilotProgramAsCustomer: React.FC<JoinPilotProgramAsCustomerFormProps> 
             display: 'flex',
             justifyContent: 'space-between',
             width: '100%',
-            marginLeft: 2
+            marginLeft: 2,
           }}
         >
-
           <Button
             variant="outlined"
             onClick={() => onBack(true)}
@@ -209,7 +210,7 @@ const JoinPilotProgramAsCustomer: React.FC<JoinPilotProgramAsCustomerFormProps> 
           <Button
             loading={loading}
             disabled={loading}
-            type='submit'
+            type="submit"
             sx={{ backgroundColor: '#3c5a1e', color: 'white' }}
           >
             {loading ? 'submitting...' : 'Submit Request'}

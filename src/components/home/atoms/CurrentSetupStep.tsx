@@ -69,7 +69,7 @@ const CurrentSetupStep = () => {
             },
             '& .MuiSlider-markLabel': {
               color: '#b0b0b0',
-              top: '-15px'
+              top: '-15px',
             },
           }}
         />
@@ -78,7 +78,7 @@ const CurrentSetupStep = () => {
       <Grid item xs={12}>
         <Typography
           align="center"
-          variant='h6'
+          variant="h6"
           sx={{
             color: '#3c5a1e',
             fontWeight: 'bold',
@@ -88,8 +88,8 @@ const CurrentSetupStep = () => {
           {formData.automationLevel <= 3
             ? `Low Automation (${formData.automationLevel}/10)`
             : formData.automationLevel <= 7
-              ? `Moderate Automation (${formData.automationLevel}/10)`
-              : `High Automation (${formData.automationLevel}/10)`}
+            ? `Moderate Automation (${formData.automationLevel}/10)`
+            : `High Automation (${formData.automationLevel}/10)`}
         </Typography>
       </Grid>
 
@@ -155,7 +155,6 @@ const CurrentSetupStep = () => {
           )}
         </FormControl>
       </Grid>
-
 
       <Grid item xs={12}>
         <FormField

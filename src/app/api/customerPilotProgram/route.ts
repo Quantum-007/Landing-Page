@@ -1,4 +1,5 @@
 import Bugsnag from '@/lib/bugsnag';
+
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
@@ -18,7 +19,7 @@ export async function POST(req: Request) {
     if (!formData.name || !formData.email || formData.consent === undefined) {
       return NextResponse.json(
         { error: 'Missing required fields: name, email, zipCode, consent' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -34,7 +35,7 @@ export async function POST(req: Request) {
     Bugsnag.notify(error as Error);
     return NextResponse.json(
       { error: `Something went wrong: ${(error as Error).message}` },
-      { status: 500 }
+      { status: 500 },
     );
   } finally {
     await prisma.$disconnect();
@@ -53,7 +54,7 @@ export async function GET() {
     Bugsnag.notify(error as Error);
     return NextResponse.json(
       { error: `Failed to retrieve data: ${(error as Error).message}` },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -66,7 +67,7 @@ export async function PUT(req: Request) {
     if (!id || isNaN(Number(id))) {
       return NextResponse.json(
         { error: 'Invalid or missing customer ID' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -85,7 +86,7 @@ export async function PUT(req: Request) {
     Bugsnag.notify(error as Error);
     return NextResponse.json(
       { error: `Failed to update data: ${(error as Error).message}` },
-      { status: 500 }
+      { status: 500 },
     );
   } finally {
     await prisma.$disconnect();
@@ -100,7 +101,7 @@ export async function DELETE(req: Request) {
     if (!id || isNaN(Number(id))) {
       return NextResponse.json(
         { error: 'Invalid or missing customer ID' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -116,7 +117,7 @@ export async function DELETE(req: Request) {
     Bugsnag.notify(error as Error);
     return NextResponse.json(
       { error: `Failed to delete data: ${(error as Error).message}` },
-      { status: 500 }
+      { status: 500 },
     );
   } finally {
     await prisma.$disconnect();

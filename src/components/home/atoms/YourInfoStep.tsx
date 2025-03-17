@@ -122,10 +122,11 @@ const YourInfoStep = () => {
             <MenuItem value="construction">Construction</MenuItem>
             <MenuItem value="other">Other</MenuItem>
           </Select>
-          {errors.industry && <FormHelperText>{errors.industry}</FormHelperText>}
+          {errors.industry && (
+            <FormHelperText>{errors.industry}</FormHelperText>
+          )}
         </FormControl>
       </Grid>
-
     </Grid>
   );
 };
