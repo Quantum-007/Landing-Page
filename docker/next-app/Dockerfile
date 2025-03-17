@@ -8,6 +8,9 @@ WORKDIR /app
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* ./
 
+# Copy Prisma schema before installing dependencies
+COPY prisma ./prisma
+
 # Omit --production flag for TypeScript devDependencies
 RUN yarn install --frozen-lockfile
 
