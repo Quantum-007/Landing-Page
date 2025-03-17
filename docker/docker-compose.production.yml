@@ -14,7 +14,6 @@ services:
         NEXT_PUBLIC_BLUE_COLLAR_STRIPE_RETURN_URL: ${NEXT_PUBLIC_BLUE_COLLAR_STRIPE_RETURN_URL}
     env_file:
       - ../.env.production
-      - ../.env.production.local
       - .deploy.env
     restart: always
     ports:
