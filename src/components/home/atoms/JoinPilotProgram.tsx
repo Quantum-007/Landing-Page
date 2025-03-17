@@ -20,10 +20,21 @@ const JoinPilotProgram = () => {
     <Box display="flex" flexDirection="column" alignItems="start" gap={4} p={3}>
       {mainFormVisible && (
         <>
-          <Typography variant="h5" sx={{ color: 'white', fontWeight: 'bold' }}>
+          <Typography
+            variant="h5"
+            sx={{ color: 'white', fontWeight: 'bold', textAlign: 'center' }}
+          >
             Tell us who you are:
           </Typography>
-          <Box className="flex flex-row gap-2 mt-4 w-full">
+
+          <Box
+            mt={2}
+            gap={3}
+            width="100%"
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+          >
             <Button
               variant="contained"
               onClick={() => handleSelection('customer')}
@@ -31,11 +42,18 @@ const JoinPilotProgram = () => {
                 color: selectedForm === 'customer' ? 'white' : '#808080',
                 backgroundColor:
                   selectedForm === 'customer' ? '#3c5a1e' : 'transparent',
-                paddingX: 4,
+                paddingX: 5,
+                paddingY: 2,
+                fontSize: '1rem',
+                borderRadius: '8px',
+                '&:hover': {
+                  backgroundColor: '#2e4716',
+                },
               }}
             >
               Consumer
             </Button>
+
             <Button
               variant="contained"
               onClick={() => handleSelection('business')}
@@ -43,7 +61,13 @@ const JoinPilotProgram = () => {
                 color: selectedForm === 'business' ? 'white' : '#808080',
                 backgroundColor:
                   selectedForm === 'business' ? '#3c5a1e' : 'transparent',
-                paddingX: 4,
+                paddingX: 5,
+                paddingY: 2,
+                fontSize: '1rem',
+                borderRadius: '8px',
+                '&:hover': {
+                  backgroundColor: '#2e4716',
+                },
               }}
             >
               Business
