@@ -1,4 +1,6 @@
 import React from 'react';
+
+import { Grid } from '@mui/material';
 import {
   List,
   Datagrid,
@@ -12,9 +14,8 @@ import {
   Create,
   EditButton,
   DeleteButton,
-  required
+  required,
 } from 'react-admin';
-import { Grid } from '@mui/material';
 
 export const CustomerPilotProgramList = () => (
   <List>

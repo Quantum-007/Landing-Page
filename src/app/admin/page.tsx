@@ -1,14 +1,16 @@
 'use client';
 
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import React, { useEffect, useState } from 'react';
-import { Admin, Resource, defaultTheme } from 'react-admin';
+
+import { createTheme } from '@mui/material/styles';
 import { dataProvider } from '../../lib/dataProvider';
+import { Admin, Resource, defaultTheme } from 'react-admin';
 import { PilotProgramResource } from './resources/pilotProgram';
 import { GeneralInquiryResource } from './resources/generalInquery';
 import { CustomerPilotProgramResource } from './resources/customerPilotProgram';
-import { createTheme } from '@mui/material/styles';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
 
 const quantumColors = {
   primary: '#3c8a2e',
@@ -30,10 +32,14 @@ const Loader = () => (
       height: '100vh',
       flexDirection: 'column',
       gap: 2,
-      backgroundColor: quantumColors.background
+      backgroundColor: quantumColors.background,
     }}
   >
-    <CircularProgress size={60} thickness={4} sx={{ color: quantumColors.primary }} />
+    <CircularProgress
+      size={60}
+      thickness={4}
+      sx={{ color: quantumColors.primary }}
+    />
     <div style={{ color: quantumColors.foreground, fontWeight: 500 }}>
       Loading Quantum Robotics Admin Panel...
     </div>
@@ -151,7 +157,6 @@ const theme = createTheme({
     },
   },
 });
-
 
 const AdminPage = () => {
   const [isMounted, setIsMounted] = useState(false);
