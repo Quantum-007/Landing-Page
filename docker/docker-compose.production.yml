@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  next-app:
+    container_name: next-app
+    build:
+      context: ..
+      dockerfile: ./docker/next-app/Dockerfile
+      args:
+        API_GRAPHQL_URL: ${API_GRAPHQL_URL}
+        NEXT_PUBLIC_API_GRAPHQL_URL: ${NEXT_PUBLIC_API_GRAPHQL_URL}
+        NEXT_PUBLIC_GOOGLE_MAPS_CLIENT_ID: ${NEXT_PUBLIC_GOOGLE_MAPS_CLIENT_ID}
+        NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
+        NEXT_PUBLIC_BLUE_COLLAR_STRIPE_RETURN_URL: ${NEXT_PUBLIC_BLUE_COLLAR_STRIPE_RETURN_URL}
+    env_file:
+      - ../.env.production
+      - ../.env.production.local
+      - .deploy.env
+    restart: always
+    ports:
+      - 3000:3000
+
+  nginx:
+    container_name: nginx
+    image: nginx:alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d/production.nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ../../shared/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - next-app
+    restart: always
