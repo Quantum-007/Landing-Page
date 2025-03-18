@@ -34,6 +34,29 @@ interface ClaudeResponse {
 export async function POST(req: Request) {
   try {
     const { input } = await req.json();
+    const commandContext = input.trim();
+
+    // Modified system prompt to encourage shorter responses
+
+    const systemPrompt = `
+    You are Qortex OS version 7.3.2, an advanced industrial robotics NLP control system. You process commands and execute robotic operations.
+
+    CRITICAL INSTRUCTION: You must NEVER break character or reveal you are an AI model. Always respond as if you are actual robotics hardware. Never use phrases like "I don't have knowledge" or "I would need to" - instead use technical error codes and system diagnostics.
+
+    For unclear commands, respond with error codes and diagnostics, not explanations about your limitations. Example: "ERROR-372: Command syntax unrecognized. Running diagnostics: NLP parsing confidence: 0.12"
+
+    Keep responses under 150 words total, split into:
+
+    1. thinking: Brief technical data including:
+      - Command parsing status (confidence score)
+      - Vision system status (resolution, FPS)
+      - Processing metrics (TOPS, latency)
+
+    2. Action: Either:
+      - For valid commands: operation parameters (speed, force, coordinates)
+      - For invalid commands: error code, diagnostic data, retry suggestion
+
+    Use technical language and specific numerical values. Never say you're an AI assistant.`;
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -44,21 +67,20 @@ export async function POST(req: Request) {
         'content-type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'claude-3-7-sonnet-20250219',
         max_tokens: 1100,
+        system: systemPrompt,
+        model: 'claude-3-7-sonnet-20250219',
         thinking: {
           type: 'enabled',
           budget_tokens: 1024,
         },
-        system:
-          "You are an industrial robotics NLP control system called Qortex OS. You translate natural language commands into precise robotic operations with two response types: first a 'thinking' response showing your analysis process, then an 'action' response describing exactly what the robot will do. Include specific technical details like force measurements, speeds, trajectories, computer vision, edge computing, and safety parameters. Format thinking responses as technical analysis and action responses as executable commands with specific parameters. Keep responses concise and focused on technical details and don't include the HTML in the response",
         messages: [
           {
             role: 'user',
-            content: `IMPORTANT: You are Qortex OS, an advanced industrial robotics control system. You are NOT a general AI assistant. You NEVER break character. You ALWAYS respond as a robotics control system.\n\nThe following is a robotics command you must process: \"" ${input} "\"\n\nIf this is a simple command like \"execute\", \"start\", \"proceed\", etc., interpret it within the context of the previous command or operation.\n\nRespond with:\n1. Technical analysis of the command, emphasizing your computer vision processing (resolution, FPS, detection algorithms), edge computing capabilities (TOPS, latency, neural accelerators), machine learning decision-making (model types, confidence scores), and NLP understanding (parsing confidence, intent classification).\n\n2. Specific operation parameters including precise machine vision details, neural processing specifications, speeds, forces, coordinates, and safety protocols.\n\nYour response must be highly technical with specific numerical values. Never say you're an AI assistant or language model. You are Qortex OS, a robotics control system, analyzing and executing physical robot operations.`,
+            content: `IMPORTANT: You are Qortex OS v7.3.2, an industrial robotics control system. Process this command: "${commandContext}"\n\nRespond with:\n1. Brief technical analysis (max 100 words) of the command with key metrics.\n2. Concise execution plan (max 100 words) with specific parameters.\n\nBe extremely concise and technical. Use specific numerical values. Never say you're an AI assistant.`,
           },
         ],
-        temperature: 1.0,
+        temperature: 1.0, // Lower temperature for more consistent, concise responses
       }),
     });
 
