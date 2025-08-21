@@ -3,10 +3,11 @@ steps:
   args: [
     'build',
     '--build-arg', 'NEXT_PUBLIC_API_GRAPHQL_URL=https://full.kitchen/api/v1/graphql',
-    '-t', 'gcr.io//quantumlanding',
+    '-t', 'gcr.io/$PROJECT_ID/quantumlanding',
     '.'
   ]
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'quantumlanding', '--image', 'gcr.io//quantumlanding', '--region', 'us-east4']
+  args: ['run', 'deploy', 'quantumlanding', '--image', 'gcr.io/$PROJECT_ID/quantumlanding', '--region', 'us-east4']
+
 images:
-- 'gcr.io//quantumlanding'
+- 'gcr.io/$PROJECT_ID/quantumlanding'
