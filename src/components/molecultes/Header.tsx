@@ -4,7 +4,8 @@ import Image from 'next/image';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { useState, useEffect } from 'react';
-import { useQuantumStore } from '@/providers/QuantumStoreProvider';
+// Temporarily comment out the store to isolate the issue
+// import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 import {
   Box,
   List,
@@ -21,10 +22,8 @@ import {
 } from '@mui/material';
 
 const navItems = [
-  // { label: 'Products', href: '#products' },
   { label: 'Qortex OS', href: '#qortex' },
   { label: 'Use Cases', href: '#use-cases' },
-  // { label: 'Blog', href: '#blog' },
   { label: 'Team', href: '#team' },
   { label: 'Vision', href: '#vision-mission' },
   { label: 'Contact', href: '#contact' },
@@ -34,7 +33,8 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
-  const { setTab, setMessage } = useQuantumStore((state) => state);
+  // Temporarily remove store dependency
+  // const { setTab, setMessage } = useQuantumStore((state) => state);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,8 +50,9 @@ const Header = () => {
 
     const contactSection = document.getElementById('contact');
 
-    setTab('comprehensive');
-    setMessage('');
+    // Temporarily comment out store actions
+    // setTab('comprehensive');
+    // setMessage('');
 
     if (!contactSection) return;
 
@@ -102,6 +103,7 @@ const Header = () => {
               height={50}
               src="/assets/logo.svg"
               alt="Quantum Robotics Logo"
+              priority
             />
 
             <Typography
@@ -109,7 +111,7 @@ const Header = () => {
               variant="h5"
               component="a"
               className="flex items-center"
-              style={{ fontWeight: 'bold', color: 'white' }}
+              style={{ fontWeight: 'bold', color: 'white', textDecoration: 'none' }}
             >
               Quantum
               <span style={{ color: '#5a7d2f' }}>Robotics</span>
@@ -139,7 +141,7 @@ const Header = () => {
                     transition: 'background-color 0.3s ease-in-out',
                   },
                   '&:hover::after': {
-                    backgroundColor: 'var(--accent-hover)',
+                    backgroundColor: '#5a7d2f',
                   },
                 }}
               >
