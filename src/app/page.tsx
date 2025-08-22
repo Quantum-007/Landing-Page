@@ -1,17 +1,43 @@
 'use client';
 
-import Home from '@/components/home/Home';
+import './globals.css'
+import { MessageStoreProvider } from '@/providers/MessageStoreProvider' // adjust import path
 
-import { Box } from '@mui/material';
-
-const App = () => {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <Box className="bg-gray-900 text-white min-h-screen">
-      <Box component="main">
-        <Home />
-      </Box>
-    </Box>
-  );
-};
-
-export default App;
+    <html lang="en">
+      <body>
+        <MessageStoreProvider>
+          {/* BRIGHT RED HEADER FOR TESTING */}
+          <div style={{ 
+            position: 'fixed', 
+            top: 0, 
+            width: '100%', 
+            height: '80px', 
+            backgroundColor: 'red', 
+            zIndex: 99999
+          }}>
+            <h1 style={{ color: 'white', textAlign: 'center' }}>
+              HEADER TEST
+            </h1>
+          </div>
+          
+          <main style={{ paddingTop: '100px' }}>
+            {children}
+          </main>
+          
+          {/* BRIGHT BLUE FOOTER */}
+          <div style={{ backgroundColor: 'blue', padding: '40px' }}>
+            <h1 style={{ color: 'white', textAlign: 'center' }}>
+              FOOTER TEST
+            </h1>
+          </div>
+        </MessageStoreProvider>
+      </body>
+    </html>
+  )
+}
