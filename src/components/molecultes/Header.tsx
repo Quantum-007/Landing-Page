@@ -1,204 +1,98 @@
 'use client';
 
-import Image from 'next/image';
-import MenuIcon from '@mui/icons-material/Menu';
-
-import { useState, useEffect } from 'react';
-// Temporarily comment out the store to isolate the issue
-// import { useQuantumStore } from '@/providers/QuantumStoreProvider';
-import {
-  Box,
-  List,
-  Button,
-  AppBar,
-  Drawer,
-  Toolbar,
-  ListItem,
-  Container,
-  Typography,
-  IconButton,
-  ListItemText,
-  ListItemButton,
-} from '@mui/material';
-
-const navItems = [
-  { label: 'Qortex OS', href: '#qortex' },
-  { label: 'Use Cases', href: '#use-cases' },
-  { label: 'Team', href: '#team' },
-  { label: 'Vision', href: '#vision-mission' },
-  { label: 'Contact', href: '#contact' },
-];
+import { useEffect, useState } from 'react';
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
-
-  // Temporarily remove store dependency
-  // const { setTab, setMessage } = useQuantumStore((state) => state);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    setMounted(true);
   }, []);
 
-  const handleButtonClicked = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-
-    const contactSection = document.getElementById('contact');
-
-    // Temporarily comment out store actions
-    // setTab('comprehensive');
-    // setMessage('');
-
-    if (!contactSection) return;
-
-    const targetPosition =
-      contactSection.getBoundingClientRect().top + window.scrollY;
-    const startPosition = window.scrollY;
-    const distance = targetPosition - startPosition;
-    const duration = 1200;
-    let startTime: number | null = null;
-
-    const easeInOutQuad = (t: number) =>
-      t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-
-    const animateScroll = (currentTime: number) => {
-      if (startTime === null) startTime = currentTime;
-      const elapsedTime = currentTime - startTime;
-      const progress = Math.min(elapsedTime / duration, 1);
-      const ease = easeInOutQuad(progress);
-
-      window.scrollTo(0, startPosition + distance * ease);
-
-      if (elapsedTime < duration) {
-        requestAnimationFrame(animateScroll);
-      }
-    };
-
-    requestAnimationFrame(animateScroll);
-  };
+  if (!mounted) {
+    // Return a placeholder during SSR to prevent hydration mismatch
+    return (
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '80px',
+        backgroundColor: '#121212',
+        zIndex: 1000
+      }} />
+    );
+  }
 
   return (
-    <AppBar
-      position="fixed"
-      className={`transition-all duration-300 bg-opacity-95 backdrop-blur-md ${
-        isScrolled ? 'shadow-md' : 'border-b border-[#3a3a3a]'
-      }`}
-      sx={{
-        zIndex: 1000,
-        backdropFilter: 'blur(8px)',
-        WebkitBackdropFilter: 'blur(8px)',
+    <header
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '80px',
         backgroundColor: 'rgba(18, 18, 18, 0.95)',
+        backdropFilter: 'blur(10px)',
+        borderBottom: '1px solid #3a3a3a',
+        zIndex: 1000,
+        display: 'flex',
+        alignItems: 'center',
+        padding: '0 2rem',
+        boxSizing: 'border-box'
       }}
     >
-      <Container maxWidth="xl">
-        <Toolbar className="flex justify-center items-center p-4 gap-8">
-          <Box className="flex items-center gap-2">
-            <Image
-              width={50}
-              height={50}
-              src="/assets/logo.svg"
-              alt="Quantum Robotics Logo"
-              priority
-            />
+      <div style={{
+        width: '100%',
+        maxWidth: '1200px',
+        margin: '0 auto',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        {/* Logo */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          cursor: 'pointer'
+        }}>
+          <div style={{
+            width: '40px',
+            height: '40px',
+            borderRadius: '50%',
+            backgroundColor: '#69b343',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '24px',
+            fontWeight: 'bold',
+            color: '#121212'
+          }}>
+            Q
+          </div>
+          <span style={{
+            fontSize: '20px',
+            fontWeight: 'bold',
+            color: '#69b343'
+          }}>
+            QuantumVerse
+          </span>
+        </div>
 
-            <Typography
-              href="#"
-              variant="h5"
-              component="a"
-              className="flex items-center"
-              style={{ fontWeight: 'bold', color: 'white', textDecoration: 'none' }}
-            >
-              Quantum
-              <span style={{ color: '#5a7d2f' }}>Robotics</span>
-            </Typography>
-          </Box>
-
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }} className="gap-4">
-            {navItems.map((item) => (
-              <Button
-                color="inherit"
-                key={item.label}
-                href={item.href}
-                sx={{
-                  fontSize: '16px',
-                  fontWeight: '600',
-                  textTransform: 'none',
-                  color: 'white',
-                  position: 'relative',
-                  '&::after': {
-                    content: '""',
-                    position: 'absolute',
-                    left: 0,
-                    bottom: 0,
-                    width: '100%',
-                    height: '2px',
-                    backgroundColor: 'transparent',
-                    transition: 'background-color 0.3s ease-in-out',
-                  },
-                  '&:hover::after': {
-                    backgroundColor: '#5a7d2f',
-                  },
-                }}
-              >
-                {item.label}
-              </Button>
-            ))}
-          </Box>
-
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Button
-              href="#contact"
-              variant="contained"
-              onClick={handleButtonClicked}
-              sx={{
-                bgcolor: '#3c5a1e',
-                fontWeight: 'bold',
-                '&:hover': { bgcolor: '#2c6e31' },
-              }}
-            >
-              Join Pilot Program
-              <span className="inline-block bg-green-600 text-white text-xs font-semibold px-2 py-1 ml-2 rounded animate-pulse">
-                FREE
-              </span>
-            </Button>
-          </Box>
-
-          <IconButton
-            edge="end"
-            color="inherit"
-            aria-label="menu"
-            onClick={() => setMobileNavOpen(true)}
-            sx={{ display: { xs: 'flex', md: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </Container>
-
-      <Drawer
-        anchor="right"
-        open={mobileNavOpen}
-        onClose={() => setMobileNavOpen(false)}
-      >
-        <List className="w-64 bg-gray-900 h-full text-white">
-          {navItems.map((item) => (
-            <ListItem key={item.label} disablePadding>
-              <ListItemButton
-                href={item.href}
-                onClick={() => setMobileNavOpen(false)}
-              >
-                <ListItemText primary={item.label} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-    </AppBar>
+        {/* Navigation */}
+        <nav style={{
+          display: 'flex',
+          gap: '2rem',
+          alignItems: 'center'
+        }}>
+          <a href="#home" style={{ color: '#ffffff', textDecoration: 'none' }}>Home</a>
+          <a href="#about" style={{ color: '#ffffff', textDecoration: 'none' }}>About</a>
+          <a href="#solutions" style={{ color: '#ffffff', textDecoration: 'none' }}>Solutions</a>
+          <a href="#contact" style={{ color: '#ffffff', textDecoration: 'none' }}>Contact</a>
+        </nav>
+      </div>
+    </header>
   );
 };
 
