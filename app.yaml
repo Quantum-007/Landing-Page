@@ -1,36 +1,9 @@
 runtime: nodejs20
 env: standard
 
-instance_class: F2
-
-handlers:
-  # Serve all static files
-  - url: /_next/static
-    static_dir: .next/static
-    secure: always
-    
-  - url: /public
-    static_dir: public
-    secure: always
-
-  # Handle all other routes
-  - url: /.*
-    script: auto
-    secure: always
-
 env_variables:
   NODE_ENV: "production"
-  PORT: "8080"
 
-automatic_scaling:
-  min_instances: 1
-  max_instances: 10
-  
-# Important: Include all build outputs
-skip_files:
-  - node_modules/
-  - .git/
-  - .gitignore
-  - README.md
-  - .env.local
-  - .env
+# Force NPM
+build_env_variables:
+  USE_NPM: "true"
