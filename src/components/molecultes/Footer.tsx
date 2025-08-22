@@ -8,26 +8,33 @@ import {
   Link,
   Container,
   Typography,
-  // IconButton,
 } from '@mui/material';
 
 import {
   Map as MapIcon,
   Phone as PhoneIcon,
   Email as EmailIcon,
-  // GitHub as GitHubIcon,
-  // Twitter as TwitterIcon,
-  // YouTube as YouTubeIcon,
-  // LinkedIn as LinkedInIcon,
 } from '@mui/icons-material';
-import { useQuantumStore } from '@/providers/QuantumStoreProvider';
+
+// Temporarily comment out store dependency
+// import { useQuantumStore } from '@/providers/QuantumStoreProvider';
 
 const Footer = () => {
-  const { setMessage } = useQuantumStore((state) => state);
+  // Temporarily remove store dependency
+  // const { setMessage } = useQuantumStore((state) => state);
 
   const handleClick = (message: string | null) => {
+    // Temporarily comment out store action
+    // if (message) {
+    //   setMessage(message);
+    // }
+    
+    // For now, just scroll to the contact section
     if (message) {
-      setMessage(message);
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -69,102 +76,9 @@ const Footer = () => {
               height={100}
               src="/assets/logo.svg"
               alt="Quantum Robotics Logo"
+              priority
             />
-
-            {/* <Box className="flex gap-2 mt-3">
-              {[
-                {
-                  icon: (
-                    <LinkedInIcon
-                      fontSize="large"
-                      className="text-[#b0b0b0] bg-[#1e1e1e] p-2 rounded-full"
-                    />
-                  ),
-                  href: '#',
-                },
-                {
-                  icon: (
-                    <TwitterIcon
-                      fontSize="large"
-                      className="text-[#b0b0b0] bg-[#1e1e1e] p-2 rounded-full"
-                    />
-                  ),
-                  href: '#',
-                },
-                {
-                  icon: (
-                    <YouTubeIcon
-                      fontSize="large"
-                      className="text-[#b0b0b0] bg-[#1e1e1e] p-2 rounded-full"
-                    />
-                  ),
-                  href: '#',
-                },
-                {
-                  icon: (
-                    <GitHubIcon
-                      fontSize="large"
-                      className="text-[#b0b0b0] bg-[#1e1e1e] p-2 rounded-full"
-                    />
-                  ),
-                  href: '#',
-                },
-              ].map((item, index) => (
-                <IconButton
-                  key={index}
-                  className="bg-[#1e1e1e] text-[#b0b0b0] transition-transform"
-                >
-                  {item.icon}
-                </IconButton>
-              ))}
-            </Box> */}
           </Grid>
-
-          {/* <Grid item xs={12} sm={6} md={3}>
-            <Typography
-              variant="h6"
-              fontWeight="600"
-              className="font-semibold text-[#f2f2f2] relative inline-block"
-              sx={{
-                '&::after': {
-                  content: '""',
-                  position: 'absolute',
-                  bottom: '-5px',
-                  left: '50%',
-                  width: '100%',
-                  height: '3px',
-                  backgroundColor: '#3c5a1e',
-                  transform: 'translateX(-50%)',
-                },
-              }}
-            >
-              Products
-            </Typography>
-
-            <Box className="space-y-2 mt-5">
-              {[
-                'QuantumFlex™',
-                'QuantumCo™',
-                'QuantumDelta™',
-                'QuantumSwift™',
-                'QuantumMover™',
-                'QuantumAero™',
-              ].map((product) => (
-                <Box key={product}>
-                  <Link
-                    href="#products"
-                    sx={{
-                      color: '#b0b0b0',
-                      textDecoration: 'none',
-                      '&:hover': { color: '#3c5a1e' },
-                    }}
-                  >
-                    {product}
-                  </Link>
-                </Box>
-              ))}
-            </Box>
-          </Grid> */}
 
           <Grid item xs={12} sm={6} md={4}>
             <Typography
@@ -212,6 +126,7 @@ const Footer = () => {
                     sx={{
                       color: '#b0b0b0',
                       textDecoration: 'none',
+                      cursor: 'pointer',
                       '&:hover': { color: '#3c5a1e' },
                     }}
                   >

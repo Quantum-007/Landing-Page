@@ -9,7 +9,7 @@ export default function MainLayout({
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <main style={{ paddingTop: '80px' }}>{children}</main>
       <Footer />
     </>
   );
