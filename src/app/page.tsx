@@ -1,5 +1,7 @@
 'use client';
 
+export const dynamic = 'force-dynamic';
+
 import './globals.css'
 import { MessageStoreProvider } from '@/providers/MessageStoreProvider' // adjust import path
 

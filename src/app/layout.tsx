@@ -1,3 +1,4 @@
+// NO 'use client' here - keep it server component
 import './globals.css'
 
 export default function RootLayout({
@@ -8,37 +9,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {/* EMERGENCY HEADER - BRIGHT GREEN */}
+        {/* SIMPLE TEST - NO PROVIDERS */}
         <div style={{ 
           position: 'fixed', 
           top: 0, 
           width: '100%', 
           height: '80px', 
-          backgroundColor: '#00FF00', 
+          backgroundColor: '#FF0000', 
           zIndex: 99999,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-          <h1 style={{ color: 'black', fontSize: '40px' }}>
-            HEADER WORKS - ROOT LAYOUT
-          </h1>
+          <h1 style={{ color: 'white' }}>BUILD TEST - NO PROVIDERS</h1>
         </div>
         
-        <main style={{ paddingTop: '100px', minHeight: '100vh' }}>
+        <main style={{ paddingTop: '100px' }}>
           {children}
         </main>
-        
-        {/* EMERGENCY FOOTER - BRIGHT ORANGE */}
-        <div style={{ 
-          backgroundColor: '#FF6600', 
-          padding: '40px',
-          textAlign: 'center'
-        }}>
-          <h1 style={{ color: 'white', fontSize: '40px' }}>
-            FOOTER WORKS - ROOT LAYOUT
-          </h1>
-        </div>
       </body>
     </html>
   )
